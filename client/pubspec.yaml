@@ -38,6 +38,8 @@ dependencies:
   stacked: ^2.2.2
   stacked_firebase_auth: ^0.2.5
   stacked_services: ^0.8.10
+  xyz_ui:
+    path: ../xyz_ui
 
 dev_dependencies:
   flutter_test:

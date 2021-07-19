@@ -4,6 +4,7 @@ import 'package:stacked/stacked_annotations.dart';
 import 'package:xyz_prototype/ui/create_account/create_account_view.form.dart';
 import 'package:xyz_prototype/ui/create_account/create_account_viewmodel.dart';
 import 'package:xyz_prototype/ui/dumb_widgets/authentication_layout.dart';
+import 'package:xyz_ui/xyz_ui.dart';
 
 @FormView(
   fields: [
@@ -26,16 +27,18 @@ class CreateAccountView extends StatelessWidget with $CreateAccountView {
           mainButtonTitle: 'SIGN UP',
           form: Column(
             children: <Widget>[
-              TextField(
-                decoration: InputDecoration(labelText: 'Full Name'),
+              BoxInputField(
+                placeholder: 'Full Name',
                 controller: fullNameController,
               ),
-              TextField(
-                decoration: InputDecoration(labelText: 'Email'),
+              verticalSpaceRegular,
+              BoxInputField(
+                placeholder: 'Email',
                 controller: emailController,
               ),
-              TextField(
-                decoration: InputDecoration(labelText: 'Password'),
+              verticalSpaceRegular,
+              BoxInputField(
+                placeholder: 'Password',
                 controller: passwordController,
               ),
             ],

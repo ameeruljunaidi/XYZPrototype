@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:xyz_ui/src/shared/app_colors.dart';
 
 // Text Styles
 
@@ -36,3 +37,11 @@ const TextStyle captionStyle = TextStyle(
   fontSize: 12,
   fontWeight: FontWeight.w400,
 );
+
+const TextStyle ktsMediumGreyBodyText = TextStyle(
+  color: kcMediumGreyColor,
+  fontSize: kBodyTextSize,
+);
+
+// Font Sizing
+const double kBodyTextSize = 16;

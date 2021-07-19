@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:stacked/stacked.dart';
-import 'package:xyz_prototype/ui/shared/styles.dart';
 import 'package:xyz_prototype/ui/startup/startup_viewmodel.dart';
+import 'package:xyz_ui/xyz_ui.dart';
 
 class StartupView extends StatelessWidget {
   const StartupView({Key? key}) : super(key: key);

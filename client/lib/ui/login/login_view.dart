@@ -4,6 +4,7 @@ import 'package:stacked/stacked_annotations.dart';
 import 'package:xyz_prototype/ui/dumb_widgets/authentication_layout.dart';
 import 'package:xyz_prototype/ui/login/login_view.form.dart';
 import 'package:xyz_prototype/ui/login/login_viewmodel.dart';
+import 'package:xyz_ui/xyz_ui.dart';
 
 @FormView(
   fields: [
@@ -25,12 +26,13 @@ class LoginView extends StatelessWidget with $LoginView {
           mainButtonTitle: 'SIGN IN',
           form: Column(
             children: <Widget>[
-              TextField(
-                decoration: InputDecoration(labelText: 'Email'),
+              BoxInputField(
                 controller: emailController,
+                placeholder: 'Email',
               ),
-              TextField(
-                decoration: InputDecoration(labelText: 'Password'),
+              verticalSpaceRegular,
+              BoxInputField(
+                placeholder: 'Password',
                 controller: passwordController,
               ),
             ],

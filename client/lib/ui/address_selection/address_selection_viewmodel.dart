@@ -23,10 +23,8 @@ class AddressSelectionViewModel extends FormViewModel {
       final placesResults =
           await _placesServices.getAutoComplete(addressValue!);
 
-      if (placesResults != null) {
-        _autoCompleteResults = placesResults;
-        notifyListeners();
-      }
+      _autoCompleteResults = placesResults;
+      notifyListeners();
     }
   }
 }
