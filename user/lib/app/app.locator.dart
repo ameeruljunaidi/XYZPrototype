@@ -27,5 +27,6 @@ void setupLocator({String? environment, EnvironmentFilter? environmentFilter}) {
   locator.registerLazySingleton(() => UserService());
   locator.registerLazySingleton(() => FirestoreApi());
   locator.registerLazySingleton(() => PlacesService());
+  locator.registerLazySingleton(() => DialogService());
   locator.registerSingleton(FirebaseAuthenticationService());
 }

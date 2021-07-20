@@ -19,3 +19,28 @@ Map<String, dynamic> _$_$_UserToJson(_$_User instance) => <String, dynamic>{
       'email': instance.email,
       'defaultAddress': instance.defaultAddress,
     };
+
+_$_Address _$_$_AddressFromJson(Map<String, dynamic> json) {
+  return _$_Address(
+    id: json['id'] as String?,
+    placeId: json['placeId'] as String,
+    street: json['street'] as String?,
+    city: json['city'] as String?,
+    state: json['state'] as String?,
+    postalCode: json['postalCode'] as String?,
+    latitude: (json['latitude'] as num).toDouble(),
+    longitude: (json['longitude'] as num).toDouble(),
+  );
+}
+
+Map<String, dynamic> _$_$_AddressToJson(_$_Address instance) =>
+    <String, dynamic>{
+      'id': instance.id,
+      'placeId': instance.placeId,
+      'street': instance.street,
+      'city': instance.city,
+      'state': instance.state,
+      'postalCode': instance.postalCode,
+      'latitude': instance.latitude,
+      'longitude': instance.longitude,
+    };

@@ -43,4 +43,6 @@ class FirestoreApi {
               'Your userId passed in is empty. Plase pass in a valid user if from your Firebase user');
     }
   }
+
+  Future<void> saveAddress({required Address address}) async {}
 }

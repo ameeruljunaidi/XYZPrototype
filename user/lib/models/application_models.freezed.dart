@@ -193,3 +193,322 @@ abstract class _User extends User {
   @JsonKey(ignore: true)
   _$UserCopyWith<_User> get copyWith => throw _privateConstructorUsedError;
 }
+
+Address _$AddressFromJson(Map<String, dynamic> json) {
+  return _Address.fromJson(json);
+}
+
+/// @nodoc
+class _$AddressTearOff {
+  const _$AddressTearOff();
+
+  _Address call(
+      {String? id,
+      required String placeId,
+      String? street,
+      String? city,
+      String? state,
+      String? postalCode,
+      required double latitude,
+      required double longitude}) {
+    return _Address(
+      id: id,
+      placeId: placeId,
+      street: street,
+      city: city,
+      state: state,
+      postalCode: postalCode,
+      latitude: latitude,
+      longitude: longitude,
+    );
+  }
+
+  Address fromJson(Map<String, Object> json) {
+    return Address.fromJson(json);
+  }
+}
+
+/// @nodoc
+const $Address = _$AddressTearOff();
+
+/// @nodoc
+mixin _$Address {
+  String? get id => throw _privateConstructorUsedError;
+  String get placeId => throw _privateConstructorUsedError;
+  String? get street => throw _privateConstructorUsedError;
+  String? get city => throw _privateConstructorUsedError;
+  String? get state => throw _privateConstructorUsedError;
+  String? get postalCode => throw _privateConstructorUsedError;
+  double get latitude => throw _privateConstructorUsedError;
+  double get longitude => throw _privateConstructorUsedError;
+
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+  @JsonKey(ignore: true)
+  $AddressCopyWith<Address> get copyWith => throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $AddressCopyWith<$Res> {
+  factory $AddressCopyWith(Address value, $Res Function(Address) then) =
+      _$AddressCopyWithImpl<$Res>;
+  $Res call(
+      {String? id,
+      String placeId,
+      String? street,
+      String? city,
+      String? state,
+      String? postalCode,
+      double latitude,
+      double longitude});
+}
+
+/// @nodoc
+class _$AddressCopyWithImpl<$Res> implements $AddressCopyWith<$Res> {
+  _$AddressCopyWithImpl(this._value, this._then);
+
+  final Address _value;
+  // ignore: unused_field
+  final $Res Function(Address) _then;
+
+  @override
+  $Res call({
+    Object? id = freezed,
+    Object? placeId = freezed,
+    Object? street = freezed,
+    Object? city = freezed,
+    Object? state = freezed,
+    Object? postalCode = freezed,
+    Object? latitude = freezed,
+    Object? longitude = freezed,
+  }) {
+    return _then(_value.copyWith(
+      id: id == freezed
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String?,
+      placeId: placeId == freezed
+          ? _value.placeId
+          : placeId // ignore: cast_nullable_to_non_nullable
+              as String,
+      street: street == freezed
+          ? _value.street
+          : street // ignore: cast_nullable_to_non_nullable
+              as String?,
+      city: city == freezed
+          ? _value.city
+          : city // ignore: cast_nullable_to_non_nullable
+              as String?,
+      state: state == freezed
+          ? _value.state
+          : state // ignore: cast_nullable_to_non_nullable
+              as String?,
+      postalCode: postalCode == freezed
+          ? _value.postalCode
+          : postalCode // ignore: cast_nullable_to_non_nullable
+              as String?,
+      latitude: latitude == freezed
+          ? _value.latitude
+          : latitude // ignore: cast_nullable_to_non_nullable
+              as double,
+      longitude: longitude == freezed
+          ? _value.longitude
+          : longitude // ignore: cast_nullable_to_non_nullable
+              as double,
+    ));
+  }
+}
+
+/// @nodoc
+abstract class _$AddressCopyWith<$Res> implements $AddressCopyWith<$Res> {
+  factory _$AddressCopyWith(_Address value, $Res Function(_Address) then) =
+      __$AddressCopyWithImpl<$Res>;
+  @override
+  $Res call(
+      {String? id,
+      String placeId,
+      String? street,
+      String? city,
+      String? state,
+      String? postalCode,
+      double latitude,
+      double longitude});
+}
+
+/// @nodoc
+class __$AddressCopyWithImpl<$Res> extends _$AddressCopyWithImpl<$Res>
+    implements _$AddressCopyWith<$Res> {
+  __$AddressCopyWithImpl(_Address _value, $Res Function(_Address) _then)
+      : super(_value, (v) => _then(v as _Address));
+
+  @override
+  _Address get _value => super._value as _Address;
+
+  @override
+  $Res call({
+    Object? id = freezed,
+    Object? placeId = freezed,
+    Object? street = freezed,
+    Object? city = freezed,
+    Object? state = freezed,
+    Object? postalCode = freezed,
+    Object? latitude = freezed,
+    Object? longitude = freezed,
+  }) {
+    return _then(_Address(
+      id: id == freezed
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String?,
+      placeId: placeId == freezed
+          ? _value.placeId
+          : placeId // ignore: cast_nullable_to_non_nullable
+              as String,
+      street: street == freezed
+          ? _value.street
+          : street // ignore: cast_nullable_to_non_nullable
+              as String?,
+      city: city == freezed
+          ? _value.city
+          : city // ignore: cast_nullable_to_non_nullable
+              as String?,
+      state: state == freezed
+          ? _value.state
+          : state // ignore: cast_nullable_to_non_nullable
+              as String?,
+      postalCode: postalCode == freezed
+          ? _value.postalCode
+          : postalCode // ignore: cast_nullable_to_non_nullable
+              as String?,
+      latitude: latitude == freezed
+          ? _value.latitude
+          : latitude // ignore: cast_nullable_to_non_nullable
+              as double,
+      longitude: longitude == freezed
+          ? _value.longitude
+          : longitude // ignore: cast_nullable_to_non_nullable
+              as double,
+    ));
+  }
+}
+
+/// @nodoc
+@JsonSerializable()
+class _$_Address implements _Address {
+  _$_Address(
+      {this.id,
+      required this.placeId,
+      this.street,
+      this.city,
+      this.state,
+      this.postalCode,
+      required this.latitude,
+      required this.longitude});
+
+  factory _$_Address.fromJson(Map<String, dynamic> json) =>
+      _$_$_AddressFromJson(json);
+
+  @override
+  final String? id;
+  @override
+  final String placeId;
+  @override
+  final String? street;
+  @override
+  final String? city;
+  @override
+  final String? state;
+  @override
+  final String? postalCode;
+  @override
+  final double latitude;
+  @override
+  final double longitude;
+
+  @override
+  String toString() {
+    return 'Address(id: $id, placeId: $placeId, street: $street, city: $city, state: $state, postalCode: $postalCode, latitude: $latitude, longitude: $longitude)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other is _Address &&
+            (identical(other.id, id) ||
+                const DeepCollectionEquality().equals(other.id, id)) &&
+            (identical(other.placeId, placeId) ||
+                const DeepCollectionEquality()
+                    .equals(other.placeId, placeId)) &&
+            (identical(other.street, street) ||
+                const DeepCollectionEquality().equals(other.street, street)) &&
+            (identical(other.city, city) ||
+                const DeepCollectionEquality().equals(other.city, city)) &&
+            (identical(other.state, state) ||
+                const DeepCollectionEquality().equals(other.state, state)) &&
+            (identical(other.postalCode, postalCode) ||
+                const DeepCollectionEquality()
+                    .equals(other.postalCode, postalCode)) &&
+            (identical(other.latitude, latitude) ||
+                const DeepCollectionEquality()
+                    .equals(other.latitude, latitude)) &&
+            (identical(other.longitude, longitude) ||
+                const DeepCollectionEquality()
+                    .equals(other.longitude, longitude)));
+  }
+
+  @override
+  int get hashCode =>
+      runtimeType.hashCode ^
+      const DeepCollectionEquality().hash(id) ^
+      const DeepCollectionEquality().hash(placeId) ^
+      const DeepCollectionEquality().hash(street) ^
+      const DeepCollectionEquality().hash(city) ^
+      const DeepCollectionEquality().hash(state) ^
+      const DeepCollectionEquality().hash(postalCode) ^
+      const DeepCollectionEquality().hash(latitude) ^
+      const DeepCollectionEquality().hash(longitude);
+
+  @JsonKey(ignore: true)
+  @override
+  _$AddressCopyWith<_Address> get copyWith =>
+      __$AddressCopyWithImpl<_Address>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$_$_AddressToJson(this);
+  }
+}
+
+abstract class _Address implements Address {
+  factory _Address(
+      {String? id,
+      required String placeId,
+      String? street,
+      String? city,
+      String? state,
+      String? postalCode,
+      required double latitude,
+      required double longitude}) = _$_Address;
+
+  factory _Address.fromJson(Map<String, dynamic> json) = _$_Address.fromJson;
+
+  @override
+  String? get id => throw _privateConstructorUsedError;
+  @override
+  String get placeId => throw _privateConstructorUsedError;
+  @override
+  String? get street => throw _privateConstructorUsedError;
+  @override
+  String? get city => throw _privateConstructorUsedError;
+  @override
+  String? get state => throw _privateConstructorUsedError;
+  @override
+  String? get postalCode => throw _privateConstructorUsedError;
+  @override
+  double get latitude => throw _privateConstructorUsedError;
+  @override
+  double get longitude => throw _privateConstructorUsedError;
+  @override
+  @JsonKey(ignore: true)
+  _$AddressCopyWith<_Address> get copyWith =>
+      throw _privateConstructorUsedError;
+}

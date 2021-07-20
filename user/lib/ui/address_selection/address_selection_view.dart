@@ -28,6 +28,8 @@ class AddressSelectionView extends StatelessWidget with $AddressSelectionView {
                 (autoCompleteResults) => ListTile(
                   title: Text(autoCompleteResults.mainText ?? ''),
                   subtitle: Text(autoCompleteResults.secondaryText ?? ''),
+                  onTap: () =>
+                      model.selectAddressSuggestion(autoCompleteResults),
                 ),
               )
           ],

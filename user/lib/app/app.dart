@@ -21,6 +21,7 @@ import 'package:xyz_prototype/ui/startup/startup_view.dart';
     LazySingleton(classType: UserService),
     LazySingleton(classType: FirestoreApi),
     LazySingleton(classType: PlacesService),
+    LazySingleton(classType: DialogService),
     Singleton(classType: FirebaseAuthenticationService),
   ],
   logger: StackedLogger(),
