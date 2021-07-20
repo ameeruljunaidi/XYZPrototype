@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:xyz_prototype/app/app.logger.dart';
+import 'package:xyz_prototype/constants/app_keys.dart';
 import 'package:xyz_prototype/exceptions/firestore_api_exceptions.dart';
 import 'package:xyz_prototype/models/application_models.dart';
 
@@ -7,7 +8,7 @@ class FirestoreApi {
   final log = getLogger('firestoreApi');
 
   final CollectionReference userCollection =
-      FirebaseFirestore.instance.collection('users');
+      FirebaseFirestore.instance.collection(UsersFirestoreKey);
 
   Future<void> createUser({required User user}) async {
     log.i('user:$user');
@@ -44,5 +45,32 @@ class FirestoreApi {
     }
   }
 
-  Future<void> saveAddress({required Address address}) async {}
+  Future<bool> saveAddress({
+    required Address address,
+    required String userId,
+  }) async {
+    log.i('Saved address: $address');
+
+    try {
+      final addressDoc = getAddressCollectionForUser(userId).doc();
+      final newAddressId = addressDoc.id;
+      log.v('Address will be stored with id:$newAddressId');
+
+      await addressDoc.set(
+        address.copyWith(id: newAddressId).toJson(),
+      );
+
+      log.v('Address save is complete');
+
+      return true;
+    } on Exception catch (e) {
+      log.e('We could not save the users addres. $e');
+
+      return false;
+    }
+  }
+
+  CollectionReference getAddressCollectionForUser(String userId) {
+    return userCollection.doc(userId).collection(AddressFirestoreKey);
+  }
 }

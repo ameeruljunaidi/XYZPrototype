@@ -409,8 +409,16 @@ class MockFirestoreApi extends _i1.Mock implements _i18.FirestoreApi {
       (super.noSuchMethod(Invocation.method(#getUser, [], {#userId: userId}),
           returnValue: Future<_i6.User?>.value()) as _i5.Future<_i6.User?>);
   @override
-  _i5.Future<void> saveAddress({_i6.Address? address}) => (super.noSuchMethod(
-      Invocation.method(#saveAddress, [], {#address: address}),
-      returnValue: Future<void>.value(),
-      returnValueForMissingStub: Future<void>.value()) as _i5.Future<void>);
+  _i5.Future<bool> saveAddress({_i6.Address? address, String? userId}) =>
+      (super.noSuchMethod(
+          Invocation.method(
+              #saveAddress, [], {#address: address, #userId: userId}),
+          returnValue: Future<bool>.value(false)) as _i5.Future<bool>);
+  @override
+  _i3.CollectionReference<Object?> getAddressCollectionForUser(
+          String? userId) =>
+      (super.noSuchMethod(
+              Invocation.method(#getAddressCollectionForUser, [userId]),
+              returnValue: _FakeCollectionReference<Object?>())
+          as _i3.CollectionReference<Object?>);
 }

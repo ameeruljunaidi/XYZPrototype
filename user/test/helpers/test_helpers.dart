@@ -9,6 +9,8 @@ import 'package:xyz_prototype/services/user_service.dart';
 
 import 'test_helpers.mocks.dart';
 
+const String UserIdTestKey = 'default_user';
+
 @GenerateMocks([], customMocks: [
   MockSpec<UserService>(returnNullOnMissingStub: true),
   MockSpec<NavigationService>(returnNullOnMissingStub: true),
@@ -23,7 +25,7 @@ MockUserService getAndRegisterUserService({
   _removeRegistrationIfExists<UserService>();
   final service = MockUserService();
   when(service.hasLoggedInUser).thenReturn(hasLoggedInUser);
-  when(service.currentUser).thenReturn(currentUser ?? User(id: 'default_user'));
+  when(service.currentUser).thenReturn(currentUser ?? User(id: UserIdTestKey));
   locator.registerSingleton<UserService>(service);
   return service;
 }
@@ -68,9 +70,19 @@ MockDialogService getAndRegisterDialogService() {
   return service;
 }
 
-MockFirestoreApi getAndRegisterFirestoreApi() {
+MockFirestoreApi getAndRegisterFirestoreApi({
+  bool saveAddressSuccess = true,
+}) {
   _removeRegistrationIfExists<FirestoreApi>();
   final service = MockFirestoreApi();
+
+  when(
+    service.saveAddress(
+      address: anyNamed('address'),
+      userId: anyNamed('userId'),
+    ),
+  ).thenAnswer((realInvocation) => Future.value(saveAddressSuccess));
+
   locator.registerSingleton<FirestoreApi>(service);
   return service;
 }

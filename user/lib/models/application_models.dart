@@ -23,12 +23,12 @@ class Address with _$Address {
   factory Address({
     String? id,
     required String placeId,
+    required double latitude,
+    required double longitude,
     String? street,
     String? city,
     String? state,
     String? postalCode,
-    required double latitude,
-    required double longitude,
   }) = _Address;
 
   factory Address.fromJson(Map<String, dynamic> json) =>

@@ -24,12 +24,12 @@ _$_Address _$_$_AddressFromJson(Map<String, dynamic> json) {
   return _$_Address(
     id: json['id'] as String?,
     placeId: json['placeId'] as String,
+    latitude: (json['latitude'] as num).toDouble(),
+    longitude: (json['longitude'] as num).toDouble(),
     street: json['street'] as String?,
     city: json['city'] as String?,
     state: json['state'] as String?,
     postalCode: json['postalCode'] as String?,
-    latitude: (json['latitude'] as num).toDouble(),
-    longitude: (json['longitude'] as num).toDouble(),
   );
 }
 
@@ -37,10 +37,10 @@ Map<String, dynamic> _$_$_AddressToJson(_$_Address instance) =>
     <String, dynamic>{
       'id': instance.id,
       'placeId': instance.placeId,
+      'latitude': instance.latitude,
+      'longitude': instance.longitude,
       'street': instance.street,
       'city': instance.city,
       'state': instance.state,
       'postalCode': instance.postalCode,
-      'latitude': instance.latitude,
-      'longitude': instance.longitude,
     };

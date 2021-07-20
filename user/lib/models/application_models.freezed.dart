@@ -205,21 +205,21 @@ class _$AddressTearOff {
   _Address call(
       {String? id,
       required String placeId,
+      required double latitude,
+      required double longitude,
       String? street,
       String? city,
       String? state,
-      String? postalCode,
-      required double latitude,
-      required double longitude}) {
+      String? postalCode}) {
     return _Address(
       id: id,
       placeId: placeId,
+      latitude: latitude,
+      longitude: longitude,
       street: street,
       city: city,
       state: state,
       postalCode: postalCode,
-      latitude: latitude,
-      longitude: longitude,
     );
   }
 
@@ -235,12 +235,12 @@ const $Address = _$AddressTearOff();
 mixin _$Address {
   String? get id => throw _privateConstructorUsedError;
   String get placeId => throw _privateConstructorUsedError;
+  double get latitude => throw _privateConstructorUsedError;
+  double get longitude => throw _privateConstructorUsedError;
   String? get street => throw _privateConstructorUsedError;
   String? get city => throw _privateConstructorUsedError;
   String? get state => throw _privateConstructorUsedError;
   String? get postalCode => throw _privateConstructorUsedError;
-  double get latitude => throw _privateConstructorUsedError;
-  double get longitude => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -254,12 +254,12 @@ abstract class $AddressCopyWith<$Res> {
   $Res call(
       {String? id,
       String placeId,
+      double latitude,
+      double longitude,
       String? street,
       String? city,
       String? state,
-      String? postalCode,
-      double latitude,
-      double longitude});
+      String? postalCode});
 }
 
 /// @nodoc
@@ -274,12 +274,12 @@ class _$AddressCopyWithImpl<$Res> implements $AddressCopyWith<$Res> {
   $Res call({
     Object? id = freezed,
     Object? placeId = freezed,
+    Object? latitude = freezed,
+    Object? longitude = freezed,
     Object? street = freezed,
     Object? city = freezed,
     Object? state = freezed,
     Object? postalCode = freezed,
-    Object? latitude = freezed,
-    Object? longitude = freezed,
   }) {
     return _then(_value.copyWith(
       id: id == freezed
@@ -290,6 +290,14 @@ class _$AddressCopyWithImpl<$Res> implements $AddressCopyWith<$Res> {
           ? _value.placeId
           : placeId // ignore: cast_nullable_to_non_nullable
               as String,
+      latitude: latitude == freezed
+          ? _value.latitude
+          : latitude // ignore: cast_nullable_to_non_nullable
+              as double,
+      longitude: longitude == freezed
+          ? _value.longitude
+          : longitude // ignore: cast_nullable_to_non_nullable
+              as double,
       street: street == freezed
           ? _value.street
           : street // ignore: cast_nullable_to_non_nullable
@@ -306,14 +314,6 @@ class _$AddressCopyWithImpl<$Res> implements $AddressCopyWith<$Res> {
           ? _value.postalCode
           : postalCode // ignore: cast_nullable_to_non_nullable
               as String?,
-      latitude: latitude == freezed
-          ? _value.latitude
-          : latitude // ignore: cast_nullable_to_non_nullable
-              as double,
-      longitude: longitude == freezed
-          ? _value.longitude
-          : longitude // ignore: cast_nullable_to_non_nullable
-              as double,
     ));
   }
 }
@@ -326,12 +326,12 @@ abstract class _$AddressCopyWith<$Res> implements $AddressCopyWith<$Res> {
   $Res call(
       {String? id,
       String placeId,
+      double latitude,
+      double longitude,
       String? street,
       String? city,
       String? state,
-      String? postalCode,
-      double latitude,
-      double longitude});
+      String? postalCode});
 }
 
 /// @nodoc
@@ -347,12 +347,12 @@ class __$AddressCopyWithImpl<$Res> extends _$AddressCopyWithImpl<$Res>
   $Res call({
     Object? id = freezed,
     Object? placeId = freezed,
+    Object? latitude = freezed,
+    Object? longitude = freezed,
     Object? street = freezed,
     Object? city = freezed,
     Object? state = freezed,
     Object? postalCode = freezed,
-    Object? latitude = freezed,
-    Object? longitude = freezed,
   }) {
     return _then(_Address(
       id: id == freezed
@@ -363,6 +363,14 @@ class __$AddressCopyWithImpl<$Res> extends _$AddressCopyWithImpl<$Res>
           ? _value.placeId
           : placeId // ignore: cast_nullable_to_non_nullable
               as String,
+      latitude: latitude == freezed
+          ? _value.latitude
+          : latitude // ignore: cast_nullable_to_non_nullable
+              as double,
+      longitude: longitude == freezed
+          ? _value.longitude
+          : longitude // ignore: cast_nullable_to_non_nullable
+              as double,
       street: street == freezed
           ? _value.street
           : street // ignore: cast_nullable_to_non_nullable
@@ -379,14 +387,6 @@ class __$AddressCopyWithImpl<$Res> extends _$AddressCopyWithImpl<$Res>
           ? _value.postalCode
           : postalCode // ignore: cast_nullable_to_non_nullable
               as String?,
-      latitude: latitude == freezed
-          ? _value.latitude
-          : latitude // ignore: cast_nullable_to_non_nullable
-              as double,
-      longitude: longitude == freezed
-          ? _value.longitude
-          : longitude // ignore: cast_nullable_to_non_nullable
-              as double,
     ));
   }
 }
@@ -397,12 +397,12 @@ class _$_Address implements _Address {
   _$_Address(
       {this.id,
       required this.placeId,
+      required this.latitude,
+      required this.longitude,
       this.street,
       this.city,
       this.state,
-      this.postalCode,
-      required this.latitude,
-      required this.longitude});
+      this.postalCode});
 
   factory _$_Address.fromJson(Map<String, dynamic> json) =>
       _$_$_AddressFromJson(json);
@@ -412,6 +412,10 @@ class _$_Address implements _Address {
   @override
   final String placeId;
   @override
+  final double latitude;
+  @override
+  final double longitude;
+  @override
   final String? street;
   @override
   final String? city;
@@ -419,14 +423,10 @@ class _$_Address implements _Address {
   final String? state;
   @override
   final String? postalCode;
-  @override
-  final double latitude;
-  @override
-  final double longitude;
 
   @override
   String toString() {
-    return 'Address(id: $id, placeId: $placeId, street: $street, city: $city, state: $state, postalCode: $postalCode, latitude: $latitude, longitude: $longitude)';
+    return 'Address(id: $id, placeId: $placeId, latitude: $latitude, longitude: $longitude, street: $street, city: $city, state: $state, postalCode: $postalCode)';
   }
 
   @override
@@ -438,6 +438,12 @@ class _$_Address implements _Address {
             (identical(other.placeId, placeId) ||
                 const DeepCollectionEquality()
                     .equals(other.placeId, placeId)) &&
+            (identical(other.latitude, latitude) ||
+                const DeepCollectionEquality()
+                    .equals(other.latitude, latitude)) &&
+            (identical(other.longitude, longitude) ||
+                const DeepCollectionEquality()
+                    .equals(other.longitude, longitude)) &&
             (identical(other.street, street) ||
                 const DeepCollectionEquality().equals(other.street, street)) &&
             (identical(other.city, city) ||
@@ -446,13 +452,7 @@ class _$_Address implements _Address {
                 const DeepCollectionEquality().equals(other.state, state)) &&
             (identical(other.postalCode, postalCode) ||
                 const DeepCollectionEquality()
-                    .equals(other.postalCode, postalCode)) &&
-            (identical(other.latitude, latitude) ||
-                const DeepCollectionEquality()
-                    .equals(other.latitude, latitude)) &&
-            (identical(other.longitude, longitude) ||
-                const DeepCollectionEquality()
-                    .equals(other.longitude, longitude)));
+                    .equals(other.postalCode, postalCode)));
   }
 
   @override
@@ -460,12 +460,12 @@ class _$_Address implements _Address {
       runtimeType.hashCode ^
       const DeepCollectionEquality().hash(id) ^
       const DeepCollectionEquality().hash(placeId) ^
+      const DeepCollectionEquality().hash(latitude) ^
+      const DeepCollectionEquality().hash(longitude) ^
       const DeepCollectionEquality().hash(street) ^
       const DeepCollectionEquality().hash(city) ^
       const DeepCollectionEquality().hash(state) ^
-      const DeepCollectionEquality().hash(postalCode) ^
-      const DeepCollectionEquality().hash(latitude) ^
-      const DeepCollectionEquality().hash(longitude);
+      const DeepCollectionEquality().hash(postalCode);
 
   @JsonKey(ignore: true)
   @override
@@ -482,12 +482,12 @@ abstract class _Address implements Address {
   factory _Address(
       {String? id,
       required String placeId,
+      required double latitude,
+      required double longitude,
       String? street,
       String? city,
       String? state,
-      String? postalCode,
-      required double latitude,
-      required double longitude}) = _$_Address;
+      String? postalCode}) = _$_Address;
 
   factory _Address.fromJson(Map<String, dynamic> json) = _$_Address.fromJson;
 
@@ -496,6 +496,10 @@ abstract class _Address implements Address {
   @override
   String get placeId => throw _privateConstructorUsedError;
   @override
+  double get latitude => throw _privateConstructorUsedError;
+  @override
+  double get longitude => throw _privateConstructorUsedError;
+  @override
   String? get street => throw _privateConstructorUsedError;
   @override
   String? get city => throw _privateConstructorUsedError;
@@ -503,10 +507,6 @@ abstract class _Address implements Address {
   String? get state => throw _privateConstructorUsedError;
   @override
   String? get postalCode => throw _privateConstructorUsedError;
-  @override
-  double get latitude => throw _privateConstructorUsedError;
-  @override
-  double get longitude => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
   _$AddressCopyWith<_Address> get copyWith =>
