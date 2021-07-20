@@ -14,7 +14,8 @@ class StartUpViewModel extends BaseViewModel {
 
   Future<void> runStartupLogic() async {
     _placesService.initialize(
-        apiKey: 'AIzaSyBzUeZcsTXODsZai6nbke65SyV_hbKdf7E');
+      apiKey: 'AIzaSyBzUeZcsTXODsZai6nbke65SyV_hbKdf7E',
+    );
 
     if (_userService.hasLoggedInUser) {
       log.v('We have a user session on disk. Sync the user profile ...');
