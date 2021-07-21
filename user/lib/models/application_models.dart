@@ -26,6 +26,7 @@ class Address with _$Address {
     required double latitude,
     required double longitude,
     String? street,
+    String? streetNumber,
     String? city,
     String? state,
     String? postalCode,

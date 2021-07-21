@@ -69,6 +69,7 @@ class AddressSelectionViewModel extends FormViewModel {
         postalCode: placeDetails.zip,
         state: placeDetails.state,
         street: placeDetails.streetLong ?? placeDetails.streetShort,
+        streetNumber: placeDetails.streetNumber,
       );
 
       final user = _userService.currentUser!;

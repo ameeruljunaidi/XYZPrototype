@@ -208,6 +208,7 @@ class _$AddressTearOff {
       required double latitude,
       required double longitude,
       String? street,
+      String? streetNumber,
       String? city,
       String? state,
       String? postalCode}) {
@@ -217,6 +218,7 @@ class _$AddressTearOff {
       latitude: latitude,
       longitude: longitude,
       street: street,
+      streetNumber: streetNumber,
       city: city,
       state: state,
       postalCode: postalCode,
@@ -238,6 +240,7 @@ mixin _$Address {
   double get latitude => throw _privateConstructorUsedError;
   double get longitude => throw _privateConstructorUsedError;
   String? get street => throw _privateConstructorUsedError;
+  String? get streetNumber => throw _privateConstructorUsedError;
   String? get city => throw _privateConstructorUsedError;
   String? get state => throw _privateConstructorUsedError;
   String? get postalCode => throw _privateConstructorUsedError;
@@ -257,6 +260,7 @@ abstract class $AddressCopyWith<$Res> {
       double latitude,
       double longitude,
       String? street,
+      String? streetNumber,
       String? city,
       String? state,
       String? postalCode});
@@ -277,6 +281,7 @@ class _$AddressCopyWithImpl<$Res> implements $AddressCopyWith<$Res> {
     Object? latitude = freezed,
     Object? longitude = freezed,
     Object? street = freezed,
+    Object? streetNumber = freezed,
     Object? city = freezed,
     Object? state = freezed,
     Object? postalCode = freezed,
@@ -301,6 +306,10 @@ class _$AddressCopyWithImpl<$Res> implements $AddressCopyWith<$Res> {
       street: street == freezed
           ? _value.street
           : street // ignore: cast_nullable_to_non_nullable
+              as String?,
+      streetNumber: streetNumber == freezed
+          ? _value.streetNumber
+          : streetNumber // ignore: cast_nullable_to_non_nullable
               as String?,
       city: city == freezed
           ? _value.city
@@ -329,6 +338,7 @@ abstract class _$AddressCopyWith<$Res> implements $AddressCopyWith<$Res> {
       double latitude,
       double longitude,
       String? street,
+      String? streetNumber,
       String? city,
       String? state,
       String? postalCode});
@@ -350,6 +360,7 @@ class __$AddressCopyWithImpl<$Res> extends _$AddressCopyWithImpl<$Res>
     Object? latitude = freezed,
     Object? longitude = freezed,
     Object? street = freezed,
+    Object? streetNumber = freezed,
     Object? city = freezed,
     Object? state = freezed,
     Object? postalCode = freezed,
@@ -374,6 +385,10 @@ class __$AddressCopyWithImpl<$Res> extends _$AddressCopyWithImpl<$Res>
       street: street == freezed
           ? _value.street
           : street // ignore: cast_nullable_to_non_nullable
+              as String?,
+      streetNumber: streetNumber == freezed
+          ? _value.streetNumber
+          : streetNumber // ignore: cast_nullable_to_non_nullable
               as String?,
       city: city == freezed
           ? _value.city
@@ -400,6 +415,7 @@ class _$_Address implements _Address {
       required this.latitude,
       required this.longitude,
       this.street,
+      this.streetNumber,
       this.city,
       this.state,
       this.postalCode});
@@ -418,6 +434,8 @@ class _$_Address implements _Address {
   @override
   final String? street;
   @override
+  final String? streetNumber;
+  @override
   final String? city;
   @override
   final String? state;
@@ -426,7 +444,7 @@ class _$_Address implements _Address {
 
   @override
   String toString() {
-    return 'Address(id: $id, placeId: $placeId, latitude: $latitude, longitude: $longitude, street: $street, city: $city, state: $state, postalCode: $postalCode)';
+    return 'Address(id: $id, placeId: $placeId, latitude: $latitude, longitude: $longitude, street: $street, streetNumber: $streetNumber, city: $city, state: $state, postalCode: $postalCode)';
   }
 
   @override
@@ -446,6 +464,9 @@ class _$_Address implements _Address {
                     .equals(other.longitude, longitude)) &&
             (identical(other.street, street) ||
                 const DeepCollectionEquality().equals(other.street, street)) &&
+            (identical(other.streetNumber, streetNumber) ||
+                const DeepCollectionEquality()
+                    .equals(other.streetNumber, streetNumber)) &&
             (identical(other.city, city) ||
                 const DeepCollectionEquality().equals(other.city, city)) &&
             (identical(other.state, state) ||
@@ -463,6 +484,7 @@ class _$_Address implements _Address {
       const DeepCollectionEquality().hash(latitude) ^
       const DeepCollectionEquality().hash(longitude) ^
       const DeepCollectionEquality().hash(street) ^
+      const DeepCollectionEquality().hash(streetNumber) ^
       const DeepCollectionEquality().hash(city) ^
       const DeepCollectionEquality().hash(state) ^
       const DeepCollectionEquality().hash(postalCode);
@@ -485,6 +507,7 @@ abstract class _Address implements Address {
       required double latitude,
       required double longitude,
       String? street,
+      String? streetNumber,
       String? city,
       String? state,
       String? postalCode}) = _$_Address;
@@ -501,6 +524,8 @@ abstract class _Address implements Address {
   double get longitude => throw _privateConstructorUsedError;
   @override
   String? get street => throw _privateConstructorUsedError;
+  @override
+  String? get streetNumber => throw _privateConstructorUsedError;
   @override
   String? get city => throw _privateConstructorUsedError;
   @override

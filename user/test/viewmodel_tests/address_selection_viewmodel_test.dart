@@ -83,6 +83,7 @@ void main() {
               postalCode: '144',
               state: 'Western Cape',
               street: 'Langen Hofen Road',
+              streetNumber: '78',
             ),
             user: anyNamed('user')));
       });
