@@ -431,6 +431,10 @@ class MockFirestoreApi extends _i1.Mock implements _i20.FirestoreApi {
               Invocation.method(#getAddressCollectionForUser, [userId]),
               returnValue: _FakeCollectionReference<Object?>())
           as _i3.CollectionReference<Object?>);
+  @override
+  _i7.Future<bool> isCityServiced({String? city}) =>
+      (super.noSuchMethod(Invocation.method(#isCityServiced, [], {#city: city}),
+          returnValue: Future<bool>.value(false)) as _i7.Future<bool>);
 }
 
 /// A class which mocks [FirebaseAuthenticationService].

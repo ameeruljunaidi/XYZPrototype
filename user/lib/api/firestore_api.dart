@@ -81,4 +81,8 @@ class FirestoreApi {
   CollectionReference getAddressCollectionForUser(String userId) {
     return userCollection.doc(userId).collection(AddressFirestoreKey);
   }
+
+  Future<bool> isCityServiced({required String city}) {
+    return Future.value(false);
+  }
 }

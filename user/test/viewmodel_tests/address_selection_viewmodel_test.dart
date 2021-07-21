@@ -147,6 +147,27 @@ void main() {
             autoCompleteResults: PlacesAutoCompleteResult(placeId: 'id'));
         verify(userService.currentUser);
       });
+
+      test(
+          'When saving address, should check if place is serviced on firestoreApi using the city from details',
+          () async {
+        final firestoreApi = getAndRegisterFirestoreApi();
+
+        getAndRegisterPlacesService(
+            placesDetails: PlacesDetails(
+          placeId: 'id',
+          city: 'Test City',
+        ));
+
+        final model = _getModel();
+        await model.selectAddressSuggestion(
+          autoCompleteResults: PlacesAutoCompleteResult(
+            placeId: 'id',
+          ),
+        );
+
+        verify(firestoreApi.isCityServiced(city: 'test-city'));
+      });
     });
   });
 }
