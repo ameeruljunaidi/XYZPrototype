@@ -54,10 +54,14 @@ abstract class AuthenticationViewModel extends FormViewModel {
   Future<void> _handleAuthenticationResponse(
       FirebaseAuthenticationResult authResult) async {
     if (!authResult.hasError && authResult.user != null) {
-      final user = authResult.user!;
+      final client = authResult.user!;
 
       await userService.syncOrCreateUserAccount(
-        user: User(id: user.uid, email: user.email),
+        client: Client(
+          clientId: client.uid,
+          clientEmail: client.email,
+          clientType: 'user',
+        ),
       );
 
       navigationService.replaceWith(successRoute);

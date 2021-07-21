@@ -10,12 +10,12 @@ class FirestoreApi {
   final CollectionReference userCollection =
       FirebaseFirestore.instance.collection(UsersFirestoreKey);
 
-  Future<void> createUser({required User user}) async {
-    log.i('user:$user');
+  Future<void> createUser({required Client client}) async {
+    log.i('client:$client');
 
     try {
-      final userDocument = userCollection.doc(user.id);
-      await userDocument.set(user.toJson());
+      final userDocument = userCollection.doc(client.clientId);
+      await userDocument.set(client.toJson());
       log.v('User created at ${userDocument.path}');
     } catch (error) {
       throw FirestoreApiException(
@@ -23,36 +23,36 @@ class FirestoreApi {
     }
   }
 
-  Future<User?> getUser({required String userId}) async {
-    log.i('userId:$userId');
+  Future<Client?> getUser({required String clientId}) async {
+    log.i('clientId:$clientId');
 
-    if (userId.isNotEmpty) {
-      final userDoc = await userCollection.doc(userId).get();
+    if (clientId.isNotEmpty) {
+      final userDoc = await userCollection.doc(clientId).get();
 
       if (!userDoc.exists) {
-        log.v('We have no user with id $userId in our database');
+        log.v('We have no user with id $clientId in our database');
         return null;
       }
 
-      final userData = userDoc.data();
-      log.v('User found. Data: $userData');
+      final clientData = userDoc.data();
+      log.v('Client found. Data: $clientData');
 
-      return User.fromJson(userData as Map<String, dynamic>);
+      return Client.fromJson(clientData as Map<String, dynamic>);
     } else {
       throw FirestoreApiException(
           message:
-              'Your userId passed in is empty. Plase pass in a valid user if from your Firebase user');
+              'Your clientId passed in is empty. Plase pass in a valid user if from your Firebase user');
     }
   }
 
   Future<bool> saveAddress({
     required Address address,
-    required User user,
+    required Client user,
   }) async {
     log.i('Saved address: $address');
 
     try {
-      final addressDoc = getAddressCollectionForUser(user.id).doc();
+      final addressDoc = getAddressCollectionForUser(user.clientId).doc();
       final newAddressId = addressDoc.id;
       log.v('Address will be stored with id:$newAddressId');
 
@@ -65,9 +65,9 @@ class FirestoreApi {
       if (!hasDefaultAddress) {
         log.v('User has not default address, set current to default');
         await userCollection
-            .doc(user.id)
-            .set(user.copyWith(defaultAddress: newAddressId).toJson());
-        log.v('User ${user.id} defaultAddress set to $newAddressId');
+            .doc(user.clientId)
+            .set(user.copyWith(clientAddress: newAddressId).toJson());
+        log.v('User ${user.clientId} defaultAddress set to $newAddressId');
       }
 
       return true;
@@ -78,8 +78,8 @@ class FirestoreApi {
     }
   }
 
-  CollectionReference getAddressCollectionForUser(String userId) {
-    return userCollection.doc(userId).collection(AddressFirestoreKey);
+  CollectionReference getAddressCollectionForUser(String clientId) {
+    return userCollection.doc(clientId).collection(AddressFirestoreKey);
   }
 
   Future<bool> isCityServiced({required String city}) {

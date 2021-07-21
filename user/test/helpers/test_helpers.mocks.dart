@@ -61,9 +61,9 @@ class MockUserService extends _i1.Mock implements _i6.UserService {
           returnValue: Future<void>.value(),
           returnValueForMissingStub: Future<void>.value()) as _i7.Future<void>);
   @override
-  _i7.Future<void> syncOrCreateUserAccount({_i8.User? user}) =>
+  _i7.Future<void> syncOrCreateUserAccount({_i8.Client? client}) =>
       (super.noSuchMethod(
-          Invocation.method(#syncOrCreateUserAccount, [], {#user: user}),
+          Invocation.method(#syncOrCreateUserAccount, [], {#client: client}),
           returnValue: Future<void>.value(),
           returnValueForMissingStub: Future<void>.value()) as _i7.Future<void>);
 }
@@ -411,24 +411,24 @@ class MockFirestoreApi extends _i1.Mock implements _i20.FirestoreApi {
               returnValue: _FakeCollectionReference<Object?>())
           as _i3.CollectionReference<Object?>);
   @override
-  _i7.Future<void> createUser({_i8.User? user}) =>
-      (super.noSuchMethod(Invocation.method(#createUser, [], {#user: user}),
+  _i7.Future<void> createUser({_i8.Client? client}) =>
+      (super.noSuchMethod(Invocation.method(#createUser, [], {#client: client}),
           returnValue: Future<void>.value(),
           returnValueForMissingStub: Future<void>.value()) as _i7.Future<void>);
   @override
-  _i7.Future<_i8.User?> getUser({String? userId}) =>
-      (super.noSuchMethod(Invocation.method(#getUser, [], {#userId: userId}),
-          returnValue: Future<_i8.User?>.value()) as _i7.Future<_i8.User?>);
+  _i7.Future<_i8.Client?> getUser({String? clientId}) => (super.noSuchMethod(
+      Invocation.method(#getUser, [], {#clientId: clientId}),
+      returnValue: Future<_i8.Client?>.value()) as _i7.Future<_i8.Client?>);
   @override
-  _i7.Future<bool> saveAddress({_i8.Address? address, _i8.User? user}) =>
+  _i7.Future<bool> saveAddress({_i8.Address? address, _i8.Client? user}) =>
       (super.noSuchMethod(
           Invocation.method(#saveAddress, [], {#address: address, #user: user}),
           returnValue: Future<bool>.value(false)) as _i7.Future<bool>);
   @override
   _i3.CollectionReference<Object?> getAddressCollectionForUser(
-          String? userId) =>
+          String? clientId) =>
       (super.noSuchMethod(
-              Invocation.method(#getAddressCollectionForUser, [userId]),
+              Invocation.method(#getAddressCollectionForUser, [clientId]),
               returnValue: _FakeCollectionReference<Object?>())
           as _i3.CollectionReference<Object?>);
   @override

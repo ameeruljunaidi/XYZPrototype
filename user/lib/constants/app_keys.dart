@@ -1,4 +1,5 @@
 // Firestore keys
 
-const String UsersFirestoreKey = 'users';
+const String UsersFirestoreKey = 'clients';
 const String AddressFirestoreKey = 'addresses';
+const String DefaultClientType = 'user';

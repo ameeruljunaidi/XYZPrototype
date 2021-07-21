@@ -12,114 +12,198 @@ T _$identity<T>(T value) => value;
 final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more informations: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
-User _$UserFromJson(Map<String, dynamic> json) {
-  return _User.fromJson(json);
+Client _$ClientFromJson(Map<String, dynamic> json) {
+  return _Client.fromJson(json);
 }
 
 /// @nodoc
-class _$UserTearOff {
-  const _$UserTearOff();
+class _$ClientTearOff {
+  const _$ClientTearOff();
 
-  _User call({required String id, String? email, String? defaultAddress}) {
-    return _User(
-      id: id,
-      email: email,
-      defaultAddress: defaultAddress,
+  _Client call(
+      {required String clientId,
+      required String clientType,
+      String? clientEmail,
+      String? clientName,
+      String? clientAddress,
+      String? clientPhone,
+      String? clientAvatar,
+      String? clientPaymentInfo}) {
+    return _Client(
+      clientId: clientId,
+      clientType: clientType,
+      clientEmail: clientEmail,
+      clientName: clientName,
+      clientAddress: clientAddress,
+      clientPhone: clientPhone,
+      clientAvatar: clientAvatar,
+      clientPaymentInfo: clientPaymentInfo,
     );
   }
 
-  User fromJson(Map<String, Object> json) {
-    return User.fromJson(json);
+  Client fromJson(Map<String, Object> json) {
+    return Client.fromJson(json);
   }
 }
 
 /// @nodoc
-const $User = _$UserTearOff();
+const $Client = _$ClientTearOff();
 
 /// @nodoc
-mixin _$User {
-  String get id => throw _privateConstructorUsedError;
-  String? get email => throw _privateConstructorUsedError;
-  String? get defaultAddress => throw _privateConstructorUsedError;
+mixin _$Client {
+  String get clientId => throw _privateConstructorUsedError;
+  String get clientType => throw _privateConstructorUsedError;
+  String? get clientEmail => throw _privateConstructorUsedError;
+  String? get clientName => throw _privateConstructorUsedError;
+  String? get clientAddress => throw _privateConstructorUsedError;
+  String? get clientPhone => throw _privateConstructorUsedError;
+  String? get clientAvatar => throw _privateConstructorUsedError;
+  String? get clientPaymentInfo => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
-  $UserCopyWith<User> get copyWith => throw _privateConstructorUsedError;
+  $ClientCopyWith<Client> get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $UserCopyWith<$Res> {
-  factory $UserCopyWith(User value, $Res Function(User) then) =
-      _$UserCopyWithImpl<$Res>;
-  $Res call({String id, String? email, String? defaultAddress});
+abstract class $ClientCopyWith<$Res> {
+  factory $ClientCopyWith(Client value, $Res Function(Client) then) =
+      _$ClientCopyWithImpl<$Res>;
+  $Res call(
+      {String clientId,
+      String clientType,
+      String? clientEmail,
+      String? clientName,
+      String? clientAddress,
+      String? clientPhone,
+      String? clientAvatar,
+      String? clientPaymentInfo});
 }
 
 /// @nodoc
-class _$UserCopyWithImpl<$Res> implements $UserCopyWith<$Res> {
-  _$UserCopyWithImpl(this._value, this._then);
+class _$ClientCopyWithImpl<$Res> implements $ClientCopyWith<$Res> {
+  _$ClientCopyWithImpl(this._value, this._then);
 
-  final User _value;
+  final Client _value;
   // ignore: unused_field
-  final $Res Function(User) _then;
+  final $Res Function(Client) _then;
 
   @override
   $Res call({
-    Object? id = freezed,
-    Object? email = freezed,
-    Object? defaultAddress = freezed,
+    Object? clientId = freezed,
+    Object? clientType = freezed,
+    Object? clientEmail = freezed,
+    Object? clientName = freezed,
+    Object? clientAddress = freezed,
+    Object? clientPhone = freezed,
+    Object? clientAvatar = freezed,
+    Object? clientPaymentInfo = freezed,
   }) {
     return _then(_value.copyWith(
-      id: id == freezed
-          ? _value.id
-          : id // ignore: cast_nullable_to_non_nullable
+      clientId: clientId == freezed
+          ? _value.clientId
+          : clientId // ignore: cast_nullable_to_non_nullable
               as String,
-      email: email == freezed
-          ? _value.email
-          : email // ignore: cast_nullable_to_non_nullable
+      clientType: clientType == freezed
+          ? _value.clientType
+          : clientType // ignore: cast_nullable_to_non_nullable
+              as String,
+      clientEmail: clientEmail == freezed
+          ? _value.clientEmail
+          : clientEmail // ignore: cast_nullable_to_non_nullable
               as String?,
-      defaultAddress: defaultAddress == freezed
-          ? _value.defaultAddress
-          : defaultAddress // ignore: cast_nullable_to_non_nullable
+      clientName: clientName == freezed
+          ? _value.clientName
+          : clientName // ignore: cast_nullable_to_non_nullable
+              as String?,
+      clientAddress: clientAddress == freezed
+          ? _value.clientAddress
+          : clientAddress // ignore: cast_nullable_to_non_nullable
+              as String?,
+      clientPhone: clientPhone == freezed
+          ? _value.clientPhone
+          : clientPhone // ignore: cast_nullable_to_non_nullable
+              as String?,
+      clientAvatar: clientAvatar == freezed
+          ? _value.clientAvatar
+          : clientAvatar // ignore: cast_nullable_to_non_nullable
+              as String?,
+      clientPaymentInfo: clientPaymentInfo == freezed
+          ? _value.clientPaymentInfo
+          : clientPaymentInfo // ignore: cast_nullable_to_non_nullable
               as String?,
     ));
   }
 }
 
 /// @nodoc
-abstract class _$UserCopyWith<$Res> implements $UserCopyWith<$Res> {
-  factory _$UserCopyWith(_User value, $Res Function(_User) then) =
-      __$UserCopyWithImpl<$Res>;
+abstract class _$ClientCopyWith<$Res> implements $ClientCopyWith<$Res> {
+  factory _$ClientCopyWith(_Client value, $Res Function(_Client) then) =
+      __$ClientCopyWithImpl<$Res>;
   @override
-  $Res call({String id, String? email, String? defaultAddress});
+  $Res call(
+      {String clientId,
+      String clientType,
+      String? clientEmail,
+      String? clientName,
+      String? clientAddress,
+      String? clientPhone,
+      String? clientAvatar,
+      String? clientPaymentInfo});
 }
 
 /// @nodoc
-class __$UserCopyWithImpl<$Res> extends _$UserCopyWithImpl<$Res>
-    implements _$UserCopyWith<$Res> {
-  __$UserCopyWithImpl(_User _value, $Res Function(_User) _then)
-      : super(_value, (v) => _then(v as _User));
+class __$ClientCopyWithImpl<$Res> extends _$ClientCopyWithImpl<$Res>
+    implements _$ClientCopyWith<$Res> {
+  __$ClientCopyWithImpl(_Client _value, $Res Function(_Client) _then)
+      : super(_value, (v) => _then(v as _Client));
 
   @override
-  _User get _value => super._value as _User;
+  _Client get _value => super._value as _Client;
 
   @override
   $Res call({
-    Object? id = freezed,
-    Object? email = freezed,
-    Object? defaultAddress = freezed,
+    Object? clientId = freezed,
+    Object? clientType = freezed,
+    Object? clientEmail = freezed,
+    Object? clientName = freezed,
+    Object? clientAddress = freezed,
+    Object? clientPhone = freezed,
+    Object? clientAvatar = freezed,
+    Object? clientPaymentInfo = freezed,
   }) {
-    return _then(_User(
-      id: id == freezed
-          ? _value.id
-          : id // ignore: cast_nullable_to_non_nullable
+    return _then(_Client(
+      clientId: clientId == freezed
+          ? _value.clientId
+          : clientId // ignore: cast_nullable_to_non_nullable
               as String,
-      email: email == freezed
-          ? _value.email
-          : email // ignore: cast_nullable_to_non_nullable
+      clientType: clientType == freezed
+          ? _value.clientType
+          : clientType // ignore: cast_nullable_to_non_nullable
+              as String,
+      clientEmail: clientEmail == freezed
+          ? _value.clientEmail
+          : clientEmail // ignore: cast_nullable_to_non_nullable
               as String?,
-      defaultAddress: defaultAddress == freezed
-          ? _value.defaultAddress
-          : defaultAddress // ignore: cast_nullable_to_non_nullable
+      clientName: clientName == freezed
+          ? _value.clientName
+          : clientName // ignore: cast_nullable_to_non_nullable
+              as String?,
+      clientAddress: clientAddress == freezed
+          ? _value.clientAddress
+          : clientAddress // ignore: cast_nullable_to_non_nullable
+              as String?,
+      clientPhone: clientPhone == freezed
+          ? _value.clientPhone
+          : clientPhone // ignore: cast_nullable_to_non_nullable
+              as String?,
+      clientAvatar: clientAvatar == freezed
+          ? _value.clientAvatar
+          : clientAvatar // ignore: cast_nullable_to_non_nullable
+              as String?,
+      clientPaymentInfo: clientPaymentInfo == freezed
+          ? _value.clientPaymentInfo
+          : clientPaymentInfo // ignore: cast_nullable_to_non_nullable
               as String?,
     ));
   }
@@ -127,71 +211,129 @@ class __$UserCopyWithImpl<$Res> extends _$UserCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_User extends _User {
-  _$_User({required this.id, this.email, this.defaultAddress}) : super._();
+class _$_Client extends _Client {
+  _$_Client(
+      {required this.clientId,
+      required this.clientType,
+      this.clientEmail,
+      this.clientName,
+      this.clientAddress,
+      this.clientPhone,
+      this.clientAvatar,
+      this.clientPaymentInfo})
+      : super._();
 
-  factory _$_User.fromJson(Map<String, dynamic> json) =>
-      _$_$_UserFromJson(json);
+  factory _$_Client.fromJson(Map<String, dynamic> json) =>
+      _$_$_ClientFromJson(json);
 
   @override
-  final String id;
+  final String clientId;
   @override
-  final String? email;
+  final String clientType;
   @override
-  final String? defaultAddress;
+  final String? clientEmail;
+  @override
+  final String? clientName;
+  @override
+  final String? clientAddress;
+  @override
+  final String? clientPhone;
+  @override
+  final String? clientAvatar;
+  @override
+  final String? clientPaymentInfo;
 
   @override
   String toString() {
-    return 'User(id: $id, email: $email, defaultAddress: $defaultAddress)';
+    return 'Client(clientId: $clientId, clientType: $clientType, clientEmail: $clientEmail, clientName: $clientName, clientAddress: $clientAddress, clientPhone: $clientPhone, clientAvatar: $clientAvatar, clientPaymentInfo: $clientPaymentInfo)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other is _User &&
-            (identical(other.id, id) ||
-                const DeepCollectionEquality().equals(other.id, id)) &&
-            (identical(other.email, email) ||
-                const DeepCollectionEquality().equals(other.email, email)) &&
-            (identical(other.defaultAddress, defaultAddress) ||
+        (other is _Client &&
+            (identical(other.clientId, clientId) ||
                 const DeepCollectionEquality()
-                    .equals(other.defaultAddress, defaultAddress)));
+                    .equals(other.clientId, clientId)) &&
+            (identical(other.clientType, clientType) ||
+                const DeepCollectionEquality()
+                    .equals(other.clientType, clientType)) &&
+            (identical(other.clientEmail, clientEmail) ||
+                const DeepCollectionEquality()
+                    .equals(other.clientEmail, clientEmail)) &&
+            (identical(other.clientName, clientName) ||
+                const DeepCollectionEquality()
+                    .equals(other.clientName, clientName)) &&
+            (identical(other.clientAddress, clientAddress) ||
+                const DeepCollectionEquality()
+                    .equals(other.clientAddress, clientAddress)) &&
+            (identical(other.clientPhone, clientPhone) ||
+                const DeepCollectionEquality()
+                    .equals(other.clientPhone, clientPhone)) &&
+            (identical(other.clientAvatar, clientAvatar) ||
+                const DeepCollectionEquality()
+                    .equals(other.clientAvatar, clientAvatar)) &&
+            (identical(other.clientPaymentInfo, clientPaymentInfo) ||
+                const DeepCollectionEquality()
+                    .equals(other.clientPaymentInfo, clientPaymentInfo)));
   }
 
   @override
   int get hashCode =>
       runtimeType.hashCode ^
-      const DeepCollectionEquality().hash(id) ^
-      const DeepCollectionEquality().hash(email) ^
-      const DeepCollectionEquality().hash(defaultAddress);
+      const DeepCollectionEquality().hash(clientId) ^
+      const DeepCollectionEquality().hash(clientType) ^
+      const DeepCollectionEquality().hash(clientEmail) ^
+      const DeepCollectionEquality().hash(clientName) ^
+      const DeepCollectionEquality().hash(clientAddress) ^
+      const DeepCollectionEquality().hash(clientPhone) ^
+      const DeepCollectionEquality().hash(clientAvatar) ^
+      const DeepCollectionEquality().hash(clientPaymentInfo);
 
   @JsonKey(ignore: true)
   @override
-  _$UserCopyWith<_User> get copyWith =>
-      __$UserCopyWithImpl<_User>(this, _$identity);
+  _$ClientCopyWith<_Client> get copyWith =>
+      __$ClientCopyWithImpl<_Client>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$_$_UserToJson(this);
+    return _$_$_ClientToJson(this);
   }
 }
 
-abstract class _User extends User {
-  factory _User({required String id, String? email, String? defaultAddress}) =
-      _$_User;
-  _User._() : super._();
+abstract class _Client extends Client {
+  factory _Client(
+      {required String clientId,
+      required String clientType,
+      String? clientEmail,
+      String? clientName,
+      String? clientAddress,
+      String? clientPhone,
+      String? clientAvatar,
+      String? clientPaymentInfo}) = _$_Client;
+  _Client._() : super._();
 
-  factory _User.fromJson(Map<String, dynamic> json) = _$_User.fromJson;
+  factory _Client.fromJson(Map<String, dynamic> json) = _$_Client.fromJson;
 
   @override
-  String get id => throw _privateConstructorUsedError;
+  String get clientId => throw _privateConstructorUsedError;
   @override
-  String? get email => throw _privateConstructorUsedError;
+  String get clientType => throw _privateConstructorUsedError;
   @override
-  String? get defaultAddress => throw _privateConstructorUsedError;
+  String? get clientEmail => throw _privateConstructorUsedError;
+  @override
+  String? get clientName => throw _privateConstructorUsedError;
+  @override
+  String? get clientAddress => throw _privateConstructorUsedError;
+  @override
+  String? get clientPhone => throw _privateConstructorUsedError;
+  @override
+  String? get clientAvatar => throw _privateConstructorUsedError;
+  @override
+  String? get clientPaymentInfo => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
-  _$UserCopyWith<_User> get copyWith => throw _privateConstructorUsedError;
+  _$ClientCopyWith<_Client> get copyWith => throw _privateConstructorUsedError;
 }
 
 Address _$AddressFromJson(Map<String, dynamic> json) {

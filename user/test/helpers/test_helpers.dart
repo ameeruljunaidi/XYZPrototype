@@ -5,6 +5,7 @@ import 'package:stacked_firebase_auth/stacked_firebase_auth.dart';
 import 'package:stacked_services/stacked_services.dart';
 import 'package:xyz_prototype/api/firestore_api.dart';
 import 'package:xyz_prototype/app/app.locator.dart';
+import 'package:xyz_prototype/constants/app_keys.dart';
 import 'package:xyz_prototype/models/application_models.dart';
 import 'package:xyz_prototype/services/user_service.dart';
 
@@ -22,12 +23,18 @@ const String UserIdTestKey = 'default_user';
 ])
 MockUserService getAndRegisterUserService({
   bool hasLoggedInUser = false,
-  User? currentUser,
+  Client? currentUser,
 }) {
   _removeRegistrationIfExists<UserService>();
   final service = MockUserService();
   when(service.hasLoggedInUser).thenReturn(hasLoggedInUser);
-  when(service.currentUser).thenReturn(currentUser ?? User(id: UserIdTestKey));
+  when(service.currentUser).thenReturn(
+    currentUser ??
+        Client(
+          clientId: UserIdTestKey,
+          clientType: DefaultClientType,
+        ),
+  );
   locator.registerSingleton<UserService>(service);
   return service;
 }

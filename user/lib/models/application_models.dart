@@ -4,18 +4,23 @@ part 'application_models.freezed.dart';
 part 'application_models.g.dart';
 
 @freezed
-class User with _$User {
-  User._();
+class Client with _$Client {
+  Client._();
 
-  factory User({
-    required String id,
-    String? email,
-    String? defaultAddress,
-  }) = _User;
+  factory Client({
+    required String clientId,
+    required String clientType,
+    String? clientEmail,
+    String? clientName,
+    String? clientAddress,
+    String? clientPhone,
+    String? clientAvatar,
+    String? clientPaymentInfo,
+  }) = _Client;
 
-  bool get hasAddress => defaultAddress?.isNotEmpty ?? false;
+  bool get hasAddress => clientAddress?.isNotEmpty ?? false;
 
-  factory User.fromJson(Map<String, dynamic> json) => _$UserFromJson(json);
+  factory Client.fromJson(Map<String, dynamic> json) => _$ClientFromJson(json);
 }
 
 @freezed
