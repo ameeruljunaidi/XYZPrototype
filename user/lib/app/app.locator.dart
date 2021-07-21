@@ -14,6 +14,11 @@ import 'package:stacked_services/stacked_services.dart';
 
 import '../api/firestore_api.dart';
 import '../services/user_service.dart';
+import '../ui/inbox/inbox_viewmodel.dart';
+import '../ui/marketplace/marketplace_viewmodel.dart';
+import '../ui/notifications/notification_viewmodel.dart';
+import '../ui/profile/profile_viewmodel.dart';
+import '../ui/search/search_viewmodel.dart';
 
 final locator = StackedLocator.instance;
 
@@ -28,5 +33,10 @@ void setupLocator({String? environment, EnvironmentFilter? environmentFilter}) {
   locator.registerLazySingleton(() => FirestoreApi());
   locator.registerLazySingleton(() => PlacesService());
   locator.registerLazySingleton(() => DialogService());
+  locator.registerLazySingleton(() => MarketPlaceViewModel());
+  locator.registerLazySingleton(() => InboxViewModel());
+  locator.registerLazySingleton(() => SearchViewModel());
+  locator.registerLazySingleton(() => NotificationsViewModel());
+  locator.registerLazySingleton(() => ProfileViewModel());
   locator.registerSingleton(FirebaseAuthenticationService());
 }

@@ -9,11 +9,16 @@ import 'package:xyz_prototype/ui/address_selection/address_selection_view.dart';
 import 'package:xyz_prototype/ui/create_account/create_account_view.dart';
 import 'package:xyz_prototype/ui/home/home_view.dart';
 import 'package:xyz_prototype/ui/inbox/inbox_view.dart';
+import 'package:xyz_prototype/ui/inbox/inbox_viewmodel.dart';
 import 'package:xyz_prototype/ui/login/login_view.dart';
 import 'package:xyz_prototype/ui/marketplace/marketplace_view.dart';
+import 'package:xyz_prototype/ui/marketplace/marketplace_viewmodel.dart';
 import 'package:xyz_prototype/ui/notifications/notification_view.dart';
+import 'package:xyz_prototype/ui/notifications/notification_viewmodel.dart';
 import 'package:xyz_prototype/ui/profile/profile_view.dart';
+import 'package:xyz_prototype/ui/profile/profile_viewmodel.dart';
 import 'package:xyz_prototype/ui/search/search_view.dart';
+import 'package:xyz_prototype/ui/search/search_viewmodel.dart';
 import 'package:xyz_prototype/ui/startup/startup_view.dart';
 
 @StackedApp(
@@ -36,6 +41,11 @@ import 'package:xyz_prototype/ui/startup/startup_view.dart';
     LazySingleton(classType: FirestoreApi),
     LazySingleton(classType: PlacesService),
     LazySingleton(classType: DialogService),
+    LazySingleton(classType: MarketPlaceViewModel),
+    LazySingleton(classType: InboxViewModel),
+    LazySingleton(classType: SearchViewModel),
+    LazySingleton(classType: NotificationsViewModel),
+    LazySingleton(classType: ProfileViewModel),
     Singleton(classType: FirebaseAuthenticationService),
   ],
   logger: StackedLogger(),

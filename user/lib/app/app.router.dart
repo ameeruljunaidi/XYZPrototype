@@ -13,7 +13,12 @@ import '../ui/add_business/add_business_view.dart';
 import '../ui/address_selection/address_selection_view.dart';
 import '../ui/create_account/create_account_view.dart';
 import '../ui/home/home_view.dart';
+import '../ui/inbox/inbox_view.dart';
 import '../ui/login/login_view.dart';
+import '../ui/marketplace/marketplace_view.dart';
+import '../ui/notifications/notification_view.dart';
+import '../ui/profile/profile_view.dart';
+import '../ui/search/search_view.dart';
 import '../ui/startup/startup_view.dart';
 
 class Routes {
@@ -23,6 +28,11 @@ class Routes {
   static const String createAccountView = '/create-account-view';
   static const String loginView = '/login-view';
   static const String addBusinessView = '/add-business-view';
+  static const String marketPlaceView = '/market-place-view';
+  static const String inboxView = '/inbox-view';
+  static const String searchView = '/search-view';
+  static const String notificationsView = '/notifications-view';
+  static const String profileView = '/profile-view';
   static const all = <String>{
     startupView,
     homeView,
@@ -30,6 +40,11 @@ class Routes {
     createAccountView,
     loginView,
     addBusinessView,
+    marketPlaceView,
+    inboxView,
+    searchView,
+    notificationsView,
+    profileView,
   };
 }
 
@@ -43,6 +58,11 @@ class StackedRouter extends RouterBase {
     RouteDef(Routes.createAccountView, page: CreateAccountView),
     RouteDef(Routes.loginView, page: LoginView),
     RouteDef(Routes.addBusinessView, page: AddBusinessView),
+    RouteDef(Routes.marketPlaceView, page: MarketPlaceView),
+    RouteDef(Routes.inboxView, page: InboxView),
+    RouteDef(Routes.searchView, page: SearchView),
+    RouteDef(Routes.notificationsView, page: NotificationsView),
+    RouteDef(Routes.profileView, page: ProfileView),
   ];
   @override
   Map<Type, StackedRouteFactory> get pagesMap => _pagesMap;
@@ -92,6 +112,36 @@ class StackedRouter extends RouterBase {
       );
       return MaterialPageRoute<dynamic>(
         builder: (context) => AddBusinessView(key: args.key),
+        settings: data,
+      );
+    },
+    MarketPlaceView: (data) {
+      return MaterialPageRoute<dynamic>(
+        builder: (context) => const MarketPlaceView(),
+        settings: data,
+      );
+    },
+    InboxView: (data) {
+      return MaterialPageRoute<dynamic>(
+        builder: (context) => const InboxView(),
+        settings: data,
+      );
+    },
+    SearchView: (data) {
+      return MaterialPageRoute<dynamic>(
+        builder: (context) => const SearchView(),
+        settings: data,
+      );
+    },
+    NotificationsView: (data) {
+      return MaterialPageRoute<dynamic>(
+        builder: (context) => const NotificationsView(),
+        settings: data,
+      );
+    },
+    ProfileView: (data) {
+      return MaterialPageRoute<dynamic>(
+        builder: (context) => const ProfileView(),
         settings: data,
       );
     },
