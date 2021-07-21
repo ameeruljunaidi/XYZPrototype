@@ -71,11 +71,11 @@ class AddressSelectionViewModel extends FormViewModel {
         street: placeDetails.streetLong ?? placeDetails.streetShort,
       );
 
-      final userId = _userService.currentUser!.id;
+      final user = _userService.currentUser!;
 
       final saveSuccess = await _firestoreApi.saveAddress(
         address: address,
-        userId: userId,
+        user: user,
       );
 
       if (!saveSuccess) {

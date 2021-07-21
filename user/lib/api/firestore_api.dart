@@ -47,12 +47,12 @@ class FirestoreApi {
 
   Future<bool> saveAddress({
     required Address address,
-    required String userId,
+    required User user,
   }) async {
     log.i('Saved address: $address');
 
     try {
-      final addressDoc = getAddressCollectionForUser(userId).doc();
+      final addressDoc = getAddressCollectionForUser(user.id).doc();
       final newAddressId = addressDoc.id;
       log.v('Address will be stored with id:$newAddressId');
 

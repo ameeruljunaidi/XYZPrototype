@@ -49,7 +49,7 @@ void main() {
             autoCompleteResults: PlacesAutoCompleteResult(placeId: 'id'));
         verify(firestoreApi.saveAddress(
           address: anyNamed('address'),
-          userId: anyNamed('userId'),
+          user: anyNamed('user'),
         ));
       });
 
@@ -84,7 +84,7 @@ void main() {
               state: 'Western Cape',
               street: 'Langen Hofen Road',
             ),
-            userId: anyNamed('userId')));
+            user: anyNamed('user')));
       });
 
       test(
@@ -107,7 +107,7 @@ void main() {
               latitude: -1,
               longitude: -1,
             ),
-            userId: anyNamed('userId')));
+            user: anyNamed('user')));
       });
 
       test('When saving address to Firestore fails show a dialog', () async {

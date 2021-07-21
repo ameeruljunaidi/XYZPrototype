@@ -79,7 +79,7 @@ MockFirestoreApi getAndRegisterFirestoreApi({
   when(
     service.saveAddress(
       address: anyNamed('address'),
-      userId: anyNamed('userId'),
+      user: anyNamed('user'),
     ),
   ).thenAnswer((realInvocation) => Future.value(saveAddressSuccess));
 
