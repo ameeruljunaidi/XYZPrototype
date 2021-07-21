@@ -1,6 +1,7 @@
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 import 'package:places_service/places_service.dart';
+import 'package:stacked_firebase_auth/stacked_firebase_auth.dart';
 import 'package:stacked_services/stacked_services.dart';
 import 'package:xyz_prototype/api/firestore_api.dart';
 import 'package:xyz_prototype/app/app.locator.dart';
@@ -17,6 +18,7 @@ const String UserIdTestKey = 'default_user';
   MockSpec<PlacesService>(returnNullOnMissingStub: true),
   MockSpec<DialogService>(returnNullOnMissingStub: true),
   MockSpec<FirestoreApi>(returnNullOnMissingStub: true),
+  MockSpec<FirebaseAuthenticationService>(returnNullOnMissingStub: true),
 ])
 MockUserService getAndRegisterUserService({
   bool hasLoggedInUser = false,
@@ -87,12 +89,21 @@ MockFirestoreApi getAndRegisterFirestoreApi({
   return service;
 }
 
+MockFirebaseAuthenticationService
+    getAndRegisterFirebaseAuthenticationService() {
+  _removeRegistrationIfExists<FirebaseAuthenticationService>();
+  final service = MockFirebaseAuthenticationService();
+  locator.registerSingleton<FirebaseAuthenticationService>(service);
+  return service;
+}
+
 void registerServices() {
   getAndRegisterUserService();
   getAndRegisterNavigationService();
   getAndRegisterPlacesService();
   getAndRegisterDialogService();
   getAndRegisterFirestoreApi();
+  getAndRegisterFirebaseAuthenticationService();
 }
 
 void unregisterServices() {
@@ -101,6 +112,7 @@ void unregisterServices() {
   locator.unregister<PlacesService>();
   locator.unregister<DialogService>();
   locator.unregister<FirestoreApi>();
+  locator.unregister<FirebaseAuthenticationService>();
 }
 
 void _removeRegistrationIfExists<T extends Object>() {

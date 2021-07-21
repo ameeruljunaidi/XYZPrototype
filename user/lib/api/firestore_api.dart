@@ -60,7 +60,15 @@ class FirestoreApi {
         address.copyWith(id: newAddressId).toJson(),
       );
 
-      log.v('Address save is complete');
+      final hasDefaultAddress = user.hasAddress;
+
+      if (!hasDefaultAddress) {
+        log.v('User has not default address, set current to default');
+        await userCollection
+            .doc(user.id)
+            .set(user.copyWith(defaultAddress: newAddressId).toJson());
+        log.v('User ${user.id} defaultAddress set to $newAddressId');
+      }
 
       return true;
     } on Exception catch (e) {

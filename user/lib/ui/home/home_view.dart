@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
 import 'package:xyz_prototype/ui/home/home_viewmodel.dart';
+import 'package:xyz_ui/xyz_ui.dart';
 
 class HomeView extends StatelessWidget {
   const HomeView({Key? key}) : super(key: key);
@@ -10,7 +11,8 @@ class HomeView extends StatelessWidget {
     return ViewModelBuilder<HomeViewModel>.reactive(
       builder: (context, model, child) => Scaffold(
         body: Container(
-          child: Text('Hello World.'),
+          alignment: Alignment.center,
+          child: BoxText.headline('Hello World'),
         ),
       ),
       viewModelBuilder: () => HomeViewModel(),

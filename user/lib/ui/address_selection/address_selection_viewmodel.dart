@@ -34,7 +34,7 @@ class AddressSelectionViewModel extends FormViewModel {
   }
 
   Future<void> _getAutoCompleteResults() async {
-    if (addressValue != null) {
+    if (addressValue != '') {
       final placesResults =
           await _placesServices.getAutoComplete(addressValue!);
 
@@ -100,5 +100,14 @@ class AddressSelectionViewModel extends FormViewModel {
     _autoCompleteResults.clear();
 
     notifyListeners();
+  }
+
+  void forceAddress() {
+    log.v(
+        'User tried to cancel without choosing location, force choose address');
+    _dialogService.showDialog(
+      title: 'Please choose a location to continue.',
+      buttonTitle: 'Ok',
+    );
   }
 }
