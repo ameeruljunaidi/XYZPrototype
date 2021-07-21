@@ -12,7 +12,20 @@ class HomeView extends StatelessWidget {
       builder: (context, model, child) => Scaffold(
         body: Container(
           alignment: Alignment.center,
-          child: BoxText.headline('Hello World'),
+          child: Padding(
+            padding: const EdgeInsets.all(24.0),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                BoxText.headline('Hello World'),
+                verticalSpaceLarge,
+                BoxButton(
+                  title: 'Add a Business',
+                  onTap: model.goToAddBusiness,
+                ),
+              ],
+            ),
+          ),
         ),
       ),
       viewModelBuilder: () => HomeViewModel(),
