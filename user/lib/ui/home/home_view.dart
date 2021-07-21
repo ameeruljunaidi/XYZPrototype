@@ -17,7 +17,8 @@ class HomeView extends StatelessWidget {
       builder: (context, model, child) => Scaffold(
         bottomNavigationBar: BottomNavigationBar(
           type: BottomNavigationBarType.fixed,
-          backgroundColor: kcPrimaryColor,
+          iconSize: 32.0,
+          selectedItemColor: kcPrimaryColor,
           currentIndex: model.currentIndex,
           onTap: model.setIndex,
           items: [
