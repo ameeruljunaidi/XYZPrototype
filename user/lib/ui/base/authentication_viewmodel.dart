@@ -61,6 +61,7 @@ abstract class AuthenticationViewModel extends FormViewModel {
           clientId: client.uid,
           clientEmail: client.email,
           clientType: 'user',
+          clientRegistrationDate: DateTime.now().toIso8601String(),
         ),
       );
 

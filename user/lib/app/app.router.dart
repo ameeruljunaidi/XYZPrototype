@@ -87,8 +87,11 @@ class StackedRouter extends RouterBase {
       );
     },
     AddBusinessView: (data) {
+      var args = data.getArgs<AddBusinessViewArguments>(
+        orElse: () => AddBusinessViewArguments(),
+      );
       return MaterialPageRoute<dynamic>(
-        builder: (context) => const AddBusinessView(),
+        builder: (context) => AddBusinessView(key: args.key),
         settings: data,
       );
     },
@@ -115,4 +118,10 @@ class CreateAccountViewArguments {
 class LoginViewArguments {
   final Key? key;
   LoginViewArguments({this.key});
+}
+
+/// AddBusinessView arguments holder class
+class AddBusinessViewArguments {
+  final Key? key;
+  AddBusinessViewArguments({this.key});
 }

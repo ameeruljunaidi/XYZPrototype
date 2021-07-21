@@ -420,10 +420,39 @@ class MockFirestoreApi extends _i1.Mock implements _i20.FirestoreApi {
       Invocation.method(#getUser, [], {#clientId: clientId}),
       returnValue: Future<_i8.Client?>.value()) as _i7.Future<_i8.Client?>);
   @override
+  _i7.Future<_i8.Business?> getBusiness({_i8.Client? client}) => (super
+          .noSuchMethod(Invocation.method(#getBusiness, [], {#client: client}),
+              returnValue: Future<_i8.Business?>.value())
+      as _i7.Future<_i8.Business?>);
+  @override
+  _i7.Future<_i8.Vendor?> getVendor({_i8.Client? client}) =>
+      (super.noSuchMethod(Invocation.method(#getVendor, [], {#client: client}),
+          returnValue: Future<_i8.Vendor?>.value()) as _i7.Future<_i8.Vendor?>);
+  @override
   _i7.Future<bool> saveAddress({_i8.Address? address, _i8.Client? user}) =>
       (super.noSuchMethod(
           Invocation.method(#saveAddress, [], {#address: address, #user: user}),
           returnValue: Future<bool>.value(false)) as _i7.Future<bool>);
+  @override
+  _i7.Future<bool> saveBusiness({_i8.Business? business, _i8.Client? client}) =>
+      (super.noSuchMethod(
+          Invocation.method(
+              #saveBusiness, [], {#business: business, #client: client}),
+          returnValue: Future<bool>.value(false)) as _i7.Future<bool>);
+  @override
+  _i3.CollectionReference<Object?> getVendorCollectionForUser(
+          String? clientId) =>
+      (super.noSuchMethod(
+              Invocation.method(#getVendorCollectionForUser, [clientId]),
+              returnValue: _FakeCollectionReference<Object?>())
+          as _i3.CollectionReference<Object?>);
+  @override
+  _i3.CollectionReference<Object?> getBusinessCollectionForUser(
+          String? clientId) =>
+      (super.noSuchMethod(
+              Invocation.method(#getBusinessCollectionForUser, [clientId]),
+              returnValue: _FakeCollectionReference<Object?>())
+          as _i3.CollectionReference<Object?>);
   @override
   _i3.CollectionReference<Object?> getAddressCollectionForUser(
           String? clientId) =>

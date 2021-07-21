@@ -5,3 +5,7 @@ const String InvalidAutoCompleteDialogDescription =
 const String AddressSaveFailedDialogTitle = 'Address saved failed';
 const String AddressSaveFailedDialogDescription =
     'We were not able to save the address you have selected. Sorry for the inconvenience. Please try again later.';
+
+const String BusinessSaveFailedDialogTitle = 'Business saved failed';
+const String BusinesSaveFailedDialogDescription =
+    'We were not able to save the business you have entered. Sorry for the inconvenience. Please try again later.';

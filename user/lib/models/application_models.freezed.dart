@@ -23,21 +23,27 @@ class _$ClientTearOff {
   _Client call(
       {required String clientId,
       required String clientType,
+      required String clientRegistrationDate,
       String? clientEmail,
       String? clientName,
       String? clientAddress,
       String? clientPhone,
       String? clientAvatar,
-      String? clientPaymentInfo}) {
+      String? clientPaymentInfo,
+      String? clientBusinessId,
+      String? clientVendorId}) {
     return _Client(
       clientId: clientId,
       clientType: clientType,
+      clientRegistrationDate: clientRegistrationDate,
       clientEmail: clientEmail,
       clientName: clientName,
       clientAddress: clientAddress,
       clientPhone: clientPhone,
       clientAvatar: clientAvatar,
       clientPaymentInfo: clientPaymentInfo,
+      clientBusinessId: clientBusinessId,
+      clientVendorId: clientVendorId,
     );
   }
 
@@ -53,12 +59,15 @@ const $Client = _$ClientTearOff();
 mixin _$Client {
   String get clientId => throw _privateConstructorUsedError;
   String get clientType => throw _privateConstructorUsedError;
+  String get clientRegistrationDate => throw _privateConstructorUsedError;
   String? get clientEmail => throw _privateConstructorUsedError;
   String? get clientName => throw _privateConstructorUsedError;
   String? get clientAddress => throw _privateConstructorUsedError;
   String? get clientPhone => throw _privateConstructorUsedError;
   String? get clientAvatar => throw _privateConstructorUsedError;
   String? get clientPaymentInfo => throw _privateConstructorUsedError;
+  String? get clientBusinessId => throw _privateConstructorUsedError;
+  String? get clientVendorId => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -72,12 +81,15 @@ abstract class $ClientCopyWith<$Res> {
   $Res call(
       {String clientId,
       String clientType,
+      String clientRegistrationDate,
       String? clientEmail,
       String? clientName,
       String? clientAddress,
       String? clientPhone,
       String? clientAvatar,
-      String? clientPaymentInfo});
+      String? clientPaymentInfo,
+      String? clientBusinessId,
+      String? clientVendorId});
 }
 
 /// @nodoc
@@ -92,12 +104,15 @@ class _$ClientCopyWithImpl<$Res> implements $ClientCopyWith<$Res> {
   $Res call({
     Object? clientId = freezed,
     Object? clientType = freezed,
+    Object? clientRegistrationDate = freezed,
     Object? clientEmail = freezed,
     Object? clientName = freezed,
     Object? clientAddress = freezed,
     Object? clientPhone = freezed,
     Object? clientAvatar = freezed,
     Object? clientPaymentInfo = freezed,
+    Object? clientBusinessId = freezed,
+    Object? clientVendorId = freezed,
   }) {
     return _then(_value.copyWith(
       clientId: clientId == freezed
@@ -107,6 +122,10 @@ class _$ClientCopyWithImpl<$Res> implements $ClientCopyWith<$Res> {
       clientType: clientType == freezed
           ? _value.clientType
           : clientType // ignore: cast_nullable_to_non_nullable
+              as String,
+      clientRegistrationDate: clientRegistrationDate == freezed
+          ? _value.clientRegistrationDate
+          : clientRegistrationDate // ignore: cast_nullable_to_non_nullable
               as String,
       clientEmail: clientEmail == freezed
           ? _value.clientEmail
@@ -132,6 +151,14 @@ class _$ClientCopyWithImpl<$Res> implements $ClientCopyWith<$Res> {
           ? _value.clientPaymentInfo
           : clientPaymentInfo // ignore: cast_nullable_to_non_nullable
               as String?,
+      clientBusinessId: clientBusinessId == freezed
+          ? _value.clientBusinessId
+          : clientBusinessId // ignore: cast_nullable_to_non_nullable
+              as String?,
+      clientVendorId: clientVendorId == freezed
+          ? _value.clientVendorId
+          : clientVendorId // ignore: cast_nullable_to_non_nullable
+              as String?,
     ));
   }
 }
@@ -144,12 +171,15 @@ abstract class _$ClientCopyWith<$Res> implements $ClientCopyWith<$Res> {
   $Res call(
       {String clientId,
       String clientType,
+      String clientRegistrationDate,
       String? clientEmail,
       String? clientName,
       String? clientAddress,
       String? clientPhone,
       String? clientAvatar,
-      String? clientPaymentInfo});
+      String? clientPaymentInfo,
+      String? clientBusinessId,
+      String? clientVendorId});
 }
 
 /// @nodoc
@@ -165,12 +195,15 @@ class __$ClientCopyWithImpl<$Res> extends _$ClientCopyWithImpl<$Res>
   $Res call({
     Object? clientId = freezed,
     Object? clientType = freezed,
+    Object? clientRegistrationDate = freezed,
     Object? clientEmail = freezed,
     Object? clientName = freezed,
     Object? clientAddress = freezed,
     Object? clientPhone = freezed,
     Object? clientAvatar = freezed,
     Object? clientPaymentInfo = freezed,
+    Object? clientBusinessId = freezed,
+    Object? clientVendorId = freezed,
   }) {
     return _then(_Client(
       clientId: clientId == freezed
@@ -180,6 +213,10 @@ class __$ClientCopyWithImpl<$Res> extends _$ClientCopyWithImpl<$Res>
       clientType: clientType == freezed
           ? _value.clientType
           : clientType // ignore: cast_nullable_to_non_nullable
+              as String,
+      clientRegistrationDate: clientRegistrationDate == freezed
+          ? _value.clientRegistrationDate
+          : clientRegistrationDate // ignore: cast_nullable_to_non_nullable
               as String,
       clientEmail: clientEmail == freezed
           ? _value.clientEmail
@@ -205,6 +242,14 @@ class __$ClientCopyWithImpl<$Res> extends _$ClientCopyWithImpl<$Res>
           ? _value.clientPaymentInfo
           : clientPaymentInfo // ignore: cast_nullable_to_non_nullable
               as String?,
+      clientBusinessId: clientBusinessId == freezed
+          ? _value.clientBusinessId
+          : clientBusinessId // ignore: cast_nullable_to_non_nullable
+              as String?,
+      clientVendorId: clientVendorId == freezed
+          ? _value.clientVendorId
+          : clientVendorId // ignore: cast_nullable_to_non_nullable
+              as String?,
     ));
   }
 }
@@ -215,12 +260,15 @@ class _$_Client extends _Client {
   _$_Client(
       {required this.clientId,
       required this.clientType,
+      required this.clientRegistrationDate,
       this.clientEmail,
       this.clientName,
       this.clientAddress,
       this.clientPhone,
       this.clientAvatar,
-      this.clientPaymentInfo})
+      this.clientPaymentInfo,
+      this.clientBusinessId,
+      this.clientVendorId})
       : super._();
 
   factory _$_Client.fromJson(Map<String, dynamic> json) =>
@@ -230,6 +278,8 @@ class _$_Client extends _Client {
   final String clientId;
   @override
   final String clientType;
+  @override
+  final String clientRegistrationDate;
   @override
   final String? clientEmail;
   @override
@@ -242,10 +292,14 @@ class _$_Client extends _Client {
   final String? clientAvatar;
   @override
   final String? clientPaymentInfo;
+  @override
+  final String? clientBusinessId;
+  @override
+  final String? clientVendorId;
 
   @override
   String toString() {
-    return 'Client(clientId: $clientId, clientType: $clientType, clientEmail: $clientEmail, clientName: $clientName, clientAddress: $clientAddress, clientPhone: $clientPhone, clientAvatar: $clientAvatar, clientPaymentInfo: $clientPaymentInfo)';
+    return 'Client(clientId: $clientId, clientType: $clientType, clientRegistrationDate: $clientRegistrationDate, clientEmail: $clientEmail, clientName: $clientName, clientAddress: $clientAddress, clientPhone: $clientPhone, clientAvatar: $clientAvatar, clientPaymentInfo: $clientPaymentInfo, clientBusinessId: $clientBusinessId, clientVendorId: $clientVendorId)';
   }
 
   @override
@@ -258,6 +312,9 @@ class _$_Client extends _Client {
             (identical(other.clientType, clientType) ||
                 const DeepCollectionEquality()
                     .equals(other.clientType, clientType)) &&
+            (identical(other.clientRegistrationDate, clientRegistrationDate) ||
+                const DeepCollectionEquality().equals(
+                    other.clientRegistrationDate, clientRegistrationDate)) &&
             (identical(other.clientEmail, clientEmail) ||
                 const DeepCollectionEquality()
                     .equals(other.clientEmail, clientEmail)) &&
@@ -275,7 +332,13 @@ class _$_Client extends _Client {
                     .equals(other.clientAvatar, clientAvatar)) &&
             (identical(other.clientPaymentInfo, clientPaymentInfo) ||
                 const DeepCollectionEquality()
-                    .equals(other.clientPaymentInfo, clientPaymentInfo)));
+                    .equals(other.clientPaymentInfo, clientPaymentInfo)) &&
+            (identical(other.clientBusinessId, clientBusinessId) ||
+                const DeepCollectionEquality()
+                    .equals(other.clientBusinessId, clientBusinessId)) &&
+            (identical(other.clientVendorId, clientVendorId) ||
+                const DeepCollectionEquality()
+                    .equals(other.clientVendorId, clientVendorId)));
   }
 
   @override
@@ -283,12 +346,15 @@ class _$_Client extends _Client {
       runtimeType.hashCode ^
       const DeepCollectionEquality().hash(clientId) ^
       const DeepCollectionEquality().hash(clientType) ^
+      const DeepCollectionEquality().hash(clientRegistrationDate) ^
       const DeepCollectionEquality().hash(clientEmail) ^
       const DeepCollectionEquality().hash(clientName) ^
       const DeepCollectionEquality().hash(clientAddress) ^
       const DeepCollectionEquality().hash(clientPhone) ^
       const DeepCollectionEquality().hash(clientAvatar) ^
-      const DeepCollectionEquality().hash(clientPaymentInfo);
+      const DeepCollectionEquality().hash(clientPaymentInfo) ^
+      const DeepCollectionEquality().hash(clientBusinessId) ^
+      const DeepCollectionEquality().hash(clientVendorId);
 
   @JsonKey(ignore: true)
   @override
@@ -305,12 +371,15 @@ abstract class _Client extends Client {
   factory _Client(
       {required String clientId,
       required String clientType,
+      required String clientRegistrationDate,
       String? clientEmail,
       String? clientName,
       String? clientAddress,
       String? clientPhone,
       String? clientAvatar,
-      String? clientPaymentInfo}) = _$_Client;
+      String? clientPaymentInfo,
+      String? clientBusinessId,
+      String? clientVendorId}) = _$_Client;
   _Client._() : super._();
 
   factory _Client.fromJson(Map<String, dynamic> json) = _$_Client.fromJson;
@@ -319,6 +388,8 @@ abstract class _Client extends Client {
   String get clientId => throw _privateConstructorUsedError;
   @override
   String get clientType => throw _privateConstructorUsedError;
+  @override
+  String get clientRegistrationDate => throw _privateConstructorUsedError;
   @override
   String? get clientEmail => throw _privateConstructorUsedError;
   @override
@@ -331,6 +402,10 @@ abstract class _Client extends Client {
   String? get clientAvatar => throw _privateConstructorUsedError;
   @override
   String? get clientPaymentInfo => throw _privateConstructorUsedError;
+  @override
+  String? get clientBusinessId => throw _privateConstructorUsedError;
+  @override
+  String? get clientVendorId => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
   _$ClientCopyWith<_Client> get copyWith => throw _privateConstructorUsedError;
@@ -678,4 +753,997 @@ abstract class _Address implements Address {
   @JsonKey(ignore: true)
   _$AddressCopyWith<_Address> get copyWith =>
       throw _privateConstructorUsedError;
+}
+
+Business _$BusinessFromJson(Map<String, dynamic> json) {
+  return _Business.fromJson(json);
+}
+
+/// @nodoc
+class _$BusinessTearOff {
+  const _$BusinessTearOff();
+
+  _Business call(
+      {required String businessRegistrationDate,
+      String? businessId,
+      String? businessName,
+      String? businessEmail,
+      String? businessPhone,
+      Address? businessAddress,
+      String? businessDescription,
+      String? businessWebsite,
+      List<String>? businessPhotos,
+      String? businessAvatar,
+      Map<String, String>? businessSocialMedias,
+      Map<String, List<String>>? businessCategories}) {
+    return _Business(
+      businessRegistrationDate: businessRegistrationDate,
+      businessId: businessId,
+      businessName: businessName,
+      businessEmail: businessEmail,
+      businessPhone: businessPhone,
+      businessAddress: businessAddress,
+      businessDescription: businessDescription,
+      businessWebsite: businessWebsite,
+      businessPhotos: businessPhotos,
+      businessAvatar: businessAvatar,
+      businessSocialMedias: businessSocialMedias,
+      businessCategories: businessCategories,
+    );
+  }
+
+  Business fromJson(Map<String, Object> json) {
+    return Business.fromJson(json);
+  }
+}
+
+/// @nodoc
+const $Business = _$BusinessTearOff();
+
+/// @nodoc
+mixin _$Business {
+  String get businessRegistrationDate => throw _privateConstructorUsedError;
+  String? get businessId => throw _privateConstructorUsedError;
+  String? get businessName => throw _privateConstructorUsedError;
+  String? get businessEmail => throw _privateConstructorUsedError;
+  String? get businessPhone => throw _privateConstructorUsedError;
+  Address? get businessAddress => throw _privateConstructorUsedError;
+  String? get businessDescription => throw _privateConstructorUsedError;
+  String? get businessWebsite => throw _privateConstructorUsedError;
+  List<String>? get businessPhotos => throw _privateConstructorUsedError;
+  String? get businessAvatar => throw _privateConstructorUsedError;
+  Map<String, String>? get businessSocialMedias =>
+      throw _privateConstructorUsedError;
+  Map<String, List<String>>? get businessCategories =>
+      throw _privateConstructorUsedError;
+
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+  @JsonKey(ignore: true)
+  $BusinessCopyWith<Business> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $BusinessCopyWith<$Res> {
+  factory $BusinessCopyWith(Business value, $Res Function(Business) then) =
+      _$BusinessCopyWithImpl<$Res>;
+  $Res call(
+      {String businessRegistrationDate,
+      String? businessId,
+      String? businessName,
+      String? businessEmail,
+      String? businessPhone,
+      Address? businessAddress,
+      String? businessDescription,
+      String? businessWebsite,
+      List<String>? businessPhotos,
+      String? businessAvatar,
+      Map<String, String>? businessSocialMedias,
+      Map<String, List<String>>? businessCategories});
+
+  $AddressCopyWith<$Res>? get businessAddress;
+}
+
+/// @nodoc
+class _$BusinessCopyWithImpl<$Res> implements $BusinessCopyWith<$Res> {
+  _$BusinessCopyWithImpl(this._value, this._then);
+
+  final Business _value;
+  // ignore: unused_field
+  final $Res Function(Business) _then;
+
+  @override
+  $Res call({
+    Object? businessRegistrationDate = freezed,
+    Object? businessId = freezed,
+    Object? businessName = freezed,
+    Object? businessEmail = freezed,
+    Object? businessPhone = freezed,
+    Object? businessAddress = freezed,
+    Object? businessDescription = freezed,
+    Object? businessWebsite = freezed,
+    Object? businessPhotos = freezed,
+    Object? businessAvatar = freezed,
+    Object? businessSocialMedias = freezed,
+    Object? businessCategories = freezed,
+  }) {
+    return _then(_value.copyWith(
+      businessRegistrationDate: businessRegistrationDate == freezed
+          ? _value.businessRegistrationDate
+          : businessRegistrationDate // ignore: cast_nullable_to_non_nullable
+              as String,
+      businessId: businessId == freezed
+          ? _value.businessId
+          : businessId // ignore: cast_nullable_to_non_nullable
+              as String?,
+      businessName: businessName == freezed
+          ? _value.businessName
+          : businessName // ignore: cast_nullable_to_non_nullable
+              as String?,
+      businessEmail: businessEmail == freezed
+          ? _value.businessEmail
+          : businessEmail // ignore: cast_nullable_to_non_nullable
+              as String?,
+      businessPhone: businessPhone == freezed
+          ? _value.businessPhone
+          : businessPhone // ignore: cast_nullable_to_non_nullable
+              as String?,
+      businessAddress: businessAddress == freezed
+          ? _value.businessAddress
+          : businessAddress // ignore: cast_nullable_to_non_nullable
+              as Address?,
+      businessDescription: businessDescription == freezed
+          ? _value.businessDescription
+          : businessDescription // ignore: cast_nullable_to_non_nullable
+              as String?,
+      businessWebsite: businessWebsite == freezed
+          ? _value.businessWebsite
+          : businessWebsite // ignore: cast_nullable_to_non_nullable
+              as String?,
+      businessPhotos: businessPhotos == freezed
+          ? _value.businessPhotos
+          : businessPhotos // ignore: cast_nullable_to_non_nullable
+              as List<String>?,
+      businessAvatar: businessAvatar == freezed
+          ? _value.businessAvatar
+          : businessAvatar // ignore: cast_nullable_to_non_nullable
+              as String?,
+      businessSocialMedias: businessSocialMedias == freezed
+          ? _value.businessSocialMedias
+          : businessSocialMedias // ignore: cast_nullable_to_non_nullable
+              as Map<String, String>?,
+      businessCategories: businessCategories == freezed
+          ? _value.businessCategories
+          : businessCategories // ignore: cast_nullable_to_non_nullable
+              as Map<String, List<String>>?,
+    ));
+  }
+
+  @override
+  $AddressCopyWith<$Res>? get businessAddress {
+    if (_value.businessAddress == null) {
+      return null;
+    }
+
+    return $AddressCopyWith<$Res>(_value.businessAddress!, (value) {
+      return _then(_value.copyWith(businessAddress: value));
+    });
+  }
+}
+
+/// @nodoc
+abstract class _$BusinessCopyWith<$Res> implements $BusinessCopyWith<$Res> {
+  factory _$BusinessCopyWith(_Business value, $Res Function(_Business) then) =
+      __$BusinessCopyWithImpl<$Res>;
+  @override
+  $Res call(
+      {String businessRegistrationDate,
+      String? businessId,
+      String? businessName,
+      String? businessEmail,
+      String? businessPhone,
+      Address? businessAddress,
+      String? businessDescription,
+      String? businessWebsite,
+      List<String>? businessPhotos,
+      String? businessAvatar,
+      Map<String, String>? businessSocialMedias,
+      Map<String, List<String>>? businessCategories});
+
+  @override
+  $AddressCopyWith<$Res>? get businessAddress;
+}
+
+/// @nodoc
+class __$BusinessCopyWithImpl<$Res> extends _$BusinessCopyWithImpl<$Res>
+    implements _$BusinessCopyWith<$Res> {
+  __$BusinessCopyWithImpl(_Business _value, $Res Function(_Business) _then)
+      : super(_value, (v) => _then(v as _Business));
+
+  @override
+  _Business get _value => super._value as _Business;
+
+  @override
+  $Res call({
+    Object? businessRegistrationDate = freezed,
+    Object? businessId = freezed,
+    Object? businessName = freezed,
+    Object? businessEmail = freezed,
+    Object? businessPhone = freezed,
+    Object? businessAddress = freezed,
+    Object? businessDescription = freezed,
+    Object? businessWebsite = freezed,
+    Object? businessPhotos = freezed,
+    Object? businessAvatar = freezed,
+    Object? businessSocialMedias = freezed,
+    Object? businessCategories = freezed,
+  }) {
+    return _then(_Business(
+      businessRegistrationDate: businessRegistrationDate == freezed
+          ? _value.businessRegistrationDate
+          : businessRegistrationDate // ignore: cast_nullable_to_non_nullable
+              as String,
+      businessId: businessId == freezed
+          ? _value.businessId
+          : businessId // ignore: cast_nullable_to_non_nullable
+              as String?,
+      businessName: businessName == freezed
+          ? _value.businessName
+          : businessName // ignore: cast_nullable_to_non_nullable
+              as String?,
+      businessEmail: businessEmail == freezed
+          ? _value.businessEmail
+          : businessEmail // ignore: cast_nullable_to_non_nullable
+              as String?,
+      businessPhone: businessPhone == freezed
+          ? _value.businessPhone
+          : businessPhone // ignore: cast_nullable_to_non_nullable
+              as String?,
+      businessAddress: businessAddress == freezed
+          ? _value.businessAddress
+          : businessAddress // ignore: cast_nullable_to_non_nullable
+              as Address?,
+      businessDescription: businessDescription == freezed
+          ? _value.businessDescription
+          : businessDescription // ignore: cast_nullable_to_non_nullable
+              as String?,
+      businessWebsite: businessWebsite == freezed
+          ? _value.businessWebsite
+          : businessWebsite // ignore: cast_nullable_to_non_nullable
+              as String?,
+      businessPhotos: businessPhotos == freezed
+          ? _value.businessPhotos
+          : businessPhotos // ignore: cast_nullable_to_non_nullable
+              as List<String>?,
+      businessAvatar: businessAvatar == freezed
+          ? _value.businessAvatar
+          : businessAvatar // ignore: cast_nullable_to_non_nullable
+              as String?,
+      businessSocialMedias: businessSocialMedias == freezed
+          ? _value.businessSocialMedias
+          : businessSocialMedias // ignore: cast_nullable_to_non_nullable
+              as Map<String, String>?,
+      businessCategories: businessCategories == freezed
+          ? _value.businessCategories
+          : businessCategories // ignore: cast_nullable_to_non_nullable
+              as Map<String, List<String>>?,
+    ));
+  }
+}
+
+/// @nodoc
+@JsonSerializable()
+class _$_Business implements _Business {
+  _$_Business(
+      {required this.businessRegistrationDate,
+      this.businessId,
+      this.businessName,
+      this.businessEmail,
+      this.businessPhone,
+      this.businessAddress,
+      this.businessDescription,
+      this.businessWebsite,
+      this.businessPhotos,
+      this.businessAvatar,
+      this.businessSocialMedias,
+      this.businessCategories});
+
+  factory _$_Business.fromJson(Map<String, dynamic> json) =>
+      _$_$_BusinessFromJson(json);
+
+  @override
+  final String businessRegistrationDate;
+  @override
+  final String? businessId;
+  @override
+  final String? businessName;
+  @override
+  final String? businessEmail;
+  @override
+  final String? businessPhone;
+  @override
+  final Address? businessAddress;
+  @override
+  final String? businessDescription;
+  @override
+  final String? businessWebsite;
+  @override
+  final List<String>? businessPhotos;
+  @override
+  final String? businessAvatar;
+  @override
+  final Map<String, String>? businessSocialMedias;
+  @override
+  final Map<String, List<String>>? businessCategories;
+
+  @override
+  String toString() {
+    return 'Business(businessRegistrationDate: $businessRegistrationDate, businessId: $businessId, businessName: $businessName, businessEmail: $businessEmail, businessPhone: $businessPhone, businessAddress: $businessAddress, businessDescription: $businessDescription, businessWebsite: $businessWebsite, businessPhotos: $businessPhotos, businessAvatar: $businessAvatar, businessSocialMedias: $businessSocialMedias, businessCategories: $businessCategories)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other is _Business &&
+            (identical(
+                    other.businessRegistrationDate, businessRegistrationDate) ||
+                const DeepCollectionEquality().equals(
+                    other.businessRegistrationDate,
+                    businessRegistrationDate)) &&
+            (identical(other.businessId, businessId) ||
+                const DeepCollectionEquality()
+                    .equals(other.businessId, businessId)) &&
+            (identical(other.businessName, businessName) ||
+                const DeepCollectionEquality()
+                    .equals(other.businessName, businessName)) &&
+            (identical(other.businessEmail, businessEmail) ||
+                const DeepCollectionEquality()
+                    .equals(other.businessEmail, businessEmail)) &&
+            (identical(other.businessPhone, businessPhone) ||
+                const DeepCollectionEquality()
+                    .equals(other.businessPhone, businessPhone)) &&
+            (identical(other.businessAddress, businessAddress) ||
+                const DeepCollectionEquality()
+                    .equals(other.businessAddress, businessAddress)) &&
+            (identical(other.businessDescription, businessDescription) ||
+                const DeepCollectionEquality()
+                    .equals(other.businessDescription, businessDescription)) &&
+            (identical(other.businessWebsite, businessWebsite) ||
+                const DeepCollectionEquality()
+                    .equals(other.businessWebsite, businessWebsite)) &&
+            (identical(other.businessPhotos, businessPhotos) ||
+                const DeepCollectionEquality()
+                    .equals(other.businessPhotos, businessPhotos)) &&
+            (identical(other.businessAvatar, businessAvatar) ||
+                const DeepCollectionEquality()
+                    .equals(other.businessAvatar, businessAvatar)) &&
+            (identical(other.businessSocialMedias, businessSocialMedias) ||
+                const DeepCollectionEquality().equals(
+                    other.businessSocialMedias, businessSocialMedias)) &&
+            (identical(other.businessCategories, businessCategories) ||
+                const DeepCollectionEquality()
+                    .equals(other.businessCategories, businessCategories)));
+  }
+
+  @override
+  int get hashCode =>
+      runtimeType.hashCode ^
+      const DeepCollectionEquality().hash(businessRegistrationDate) ^
+      const DeepCollectionEquality().hash(businessId) ^
+      const DeepCollectionEquality().hash(businessName) ^
+      const DeepCollectionEquality().hash(businessEmail) ^
+      const DeepCollectionEquality().hash(businessPhone) ^
+      const DeepCollectionEquality().hash(businessAddress) ^
+      const DeepCollectionEquality().hash(businessDescription) ^
+      const DeepCollectionEquality().hash(businessWebsite) ^
+      const DeepCollectionEquality().hash(businessPhotos) ^
+      const DeepCollectionEquality().hash(businessAvatar) ^
+      const DeepCollectionEquality().hash(businessSocialMedias) ^
+      const DeepCollectionEquality().hash(businessCategories);
+
+  @JsonKey(ignore: true)
+  @override
+  _$BusinessCopyWith<_Business> get copyWith =>
+      __$BusinessCopyWithImpl<_Business>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$_$_BusinessToJson(this);
+  }
+}
+
+abstract class _Business implements Business {
+  factory _Business(
+      {required String businessRegistrationDate,
+      String? businessId,
+      String? businessName,
+      String? businessEmail,
+      String? businessPhone,
+      Address? businessAddress,
+      String? businessDescription,
+      String? businessWebsite,
+      List<String>? businessPhotos,
+      String? businessAvatar,
+      Map<String, String>? businessSocialMedias,
+      Map<String, List<String>>? businessCategories}) = _$_Business;
+
+  factory _Business.fromJson(Map<String, dynamic> json) = _$_Business.fromJson;
+
+  @override
+  String get businessRegistrationDate => throw _privateConstructorUsedError;
+  @override
+  String? get businessId => throw _privateConstructorUsedError;
+  @override
+  String? get businessName => throw _privateConstructorUsedError;
+  @override
+  String? get businessEmail => throw _privateConstructorUsedError;
+  @override
+  String? get businessPhone => throw _privateConstructorUsedError;
+  @override
+  Address? get businessAddress => throw _privateConstructorUsedError;
+  @override
+  String? get businessDescription => throw _privateConstructorUsedError;
+  @override
+  String? get businessWebsite => throw _privateConstructorUsedError;
+  @override
+  List<String>? get businessPhotos => throw _privateConstructorUsedError;
+  @override
+  String? get businessAvatar => throw _privateConstructorUsedError;
+  @override
+  Map<String, String>? get businessSocialMedias =>
+      throw _privateConstructorUsedError;
+  @override
+  Map<String, List<String>>? get businessCategories =>
+      throw _privateConstructorUsedError;
+  @override
+  @JsonKey(ignore: true)
+  _$BusinessCopyWith<_Business> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+Vendor _$VendorFromJson(Map<String, dynamic> json) {
+  return _Vendor.fromJson(json);
+}
+
+/// @nodoc
+class _$VendorTearOff {
+  const _$VendorTearOff();
+
+  _Vendor call(
+      {required String vendorRegistrationDate,
+      String? vendorId,
+      String? vendorName,
+      String? vendorEmail,
+      String? vendorPhone,
+      Address? vendorAddress,
+      List<String>? vendorPhotos,
+      String? vendorAvatar,
+      Map<String, String>? vendorSocialMedias,
+      List<String>? vendorLanguages,
+      Map<String, List<String>>? vendorAccreditations,
+      String? vendorAge,
+      String? vendorGender,
+      List<String>? vendorSkills,
+      Map<String, Map<String, String>>? vendorEducationHistory,
+      Map<String, Map<String, String>>? vendorOccupationHistory}) {
+    return _Vendor(
+      vendorRegistrationDate: vendorRegistrationDate,
+      vendorId: vendorId,
+      vendorName: vendorName,
+      vendorEmail: vendorEmail,
+      vendorPhone: vendorPhone,
+      vendorAddress: vendorAddress,
+      vendorPhotos: vendorPhotos,
+      vendorAvatar: vendorAvatar,
+      vendorSocialMedias: vendorSocialMedias,
+      vendorLanguages: vendorLanguages,
+      vendorAccreditations: vendorAccreditations,
+      vendorAge: vendorAge,
+      vendorGender: vendorGender,
+      vendorSkills: vendorSkills,
+      vendorEducationHistory: vendorEducationHistory,
+      vendorOccupationHistory: vendorOccupationHistory,
+    );
+  }
+
+  Vendor fromJson(Map<String, Object> json) {
+    return Vendor.fromJson(json);
+  }
+}
+
+/// @nodoc
+const $Vendor = _$VendorTearOff();
+
+/// @nodoc
+mixin _$Vendor {
+  String get vendorRegistrationDate => throw _privateConstructorUsedError;
+  String? get vendorId => throw _privateConstructorUsedError;
+  String? get vendorName => throw _privateConstructorUsedError;
+  String? get vendorEmail => throw _privateConstructorUsedError;
+  String? get vendorPhone => throw _privateConstructorUsedError;
+  Address? get vendorAddress => throw _privateConstructorUsedError;
+  List<String>? get vendorPhotos => throw _privateConstructorUsedError;
+  String? get vendorAvatar => throw _privateConstructorUsedError;
+  Map<String, String>? get vendorSocialMedias =>
+      throw _privateConstructorUsedError;
+  List<String>? get vendorLanguages => throw _privateConstructorUsedError;
+  Map<String, List<String>>? get vendorAccreditations =>
+      throw _privateConstructorUsedError;
+  String? get vendorAge => throw _privateConstructorUsedError;
+  String? get vendorGender => throw _privateConstructorUsedError;
+  List<String>? get vendorSkills => throw _privateConstructorUsedError;
+  Map<String, Map<String, String>>? get vendorEducationHistory =>
+      throw _privateConstructorUsedError;
+  Map<String, Map<String, String>>? get vendorOccupationHistory =>
+      throw _privateConstructorUsedError;
+
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+  @JsonKey(ignore: true)
+  $VendorCopyWith<Vendor> get copyWith => throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $VendorCopyWith<$Res> {
+  factory $VendorCopyWith(Vendor value, $Res Function(Vendor) then) =
+      _$VendorCopyWithImpl<$Res>;
+  $Res call(
+      {String vendorRegistrationDate,
+      String? vendorId,
+      String? vendorName,
+      String? vendorEmail,
+      String? vendorPhone,
+      Address? vendorAddress,
+      List<String>? vendorPhotos,
+      String? vendorAvatar,
+      Map<String, String>? vendorSocialMedias,
+      List<String>? vendorLanguages,
+      Map<String, List<String>>? vendorAccreditations,
+      String? vendorAge,
+      String? vendorGender,
+      List<String>? vendorSkills,
+      Map<String, Map<String, String>>? vendorEducationHistory,
+      Map<String, Map<String, String>>? vendorOccupationHistory});
+
+  $AddressCopyWith<$Res>? get vendorAddress;
+}
+
+/// @nodoc
+class _$VendorCopyWithImpl<$Res> implements $VendorCopyWith<$Res> {
+  _$VendorCopyWithImpl(this._value, this._then);
+
+  final Vendor _value;
+  // ignore: unused_field
+  final $Res Function(Vendor) _then;
+
+  @override
+  $Res call({
+    Object? vendorRegistrationDate = freezed,
+    Object? vendorId = freezed,
+    Object? vendorName = freezed,
+    Object? vendorEmail = freezed,
+    Object? vendorPhone = freezed,
+    Object? vendorAddress = freezed,
+    Object? vendorPhotos = freezed,
+    Object? vendorAvatar = freezed,
+    Object? vendorSocialMedias = freezed,
+    Object? vendorLanguages = freezed,
+    Object? vendorAccreditations = freezed,
+    Object? vendorAge = freezed,
+    Object? vendorGender = freezed,
+    Object? vendorSkills = freezed,
+    Object? vendorEducationHistory = freezed,
+    Object? vendorOccupationHistory = freezed,
+  }) {
+    return _then(_value.copyWith(
+      vendorRegistrationDate: vendorRegistrationDate == freezed
+          ? _value.vendorRegistrationDate
+          : vendorRegistrationDate // ignore: cast_nullable_to_non_nullable
+              as String,
+      vendorId: vendorId == freezed
+          ? _value.vendorId
+          : vendorId // ignore: cast_nullable_to_non_nullable
+              as String?,
+      vendorName: vendorName == freezed
+          ? _value.vendorName
+          : vendorName // ignore: cast_nullable_to_non_nullable
+              as String?,
+      vendorEmail: vendorEmail == freezed
+          ? _value.vendorEmail
+          : vendorEmail // ignore: cast_nullable_to_non_nullable
+              as String?,
+      vendorPhone: vendorPhone == freezed
+          ? _value.vendorPhone
+          : vendorPhone // ignore: cast_nullable_to_non_nullable
+              as String?,
+      vendorAddress: vendorAddress == freezed
+          ? _value.vendorAddress
+          : vendorAddress // ignore: cast_nullable_to_non_nullable
+              as Address?,
+      vendorPhotos: vendorPhotos == freezed
+          ? _value.vendorPhotos
+          : vendorPhotos // ignore: cast_nullable_to_non_nullable
+              as List<String>?,
+      vendorAvatar: vendorAvatar == freezed
+          ? _value.vendorAvatar
+          : vendorAvatar // ignore: cast_nullable_to_non_nullable
+              as String?,
+      vendorSocialMedias: vendorSocialMedias == freezed
+          ? _value.vendorSocialMedias
+          : vendorSocialMedias // ignore: cast_nullable_to_non_nullable
+              as Map<String, String>?,
+      vendorLanguages: vendorLanguages == freezed
+          ? _value.vendorLanguages
+          : vendorLanguages // ignore: cast_nullable_to_non_nullable
+              as List<String>?,
+      vendorAccreditations: vendorAccreditations == freezed
+          ? _value.vendorAccreditations
+          : vendorAccreditations // ignore: cast_nullable_to_non_nullable
+              as Map<String, List<String>>?,
+      vendorAge: vendorAge == freezed
+          ? _value.vendorAge
+          : vendorAge // ignore: cast_nullable_to_non_nullable
+              as String?,
+      vendorGender: vendorGender == freezed
+          ? _value.vendorGender
+          : vendorGender // ignore: cast_nullable_to_non_nullable
+              as String?,
+      vendorSkills: vendorSkills == freezed
+          ? _value.vendorSkills
+          : vendorSkills // ignore: cast_nullable_to_non_nullable
+              as List<String>?,
+      vendorEducationHistory: vendorEducationHistory == freezed
+          ? _value.vendorEducationHistory
+          : vendorEducationHistory // ignore: cast_nullable_to_non_nullable
+              as Map<String, Map<String, String>>?,
+      vendorOccupationHistory: vendorOccupationHistory == freezed
+          ? _value.vendorOccupationHistory
+          : vendorOccupationHistory // ignore: cast_nullable_to_non_nullable
+              as Map<String, Map<String, String>>?,
+    ));
+  }
+
+  @override
+  $AddressCopyWith<$Res>? get vendorAddress {
+    if (_value.vendorAddress == null) {
+      return null;
+    }
+
+    return $AddressCopyWith<$Res>(_value.vendorAddress!, (value) {
+      return _then(_value.copyWith(vendorAddress: value));
+    });
+  }
+}
+
+/// @nodoc
+abstract class _$VendorCopyWith<$Res> implements $VendorCopyWith<$Res> {
+  factory _$VendorCopyWith(_Vendor value, $Res Function(_Vendor) then) =
+      __$VendorCopyWithImpl<$Res>;
+  @override
+  $Res call(
+      {String vendorRegistrationDate,
+      String? vendorId,
+      String? vendorName,
+      String? vendorEmail,
+      String? vendorPhone,
+      Address? vendorAddress,
+      List<String>? vendorPhotos,
+      String? vendorAvatar,
+      Map<String, String>? vendorSocialMedias,
+      List<String>? vendorLanguages,
+      Map<String, List<String>>? vendorAccreditations,
+      String? vendorAge,
+      String? vendorGender,
+      List<String>? vendorSkills,
+      Map<String, Map<String, String>>? vendorEducationHistory,
+      Map<String, Map<String, String>>? vendorOccupationHistory});
+
+  @override
+  $AddressCopyWith<$Res>? get vendorAddress;
+}
+
+/// @nodoc
+class __$VendorCopyWithImpl<$Res> extends _$VendorCopyWithImpl<$Res>
+    implements _$VendorCopyWith<$Res> {
+  __$VendorCopyWithImpl(_Vendor _value, $Res Function(_Vendor) _then)
+      : super(_value, (v) => _then(v as _Vendor));
+
+  @override
+  _Vendor get _value => super._value as _Vendor;
+
+  @override
+  $Res call({
+    Object? vendorRegistrationDate = freezed,
+    Object? vendorId = freezed,
+    Object? vendorName = freezed,
+    Object? vendorEmail = freezed,
+    Object? vendorPhone = freezed,
+    Object? vendorAddress = freezed,
+    Object? vendorPhotos = freezed,
+    Object? vendorAvatar = freezed,
+    Object? vendorSocialMedias = freezed,
+    Object? vendorLanguages = freezed,
+    Object? vendorAccreditations = freezed,
+    Object? vendorAge = freezed,
+    Object? vendorGender = freezed,
+    Object? vendorSkills = freezed,
+    Object? vendorEducationHistory = freezed,
+    Object? vendorOccupationHistory = freezed,
+  }) {
+    return _then(_Vendor(
+      vendorRegistrationDate: vendorRegistrationDate == freezed
+          ? _value.vendorRegistrationDate
+          : vendorRegistrationDate // ignore: cast_nullable_to_non_nullable
+              as String,
+      vendorId: vendorId == freezed
+          ? _value.vendorId
+          : vendorId // ignore: cast_nullable_to_non_nullable
+              as String?,
+      vendorName: vendorName == freezed
+          ? _value.vendorName
+          : vendorName // ignore: cast_nullable_to_non_nullable
+              as String?,
+      vendorEmail: vendorEmail == freezed
+          ? _value.vendorEmail
+          : vendorEmail // ignore: cast_nullable_to_non_nullable
+              as String?,
+      vendorPhone: vendorPhone == freezed
+          ? _value.vendorPhone
+          : vendorPhone // ignore: cast_nullable_to_non_nullable
+              as String?,
+      vendorAddress: vendorAddress == freezed
+          ? _value.vendorAddress
+          : vendorAddress // ignore: cast_nullable_to_non_nullable
+              as Address?,
+      vendorPhotos: vendorPhotos == freezed
+          ? _value.vendorPhotos
+          : vendorPhotos // ignore: cast_nullable_to_non_nullable
+              as List<String>?,
+      vendorAvatar: vendorAvatar == freezed
+          ? _value.vendorAvatar
+          : vendorAvatar // ignore: cast_nullable_to_non_nullable
+              as String?,
+      vendorSocialMedias: vendorSocialMedias == freezed
+          ? _value.vendorSocialMedias
+          : vendorSocialMedias // ignore: cast_nullable_to_non_nullable
+              as Map<String, String>?,
+      vendorLanguages: vendorLanguages == freezed
+          ? _value.vendorLanguages
+          : vendorLanguages // ignore: cast_nullable_to_non_nullable
+              as List<String>?,
+      vendorAccreditations: vendorAccreditations == freezed
+          ? _value.vendorAccreditations
+          : vendorAccreditations // ignore: cast_nullable_to_non_nullable
+              as Map<String, List<String>>?,
+      vendorAge: vendorAge == freezed
+          ? _value.vendorAge
+          : vendorAge // ignore: cast_nullable_to_non_nullable
+              as String?,
+      vendorGender: vendorGender == freezed
+          ? _value.vendorGender
+          : vendorGender // ignore: cast_nullable_to_non_nullable
+              as String?,
+      vendorSkills: vendorSkills == freezed
+          ? _value.vendorSkills
+          : vendorSkills // ignore: cast_nullable_to_non_nullable
+              as List<String>?,
+      vendorEducationHistory: vendorEducationHistory == freezed
+          ? _value.vendorEducationHistory
+          : vendorEducationHistory // ignore: cast_nullable_to_non_nullable
+              as Map<String, Map<String, String>>?,
+      vendorOccupationHistory: vendorOccupationHistory == freezed
+          ? _value.vendorOccupationHistory
+          : vendorOccupationHistory // ignore: cast_nullable_to_non_nullable
+              as Map<String, Map<String, String>>?,
+    ));
+  }
+}
+
+/// @nodoc
+@JsonSerializable()
+class _$_Vendor implements _Vendor {
+  _$_Vendor(
+      {required this.vendorRegistrationDate,
+      this.vendorId,
+      this.vendorName,
+      this.vendorEmail,
+      this.vendorPhone,
+      this.vendorAddress,
+      this.vendorPhotos,
+      this.vendorAvatar,
+      this.vendorSocialMedias,
+      this.vendorLanguages,
+      this.vendorAccreditations,
+      this.vendorAge,
+      this.vendorGender,
+      this.vendorSkills,
+      this.vendorEducationHistory,
+      this.vendorOccupationHistory});
+
+  factory _$_Vendor.fromJson(Map<String, dynamic> json) =>
+      _$_$_VendorFromJson(json);
+
+  @override
+  final String vendorRegistrationDate;
+  @override
+  final String? vendorId;
+  @override
+  final String? vendorName;
+  @override
+  final String? vendorEmail;
+  @override
+  final String? vendorPhone;
+  @override
+  final Address? vendorAddress;
+  @override
+  final List<String>? vendorPhotos;
+  @override
+  final String? vendorAvatar;
+  @override
+  final Map<String, String>? vendorSocialMedias;
+  @override
+  final List<String>? vendorLanguages;
+  @override
+  final Map<String, List<String>>? vendorAccreditations;
+  @override
+  final String? vendorAge;
+  @override
+  final String? vendorGender;
+  @override
+  final List<String>? vendorSkills;
+  @override
+  final Map<String, Map<String, String>>? vendorEducationHistory;
+  @override
+  final Map<String, Map<String, String>>? vendorOccupationHistory;
+
+  @override
+  String toString() {
+    return 'Vendor(vendorRegistrationDate: $vendorRegistrationDate, vendorId: $vendorId, vendorName: $vendorName, vendorEmail: $vendorEmail, vendorPhone: $vendorPhone, vendorAddress: $vendorAddress, vendorPhotos: $vendorPhotos, vendorAvatar: $vendorAvatar, vendorSocialMedias: $vendorSocialMedias, vendorLanguages: $vendorLanguages, vendorAccreditations: $vendorAccreditations, vendorAge: $vendorAge, vendorGender: $vendorGender, vendorSkills: $vendorSkills, vendorEducationHistory: $vendorEducationHistory, vendorOccupationHistory: $vendorOccupationHistory)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other is _Vendor &&
+            (identical(other.vendorRegistrationDate, vendorRegistrationDate) ||
+                const DeepCollectionEquality().equals(
+                    other.vendorRegistrationDate, vendorRegistrationDate)) &&
+            (identical(other.vendorId, vendorId) ||
+                const DeepCollectionEquality()
+                    .equals(other.vendorId, vendorId)) &&
+            (identical(other.vendorName, vendorName) ||
+                const DeepCollectionEquality()
+                    .equals(other.vendorName, vendorName)) &&
+            (identical(other.vendorEmail, vendorEmail) ||
+                const DeepCollectionEquality()
+                    .equals(other.vendorEmail, vendorEmail)) &&
+            (identical(other.vendorPhone, vendorPhone) ||
+                const DeepCollectionEquality()
+                    .equals(other.vendorPhone, vendorPhone)) &&
+            (identical(other.vendorAddress, vendorAddress) ||
+                const DeepCollectionEquality()
+                    .equals(other.vendorAddress, vendorAddress)) &&
+            (identical(other.vendorPhotos, vendorPhotos) ||
+                const DeepCollectionEquality()
+                    .equals(other.vendorPhotos, vendorPhotos)) &&
+            (identical(other.vendorAvatar, vendorAvatar) ||
+                const DeepCollectionEquality()
+                    .equals(other.vendorAvatar, vendorAvatar)) &&
+            (identical(other.vendorSocialMedias, vendorSocialMedias) ||
+                const DeepCollectionEquality()
+                    .equals(other.vendorSocialMedias, vendorSocialMedias)) &&
+            (identical(other.vendorLanguages, vendorLanguages) ||
+                const DeepCollectionEquality()
+                    .equals(other.vendorLanguages, vendorLanguages)) &&
+            (identical(other.vendorAccreditations, vendorAccreditations) ||
+                const DeepCollectionEquality().equals(
+                    other.vendorAccreditations, vendorAccreditations)) &&
+            (identical(other.vendorAge, vendorAge) ||
+                const DeepCollectionEquality()
+                    .equals(other.vendorAge, vendorAge)) &&
+            (identical(other.vendorGender, vendorGender) ||
+                const DeepCollectionEquality()
+                    .equals(other.vendorGender, vendorGender)) &&
+            (identical(other.vendorSkills, vendorSkills) ||
+                const DeepCollectionEquality()
+                    .equals(other.vendorSkills, vendorSkills)) &&
+            (identical(other.vendorEducationHistory, vendorEducationHistory) ||
+                const DeepCollectionEquality().equals(
+                    other.vendorEducationHistory, vendorEducationHistory)) &&
+            (identical(
+                    other.vendorOccupationHistory, vendorOccupationHistory) ||
+                const DeepCollectionEquality().equals(
+                    other.vendorOccupationHistory, vendorOccupationHistory)));
+  }
+
+  @override
+  int get hashCode =>
+      runtimeType.hashCode ^
+      const DeepCollectionEquality().hash(vendorRegistrationDate) ^
+      const DeepCollectionEquality().hash(vendorId) ^
+      const DeepCollectionEquality().hash(vendorName) ^
+      const DeepCollectionEquality().hash(vendorEmail) ^
+      const DeepCollectionEquality().hash(vendorPhone) ^
+      const DeepCollectionEquality().hash(vendorAddress) ^
+      const DeepCollectionEquality().hash(vendorPhotos) ^
+      const DeepCollectionEquality().hash(vendorAvatar) ^
+      const DeepCollectionEquality().hash(vendorSocialMedias) ^
+      const DeepCollectionEquality().hash(vendorLanguages) ^
+      const DeepCollectionEquality().hash(vendorAccreditations) ^
+      const DeepCollectionEquality().hash(vendorAge) ^
+      const DeepCollectionEquality().hash(vendorGender) ^
+      const DeepCollectionEquality().hash(vendorSkills) ^
+      const DeepCollectionEquality().hash(vendorEducationHistory) ^
+      const DeepCollectionEquality().hash(vendorOccupationHistory);
+
+  @JsonKey(ignore: true)
+  @override
+  _$VendorCopyWith<_Vendor> get copyWith =>
+      __$VendorCopyWithImpl<_Vendor>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$_$_VendorToJson(this);
+  }
+}
+
+abstract class _Vendor implements Vendor {
+  factory _Vendor(
+      {required String vendorRegistrationDate,
+      String? vendorId,
+      String? vendorName,
+      String? vendorEmail,
+      String? vendorPhone,
+      Address? vendorAddress,
+      List<String>? vendorPhotos,
+      String? vendorAvatar,
+      Map<String, String>? vendorSocialMedias,
+      List<String>? vendorLanguages,
+      Map<String, List<String>>? vendorAccreditations,
+      String? vendorAge,
+      String? vendorGender,
+      List<String>? vendorSkills,
+      Map<String, Map<String, String>>? vendorEducationHistory,
+      Map<String, Map<String, String>>? vendorOccupationHistory}) = _$_Vendor;
+
+  factory _Vendor.fromJson(Map<String, dynamic> json) = _$_Vendor.fromJson;
+
+  @override
+  String get vendorRegistrationDate => throw _privateConstructorUsedError;
+  @override
+  String? get vendorId => throw _privateConstructorUsedError;
+  @override
+  String? get vendorName => throw _privateConstructorUsedError;
+  @override
+  String? get vendorEmail => throw _privateConstructorUsedError;
+  @override
+  String? get vendorPhone => throw _privateConstructorUsedError;
+  @override
+  Address? get vendorAddress => throw _privateConstructorUsedError;
+  @override
+  List<String>? get vendorPhotos => throw _privateConstructorUsedError;
+  @override
+  String? get vendorAvatar => throw _privateConstructorUsedError;
+  @override
+  Map<String, String>? get vendorSocialMedias =>
+      throw _privateConstructorUsedError;
+  @override
+  List<String>? get vendorLanguages => throw _privateConstructorUsedError;
+  @override
+  Map<String, List<String>>? get vendorAccreditations =>
+      throw _privateConstructorUsedError;
+  @override
+  String? get vendorAge => throw _privateConstructorUsedError;
+  @override
+  String? get vendorGender => throw _privateConstructorUsedError;
+  @override
+  List<String>? get vendorSkills => throw _privateConstructorUsedError;
+  @override
+  Map<String, Map<String, String>>? get vendorEducationHistory =>
+      throw _privateConstructorUsedError;
+  @override
+  Map<String, Map<String, String>>? get vendorOccupationHistory =>
+      throw _privateConstructorUsedError;
+  @override
+  @JsonKey(ignore: true)
+  _$VendorCopyWith<_Vendor> get copyWith => throw _privateConstructorUsedError;
 }
