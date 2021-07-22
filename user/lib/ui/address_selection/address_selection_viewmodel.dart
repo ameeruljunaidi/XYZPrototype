@@ -98,7 +98,7 @@ class AddressSelectionViewModel extends FormViewModel {
     log.i('autoCompleteResults: $autoCompleteResults');
     _selectedResult = autoCompleteResults;
 
-    _autoCompleteResults.clear();
+    // _autoCompleteResults.clear();
 
     notifyListeners();
   }

@@ -36,7 +36,7 @@ class StartUpViewModel extends BaseViewModel {
           _navigationService.navigateTo(Routes.addressSelectionView);
           log.v('User has no default address, go to choose address');
         } else {
-          _navigationService.navigateTo(Routes.homeView);
+          _navigationService.replaceWith(Routes.homeView);
           log.v('User has default address, go to homeView');
         }
       }

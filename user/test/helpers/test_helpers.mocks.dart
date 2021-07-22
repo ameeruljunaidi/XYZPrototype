@@ -52,6 +52,10 @@ class _FakeFirebaseAuthenticationResult extends _i1.Fake
 /// See the documentation for Mockito's code generation for more information.
 class MockUserService extends _i1.Mock implements _i6.UserService {
   @override
+  String get clientType =>
+      (super.noSuchMethod(Invocation.getter(#clientType), returnValue: '')
+          as String);
+  @override
   bool get hasLoggedInUser => (super
           .noSuchMethod(Invocation.getter(#hasLoggedInUser), returnValue: false)
       as bool);

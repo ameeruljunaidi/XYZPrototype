@@ -1,4 +1,3 @@
-import 'package:places_service/places_service.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
 import 'package:xyz_prototype/api/firestore_api.dart';
@@ -13,7 +12,6 @@ import 'package:xyz_prototype/ui/add_business/add_business_view.form.dart';
 
 class AddBusinessViewModel extends FormViewModel {
   final log = getLogger('AddBusinessViewModel');
-  final _placesServices = locator<PlacesService>();
   final _dialogService = locator<DialogService>();
   final _firestoreApi = locator<FirestoreApi>();
   final _navigationService = locator<NavigationService>();

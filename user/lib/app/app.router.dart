@@ -116,8 +116,11 @@ class StackedRouter extends RouterBase {
       );
     },
     MarketPlaceView: (data) {
+      var args = data.getArgs<MarketPlaceViewArguments>(
+        orElse: () => MarketPlaceViewArguments(),
+      );
       return MaterialPageRoute<dynamic>(
-        builder: (context) => const MarketPlaceView(),
+        builder: (context) => MarketPlaceView(key: args.key),
         settings: data,
       );
     },
@@ -174,4 +177,10 @@ class LoginViewArguments {
 class AddBusinessViewArguments {
   final Key? key;
   AddBusinessViewArguments({this.key});
+}
+
+/// MarketPlaceView arguments holder class
+class MarketPlaceViewArguments {
+  final Key? key;
+  MarketPlaceViewArguments({this.key});
 }

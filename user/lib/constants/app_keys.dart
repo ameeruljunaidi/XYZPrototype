@@ -1,4 +1,4 @@
-import 'package:enum_to_string/enum_to_string.dart';
+import 'package:flutter/foundation.dart';
 
 // Firestore keys
 const String UsersFirestoreKey = 'clients';
@@ -13,5 +13,5 @@ enum ClientType {
   vendor,
 }
 
-String defaultClientType = EnumToString.convertToString(ClientType.user);
+String defaultClientType = describeEnum(ClientType.user);
 String defaultRegistrationDate = DateTime.now().toIso8601String();

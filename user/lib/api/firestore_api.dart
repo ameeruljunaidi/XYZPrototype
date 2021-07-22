@@ -1,5 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:enum_to_string/enum_to_string.dart';
+import 'package:flutter/foundation.dart';
 import 'package:xyz_prototype/app/app.logger.dart';
 import 'package:xyz_prototype/constants/app_keys.dart';
 import 'package:xyz_prototype/exceptions/firestore_api_exceptions.dart';
@@ -158,7 +158,7 @@ class FirestoreApi {
             .copyWith(
               clientBusinessId: newBusinessId,
               clientVendorId: newVendorId,
-              clientType: EnumToString.convertToString(ClientType.business),
+              clientType: describeEnum(ClientType.business),
             )
             .toJson());
         log.v(

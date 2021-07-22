@@ -19,13 +19,14 @@ class BoxText extends StatelessWidget {
   const BoxText.headline(this.text, {TextAlign align = TextAlign.start})
       : style = headlineStyle,
         alignment = align;
-  const BoxText.subheading(this.text, {TextAlign align = TextAlign.start})
-      : style = subheadingStyle,
-        alignment = align;
   const BoxText.caption(this.text, {TextAlign align = TextAlign.start})
       : style = captionStyle,
         alignment = align;
 
+  BoxText.subheading(this.text,
+      {TextAlign align = TextAlign.start, color = Colors.black})
+      : style = subheadingStyle.copyWith(color: color),
+        alignment = align;
   BoxText.body(this.text,
       {Color color = kcMediumGreyColor, TextAlign align = TextAlign.start})
       : style = bodyStyle.copyWith(color: color),

@@ -1747,3 +1747,465 @@ abstract class _Vendor implements Vendor {
   @JsonKey(ignore: true)
   _$VendorCopyWith<_Vendor> get copyWith => throw _privateConstructorUsedError;
 }
+
+Gigs _$GigsFromJson(Map<String, dynamic> json) {
+  return _Gigs.fromJson(json);
+}
+
+/// @nodoc
+class _$GigsTearOff {
+  const _$GigsTearOff();
+
+  _Gigs call(
+      {String? gigId,
+      String? gigTitle,
+      String? gitSubtitle,
+      String? gigDescription,
+      List<String>? gigPhotos,
+      List<String>? gigFeatures,
+      Map<String, String>? gigFaqs,
+      Map<String, double>? gigReviews,
+      String? gigCategory,
+      String? gigSubCategory,
+      Map<String, dynamic>? gigFilters,
+      Map<String, dynamic>? gigPrice,
+      Address? gigLocation}) {
+    return _Gigs(
+      gigId: gigId,
+      gigTitle: gigTitle,
+      gitSubtitle: gitSubtitle,
+      gigDescription: gigDescription,
+      gigPhotos: gigPhotos,
+      gigFeatures: gigFeatures,
+      gigFaqs: gigFaqs,
+      gigReviews: gigReviews,
+      gigCategory: gigCategory,
+      gigSubCategory: gigSubCategory,
+      gigFilters: gigFilters,
+      gigPrice: gigPrice,
+      gigLocation: gigLocation,
+    );
+  }
+
+  Gigs fromJson(Map<String, Object> json) {
+    return Gigs.fromJson(json);
+  }
+}
+
+/// @nodoc
+const $Gigs = _$GigsTearOff();
+
+/// @nodoc
+mixin _$Gigs {
+  String? get gigId => throw _privateConstructorUsedError;
+  String? get gigTitle => throw _privateConstructorUsedError;
+  String? get gitSubtitle => throw _privateConstructorUsedError;
+  String? get gigDescription => throw _privateConstructorUsedError;
+  List<String>? get gigPhotos => throw _privateConstructorUsedError;
+  List<String>? get gigFeatures => throw _privateConstructorUsedError;
+  Map<String, String>? get gigFaqs => throw _privateConstructorUsedError;
+  Map<String, double>? get gigReviews => throw _privateConstructorUsedError;
+  String? get gigCategory => throw _privateConstructorUsedError;
+  String? get gigSubCategory => throw _privateConstructorUsedError;
+  Map<String, dynamic>? get gigFilters => throw _privateConstructorUsedError;
+  Map<String, dynamic>? get gigPrice => throw _privateConstructorUsedError;
+  Address? get gigLocation => throw _privateConstructorUsedError;
+
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+  @JsonKey(ignore: true)
+  $GigsCopyWith<Gigs> get copyWith => throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $GigsCopyWith<$Res> {
+  factory $GigsCopyWith(Gigs value, $Res Function(Gigs) then) =
+      _$GigsCopyWithImpl<$Res>;
+  $Res call(
+      {String? gigId,
+      String? gigTitle,
+      String? gitSubtitle,
+      String? gigDescription,
+      List<String>? gigPhotos,
+      List<String>? gigFeatures,
+      Map<String, String>? gigFaqs,
+      Map<String, double>? gigReviews,
+      String? gigCategory,
+      String? gigSubCategory,
+      Map<String, dynamic>? gigFilters,
+      Map<String, dynamic>? gigPrice,
+      Address? gigLocation});
+
+  $AddressCopyWith<$Res>? get gigLocation;
+}
+
+/// @nodoc
+class _$GigsCopyWithImpl<$Res> implements $GigsCopyWith<$Res> {
+  _$GigsCopyWithImpl(this._value, this._then);
+
+  final Gigs _value;
+  // ignore: unused_field
+  final $Res Function(Gigs) _then;
+
+  @override
+  $Res call({
+    Object? gigId = freezed,
+    Object? gigTitle = freezed,
+    Object? gitSubtitle = freezed,
+    Object? gigDescription = freezed,
+    Object? gigPhotos = freezed,
+    Object? gigFeatures = freezed,
+    Object? gigFaqs = freezed,
+    Object? gigReviews = freezed,
+    Object? gigCategory = freezed,
+    Object? gigSubCategory = freezed,
+    Object? gigFilters = freezed,
+    Object? gigPrice = freezed,
+    Object? gigLocation = freezed,
+  }) {
+    return _then(_value.copyWith(
+      gigId: gigId == freezed
+          ? _value.gigId
+          : gigId // ignore: cast_nullable_to_non_nullable
+              as String?,
+      gigTitle: gigTitle == freezed
+          ? _value.gigTitle
+          : gigTitle // ignore: cast_nullable_to_non_nullable
+              as String?,
+      gitSubtitle: gitSubtitle == freezed
+          ? _value.gitSubtitle
+          : gitSubtitle // ignore: cast_nullable_to_non_nullable
+              as String?,
+      gigDescription: gigDescription == freezed
+          ? _value.gigDescription
+          : gigDescription // ignore: cast_nullable_to_non_nullable
+              as String?,
+      gigPhotos: gigPhotos == freezed
+          ? _value.gigPhotos
+          : gigPhotos // ignore: cast_nullable_to_non_nullable
+              as List<String>?,
+      gigFeatures: gigFeatures == freezed
+          ? _value.gigFeatures
+          : gigFeatures // ignore: cast_nullable_to_non_nullable
+              as List<String>?,
+      gigFaqs: gigFaqs == freezed
+          ? _value.gigFaqs
+          : gigFaqs // ignore: cast_nullable_to_non_nullable
+              as Map<String, String>?,
+      gigReviews: gigReviews == freezed
+          ? _value.gigReviews
+          : gigReviews // ignore: cast_nullable_to_non_nullable
+              as Map<String, double>?,
+      gigCategory: gigCategory == freezed
+          ? _value.gigCategory
+          : gigCategory // ignore: cast_nullable_to_non_nullable
+              as String?,
+      gigSubCategory: gigSubCategory == freezed
+          ? _value.gigSubCategory
+          : gigSubCategory // ignore: cast_nullable_to_non_nullable
+              as String?,
+      gigFilters: gigFilters == freezed
+          ? _value.gigFilters
+          : gigFilters // ignore: cast_nullable_to_non_nullable
+              as Map<String, dynamic>?,
+      gigPrice: gigPrice == freezed
+          ? _value.gigPrice
+          : gigPrice // ignore: cast_nullable_to_non_nullable
+              as Map<String, dynamic>?,
+      gigLocation: gigLocation == freezed
+          ? _value.gigLocation
+          : gigLocation // ignore: cast_nullable_to_non_nullable
+              as Address?,
+    ));
+  }
+
+  @override
+  $AddressCopyWith<$Res>? get gigLocation {
+    if (_value.gigLocation == null) {
+      return null;
+    }
+
+    return $AddressCopyWith<$Res>(_value.gigLocation!, (value) {
+      return _then(_value.copyWith(gigLocation: value));
+    });
+  }
+}
+
+/// @nodoc
+abstract class _$GigsCopyWith<$Res> implements $GigsCopyWith<$Res> {
+  factory _$GigsCopyWith(_Gigs value, $Res Function(_Gigs) then) =
+      __$GigsCopyWithImpl<$Res>;
+  @override
+  $Res call(
+      {String? gigId,
+      String? gigTitle,
+      String? gitSubtitle,
+      String? gigDescription,
+      List<String>? gigPhotos,
+      List<String>? gigFeatures,
+      Map<String, String>? gigFaqs,
+      Map<String, double>? gigReviews,
+      String? gigCategory,
+      String? gigSubCategory,
+      Map<String, dynamic>? gigFilters,
+      Map<String, dynamic>? gigPrice,
+      Address? gigLocation});
+
+  @override
+  $AddressCopyWith<$Res>? get gigLocation;
+}
+
+/// @nodoc
+class __$GigsCopyWithImpl<$Res> extends _$GigsCopyWithImpl<$Res>
+    implements _$GigsCopyWith<$Res> {
+  __$GigsCopyWithImpl(_Gigs _value, $Res Function(_Gigs) _then)
+      : super(_value, (v) => _then(v as _Gigs));
+
+  @override
+  _Gigs get _value => super._value as _Gigs;
+
+  @override
+  $Res call({
+    Object? gigId = freezed,
+    Object? gigTitle = freezed,
+    Object? gitSubtitle = freezed,
+    Object? gigDescription = freezed,
+    Object? gigPhotos = freezed,
+    Object? gigFeatures = freezed,
+    Object? gigFaqs = freezed,
+    Object? gigReviews = freezed,
+    Object? gigCategory = freezed,
+    Object? gigSubCategory = freezed,
+    Object? gigFilters = freezed,
+    Object? gigPrice = freezed,
+    Object? gigLocation = freezed,
+  }) {
+    return _then(_Gigs(
+      gigId: gigId == freezed
+          ? _value.gigId
+          : gigId // ignore: cast_nullable_to_non_nullable
+              as String?,
+      gigTitle: gigTitle == freezed
+          ? _value.gigTitle
+          : gigTitle // ignore: cast_nullable_to_non_nullable
+              as String?,
+      gitSubtitle: gitSubtitle == freezed
+          ? _value.gitSubtitle
+          : gitSubtitle // ignore: cast_nullable_to_non_nullable
+              as String?,
+      gigDescription: gigDescription == freezed
+          ? _value.gigDescription
+          : gigDescription // ignore: cast_nullable_to_non_nullable
+              as String?,
+      gigPhotos: gigPhotos == freezed
+          ? _value.gigPhotos
+          : gigPhotos // ignore: cast_nullable_to_non_nullable
+              as List<String>?,
+      gigFeatures: gigFeatures == freezed
+          ? _value.gigFeatures
+          : gigFeatures // ignore: cast_nullable_to_non_nullable
+              as List<String>?,
+      gigFaqs: gigFaqs == freezed
+          ? _value.gigFaqs
+          : gigFaqs // ignore: cast_nullable_to_non_nullable
+              as Map<String, String>?,
+      gigReviews: gigReviews == freezed
+          ? _value.gigReviews
+          : gigReviews // ignore: cast_nullable_to_non_nullable
+              as Map<String, double>?,
+      gigCategory: gigCategory == freezed
+          ? _value.gigCategory
+          : gigCategory // ignore: cast_nullable_to_non_nullable
+              as String?,
+      gigSubCategory: gigSubCategory == freezed
+          ? _value.gigSubCategory
+          : gigSubCategory // ignore: cast_nullable_to_non_nullable
+              as String?,
+      gigFilters: gigFilters == freezed
+          ? _value.gigFilters
+          : gigFilters // ignore: cast_nullable_to_non_nullable
+              as Map<String, dynamic>?,
+      gigPrice: gigPrice == freezed
+          ? _value.gigPrice
+          : gigPrice // ignore: cast_nullable_to_non_nullable
+              as Map<String, dynamic>?,
+      gigLocation: gigLocation == freezed
+          ? _value.gigLocation
+          : gigLocation // ignore: cast_nullable_to_non_nullable
+              as Address?,
+    ));
+  }
+}
+
+/// @nodoc
+@JsonSerializable()
+class _$_Gigs implements _Gigs {
+  _$_Gigs(
+      {this.gigId,
+      this.gigTitle,
+      this.gitSubtitle,
+      this.gigDescription,
+      this.gigPhotos,
+      this.gigFeatures,
+      this.gigFaqs,
+      this.gigReviews,
+      this.gigCategory,
+      this.gigSubCategory,
+      this.gigFilters,
+      this.gigPrice,
+      this.gigLocation});
+
+  factory _$_Gigs.fromJson(Map<String, dynamic> json) =>
+      _$_$_GigsFromJson(json);
+
+  @override
+  final String? gigId;
+  @override
+  final String? gigTitle;
+  @override
+  final String? gitSubtitle;
+  @override
+  final String? gigDescription;
+  @override
+  final List<String>? gigPhotos;
+  @override
+  final List<String>? gigFeatures;
+  @override
+  final Map<String, String>? gigFaqs;
+  @override
+  final Map<String, double>? gigReviews;
+  @override
+  final String? gigCategory;
+  @override
+  final String? gigSubCategory;
+  @override
+  final Map<String, dynamic>? gigFilters;
+  @override
+  final Map<String, dynamic>? gigPrice;
+  @override
+  final Address? gigLocation;
+
+  @override
+  String toString() {
+    return 'Gigs(gigId: $gigId, gigTitle: $gigTitle, gitSubtitle: $gitSubtitle, gigDescription: $gigDescription, gigPhotos: $gigPhotos, gigFeatures: $gigFeatures, gigFaqs: $gigFaqs, gigReviews: $gigReviews, gigCategory: $gigCategory, gigSubCategory: $gigSubCategory, gigFilters: $gigFilters, gigPrice: $gigPrice, gigLocation: $gigLocation)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other is _Gigs &&
+            (identical(other.gigId, gigId) ||
+                const DeepCollectionEquality().equals(other.gigId, gigId)) &&
+            (identical(other.gigTitle, gigTitle) ||
+                const DeepCollectionEquality()
+                    .equals(other.gigTitle, gigTitle)) &&
+            (identical(other.gitSubtitle, gitSubtitle) ||
+                const DeepCollectionEquality()
+                    .equals(other.gitSubtitle, gitSubtitle)) &&
+            (identical(other.gigDescription, gigDescription) ||
+                const DeepCollectionEquality()
+                    .equals(other.gigDescription, gigDescription)) &&
+            (identical(other.gigPhotos, gigPhotos) ||
+                const DeepCollectionEquality()
+                    .equals(other.gigPhotos, gigPhotos)) &&
+            (identical(other.gigFeatures, gigFeatures) ||
+                const DeepCollectionEquality()
+                    .equals(other.gigFeatures, gigFeatures)) &&
+            (identical(other.gigFaqs, gigFaqs) ||
+                const DeepCollectionEquality()
+                    .equals(other.gigFaqs, gigFaqs)) &&
+            (identical(other.gigReviews, gigReviews) ||
+                const DeepCollectionEquality()
+                    .equals(other.gigReviews, gigReviews)) &&
+            (identical(other.gigCategory, gigCategory) ||
+                const DeepCollectionEquality()
+                    .equals(other.gigCategory, gigCategory)) &&
+            (identical(other.gigSubCategory, gigSubCategory) ||
+                const DeepCollectionEquality()
+                    .equals(other.gigSubCategory, gigSubCategory)) &&
+            (identical(other.gigFilters, gigFilters) ||
+                const DeepCollectionEquality()
+                    .equals(other.gigFilters, gigFilters)) &&
+            (identical(other.gigPrice, gigPrice) ||
+                const DeepCollectionEquality()
+                    .equals(other.gigPrice, gigPrice)) &&
+            (identical(other.gigLocation, gigLocation) ||
+                const DeepCollectionEquality()
+                    .equals(other.gigLocation, gigLocation)));
+  }
+
+  @override
+  int get hashCode =>
+      runtimeType.hashCode ^
+      const DeepCollectionEquality().hash(gigId) ^
+      const DeepCollectionEquality().hash(gigTitle) ^
+      const DeepCollectionEquality().hash(gitSubtitle) ^
+      const DeepCollectionEquality().hash(gigDescription) ^
+      const DeepCollectionEquality().hash(gigPhotos) ^
+      const DeepCollectionEquality().hash(gigFeatures) ^
+      const DeepCollectionEquality().hash(gigFaqs) ^
+      const DeepCollectionEquality().hash(gigReviews) ^
+      const DeepCollectionEquality().hash(gigCategory) ^
+      const DeepCollectionEquality().hash(gigSubCategory) ^
+      const DeepCollectionEquality().hash(gigFilters) ^
+      const DeepCollectionEquality().hash(gigPrice) ^
+      const DeepCollectionEquality().hash(gigLocation);
+
+  @JsonKey(ignore: true)
+  @override
+  _$GigsCopyWith<_Gigs> get copyWith =>
+      __$GigsCopyWithImpl<_Gigs>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$_$_GigsToJson(this);
+  }
+}
+
+abstract class _Gigs implements Gigs {
+  factory _Gigs(
+      {String? gigId,
+      String? gigTitle,
+      String? gitSubtitle,
+      String? gigDescription,
+      List<String>? gigPhotos,
+      List<String>? gigFeatures,
+      Map<String, String>? gigFaqs,
+      Map<String, double>? gigReviews,
+      String? gigCategory,
+      String? gigSubCategory,
+      Map<String, dynamic>? gigFilters,
+      Map<String, dynamic>? gigPrice,
+      Address? gigLocation}) = _$_Gigs;
+
+  factory _Gigs.fromJson(Map<String, dynamic> json) = _$_Gigs.fromJson;
+
+  @override
+  String? get gigId => throw _privateConstructorUsedError;
+  @override
+  String? get gigTitle => throw _privateConstructorUsedError;
+  @override
+  String? get gitSubtitle => throw _privateConstructorUsedError;
+  @override
+  String? get gigDescription => throw _privateConstructorUsedError;
+  @override
+  List<String>? get gigPhotos => throw _privateConstructorUsedError;
+  @override
+  List<String>? get gigFeatures => throw _privateConstructorUsedError;
+  @override
+  Map<String, String>? get gigFaqs => throw _privateConstructorUsedError;
+  @override
+  Map<String, double>? get gigReviews => throw _privateConstructorUsedError;
+  @override
+  String? get gigCategory => throw _privateConstructorUsedError;
+  @override
+  String? get gigSubCategory => throw _privateConstructorUsedError;
+  @override
+  Map<String, dynamic>? get gigFilters => throw _privateConstructorUsedError;
+  @override
+  Map<String, dynamic>? get gigPrice => throw _privateConstructorUsedError;
+  @override
+  Address? get gigLocation => throw _privateConstructorUsedError;
+  @override
+  @JsonKey(ignore: true)
+  _$GigsCopyWith<_Gigs> get copyWith => throw _privateConstructorUsedError;
+}

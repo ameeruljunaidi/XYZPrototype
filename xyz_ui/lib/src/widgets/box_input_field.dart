@@ -8,6 +8,7 @@ class BoxInputField extends StatelessWidget {
   final Widget? trailing;
   final bool password;
   final void Function()? trailingTapped;
+  final TextAlign textAlign;
 
   final circularBorder = OutlineInputBorder(
     borderRadius: BorderRadius.circular(8),
@@ -21,6 +22,7 @@ class BoxInputField extends StatelessWidget {
     this.trailing,
     this.trailingTapped,
     this.password = false,
+    this.textAlign = TextAlign.start,
   }) : super(key: key);
 
   @override
@@ -32,6 +34,7 @@ class BoxInputField extends StatelessWidget {
       data: ThemeData(primaryColor: kcPrimaryColor),
       child: TextField(
         controller: controller,
+        textAlign: textAlign,
         style: TextStyle(height: 1),
         obscureText: password,
         decoration: InputDecoration(

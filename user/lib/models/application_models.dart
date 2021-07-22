@@ -89,3 +89,24 @@ class Vendor with _$Vendor {
 
   factory Vendor.fromJson(Map<String, dynamic> json) => _$VendorFromJson(json);
 }
+
+@freezed
+class Gigs with _$Gigs {
+  factory Gigs({
+    String? gigId,
+    String? gigTitle,
+    String? gitSubtitle,
+    String? gigDescription,
+    List<String>? gigPhotos,
+    List<String>? gigFeatures,
+    Map<String, String>? gigFaqs,
+    Map<String, double>? gigReviews,
+    String? gigCategory,
+    String? gigSubCategory,
+    Map<String, dynamic>? gigFilters,
+    Map<String, dynamic>? gigPrice,
+    Address? gigLocation,
+  }) = _Gigs;
+
+  factory Gigs.fromJson(Map<String, dynamic> json) => _$GigsFromJson(json);
+}
