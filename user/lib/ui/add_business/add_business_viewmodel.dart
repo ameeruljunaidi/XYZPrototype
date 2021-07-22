@@ -54,4 +54,8 @@ class AddBusinessViewModel extends FormViewModel {
 
     setBusy(false);
   }
+
+  void cancelAddBusiness() {
+    _navigationService.back();
+  }
 }

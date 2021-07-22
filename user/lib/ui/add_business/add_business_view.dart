@@ -42,7 +42,7 @@ class AddBusinessView extends StatelessWidget with $AddBusinessView {
                   child: IconButton(
                     padding: EdgeInsets.zero,
                     icon: Icon(Icons.arrow_back_ios, color: Colors.black),
-                    onPressed: () {},
+                    onPressed: model.cancelAddBusiness,
                   ),
                 ),
                 verticalSpaceTiny,

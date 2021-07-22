@@ -1,3 +1,4 @@
+import 'package:animations/animations.dart';
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
 import 'package:xyz_prototype/ui/home/home_viewmodel.dart';
@@ -22,29 +23,45 @@ class HomeView extends StatelessWidget {
           currentIndex: model.currentIndex,
           onTap: model.setIndex,
           items: [
-            BottomNavigationBarItem(
-              icon: Icon(Icons.home),
+            bottomNavigationBarItem(
+              icon: Icons.home,
               label: 'Home',
             ),
-            BottomNavigationBarItem(
-              icon: Icon(Icons.inbox),
+            bottomNavigationBarItem(
+              icon: Icons.inbox,
               label: 'Inbox',
             ),
-            BottomNavigationBarItem(
-              icon: Icon(Icons.search),
+            bottomNavigationBarItem(
+              icon: Icons.search,
               label: 'Search',
             ),
-            BottomNavigationBarItem(
-              icon: Icon(Icons.notifications),
+            bottomNavigationBarItem(
+              icon: Icons.notifications,
               label: 'Notifications',
             ),
-            BottomNavigationBarItem(
-              icon: Icon(Icons.list),
+            bottomNavigationBarItem(
+              icon: Icons.list,
               label: 'Profile',
             ),
           ],
         ),
-        body: getViewForIndex(model.currentIndex),
+        body: PageTransitionSwitcher(
+          duration: const Duration(milliseconds: 300),
+          reverse: model.reverse,
+          transitionBuilder: (
+            Widget child,
+            Animation<double> animation,
+            Animation<double> secondaryAnimation,
+          ) {
+            return SharedAxisTransition(
+              animation: animation,
+              secondaryAnimation: secondaryAnimation,
+              transitionType: SharedAxisTransitionType.horizontal,
+              child: child,
+            );
+          },
+          child: getViewForIndex(model.currentIndex),
+        ),
       ),
       viewModelBuilder: () => HomeViewModel(),
     );
@@ -65,5 +82,15 @@ class HomeView extends StatelessWidget {
       default:
         return MarketPlaceView();
     }
+  }
+
+  BottomNavigationBarItem bottomNavigationBarItem({icon, label}) {
+    return BottomNavigationBarItem(
+      icon: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 0.0, vertical: 4.0),
+        child: Icon(icon),
+      ),
+      label: label,
+    );
   }
 }

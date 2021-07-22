@@ -23,6 +23,9 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  xyz_ui:
+    path: ../xyz_ui
+  animations: ^2.0.1
   auth_buttons: ^1.0.1+4
   cloud_firestore: ^2.3.0
   cupertino_icons: ^1.0.2
@@ -38,8 +41,6 @@ dependencies:
   stacked: ^2.2.2
   stacked_firebase_auth: ^0.2.5
   stacked_services: ^0.8.10
-  xyz_ui:
-    path: ../xyz_ui
 
 dev_dependencies:
   flutter_test:
