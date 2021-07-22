@@ -9,6 +9,8 @@ class BoxInputField extends StatelessWidget {
   final bool password;
   final void Function()? trailingTapped;
   final TextAlign textAlign;
+  final bool tapOnly;
+  final void Function()? onTap;
 
   final circularBorder = OutlineInputBorder(
     borderRadius: BorderRadius.circular(8),
@@ -23,45 +25,52 @@ class BoxInputField extends StatelessWidget {
     this.trailingTapped,
     this.password = false,
     this.textAlign = TextAlign.start,
+    this.tapOnly = false,
+    this.onTap,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    final _decoration = InputDecoration(
+      hintText: placeholder,
+      contentPadding: const EdgeInsets.symmetric(vertical: 15, horizontal: 20),
+      filled: true,
+      fillColor: kcVeryLightGreyColor,
+      prefixIcon: leading,
+      suffixIcon: trailing != null
+          ? GestureDetector(
+              onTap: trailingTapped,
+              child: trailing,
+            )
+          : null,
+      border: circularBorder.copyWith(
+        borderSide: BorderSide(color: kcLightGreyColor),
+      ),
+      errorBorder: circularBorder.copyWith(
+        borderSide: BorderSide(color: Colors.red),
+      ),
+      focusedBorder: circularBorder.copyWith(
+        borderSide: BorderSide(color: kcPrimaryColor),
+      ),
+      enabledBorder: circularBorder.copyWith(
+        borderSide: BorderSide(color: kcLightGreyColor),
+      ),
+    );
+
     return Theme(
       /// Overriding the default blue color.
       ///
       /// We can also avoid this by changing the [primarySwatch] in MaterialApp
       data: ThemeData(primaryColor: kcPrimaryColor),
-      child: TextField(
-        controller: controller,
-        textAlign: textAlign,
-        style: TextStyle(height: 1),
-        obscureText: password,
-        decoration: InputDecoration(
-          hintText: placeholder,
-          contentPadding:
-              const EdgeInsets.symmetric(vertical: 15, horizontal: 20),
-          filled: true,
-          fillColor: kcVeryLightGreyColor,
-          prefixIcon: leading,
-          suffixIcon: trailing != null
-              ? GestureDetector(
-                  onTap: trailingTapped,
-                  child: trailing,
-                )
-              : null,
-          border: circularBorder.copyWith(
-            borderSide: BorderSide(color: kcLightGreyColor),
-          ),
-          errorBorder: circularBorder.copyWith(
-            borderSide: BorderSide(color: Colors.red),
-          ),
-          focusedBorder: circularBorder.copyWith(
-            borderSide: BorderSide(color: kcPrimaryColor),
-          ),
-          enabledBorder: circularBorder.copyWith(
-            borderSide: BorderSide(color: kcLightGreyColor),
-          ),
+      child: GestureDetector(
+        onTap: onTap,
+        child: TextField(
+          enabled: !tapOnly,
+          controller: controller,
+          textAlign: textAlign,
+          style: TextStyle(height: 1),
+          obscureText: password,
+          decoration: _decoration,
         ),
       ),
     );

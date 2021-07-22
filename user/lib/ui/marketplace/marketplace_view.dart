@@ -36,12 +36,6 @@ class MarketPlaceView extends StatelessWidget with $MarketPlaceView {
                 child: Column(
                   children: [
                     verticalSpaceRegular,
-                    BoxInputField(
-                      controller: searchController,
-                      placeholder: 'Search for Service Around You',
-                      textAlign: TextAlign.center,
-                    ),
-                    verticalSpaceRegular,
                     Align(
                       alignment: Alignment.centerLeft,
                       child: BoxText.headingThree(
