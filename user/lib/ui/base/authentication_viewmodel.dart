@@ -3,6 +3,7 @@ import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
 import 'package:xyz_prototype/app/app.locator.dart';
 import 'package:xyz_prototype/app/app.logger.dart';
+import 'package:xyz_prototype/constants/app_keys.dart';
 import 'package:xyz_prototype/exceptions/firestore_api_exceptions.dart';
 import 'package:xyz_prototype/models/application_models.dart';
 import 'package:xyz_prototype/services/user_service.dart';
@@ -61,7 +62,7 @@ abstract class AuthenticationViewModel extends FormViewModel {
           clientId: client.uid,
           clientEmail: client.email,
           clientType: 'user',
-          clientRegistrationDate: DateTime.now().toIso8601String(),
+          clientRegistrationDate: defaultRegistrationDate,
         ),
       );
 

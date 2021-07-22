@@ -5,6 +5,7 @@ import 'package:xyz_prototype/api/firestore_api.dart';
 import 'package:xyz_prototype/app/app.locator.dart';
 import 'package:xyz_prototype/app/app.logger.dart';
 import 'package:xyz_prototype/app/app.router.dart';
+import 'package:xyz_prototype/constants/app_keys.dart';
 import 'package:xyz_prototype/constants/app_strings.dart';
 import 'package:xyz_prototype/models/application_models.dart';
 import 'package:xyz_prototype/services/user_service.dart';
@@ -23,7 +24,7 @@ class AddBusinessViewModel extends FormViewModel {
 
   Future<void> submitBusinessRegistration() async {
     final business = Business(
-      businessRegistrationDate: DateTime.now().toIso8601String(),
+      businessRegistrationDate: defaultRegistrationDate,
       businessName: businessNameValue,
       businessDescription: businessDescriptionValue,
       businessWebsite: businessWebsiteValue,

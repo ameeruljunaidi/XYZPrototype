@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:enum_to_string/enum_to_string.dart';
 import 'package:xyz_prototype/app/app.logger.dart';
 import 'package:xyz_prototype/constants/app_keys.dart';
 import 'package:xyz_prototype/exceptions/firestore_api_exceptions.dart';
@@ -123,7 +124,7 @@ class FirestoreApi {
 
       // Assign defautl vendor values to the client
       final defaultVendor = Vendor(
-        vendorRegistrationDate: DateTime.now().toIso8601String(),
+        vendorRegistrationDate: business.businessRegistrationDate,
         vendorAddress: business.businessAddress,
         vendorAvatar: business.businessAvatar,
         vendorEmail: business.businessEmail,
@@ -157,7 +158,7 @@ class FirestoreApi {
             .copyWith(
               clientBusinessId: newBusinessId,
               clientVendorId: newVendorId,
-              clientType: 'business',
+              clientType: EnumToString.convertToString(ClientType.business),
             )
             .toJson());
         log.v(

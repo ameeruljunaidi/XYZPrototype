@@ -1,8 +1,17 @@
-// Firestore keys
+import 'package:enum_to_string/enum_to_string.dart';
 
+// Firestore keys
 const String UsersFirestoreKey = 'clients';
 const String AddressFirestoreKey = 'addresses';
 const String BusinessFirestoreKey = 'business';
 const String VendorFirestoreKey = 'vendor';
-const String DefaultClientType = 'user';
-String defaultClientRegistrationDate = DateTime.now().toIso8601String();
+
+// Clienttype keys
+enum ClientType {
+  user,
+  business,
+  vendor,
+}
+
+String defaultClientType = EnumToString.convertToString(ClientType.user);
+String defaultRegistrationDate = DateTime.now().toIso8601String();
