@@ -80,7 +80,7 @@ class MarketPlaceView extends StatelessWidget with $MarketPlaceView {
             child: AspectRatio(
               aspectRatio: 1,
               child: ClipRRect(
-                borderRadius: BorderRadius.circular(8.0),
+                borderRadius: defaultBorderRadius,
                 child: Container(
                   color: kcLightGreyColor,
                   height: double.maxFinite,

@@ -13,8 +13,9 @@ class ProfileViewModel extends BaseViewModel {
   final _firebaseAuthenticationService =
       locator<FirebaseAuthenticationService>();
 
-  void goToAddBusiness() {
-    _navigationService.navigateTo(Routes.addBusinessView);
+  Future<void> goToAddBusiness() async {
+    await _navigationService.navigateTo(Routes.addBusinessView);
+    clientData();
   }
 
   Client clientData() {

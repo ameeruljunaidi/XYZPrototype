@@ -49,7 +49,8 @@ class AddBusinessViewModel extends FormViewModel {
       log.v('Business saved! You can now add gigs!');
     }
 
-    _navigationService.clearStackAndShow(Routes.homeView);
+    notifyListeners();
+    _navigationService.back();
 
     setBusy(false);
   }

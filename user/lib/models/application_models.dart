@@ -1,4 +1,6 @@
+import 'package:flutter/foundation.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:xyz_prototype/constants/app_keys.dart';
 
 part 'application_models.freezed.dart';
 part 'application_models.g.dart';
@@ -22,7 +24,7 @@ class Client with _$Client {
   }) = _Client;
 
   bool get hasAddress => clientAddress?.isNotEmpty ?? false;
-  bool get isBusiness => clientBusinessId?.isNotEmpty ?? false;
+  bool get isBusiness => clientType == describeEnum(ClientType.business);
 
   factory Client.fromJson(Map<String, dynamic> json) => _$ClientFromJson(json);
 }

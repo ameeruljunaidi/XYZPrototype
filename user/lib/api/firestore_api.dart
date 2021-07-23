@@ -6,26 +6,31 @@ import 'package:xyz_prototype/exceptions/firestore_api_exceptions.dart';
 import 'package:xyz_prototype/models/application_models.dart';
 
 class FirestoreApi {
+  // Log everything that is happening in this api call
   final log = getLogger('firestoreApi');
 
+  // Collection reference for firebas
   final CollectionReference userCollection =
       FirebaseFirestore.instance.collection(UsersFirestoreKey);
   final CollectionReference gigsCollection =
       FirebaseFirestore.instance.collection(GigsFirestoreKey);
 
-  Future<void> createUser({required Client client}) async {
-    log.i('client:$client');
-
-    try {
-      final userDocument = userCollection.doc(client.clientId);
-      await userDocument.set(client.toJson());
-      log.v('User created at ${userDocument.path}');
-    } catch (error) {
-      throw FirestoreApiException(
-          message: 'Failed to create new user', devDetails: '$error');
-    }
+  // Get collection reference base on client Id
+  CollectionReference getVendorCollectionForUser(String clientId) {
+    return userCollection.doc(clientId).collection(VendorFirestoreKey);
   }
 
+  CollectionReference getBusinessCollectionForUser(String clientId) {
+    return userCollection.doc(clientId).collection(BusinessFirestoreKey);
+  }
+
+  CollectionReference getAddressCollectionForUser(String clientId) {
+    return userCollection.doc(clientId).collection(AddressFirestoreKey);
+  }
+
+  // Firebase functions that get stuff /////////////////////////////////////////
+
+  // Getting the user
   Future<Client?> getUser({required String clientId}) async {
     log.i('clientId:$clientId');
 
@@ -48,6 +53,7 @@ class FirestoreApi {
     }
   }
 
+  // Getting the client's business info
   Future<Business?> getBusiness({required Client client}) async {
     log.i('clientBusinessId: ${client.clientBusinessId}');
 
@@ -60,6 +66,7 @@ class FirestoreApi {
     return Business.fromJson(businessData as Map<String, dynamic>);
   }
 
+  // Getting the client's vendor info
   Future<Vendor?> getVendor({required Client client}) async {
     log.i('clientVendorId: ${client.clientVendorId}');
 
@@ -72,7 +79,36 @@ class FirestoreApi {
     return Vendor.fromJson(vendorData as Map<String, dynamic>);
   }
 
-  Future<bool> saveAddress({
+  // Getting all gigs
+  Future<List<Gig?>> getGigs() async {
+    final gigDocs = await gigsCollection.get();
+
+    return gigDocs.docs.map((element) {
+      final gigData = element.data();
+
+      log.v('gigs retrieved from firestore');
+      return Gig.fromJson(gigData as Map<String, dynamic>);
+    }).toList();
+  }
+
+  // Firebase functions for CRUD ///////////////////////////////////////////////
+
+  // Creating a user
+  Future<void> createUser({required Client client}) async {
+    log.i('client:$client');
+
+    try {
+      final userDocument = userCollection.doc(client.clientId);
+      await userDocument.set(client.toJson());
+      log.v('User created at ${userDocument.path}');
+    } catch (error) {
+      throw FirestoreApiException(
+          message: 'Failed to create new user', devDetails: '$error');
+    }
+  }
+
+  // Saving the users adderss
+  Future<bool> saveClientAddress({
     required Address address,
     required Client user,
   }) async {
@@ -105,6 +141,7 @@ class FirestoreApi {
     }
   }
 
+  // Saving/editing the client's business
   Future<bool> saveBusiness({
     required Business business,
     required Client client,
@@ -195,6 +232,7 @@ class FirestoreApi {
     }
   }
 
+  // Add a vendor's gig
   Future<bool> addGig({required Gig gig}) async {
     log.i('Gig loaded: $gig');
 
@@ -214,18 +252,9 @@ class FirestoreApi {
     }
   }
 
-  CollectionReference getVendorCollectionForUser(String clientId) {
-    return userCollection.doc(clientId).collection(VendorFirestoreKey);
-  }
+  // Other firebase functions //////////////////////////////////////////////////
 
-  CollectionReference getBusinessCollectionForUser(String clientId) {
-    return userCollection.doc(clientId).collection(BusinessFirestoreKey);
-  }
-
-  CollectionReference getAddressCollectionForUser(String clientId) {
-    return userCollection.doc(clientId).collection(AddressFirestoreKey);
-  }
-
+  // Check if the city is serviced
   Future<bool> isCityServiced({required String city}) {
     return Future.value(false);
   }

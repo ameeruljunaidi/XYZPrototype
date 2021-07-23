@@ -17,6 +17,7 @@ class ProfileView extends StatelessWidget {
     return ViewModelBuilder<ProfileViewModel>.reactive(
       disposeViewModel: false,
       initialiseSpecialViewModelsOnce: true,
+      createNewModelOnInsert: true,
       builder: (context, model, child) => Scaffold(
         body: ColorfulSafeArea(
           color: kcVeryLightGreyColor,
@@ -114,7 +115,7 @@ class ProfileView extends StatelessWidget {
           ),
           verticalSpaceRegular,
           BoxText.caption(
-            'VERSION 0.01 (XYZ-PROTOTYPE)',
+            'v. 0.01 (XYZ-PROTOTYPE)',
             align: TextAlign.center,
           ),
           verticalSpaceRegular,

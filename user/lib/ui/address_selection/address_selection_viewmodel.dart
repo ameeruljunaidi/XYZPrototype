@@ -74,7 +74,7 @@ class AddressSelectionViewModel extends FormViewModel {
 
       final user = _userService.currentUser!;
 
-      final saveSuccess = await _firestoreApi.saveAddress(
+      final saveSuccess = await _firestoreApi.saveClientAddress(
         address: address,
         user: user,
       );

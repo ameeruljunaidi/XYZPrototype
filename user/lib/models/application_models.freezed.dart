@@ -256,7 +256,7 @@ class __$ClientCopyWithImpl<$Res> extends _$ClientCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_Client extends _Client {
+class _$_Client extends _Client with DiagnosticableTreeMixin {
   _$_Client(
       {required this.clientId,
       required this.clientType,
@@ -298,8 +298,27 @@ class _$_Client extends _Client {
   final String? clientVendorId;
 
   @override
-  String toString() {
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
     return 'Client(clientId: $clientId, clientType: $clientType, clientRegistrationDate: $clientRegistrationDate, clientEmail: $clientEmail, clientName: $clientName, clientAddress: $clientAddress, clientPhone: $clientPhone, clientAvatar: $clientAvatar, clientPaymentInfo: $clientPaymentInfo, clientBusinessId: $clientBusinessId, clientVendorId: $clientVendorId)';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty('type', 'Client'))
+      ..add(DiagnosticsProperty('clientId', clientId))
+      ..add(DiagnosticsProperty('clientType', clientType))
+      ..add(
+          DiagnosticsProperty('clientRegistrationDate', clientRegistrationDate))
+      ..add(DiagnosticsProperty('clientEmail', clientEmail))
+      ..add(DiagnosticsProperty('clientName', clientName))
+      ..add(DiagnosticsProperty('clientAddress', clientAddress))
+      ..add(DiagnosticsProperty('clientPhone', clientPhone))
+      ..add(DiagnosticsProperty('clientAvatar', clientAvatar))
+      ..add(DiagnosticsProperty('clientPaymentInfo', clientPaymentInfo))
+      ..add(DiagnosticsProperty('clientBusinessId', clientBusinessId))
+      ..add(DiagnosticsProperty('clientVendorId', clientVendorId));
   }
 
   @override
@@ -625,7 +644,7 @@ class __$AddressCopyWithImpl<$Res> extends _$AddressCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_Address implements _Address {
+class _$_Address with DiagnosticableTreeMixin implements _Address {
   _$_Address(
       {this.id,
       required this.placeId,
@@ -660,8 +679,24 @@ class _$_Address implements _Address {
   final String? postalCode;
 
   @override
-  String toString() {
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
     return 'Address(id: $id, placeId: $placeId, latitude: $latitude, longitude: $longitude, street: $street, streetNumber: $streetNumber, city: $city, state: $state, postalCode: $postalCode)';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty('type', 'Address'))
+      ..add(DiagnosticsProperty('id', id))
+      ..add(DiagnosticsProperty('placeId', placeId))
+      ..add(DiagnosticsProperty('latitude', latitude))
+      ..add(DiagnosticsProperty('longitude', longitude))
+      ..add(DiagnosticsProperty('street', street))
+      ..add(DiagnosticsProperty('streetNumber', streetNumber))
+      ..add(DiagnosticsProperty('city', city))
+      ..add(DiagnosticsProperty('state', state))
+      ..add(DiagnosticsProperty('postalCode', postalCode));
   }
 
   @override
@@ -1033,7 +1068,7 @@ class __$BusinessCopyWithImpl<$Res> extends _$BusinessCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_Business implements _Business {
+class _$_Business with DiagnosticableTreeMixin implements _Business {
   _$_Business(
       {required this.businessRegistrationDate,
       this.businessId,
@@ -1077,8 +1112,28 @@ class _$_Business implements _Business {
   final Map<String, List<String>>? businessCategories;
 
   @override
-  String toString() {
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
     return 'Business(businessRegistrationDate: $businessRegistrationDate, businessId: $businessId, businessName: $businessName, businessEmail: $businessEmail, businessPhone: $businessPhone, businessAddress: $businessAddress, businessDescription: $businessDescription, businessWebsite: $businessWebsite, businessPhotos: $businessPhotos, businessAvatar: $businessAvatar, businessSocialMedias: $businessSocialMedias, businessCategories: $businessCategories)';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty('type', 'Business'))
+      ..add(DiagnosticsProperty(
+          'businessRegistrationDate', businessRegistrationDate))
+      ..add(DiagnosticsProperty('businessId', businessId))
+      ..add(DiagnosticsProperty('businessName', businessName))
+      ..add(DiagnosticsProperty('businessEmail', businessEmail))
+      ..add(DiagnosticsProperty('businessPhone', businessPhone))
+      ..add(DiagnosticsProperty('businessAddress', businessAddress))
+      ..add(DiagnosticsProperty('businessDescription', businessDescription))
+      ..add(DiagnosticsProperty('businessWebsite', businessWebsite))
+      ..add(DiagnosticsProperty('businessPhotos', businessPhotos))
+      ..add(DiagnosticsProperty('businessAvatar', businessAvatar))
+      ..add(DiagnosticsProperty('businessSocialMedias', businessSocialMedias))
+      ..add(DiagnosticsProperty('businessCategories', businessCategories));
   }
 
   @override
@@ -1540,7 +1595,7 @@ class __$VendorCopyWithImpl<$Res> extends _$VendorCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_Vendor implements _Vendor {
+class _$_Vendor with DiagnosticableTreeMixin implements _Vendor {
   _$_Vendor(
       {required this.vendorRegistrationDate,
       this.vendorId,
@@ -1596,8 +1651,34 @@ class _$_Vendor implements _Vendor {
   final Map<String, Map<String, String>>? vendorOccupationHistory;
 
   @override
-  String toString() {
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
     return 'Vendor(vendorRegistrationDate: $vendorRegistrationDate, vendorId: $vendorId, vendorName: $vendorName, vendorEmail: $vendorEmail, vendorPhone: $vendorPhone, vendorAddress: $vendorAddress, vendorPhotos: $vendorPhotos, vendorAvatar: $vendorAvatar, vendorSocialMedias: $vendorSocialMedias, vendorLanguages: $vendorLanguages, vendorAccreditations: $vendorAccreditations, vendorAge: $vendorAge, vendorGender: $vendorGender, vendorSkills: $vendorSkills, vendorEducationHistory: $vendorEducationHistory, vendorOccupationHistory: $vendorOccupationHistory)';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty('type', 'Vendor'))
+      ..add(
+          DiagnosticsProperty('vendorRegistrationDate', vendorRegistrationDate))
+      ..add(DiagnosticsProperty('vendorId', vendorId))
+      ..add(DiagnosticsProperty('vendorName', vendorName))
+      ..add(DiagnosticsProperty('vendorEmail', vendorEmail))
+      ..add(DiagnosticsProperty('vendorPhone', vendorPhone))
+      ..add(DiagnosticsProperty('vendorAddress', vendorAddress))
+      ..add(DiagnosticsProperty('vendorPhotos', vendorPhotos))
+      ..add(DiagnosticsProperty('vendorAvatar', vendorAvatar))
+      ..add(DiagnosticsProperty('vendorSocialMedias', vendorSocialMedias))
+      ..add(DiagnosticsProperty('vendorLanguages', vendorLanguages))
+      ..add(DiagnosticsProperty('vendorAccreditations', vendorAccreditations))
+      ..add(DiagnosticsProperty('vendorAge', vendorAge))
+      ..add(DiagnosticsProperty('vendorGender', vendorGender))
+      ..add(DiagnosticsProperty('vendorSkills', vendorSkills))
+      ..add(
+          DiagnosticsProperty('vendorEducationHistory', vendorEducationHistory))
+      ..add(DiagnosticsProperty(
+          'vendorOccupationHistory', vendorOccupationHistory));
   }
 
   @override
@@ -2053,7 +2134,7 @@ class __$GigsCopyWithImpl<$Res> extends _$GigCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_Gigs implements _Gigs {
+class _$_Gigs with DiagnosticableTreeMixin implements _Gigs {
   _$_Gigs(
       {this.gigId,
       this.gigVendorId,
@@ -2103,8 +2184,29 @@ class _$_Gigs implements _Gigs {
   final Address? gigLocation;
 
   @override
-  String toString() {
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
     return 'Gig(gigId: $gigId, gigVendorId: $gigVendorId, gigTitle: $gigTitle, gitSubtitle: $gitSubtitle, gigDescription: $gigDescription, gigPhotos: $gigPhotos, gigFeatures: $gigFeatures, gigFaqs: $gigFaqs, gigReviews: $gigReviews, gigCategory: $gigCategory, gigSubCategory: $gigSubCategory, gigFilters: $gigFilters, gigPrice: $gigPrice, gigLocation: $gigLocation)';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty('type', 'Gig'))
+      ..add(DiagnosticsProperty('gigId', gigId))
+      ..add(DiagnosticsProperty('gigVendorId', gigVendorId))
+      ..add(DiagnosticsProperty('gigTitle', gigTitle))
+      ..add(DiagnosticsProperty('gitSubtitle', gitSubtitle))
+      ..add(DiagnosticsProperty('gigDescription', gigDescription))
+      ..add(DiagnosticsProperty('gigPhotos', gigPhotos))
+      ..add(DiagnosticsProperty('gigFeatures', gigFeatures))
+      ..add(DiagnosticsProperty('gigFaqs', gigFaqs))
+      ..add(DiagnosticsProperty('gigReviews', gigReviews))
+      ..add(DiagnosticsProperty('gigCategory', gigCategory))
+      ..add(DiagnosticsProperty('gigSubCategory', gigSubCategory))
+      ..add(DiagnosticsProperty('gigFilters', gigFilters))
+      ..add(DiagnosticsProperty('gigPrice', gigPrice))
+      ..add(DiagnosticsProperty('gigLocation', gigLocation));
   }
 
   @override

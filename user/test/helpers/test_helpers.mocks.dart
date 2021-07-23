@@ -420,39 +420,6 @@ class MockFirestoreApi extends _i1.Mock implements _i20.FirestoreApi {
               returnValue: _FakeCollectionReference<Object?>())
           as _i3.CollectionReference<Object?>);
   @override
-  _i7.Future<void> createUser({_i8.Client? client}) =>
-      (super.noSuchMethod(Invocation.method(#createUser, [], {#client: client}),
-          returnValue: Future<void>.value(),
-          returnValueForMissingStub: Future<void>.value()) as _i7.Future<void>);
-  @override
-  _i7.Future<_i8.Client?> getUser({String? clientId}) => (super.noSuchMethod(
-      Invocation.method(#getUser, [], {#clientId: clientId}),
-      returnValue: Future<_i8.Client?>.value()) as _i7.Future<_i8.Client?>);
-  @override
-  _i7.Future<_i8.Business?> getBusiness({_i8.Client? client}) => (super
-          .noSuchMethod(Invocation.method(#getBusiness, [], {#client: client}),
-              returnValue: Future<_i8.Business?>.value())
-      as _i7.Future<_i8.Business?>);
-  @override
-  _i7.Future<_i8.Vendor?> getVendor({_i8.Client? client}) =>
-      (super.noSuchMethod(Invocation.method(#getVendor, [], {#client: client}),
-          returnValue: Future<_i8.Vendor?>.value()) as _i7.Future<_i8.Vendor?>);
-  @override
-  _i7.Future<bool> saveAddress({_i8.Address? address, _i8.Client? user}) =>
-      (super.noSuchMethod(
-          Invocation.method(#saveAddress, [], {#address: address, #user: user}),
-          returnValue: Future<bool>.value(false)) as _i7.Future<bool>);
-  @override
-  _i7.Future<bool> saveBusiness({_i8.Business? business, _i8.Client? client}) =>
-      (super.noSuchMethod(
-          Invocation.method(
-              #saveBusiness, [], {#business: business, #client: client}),
-          returnValue: Future<bool>.value(false)) as _i7.Future<bool>);
-  @override
-  _i7.Future<bool> addGig({_i8.Gig? gig}) =>
-      (super.noSuchMethod(Invocation.method(#addGig, [], {#gig: gig}),
-          returnValue: Future<bool>.value(false)) as _i7.Future<bool>);
-  @override
   _i3.CollectionReference<Object?> getVendorCollectionForUser(
           String? clientId) =>
       (super.noSuchMethod(
@@ -473,6 +440,46 @@ class MockFirestoreApi extends _i1.Mock implements _i20.FirestoreApi {
               Invocation.method(#getAddressCollectionForUser, [clientId]),
               returnValue: _FakeCollectionReference<Object?>())
           as _i3.CollectionReference<Object?>);
+  @override
+  _i7.Future<_i8.Client?> getUser({String? clientId}) => (super.noSuchMethod(
+      Invocation.method(#getUser, [], {#clientId: clientId}),
+      returnValue: Future<_i8.Client?>.value()) as _i7.Future<_i8.Client?>);
+  @override
+  _i7.Future<_i8.Business?> getBusiness({_i8.Client? client}) => (super
+          .noSuchMethod(Invocation.method(#getBusiness, [], {#client: client}),
+              returnValue: Future<_i8.Business?>.value())
+      as _i7.Future<_i8.Business?>);
+  @override
+  _i7.Future<_i8.Vendor?> getVendor({_i8.Client? client}) =>
+      (super.noSuchMethod(Invocation.method(#getVendor, [], {#client: client}),
+          returnValue: Future<_i8.Vendor?>.value()) as _i7.Future<_i8.Vendor?>);
+  @override
+  _i7.Future<List<_i8.Gig?>> getGigs() =>
+      (super.noSuchMethod(Invocation.method(#getGigs, []),
+              returnValue: Future<List<_i8.Gig?>>.value(<_i8.Gig?>[]))
+          as _i7.Future<List<_i8.Gig?>>);
+  @override
+  _i7.Future<void> createUser({_i8.Client? client}) =>
+      (super.noSuchMethod(Invocation.method(#createUser, [], {#client: client}),
+          returnValue: Future<void>.value(),
+          returnValueForMissingStub: Future<void>.value()) as _i7.Future<void>);
+  @override
+  _i7.Future<bool> saveClientAddress(
+          {_i8.Address? address, _i8.Client? user}) =>
+      (super.noSuchMethod(
+          Invocation.method(
+              #saveClientAddress, [], {#address: address, #user: user}),
+          returnValue: Future<bool>.value(false)) as _i7.Future<bool>);
+  @override
+  _i7.Future<bool> saveBusiness({_i8.Business? business, _i8.Client? client}) =>
+      (super.noSuchMethod(
+          Invocation.method(
+              #saveBusiness, [], {#business: business, #client: client}),
+          returnValue: Future<bool>.value(false)) as _i7.Future<bool>);
+  @override
+  _i7.Future<bool> addGig({_i8.Gig? gig}) =>
+      (super.noSuchMethod(Invocation.method(#addGig, [], {#gig: gig}),
+          returnValue: Future<bool>.value(false)) as _i7.Future<bool>);
   @override
   _i7.Future<bool> isCityServiced({String? city}) =>
       (super.noSuchMethod(Invocation.method(#isCityServiced, [], {#city: city}),

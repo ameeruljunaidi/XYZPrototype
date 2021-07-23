@@ -87,7 +87,7 @@ MockFirestoreApi getAndRegisterFirestoreApi({
   final service = MockFirestoreApi();
 
   when(
-    service.saveAddress(
+    service.saveClientAddress(
       address: anyNamed('address'),
       user: anyNamed('user'),
     ),

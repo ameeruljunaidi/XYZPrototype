@@ -47,7 +47,7 @@ void main() {
         final model = _getModel();
         await model.selectAddressSuggestion(
             autoCompleteResults: PlacesAutoCompleteResult(placeId: 'id'));
-        verify(firestoreApi.saveAddress(
+        verify(firestoreApi.saveClientAddress(
           address: anyNamed('address'),
           user: anyNamed('user'),
         ));
@@ -74,7 +74,7 @@ void main() {
         await model.selectAddressSuggestion(
             autoCompleteResults: PlacesAutoCompleteResult(placeId: 'id'));
 
-        verify(firestoreApi.saveAddress(
+        verify(firestoreApi.saveClientAddress(
             address: Address(
               placeId: 'placeId',
               latitude: 19,
@@ -102,7 +102,7 @@ void main() {
         await model.selectAddressSuggestion(
             autoCompleteResults: PlacesAutoCompleteResult(placeId: 'id'));
 
-        verify(firestoreApi.saveAddress(
+        verify(firestoreApi.saveClientAddress(
             address: Address(
               placeId: 'placeId',
               latitude: -1,
