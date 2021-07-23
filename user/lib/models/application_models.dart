@@ -91,9 +91,10 @@ class Vendor with _$Vendor {
 }
 
 @freezed
-class Gigs with _$Gigs {
-  factory Gigs({
+class Gig with _$Gig {
+  factory Gig({
     String? gigId,
+    String? gigVendorId,
     String? gigTitle,
     String? gitSubtitle,
     String? gigDescription,
@@ -108,5 +109,5 @@ class Gigs with _$Gigs {
     Address? gigLocation,
   }) = _Gigs;
 
-  factory Gigs.fromJson(Map<String, dynamic> json) => _$GigsFromJson(json);
+  factory Gig.fromJson(Map<String, dynamic> json) => _$GigFromJson(json);
 }

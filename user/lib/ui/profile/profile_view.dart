@@ -76,7 +76,7 @@ class ProfileView extends StatelessWidget {
           _profileSettingsWidget(
             text: 'Manage Gigs',
             icon: Icon(Icons.work),
-            onTap: () {},
+            onTap: model.goToGigManagerView,
           ),
           _profileSettingsWidget(
             text: 'Manage Requests',
@@ -139,11 +139,7 @@ class ProfileView extends StatelessWidget {
             child: CircleAvatar(
               backgroundColor: kcMediumGreyColor,
               radius: 56.0,
-              child: Icon(
-                Icons.face,
-                size: 56.0,
-                color: kcVeryLightGreyColor,
-              ),
+              child: Placeholder(),
             ),
           ),
           horizontalSpaceRegular,

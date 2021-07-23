@@ -2,11 +2,6 @@ import 'package:animations/animations.dart';
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
 import 'package:xyz_prototype/ui/home/home_viewmodel.dart';
-import 'package:xyz_prototype/ui/inbox/inbox_view.dart';
-import 'package:xyz_prototype/ui/marketplace/marketplace_view.dart';
-import 'package:xyz_prototype/ui/notifications/notification_view.dart';
-import 'package:xyz_prototype/ui/profile/profile_view.dart';
-import 'package:xyz_prototype/ui/search/search_view.dart';
 import 'package:xyz_ui/xyz_ui.dart';
 
 class HomeView extends StatelessWidget {
@@ -60,28 +55,11 @@ class HomeView extends StatelessWidget {
               child: child,
             );
           },
-          child: getViewForIndex(model.currentIndex),
+          child: model.getViewForIndex(model.currentIndex),
         ),
       ),
       viewModelBuilder: () => HomeViewModel(),
     );
-  }
-
-  Widget getViewForIndex(int index) {
-    switch (index) {
-      case 0:
-        return MarketPlaceView();
-      case 1:
-        return InboxView();
-      case 2:
-        return SearchView();
-      case 3:
-        return NotificationsView();
-      case 4:
-        return ProfileView();
-      default:
-        return MarketPlaceView();
-    }
   }
 
   BottomNavigationBarItem bottomNavigationBarItem({icon, label}) {

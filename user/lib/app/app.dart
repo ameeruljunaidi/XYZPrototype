@@ -5,8 +5,10 @@ import 'package:stacked_services/stacked_services.dart';
 import 'package:xyz_prototype/api/firestore_api.dart';
 import 'package:xyz_prototype/services/user_service.dart';
 import 'package:xyz_prototype/ui/add_business/add_business_view.dart';
+import 'package:xyz_prototype/ui/add_gig/add_gig_view.dart';
 import 'package:xyz_prototype/ui/address_selection/address_selection_view.dart';
 import 'package:xyz_prototype/ui/create_account/create_account_view.dart';
+import 'package:xyz_prototype/ui/gig_manager/gig_manager_view.dart';
 import 'package:xyz_prototype/ui/home/home_view.dart';
 import 'package:xyz_prototype/ui/inbox/inbox_view.dart';
 import 'package:xyz_prototype/ui/inbox/inbox_viewmodel.dart';
@@ -34,6 +36,8 @@ import 'package:xyz_prototype/ui/startup/startup_view.dart';
     MaterialRoute(page: SearchView),
     MaterialRoute(page: NotificationsView),
     MaterialRoute(page: ProfileView),
+    MaterialRoute(page: AddGigView),
+    MaterialRoute(page: GigManagerView),
   ],
   dependencies: [
     LazySingleton(classType: NavigationService),

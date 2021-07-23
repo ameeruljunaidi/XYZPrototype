@@ -171,6 +171,7 @@ Map<String, dynamic> _$_$_VendorToJson(_$_Vendor instance) => <String, dynamic>{
 _$_Gigs _$_$_GigsFromJson(Map<String, dynamic> json) {
   return _$_Gigs(
     gigId: json['gigId'] as String?,
+    gigVendorId: json['gigVendorId'] as String?,
     gigTitle: json['gigTitle'] as String?,
     gitSubtitle: json['gitSubtitle'] as String?,
     gigDescription: json['gigDescription'] as String?,
@@ -197,6 +198,7 @@ _$_Gigs _$_$_GigsFromJson(Map<String, dynamic> json) {
 
 Map<String, dynamic> _$_$_GigsToJson(_$_Gigs instance) => <String, dynamic>{
       'gigId': instance.gigId,
+      'gigVendorId': instance.gigVendorId,
       'gigTitle': instance.gigTitle,
       'gitSubtitle': instance.gitSubtitle,
       'gigDescription': instance.gigDescription,

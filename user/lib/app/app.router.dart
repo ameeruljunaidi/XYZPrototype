@@ -10,8 +10,10 @@ import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
 
 import '../ui/add_business/add_business_view.dart';
+import '../ui/add_gig/add_gig_view.dart';
 import '../ui/address_selection/address_selection_view.dart';
 import '../ui/create_account/create_account_view.dart';
+import '../ui/gig_manager/gig_manager_view.dart';
 import '../ui/home/home_view.dart';
 import '../ui/inbox/inbox_view.dart';
 import '../ui/login/login_view.dart';
@@ -33,6 +35,8 @@ class Routes {
   static const String searchView = '/search-view';
   static const String notificationsView = '/notifications-view';
   static const String profileView = '/profile-view';
+  static const String addGigView = '/add-gig-view';
+  static const String gigManagerView = '/gig-manager-view';
   static const all = <String>{
     startupView,
     homeView,
@@ -45,6 +49,8 @@ class Routes {
     searchView,
     notificationsView,
     profileView,
+    addGigView,
+    gigManagerView,
   };
 }
 
@@ -63,6 +69,8 @@ class StackedRouter extends RouterBase {
     RouteDef(Routes.searchView, page: SearchView),
     RouteDef(Routes.notificationsView, page: NotificationsView),
     RouteDef(Routes.profileView, page: ProfileView),
+    RouteDef(Routes.addGigView, page: AddGigView),
+    RouteDef(Routes.gigManagerView, page: GigManagerView),
   ];
   @override
   Map<Type, StackedRouteFactory> get pagesMap => _pagesMap;
@@ -148,6 +156,21 @@ class StackedRouter extends RouterBase {
         settings: data,
       );
     },
+    AddGigView: (data) {
+      var args = data.getArgs<AddGigViewArguments>(
+        orElse: () => AddGigViewArguments(),
+      );
+      return MaterialPageRoute<dynamic>(
+        builder: (context) => AddGigView(key: args.key),
+        settings: data,
+      );
+    },
+    GigManagerView: (data) {
+      return MaterialPageRoute<dynamic>(
+        builder: (context) => const GigManagerView(),
+        settings: data,
+      );
+    },
   };
 }
 
@@ -183,4 +206,10 @@ class AddBusinessViewArguments {
 class MarketPlaceViewArguments {
   final Key? key;
   MarketPlaceViewArguments({this.key});
+}
+
+/// AddGigView arguments holder class
+class AddGigViewArguments {
+  final Key? key;
+  AddGigViewArguments({this.key});
 }

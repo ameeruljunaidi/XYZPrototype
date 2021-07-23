@@ -1748,16 +1748,17 @@ abstract class _Vendor implements Vendor {
   _$VendorCopyWith<_Vendor> get copyWith => throw _privateConstructorUsedError;
 }
 
-Gigs _$GigsFromJson(Map<String, dynamic> json) {
+Gig _$GigFromJson(Map<String, dynamic> json) {
   return _Gigs.fromJson(json);
 }
 
 /// @nodoc
-class _$GigsTearOff {
-  const _$GigsTearOff();
+class _$GigTearOff {
+  const _$GigTearOff();
 
   _Gigs call(
       {String? gigId,
+      String? gigVendorId,
       String? gigTitle,
       String? gitSubtitle,
       String? gigDescription,
@@ -1772,6 +1773,7 @@ class _$GigsTearOff {
       Address? gigLocation}) {
     return _Gigs(
       gigId: gigId,
+      gigVendorId: gigVendorId,
       gigTitle: gigTitle,
       gitSubtitle: gitSubtitle,
       gigDescription: gigDescription,
@@ -1787,17 +1789,18 @@ class _$GigsTearOff {
     );
   }
 
-  Gigs fromJson(Map<String, Object> json) {
-    return Gigs.fromJson(json);
+  Gig fromJson(Map<String, Object> json) {
+    return Gig.fromJson(json);
   }
 }
 
 /// @nodoc
-const $Gigs = _$GigsTearOff();
+const $Gig = _$GigTearOff();
 
 /// @nodoc
-mixin _$Gigs {
+mixin _$Gig {
   String? get gigId => throw _privateConstructorUsedError;
+  String? get gigVendorId => throw _privateConstructorUsedError;
   String? get gigTitle => throw _privateConstructorUsedError;
   String? get gitSubtitle => throw _privateConstructorUsedError;
   String? get gigDescription => throw _privateConstructorUsedError;
@@ -1813,15 +1816,16 @@ mixin _$Gigs {
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
-  $GigsCopyWith<Gigs> get copyWith => throw _privateConstructorUsedError;
+  $GigCopyWith<Gig> get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $GigsCopyWith<$Res> {
-  factory $GigsCopyWith(Gigs value, $Res Function(Gigs) then) =
-      _$GigsCopyWithImpl<$Res>;
+abstract class $GigCopyWith<$Res> {
+  factory $GigCopyWith(Gig value, $Res Function(Gig) then) =
+      _$GigCopyWithImpl<$Res>;
   $Res call(
       {String? gigId,
+      String? gigVendorId,
       String? gigTitle,
       String? gitSubtitle,
       String? gigDescription,
@@ -1839,16 +1843,17 @@ abstract class $GigsCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$GigsCopyWithImpl<$Res> implements $GigsCopyWith<$Res> {
-  _$GigsCopyWithImpl(this._value, this._then);
+class _$GigCopyWithImpl<$Res> implements $GigCopyWith<$Res> {
+  _$GigCopyWithImpl(this._value, this._then);
 
-  final Gigs _value;
+  final Gig _value;
   // ignore: unused_field
-  final $Res Function(Gigs) _then;
+  final $Res Function(Gig) _then;
 
   @override
   $Res call({
     Object? gigId = freezed,
+    Object? gigVendorId = freezed,
     Object? gigTitle = freezed,
     Object? gitSubtitle = freezed,
     Object? gigDescription = freezed,
@@ -1866,6 +1871,10 @@ class _$GigsCopyWithImpl<$Res> implements $GigsCopyWith<$Res> {
       gigId: gigId == freezed
           ? _value.gigId
           : gigId // ignore: cast_nullable_to_non_nullable
+              as String?,
+      gigVendorId: gigVendorId == freezed
+          ? _value.gigVendorId
+          : gigVendorId // ignore: cast_nullable_to_non_nullable
               as String?,
       gigTitle: gigTitle == freezed
           ? _value.gigTitle
@@ -1931,12 +1940,13 @@ class _$GigsCopyWithImpl<$Res> implements $GigsCopyWith<$Res> {
 }
 
 /// @nodoc
-abstract class _$GigsCopyWith<$Res> implements $GigsCopyWith<$Res> {
+abstract class _$GigsCopyWith<$Res> implements $GigCopyWith<$Res> {
   factory _$GigsCopyWith(_Gigs value, $Res Function(_Gigs) then) =
       __$GigsCopyWithImpl<$Res>;
   @override
   $Res call(
       {String? gigId,
+      String? gigVendorId,
       String? gigTitle,
       String? gitSubtitle,
       String? gigDescription,
@@ -1955,7 +1965,7 @@ abstract class _$GigsCopyWith<$Res> implements $GigsCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$GigsCopyWithImpl<$Res> extends _$GigsCopyWithImpl<$Res>
+class __$GigsCopyWithImpl<$Res> extends _$GigCopyWithImpl<$Res>
     implements _$GigsCopyWith<$Res> {
   __$GigsCopyWithImpl(_Gigs _value, $Res Function(_Gigs) _then)
       : super(_value, (v) => _then(v as _Gigs));
@@ -1966,6 +1976,7 @@ class __$GigsCopyWithImpl<$Res> extends _$GigsCopyWithImpl<$Res>
   @override
   $Res call({
     Object? gigId = freezed,
+    Object? gigVendorId = freezed,
     Object? gigTitle = freezed,
     Object? gitSubtitle = freezed,
     Object? gigDescription = freezed,
@@ -1983,6 +1994,10 @@ class __$GigsCopyWithImpl<$Res> extends _$GigsCopyWithImpl<$Res>
       gigId: gigId == freezed
           ? _value.gigId
           : gigId // ignore: cast_nullable_to_non_nullable
+              as String?,
+      gigVendorId: gigVendorId == freezed
+          ? _value.gigVendorId
+          : gigVendorId // ignore: cast_nullable_to_non_nullable
               as String?,
       gigTitle: gigTitle == freezed
           ? _value.gigTitle
@@ -2041,6 +2056,7 @@ class __$GigsCopyWithImpl<$Res> extends _$GigsCopyWithImpl<$Res>
 class _$_Gigs implements _Gigs {
   _$_Gigs(
       {this.gigId,
+      this.gigVendorId,
       this.gigTitle,
       this.gitSubtitle,
       this.gigDescription,
@@ -2059,6 +2075,8 @@ class _$_Gigs implements _Gigs {
 
   @override
   final String? gigId;
+  @override
+  final String? gigVendorId;
   @override
   final String? gigTitle;
   @override
@@ -2086,7 +2104,7 @@ class _$_Gigs implements _Gigs {
 
   @override
   String toString() {
-    return 'Gigs(gigId: $gigId, gigTitle: $gigTitle, gitSubtitle: $gitSubtitle, gigDescription: $gigDescription, gigPhotos: $gigPhotos, gigFeatures: $gigFeatures, gigFaqs: $gigFaqs, gigReviews: $gigReviews, gigCategory: $gigCategory, gigSubCategory: $gigSubCategory, gigFilters: $gigFilters, gigPrice: $gigPrice, gigLocation: $gigLocation)';
+    return 'Gig(gigId: $gigId, gigVendorId: $gigVendorId, gigTitle: $gigTitle, gitSubtitle: $gitSubtitle, gigDescription: $gigDescription, gigPhotos: $gigPhotos, gigFeatures: $gigFeatures, gigFaqs: $gigFaqs, gigReviews: $gigReviews, gigCategory: $gigCategory, gigSubCategory: $gigSubCategory, gigFilters: $gigFilters, gigPrice: $gigPrice, gigLocation: $gigLocation)';
   }
 
   @override
@@ -2095,6 +2113,9 @@ class _$_Gigs implements _Gigs {
         (other is _Gigs &&
             (identical(other.gigId, gigId) ||
                 const DeepCollectionEquality().equals(other.gigId, gigId)) &&
+            (identical(other.gigVendorId, gigVendorId) ||
+                const DeepCollectionEquality()
+                    .equals(other.gigVendorId, gigVendorId)) &&
             (identical(other.gigTitle, gigTitle) ||
                 const DeepCollectionEquality()
                     .equals(other.gigTitle, gigTitle)) &&
@@ -2137,6 +2158,7 @@ class _$_Gigs implements _Gigs {
   int get hashCode =>
       runtimeType.hashCode ^
       const DeepCollectionEquality().hash(gigId) ^
+      const DeepCollectionEquality().hash(gigVendorId) ^
       const DeepCollectionEquality().hash(gigTitle) ^
       const DeepCollectionEquality().hash(gitSubtitle) ^
       const DeepCollectionEquality().hash(gigDescription) ^
@@ -2161,9 +2183,10 @@ class _$_Gigs implements _Gigs {
   }
 }
 
-abstract class _Gigs implements Gigs {
+abstract class _Gigs implements Gig {
   factory _Gigs(
       {String? gigId,
+      String? gigVendorId,
       String? gigTitle,
       String? gitSubtitle,
       String? gigDescription,
@@ -2181,6 +2204,8 @@ abstract class _Gigs implements Gigs {
 
   @override
   String? get gigId => throw _privateConstructorUsedError;
+  @override
+  String? get gigVendorId => throw _privateConstructorUsedError;
   @override
   String? get gigTitle => throw _privateConstructorUsedError;
   @override

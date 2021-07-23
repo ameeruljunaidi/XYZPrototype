@@ -415,6 +415,11 @@ class MockFirestoreApi extends _i1.Mock implements _i20.FirestoreApi {
               returnValue: _FakeCollectionReference<Object?>())
           as _i3.CollectionReference<Object?>);
   @override
+  _i3.CollectionReference<Object?> get gigsCollection =>
+      (super.noSuchMethod(Invocation.getter(#gigsCollection),
+              returnValue: _FakeCollectionReference<Object?>())
+          as _i3.CollectionReference<Object?>);
+  @override
   _i7.Future<void> createUser({_i8.Client? client}) =>
       (super.noSuchMethod(Invocation.method(#createUser, [], {#client: client}),
           returnValue: Future<void>.value(),
@@ -442,6 +447,10 @@ class MockFirestoreApi extends _i1.Mock implements _i20.FirestoreApi {
       (super.noSuchMethod(
           Invocation.method(
               #saveBusiness, [], {#business: business, #client: client}),
+          returnValue: Future<bool>.value(false)) as _i7.Future<bool>);
+  @override
+  _i7.Future<bool> addGig({_i8.Gig? gig}) =>
+      (super.noSuchMethod(Invocation.method(#addGig, [], {#gig: gig}),
           returnValue: Future<bool>.value(false)) as _i7.Future<bool>);
   @override
   _i3.CollectionReference<Object?> getVendorCollectionForUser(

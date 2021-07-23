@@ -10,6 +10,8 @@ class FirestoreApi {
 
   final CollectionReference userCollection =
       FirebaseFirestore.instance.collection(UsersFirestoreKey);
+  final CollectionReference gigsCollection =
+      FirebaseFirestore.instance.collection(GigsFirestoreKey);
 
   Future<void> createUser({required Client client}) async {
     log.i('client:$client');
@@ -188,6 +190,25 @@ class FirestoreApi {
       }
     } on Exception catch (e) {
       log.e('We could not save the businesss. $e');
+
+      return false;
+    }
+  }
+
+  Future<bool> addGig({required Gig gig}) async {
+    log.i('Gig loaded: $gig');
+
+    final gigDoc = gigsCollection.doc();
+    final newGigId = gigDoc.id;
+    log.v('newGigId will be $newGigId');
+
+    try {
+      await gigDoc.set(gig.copyWith(gigId: newGigId).toJson());
+      log.v('Gig will be stored at id: $newGigId');
+
+      return true;
+    } on Exception catch (e) {
+      log.e('We could no add the gig. $e');
 
       return false;
     }

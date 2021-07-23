@@ -34,4 +34,23 @@ class ProfileViewModel extends BaseViewModel {
       _navigationService.clearStackAndShow(Routes.startupView);
     }
   }
+
+  void goToGigManagerView() async {
+    final _currentUser = _userService.currentUser!;
+
+    if (_currentUser.isBusiness) {
+      _navigationService.navigateTo(Routes.gigManagerView);
+    } else {
+      var confirmToBeGig = await _dialogService.showConfirmationDialog(
+          confirmationTitle: 'Continue',
+          cancelTitle: 'Cancel',
+          description:
+              'To view and manage gigs, become on of our growing number of giggers!',
+          title: 'Become a Gigger');
+
+      if (confirmToBeGig!.confirmed) {
+        _navigationService.navigateTo(Routes.addBusinessView);
+      }
+    }
+  }
 }

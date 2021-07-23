@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked/stacked_annotations.dart';
 import 'package:xyz_prototype/app/app.locator.dart';
-import 'package:xyz_prototype/models/application_models.dart';
 import 'package:xyz_prototype/ui/marketplace/marketplace_viewmodel.dart';
 import 'package:xyz_prototype/ui/marketplace/marketplace_view.form.dart';
 import 'package:xyz_ui/xyz_ui.dart';
@@ -13,20 +12,11 @@ import 'package:xyz_ui/xyz_ui.dart';
 class MarketPlaceView extends StatelessWidget with $MarketPlaceView {
   MarketPlaceView({Key? key}) : super(key: key);
 
-  final mockServices = [
-    Gigs(gigTitle: 'Test gig one'),
-    Gigs(gigTitle: 'Test gig two'),
-    Gigs(gigTitle: 'Test gig three'),
-    Gigs(gigTitle: 'Test gig four'),
-    Gigs(gigTitle: 'Test gig five'),
-  ];
-
   @override
   Widget build(BuildContext context) {
     return ViewModelBuilder<MarketPlaceViewModel>.reactive(
       disposeViewModel: false,
       initialiseSpecialViewModelsOnce: true,
-      onModelReady: (model) => listenToFormUpdated(model),
       builder: (context, model, child) => Scaffold(
         body: SafeArea(
           child: Column(
@@ -35,6 +25,13 @@ class MarketPlaceView extends StatelessWidget with $MarketPlaceView {
                 padding: const EdgeInsets.symmetric(horizontal: 24.0),
                 child: Column(
                   children: [
+                    verticalSpaceRegular,
+                    BoxInputField(
+                      controller: TextEditingController(),
+                      placeholder: 'Search for Service Around You',
+                      textAlign: TextAlign.center,
+                      tapOnly: true,
+                    ),
                     verticalSpaceRegular,
                     Align(
                       alignment: Alignment.centerLeft,
@@ -85,20 +82,16 @@ class MarketPlaceView extends StatelessWidget with $MarketPlaceView {
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(8.0),
                 child: Container(
+                  color: kcLightGreyColor,
                   height: double.maxFinite,
-                  color: Colors.blue,
-                  child: Center(
-                    child: Text(
-                      mockServices[index].gigTitle!,
-                      textAlign: TextAlign.center,
-                    ),
-                  ),
+                  // color: Colors.blue,
+                  child: Placeholder(),
                 ),
               ),
             ),
           );
         },
-        itemCount: mockServices.length,
+        itemCount: 5,
       ),
     );
   }
