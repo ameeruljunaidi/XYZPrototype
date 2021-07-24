@@ -454,8 +454,8 @@ class MockFirestoreApi extends _i1.Mock implements _i20.FirestoreApi {
       (super.noSuchMethod(Invocation.method(#getVendor, [], {#client: client}),
           returnValue: Future<_i8.Vendor?>.value()) as _i7.Future<_i8.Vendor?>);
   @override
-  _i7.Future<List<_i8.Gig?>> getGigs() =>
-      (super.noSuchMethod(Invocation.method(#getGigs, []),
+  _i7.Future<List<_i8.Gig?>> getGigs(_i8.Client? client) =>
+      (super.noSuchMethod(Invocation.method(#getGigs, [client]),
               returnValue: Future<List<_i8.Gig?>>.value(<_i8.Gig?>[]))
           as _i7.Future<List<_i8.Gig?>>);
   @override

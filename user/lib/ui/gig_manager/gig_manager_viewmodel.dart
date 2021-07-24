@@ -5,12 +5,14 @@ import 'package:xyz_prototype/app/app.locator.dart';
 import 'package:xyz_prototype/app/app.logger.dart';
 import 'package:xyz_prototype/app/app.router.dart';
 import 'package:xyz_prototype/models/application_models.dart';
+import 'package:xyz_prototype/services/user_service.dart';
 
 class GigManagerViewModel extends BaseViewModel {
   final log = getLogger('MarketPlaceViewModel');
   final _navigationService = locator<NavigationService>();
   final _firestoreApi = locator<FirestoreApi>();
   final _dialogService = locator<DialogService>();
+  final _userService = locator<UserService>();
 
   List<Gig?>? _gigs;
   List<Gig?>? get gigs => _gigs;
@@ -27,7 +29,9 @@ class GigManagerViewModel extends BaseViewModel {
   Future<void> fetchGigs() async {
     setBusy(true);
 
-    var gigResults = await _firestoreApi.getGigs();
+    final _currentUser = _userService.currentUser!;
+
+    var gigResults = await _firestoreApi.getGigs(_currentUser);
     setBusy(false);
 
     if (gigResults is List<Gig?>) {

@@ -80,8 +80,10 @@ class FirestoreApi {
   }
 
   // Getting all gigs
-  Future<List<Gig?>> getGigs() async {
-    final gigDocs = await gigsCollection.get();
+  Future<List<Gig?>> getGigs(Client client) async {
+    final gigDocs = await gigsCollection
+        .where('gigVendorId', isEqualTo: client.clientVendorId)
+        .get();
 
     return gigDocs.docs.map((element) {
       final gigData = element.data();
