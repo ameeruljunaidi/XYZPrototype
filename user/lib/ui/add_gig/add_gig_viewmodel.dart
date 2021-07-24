@@ -3,6 +3,8 @@ import 'package:stacked_services/stacked_services.dart';
 import 'package:xyz_prototype/api/firestore_api.dart';
 import 'package:xyz_prototype/app/app.locator.dart';
 import 'package:xyz_prototype/app/app.logger.dart';
+import 'package:xyz_prototype/enums/basic_dialog_status.dart';
+import 'package:xyz_prototype/enums/dialog_type.dart';
 import 'package:xyz_prototype/models/application_models.dart';
 import 'package:xyz_prototype/services/user_service.dart';
 import 'package:xyz_prototype/ui/add_gig/add_gig_view.form.dart';
@@ -32,11 +34,21 @@ class AddGigViewModel extends FormViewModel {
     final addSuccess = await _firestoreApi.addGig(gig: gig);
 
     if (!addSuccess) {
-      await _dialogService.showDialog(title: 'Could not add gig');
+      await _dialogService.showCustomDialog(
+        variant: DialogType.basic,
+        data: BasicDialogStatus.error,
+        mainButtonTitle: 'Go Back',
+        title: 'Could not add gig',
+      );
     } else {
-      await _dialogService.showDialog(
-          title: 'Gig successfully added',
-          description: 'You gig has been added');
+      await _dialogService.showCustomDialog(
+        variant: DialogType.basic,
+        data: BasicDialogStatus.sucess,
+        title: 'Gig successfully added',
+        description: 'You gig has been added',
+        mainButtonTitle: 'Ok',
+        secondaryButtonTitle: 'Go Back',
+      );
     }
 
     _navigationService.back();

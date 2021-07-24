@@ -3,11 +3,13 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:stacked_services/stacked_services.dart';
 import 'package:xyz_prototype/app/app.locator.dart';
 import 'package:xyz_prototype/app/app.router.dart';
+import 'package:xyz_prototype/ui/shared/setup_dialog_ui.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
   setupLocator();
+  setupDialogUi();
   runApp(MyApp());
 }
 

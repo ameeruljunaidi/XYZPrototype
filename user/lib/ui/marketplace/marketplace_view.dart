@@ -113,7 +113,7 @@ class MarketPlaceView extends StatelessWidget with $MarketPlaceView {
               alignment: Alignment.topCenter,
               children: <Widget>[
                 Positioned(
-                  bottom: 0.0,
+                  bottom: -8.0,
                   child: Container(
                     height: _carouselHeight * 0.5,
                     width: _cardWidth,
@@ -127,17 +127,23 @@ class MarketPlaceView extends StatelessWidget with $MarketPlaceView {
                         mainAxisAlignment: MainAxisAlignment.end,
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: <Widget>[
-                          Text(
-                            '${subCategories.subCategoryCount.toString()} services',
-                            style: TextStyle(
-                              fontSize: 24.0,
-                              fontWeight: FontWeight.w600,
+                          Padding(
+                            padding: const EdgeInsets.only(top: 8.0),
+                            child: Text(
+                              '${subCategories.subCategoryCount.toString()} services',
+                              style: TextStyle(
+                                fontSize: 24.0,
+                                fontWeight: FontWeight.w600,
+                              ),
                             ),
                           ),
                           verticalSpaceTiny,
-                          Text(
-                            '${subCategories.subCategoryDescription}',
-                            style: TextStyle(color: Colors.grey),
+                          Padding(
+                            padding: const EdgeInsets.only(bottom: 8.0),
+                            child: Text(
+                              '${subCategories.subCategoryDescription}',
+                              style: TextStyle(color: Colors.grey),
+                            ),
                           ),
                         ],
                       ),

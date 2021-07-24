@@ -11,3 +11,7 @@ const Color kcMediumGreyColor = Color(0xff868686);
 const Color kcLightGreyColor = Color(0xffe5e5e5);
 const Color kcMainGreyColor = Color(0xffEEEEEE);
 const Color kcVeryLightGreyColor = Color(0xfff2f2f2);
+
+// Others
+const Color kcRedColor = Color(0xfff44336);
+const Color kcOrangeColor = Color(0xffff9800);
