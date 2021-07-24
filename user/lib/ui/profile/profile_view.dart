@@ -18,18 +18,28 @@ class ProfileView extends StatelessWidget {
       disposeViewModel: false,
       initialiseSpecialViewModelsOnce: true,
       builder: (context, model, child) => Scaffold(
-        body: ColorfulSafeArea(
-          color: kcVeryLightGreyColor,
-          child: Column(
-            children: [
-              _profileWidget(context, model),
-              _profileSettingsList(model),
-              if (model.clientData().clientType ==
-                  describeEnum(ClientType.user))
-                _becomeSellerButton(model),
-            ],
-          ),
-        ),
+        body: model.clientData().clientEmail == null
+            ? Padding(
+                padding: const EdgeInsets.all(24.0),
+                child: Center(
+                  child: BoxButton(
+                    title: 'Login Or Create Account to Continue',
+                    onTap: model.goToLoginView,
+                  ),
+                ),
+              )
+            : ColorfulSafeArea(
+                color: kcVeryLightGreyColor,
+                child: Column(
+                  children: [
+                    _profileWidget(context, model),
+                    _profileSettingsList(model),
+                    if (model.clientData().clientType ==
+                        describeEnum(ClientType.user))
+                      _becomeSellerButton(model),
+                  ],
+                ),
+              ),
       ),
       viewModelBuilder: () => locator<ProfileViewModel>(),
     );

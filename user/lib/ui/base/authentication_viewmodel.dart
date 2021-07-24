@@ -50,6 +50,11 @@ abstract class AuthenticationViewModel extends FormViewModel {
     await _handleAuthenticationResponse(result);
   }
 
+  Future<void> loginWithoutAccount() async {
+    final result = await _firebaseAuthenticationService.loginAnonymously();
+    await _handleAuthenticationResponse(result);
+  }
+
   Future<FirebaseAuthenticationResult> runAuthentication();
 
   Future<void> _handleAuthenticationResponse(

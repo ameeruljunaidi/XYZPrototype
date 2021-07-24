@@ -31,6 +31,10 @@ class ProfileViewModel extends FutureViewModel<void> {
     notifyListeners();
   }
 
+  void goToLoginView() {
+    _navigationService.navigateTo(Routes.loginView);
+  }
+
   void logOut() async {
     var logOut = await _dialogService.showConfirmationDialog(
       confirmationTitle: 'Log Out',
