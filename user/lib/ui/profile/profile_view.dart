@@ -17,7 +17,6 @@ class ProfileView extends StatelessWidget {
     return ViewModelBuilder<ProfileViewModel>.reactive(
       disposeViewModel: false,
       initialiseSpecialViewModelsOnce: true,
-      createNewModelOnInsert: true,
       builder: (context, model, child) => Scaffold(
         body: ColorfulSafeArea(
           color: kcVeryLightGreyColor,

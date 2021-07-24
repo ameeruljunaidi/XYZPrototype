@@ -11,6 +11,7 @@ class BoxInputField extends StatelessWidget {
   final TextAlign textAlign;
   final bool tapOnly;
   final void Function()? onTap;
+  final fillColor;
 
   final circularBorder = OutlineInputBorder(
     borderRadius: BorderRadius.circular(8),
@@ -27,6 +28,7 @@ class BoxInputField extends StatelessWidget {
     this.textAlign = TextAlign.start,
     this.tapOnly = false,
     this.onTap,
+    this.fillColor = kcVeryLightGreyColor,
   }) : super(key: key);
 
   @override
@@ -35,7 +37,7 @@ class BoxInputField extends StatelessWidget {
       hintText: placeholder,
       contentPadding: const EdgeInsets.symmetric(vertical: 15, horizontal: 20),
       filled: true,
-      fillColor: kcVeryLightGreyColor,
+      fillColor: fillColor,
       prefixIcon: leading,
       suffixIcon: trailing != null
           ? GestureDetector(

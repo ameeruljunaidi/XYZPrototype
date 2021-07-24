@@ -7,7 +7,7 @@ import 'package:xyz_prototype/app/app.router.dart';
 import 'package:xyz_prototype/models/application_models.dart';
 
 class GigManagerViewModel extends BaseViewModel {
-  final log = getLogger('GigManagerViewModel');
+  final log = getLogger('MarketPlaceViewModel');
   final _navigationService = locator<NavigationService>();
   final _firestoreApi = locator<FirestoreApi>();
   final _dialogService = locator<DialogService>();

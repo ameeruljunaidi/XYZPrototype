@@ -24,4 +24,4 @@ double screenWidthPercentage(BuildContext context, {double percentage = 1}) =>
     screenWidth(context) * percentage;
 
 // Borders
-BorderRadius defaultBorderRadius = BorderRadius.circular(8.0);
+BorderRadius defaultBorderRadius = BorderRadius.circular(16.0);

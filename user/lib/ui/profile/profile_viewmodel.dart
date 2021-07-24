@@ -6,20 +6,29 @@ import 'package:xyz_prototype/app/app.router.dart';
 import 'package:xyz_prototype/models/application_models.dart';
 import 'package:xyz_prototype/services/user_service.dart';
 
-class ProfileViewModel extends BaseViewModel {
+class ProfileViewModel extends FutureViewModel<void> {
   final _navigationService = locator<NavigationService>();
   final _userService = locator<UserService>();
   final _dialogService = locator<DialogService>();
   final _firebaseAuthenticationService =
       locator<FirebaseAuthenticationService>();
 
-  Future<void> goToAddBusiness() async {
-    await _navigationService.navigateTo(Routes.addBusinessView);
-    clientData();
+  @override
+  Future<void> futureToRun() => _userService.syncUserAccount();
+
+  Future<void> syncUserAccount() async {
+    await futureToRun();
+    notifyListeners();
   }
 
   Client clientData() {
     return _userService.currentUser!;
+  }
+
+  Future<void> goToAddBusiness() async {
+    await _navigationService.navigateTo(Routes.addBusinessView);
+    await syncUserAccount();
+    notifyListeners();
   }
 
   void logOut() async {

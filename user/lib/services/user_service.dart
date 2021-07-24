@@ -14,9 +14,7 @@ class UserService {
   Client? _currentClient;
 
   Client? get currentUser => _currentClient;
-
   String get clientType => _currentClient!.clientType;
-
   bool get hasLoggedInUser => _firebaseAuthenticationService.hasUser;
 
   Future<void> syncUserAccount() async {
