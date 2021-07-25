@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/foundation.dart';
 import 'package:xyz_prototype/app/app.logger.dart';
@@ -27,6 +29,10 @@ class FirestoreApi {
   CollectionReference getAddressCollectionForUser(String clientId) {
     return userCollection.doc(clientId).collection(AddressFirestoreKey);
   }
+
+  // Getting a stream controller for gigs
+  final StreamController<List<Gig>> _gigsController =
+      StreamController<List<Gig>>.broadcast();
 
   // Firebase functions that get stuff /////////////////////////////////////////
 
@@ -91,6 +97,32 @@ class FirestoreApi {
       log.v('gigs retrieved from firestore');
       return Gig.fromJson(gigData as Map<String, dynamic>);
     }).toList();
+  }
+
+  // Stream for all gigs based on clientId
+  Stream getGigsRealtime(Client client) {
+    log.v('client for gig stream: $client');
+
+    gigsCollection.snapshots().listen(
+      (gigsSnapshot) {
+        if (gigsSnapshot.docs.isNotEmpty) {
+          log.v('gigSnaphot not empty');
+          var gigs = gigsSnapshot.docs
+              .map((snapshot) =>
+                  Gig.fromJson(snapshot.data() as Map<String, dynamic>))
+              .where((mappedItem) =>
+                  mappedItem.gigVendorId == client.clientVendorId)
+              .toList();
+
+          log.v('gigSnapshot mapped properly');
+
+          _gigsController.add(gigs);
+          log.v('Added gigs to controller: $gigs');
+        }
+      },
+    );
+
+    return _gigsController.stream;
   }
 
   // Firebase functions for CRUD ///////////////////////////////////////////////
@@ -252,6 +284,12 @@ class FirestoreApi {
 
       return false;
     }
+  }
+
+  // Deleting a vendor's gig
+  Future deleteGig(String gigId) async {
+    log.v('got gigId: $gigId');
+    await gigsCollection.doc(gigId).delete();
   }
 
   // Other firebase functions //////////////////////////////////////////////////

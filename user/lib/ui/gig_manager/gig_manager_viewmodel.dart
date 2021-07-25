@@ -3,7 +3,8 @@ import 'package:stacked_services/stacked_services.dart';
 import 'package:xyz_prototype/api/firestore_api.dart';
 import 'package:xyz_prototype/app/app.locator.dart';
 import 'package:xyz_prototype/app/app.logger.dart';
-import 'package:xyz_prototype/app/app.router.dart';
+import 'package:xyz_prototype/enums/basic_dialog_status.dart';
+import 'package:xyz_prototype/enums/dialog_type.dart';
 import 'package:xyz_prototype/models/application_models.dart';
 import 'package:xyz_prototype/services/user_service.dart';
 
@@ -16,11 +17,6 @@ class GigManagerViewModel extends BaseViewModel {
 
   List<Gig?>? _gigs;
   List<Gig?>? get gigs => _gigs;
-
-  Future<void> goToAddGigView() async {
-    await _navigationService.navigateTo(Routes.addGigView);
-    await fetchGigs();
-  }
 
   void goBack() {
     _navigationService.back();
@@ -42,5 +38,41 @@ class GigManagerViewModel extends BaseViewModel {
     }
 
     log.v('gig in viewmodel: $gigResults');
+  }
+
+  void listenToGigs() {
+    setBusy(true);
+
+    final _currentUser = _userService.currentUser!;
+
+    _firestoreApi.getGigsRealtime(_currentUser).listen(
+      (gigsData) {
+        List<Gig?> updatedGigs = gigsData;
+        if (updatedGigs.length > 0) {
+          _gigs = updatedGigs;
+          notifyListeners();
+        }
+        setBusy(false);
+      },
+    );
+  }
+
+  Future removeGig(int index) async {
+    var dialogResponse = await _dialogService.showCustomDialog(
+      variant: DialogType.basic,
+      data: BasicDialogStatus.warning,
+      mainButtonTitle: 'Confirm',
+      secondaryButtonTitle: 'Cancel',
+      description: 'Are you sure you want to delete this gig?',
+      title: 'Delete Gig,',
+    );
+
+    if (dialogResponse!.confirmed) {
+      setBusy(true);
+
+      await _firestoreApi.deleteGig(_gigs![index]!.gigId!);
+
+      setBusy(false);
+    }
   }
 }
