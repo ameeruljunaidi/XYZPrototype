@@ -21,15 +21,6 @@ void main() {
         verify(userService.hasLoggedInUser);
       });
 
-      // test('When there is no login user, navigate to the login view.',
-      //     () async {
-      //   final navigationService = getAndRegisterNavigationService();
-      //   final model = _getModel();
-      //   await model.runStartupLogic();
-
-      //   verify(navigationService.replaceWith(Routes.loginView));
-      // });
-
       test(
           'When hasLoggedInUser is true, call syncUserAccount on the userService',
           () async {
@@ -48,17 +39,6 @@ void main() {
 
         verify(userService.currentUser);
       });
-
-      // test(
-      //     'When currentUser does not have defaultAddress, navigate to addressSelectionView',
-      //     () async {
-      //   final navigationService = getAndRegisterNavigationService();
-      //   getAndRegisterUserService(hasLoggedInUser: true);
-      //   final model = _getModel();
-      //   await model.runStartupLogic();
-
-      //   verify(navigationService.navigateTo(Routes.addressSelectionView));
-      // });
     });
   });
 }

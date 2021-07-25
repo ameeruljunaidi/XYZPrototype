@@ -5,7 +5,6 @@ import 'package:xyz_prototype/ui/dumb_widgets/authentication_layout.dart';
 import 'package:xyz_prototype/ui/login/login_view.form.dart';
 import 'package:xyz_prototype/ui/login/login_viewmodel.dart';
 import 'package:xyz_ui/xyz_ui.dart';
-import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 
 @FormView(
   fields: [
@@ -21,10 +20,18 @@ class LoginView extends StatelessWidget with $LoginView {
     return BoxButton(
       title: 'Login/Sign Up',
       onTap: () {
-        showMaterialModalBottomSheet(
+        showModalBottomSheet(
+          isScrollControlled: true,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.vertical(
+              top: Radius.circular(24.0),
+            ),
+          ),
+          clipBehavior: Clip.antiAliasWithSaveLayer,
           context: context,
           builder: (context) => Container(
-            decoration: BoxDecoration(borderRadius: defaultBorderRadius),
+            decoration: BoxDecoration(
+                borderRadius: BorderRadius.all(Radius.circular(200))),
             height: screenHeightPercentage(context, percentage: 0.9),
             child: ViewModelBuilder<LoginViewModel>.reactive(
               onModelReady: (model) => listenToFormUpdated(model),

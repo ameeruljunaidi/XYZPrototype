@@ -18,39 +18,69 @@ class CreateAccountView extends StatelessWidget with $CreateAccountView {
 
   @override
   Widget build(BuildContext context) {
-    return ViewModelBuilder<CreateAccountViewModel>.reactive(
-      onModelReady: (model) => listenToFormUpdated(model),
-      builder: (context, model, child) => Scaffold(
-        body: AuthenticationLayout(
-          title: 'Create Account',
-          subtitle: 'Enter your name, email, and password to sign up.',
-          mainButtonTitle: 'SIGN UP',
-          form: Column(
-            children: <Widget>[
-              BoxInputField(
-                placeholder: 'Full Name',
-                controller: fullNameController,
-              ),
-              verticalSpaceRegular,
-              BoxInputField(
-                placeholder: 'Email',
-                controller: emailController,
-              ),
-              verticalSpaceRegular,
-              BoxInputField(
-                placeholder: 'Password',
-                controller: passwordController,
-              ),
-            ],
+    return GestureDetector(
+      onTap: () {
+        showModalBottomSheet(
+          isScrollControlled: true,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.vertical(
+              top: Radius.circular(24.0),
+            ),
           ),
-          busy: model.isBusy,
-          showTermsText: true,
-          onMainButtonTapped: () => model.saveData(),
-          onBackPressed: model.navigateBack,
-          validationMessage: model.validationMessage,
-        ),
+          clipBehavior: Clip.antiAliasWithSaveLayer,
+          context: context,
+          builder: (context) => Container(
+            decoration: BoxDecoration(
+                borderRadius: BorderRadius.all(Radius.circular(200))),
+            height: screenHeightPercentage(context, percentage: 0.9),
+            child: ViewModelBuilder<CreateAccountViewModel>.reactive(
+              onModelReady: (model) => listenToFormUpdated(model),
+              builder: (context, model, child) => Scaffold(
+                body: AuthenticationLayout(
+                  title: 'Create Account',
+                  subtitle: 'Enter your name, email, and password to sign up.',
+                  mainButtonTitle: 'SIGN UP',
+                  form: Column(
+                    children: <Widget>[
+                      BoxInputField(
+                        placeholder: 'Full Name',
+                        controller: fullNameController,
+                      ),
+                      verticalSpaceRegular,
+                      BoxInputField(
+                        placeholder: 'Email',
+                        controller: emailController,
+                      ),
+                      verticalSpaceRegular,
+                      BoxInputField(
+                        placeholder: 'Password',
+                        controller: passwordController,
+                      ),
+                    ],
+                  ),
+                  busy: model.isBusy,
+                  showTermsText: true,
+                  onMainButtonTapped: () => model.saveData(),
+                  onBackPressed: model.navigateBack,
+                  validationMessage: model.validationMessage,
+                ),
+              ),
+              viewModelBuilder: () => CreateAccountViewModel(),
+            ),
+          ),
+        );
+      },
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: <Widget>[
+          Text('Don\'t have an account?'),
+          horizontalSpaceTiny,
+          Text(
+            'Create an account',
+            style: TextStyle(color: kcPrimaryColor),
+          ),
+        ],
       ),
-      viewModelBuilder: () => CreateAccountViewModel(),
     );
   }
 }
