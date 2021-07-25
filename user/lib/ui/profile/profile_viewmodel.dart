@@ -5,6 +5,7 @@ import 'package:xyz_prototype/app/app.locator.dart';
 import 'package:xyz_prototype/app/app.router.dart';
 import 'package:xyz_prototype/models/application_models.dart';
 import 'package:xyz_prototype/services/user_service.dart';
+import 'package:xyz_prototype/ui/login/login_viewmodel.dart';
 
 class ProfileViewModel extends FutureViewModel<void> {
   final _navigationService = locator<NavigationService>();
