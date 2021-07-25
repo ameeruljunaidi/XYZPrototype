@@ -110,7 +110,7 @@ class ProfileView extends StatelessWidget {
           ),
           _profileSettingsWidget(
             text: 'Log Out',
-            onTap: model.logOut,
+            onTap: () => model.logOut(),
             icon: Icon(
               Icons.logout,
               color: Colors.red,

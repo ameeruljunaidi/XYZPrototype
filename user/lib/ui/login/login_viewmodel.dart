@@ -8,7 +8,7 @@ class LoginViewModel extends AuthenticationViewModel {
   final _firebaseAuthenticationService =
       locator<FirebaseAuthenticationService>();
 
-  LoginViewModel() : super(successRoute: Routes.addressSelectionView);
+  LoginViewModel() : super(successRoute: Routes.homeView);
 
   @override
   Future<FirebaseAuthenticationResult> runAuthentication() =>
@@ -17,7 +17,7 @@ class LoginViewModel extends AuthenticationViewModel {
         password: passwordValue!,
       );
 
-  void navigateToCreateAccount() => navigationService.navigateTo(
-        Routes.createAccountView,
-      );
+  void navigateToCreateAccount() {
+    navigationService.navigateTo(Routes.createAccountView);
+  }
 }

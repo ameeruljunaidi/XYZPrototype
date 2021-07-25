@@ -20,22 +20,22 @@ class AuthenticationLayout extends StatelessWidget {
   final String? validationMessage;
   final bool? busy;
 
-  const AuthenticationLayout(
-      {Key? key,
-      this.title,
-      this.subtitle,
-      this.mainButtonTitle,
-      this.form,
-      this.showTermsText,
-      this.onMainButtonTapped,
-      this.onCreateAccountTapped,
-      this.onForgotPassword,
-      this.onBackPressed,
-      this.validationMessage,
-      this.busy,
-      this.onSignInWithApple,
-      this.onSignInWithGoogle})
-      : super(key: key);
+  const AuthenticationLayout({
+    Key? key,
+    this.title,
+    this.subtitle,
+    this.mainButtonTitle,
+    this.form,
+    this.showTermsText,
+    this.onMainButtonTapped,
+    this.onCreateAccountTapped,
+    this.onForgotPassword,
+    this.onBackPressed,
+    this.validationMessage,
+    this.busy,
+    this.onSignInWithApple,
+    this.onSignInWithGoogle,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -43,9 +43,9 @@ class AuthenticationLayout extends StatelessWidget {
       padding: const EdgeInsets.symmetric(horizontal: 24.0),
       child: SingleChildScrollView(
         child: Column(
-          // physics: const NeverScrollableScrollPhysics(),
           children: <Widget>[
             Icon(Icons.drag_handle),
+            verticalSpaceRegular,
             Align(
               alignment: Alignment.topLeft,
               child: Text(
@@ -159,7 +159,7 @@ class AuthenticationLayout extends StatelessWidget {
                   textStyle: TextStyle(fontSize: 14.0),
                 ),
               ),
-            )
+            ),
           ],
         ),
       ),

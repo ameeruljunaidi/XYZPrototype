@@ -4,6 +4,7 @@ import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
 import 'package:xyz_prototype/app/app.locator.dart';
 import 'package:xyz_prototype/app/app.logger.dart';
+import 'package:xyz_prototype/app/app.router.dart';
 import 'package:xyz_prototype/constants/app_keys.dart';
 import 'package:xyz_prototype/exceptions/firestore_api_exceptions.dart';
 import 'package:xyz_prototype/models/application_models.dart';
@@ -73,7 +74,7 @@ abstract class AuthenticationViewModel extends FormViewModel {
       );
 
       if (client.email != null) {
-        navigationService.replaceWith(successRoute);
+        navigationService.clearStackAndShow(successRoute);
       }
     } else {
       if (!authResult.hasError && authResult.user == null) {

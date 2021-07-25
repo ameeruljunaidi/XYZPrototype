@@ -1,11 +1,13 @@
+import 'package:flutter_phoenix/flutter_phoenix.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked_firebase_auth/stacked_firebase_auth.dart';
 import 'package:stacked_services/stacked_services.dart';
 import 'package:xyz_prototype/app/app.locator.dart';
 import 'package:xyz_prototype/app/app.router.dart';
+import 'package:xyz_prototype/enums/basic_dialog_status.dart';
+import 'package:xyz_prototype/enums/dialog_type.dart';
 import 'package:xyz_prototype/models/application_models.dart';
 import 'package:xyz_prototype/services/user_service.dart';
-import 'package:xyz_prototype/ui/login/login_viewmodel.dart';
 
 class ProfileViewModel extends FutureViewModel<void> {
   final _navigationService = locator<NavigationService>();
@@ -37,9 +39,11 @@ class ProfileViewModel extends FutureViewModel<void> {
   }
 
   void logOut() async {
-    var logOut = await _dialogService.showConfirmationDialog(
-      confirmationTitle: 'Log Out',
-      cancelTitle: 'Go Back',
+    var logOut = await _dialogService.showCustomDialog(
+      variant: DialogType.basic,
+      data: BasicDialogStatus.warning,
+      mainButtonTitle: 'Log Out',
+      secondaryButtonTitle: 'Go Back',
       description: 'Are you sure you want to log out?',
       title: 'Log Out',
     );
