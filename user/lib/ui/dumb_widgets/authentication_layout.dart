@@ -41,8 +41,9 @@ class AuthenticationLayout extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 24.0),
       child: ListView(
+        physics: const NeverScrollableScrollPhysics(),
         children: <Widget>[
-          if (onBackPressed == null) verticalSpaceLarge,
+          // if (onBackPressed == null) verticalSpaceLarge,
           if (onBackPressed != null) verticalSpaceRegular,
           if (onBackPressed != null)
             IconButton(
