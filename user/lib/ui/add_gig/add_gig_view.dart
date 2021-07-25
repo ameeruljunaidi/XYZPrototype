@@ -15,40 +15,61 @@ class AddGigView extends StatelessWidget with $AddGigView {
 
   @override
   Widget build(BuildContext context) {
-    return ViewModelBuilder<AddGigViewModel>.reactive(
-      onModelReady: (model) => listenToFormUpdated(model),
-      builder: (context, model, child) => Scaffold(
-        body: SafeArea(
-          child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 24.0),
-            child: Column(
-              children: [
-                Align(
-                  alignment: Alignment.centerLeft,
-                  child: IconButton(
-                    padding: EdgeInsets.zero,
-                    icon: Icon(Icons.arrow_back_ios, color: Colors.black),
-                    onPressed: model.goBack,
+    return Align(
+      alignment: Alignment.centerRight,
+      child: IconButton(
+        padding: EdgeInsets.zero,
+        icon: Icon(
+          Icons.add,
+          color: Colors.black,
+          size: 32.0,
+        ),
+        onPressed: () {
+          showModalBottomSheet(
+            isScrollControlled: true,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.vertical(
+                top: Radius.circular(24.0),
+              ),
+            ),
+            clipBehavior: Clip.antiAliasWithSaveLayer,
+            context: context,
+            builder: (context) => Container(
+              decoration: BoxDecoration(
+                  borderRadius: BorderRadius.all(Radius.circular(200))),
+              height: screenHeightPercentage(context, percentage: 0.9),
+              child: ViewModelBuilder<AddGigViewModel>.reactive(
+                onModelReady: (model) => listenToFormUpdated(model),
+                builder: (context, model, child) => Scaffold(
+                  body: SafeArea(
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 24.0),
+                      child: Column(
+                        children: [
+                          Icon(Icons.drag_handle),
+                          verticalSpaceRegular,
+                          Center(
+                            child: BoxText.headingTwo(
+                                'This is where you will add your gig.'),
+                          ),
+                          verticalSpaceMedium,
+                          BoxInputField(
+                            controller: gigTitleController,
+                            placeholder: 'Gig Title',
+                          ),
+                          Spacer(),
+                          _addGigButton(model),
+                        ],
+                      ),
+                    ),
                   ),
                 ),
-                verticalSpaceTiny,
-                Center(
-                  child: BoxText.headingTwo(
-                      'This is where you will add your gig.'),
-                ),
-                verticalSpaceMedium,
-                BoxInputField(
-                  controller: gigTitleController,
-                  placeholder: 'Gig Title',
-                ),
-                Spacer(),
-                _addGigButton(model),
-              ],
+                viewModelBuilder: () => AddGigViewModel(),
+              ),
             ),
-          ),
-        ),
+          );
+        },
       ),
-      viewModelBuilder: () => AddGigViewModel(),
     );
   }
 

@@ -64,8 +64,8 @@ class ProfileView extends StatelessWidget {
       child: ListView(
         children: [
           _profileSettingsWidget(
-            text: 'Personal Information',
-            icon: Icon(Icons.verified_user),
+            text: 'View Profile',
+            icon: Icon(Icons.person),
             onTap: () {},
           ),
           _profileSettingsWidget(
@@ -73,23 +73,20 @@ class ProfileView extends StatelessWidget {
             icon: Icon(Icons.credit_card),
             onTap: () {},
           ),
-          _profileSettingsWidget(
-            text: 'View Profile',
-            icon: Icon(Icons.person),
-            onTap: () {},
-          ),
-          _profileSettingsWidget(
-            text: 'Manage Gigs',
-            icon: Icon(Icons.work),
-            onTap: model.goToGigManagerView,
-          ),
+          if (model.clientData().clientType ==
+              describeEnum(ClientType.business))
+            _profileSettingsWidget(
+              text: 'Manage Gigs',
+              icon: Icon(Icons.work),
+              onTap: model.goToGigManagerView,
+            ),
           _profileSettingsWidget(
             text: 'Manage Requests',
             icon: Icon(Icons.request_quote),
             onTap: () {},
           ),
           _profileSettingsWidget(
-            text: 'Manage Orders',
+            text: 'Orders',
             icon: Icon(Icons.list_alt),
             onTap: () {},
           ),

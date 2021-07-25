@@ -25,7 +25,11 @@ class ProfileViewModel extends FutureViewModel<void> {
   }
 
   Client clientData() {
-    return _userService.currentUser!;
+    return _userService.currentUser ??
+        Client(
+            clientId: 'anonymous',
+            clientType: 'anonymous',
+            clientRegistrationDate: 'anonymous');
   }
 
   Future<void> goToAddBusiness() async {
@@ -49,8 +53,9 @@ class ProfileViewModel extends FutureViewModel<void> {
     );
 
     if (logOut!.confirmed) {
-      _firebaseAuthenticationService.logout();
-      _navigationService.clearStackAndShow(Routes.startupView);
+      _userService.logOut();
+      _firebaseAuthenticationService.loginAnonymously();
+      _navigationService.clearStackAndShow(Routes.homeView);
     }
   }
 

@@ -48,4 +48,9 @@ class UserService {
       log.v('_currentUser has been created and saved');
     }
   }
+
+  Future<void> logOut() async {
+    _firebaseAuthenticationService.logout();
+    _currentClient = null;
+  }
 }
