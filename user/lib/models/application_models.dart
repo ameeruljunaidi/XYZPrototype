@@ -25,6 +25,7 @@ class Client with _$Client {
 
   bool get hasAddress => clientAddress?.isNotEmpty ?? false;
   bool get isBusiness => clientType == describeEnum(ClientType.business);
+  bool get isAnonymous => clientEmail == null;
 
   factory Client.fromJson(Map<String, dynamic> json) => _$ClientFromJson(json);
 }

@@ -15,8 +15,6 @@ class ProfileView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ViewModelBuilder<ProfileViewModel>.reactive(
-      disposeViewModel: false,
-      initialiseSpecialViewModelsOnce: true,
       builder: (context, model, child) => Scaffold(
         body: model.clientData().clientEmail == null
             ? Padding(
@@ -41,7 +39,7 @@ class ProfileView extends StatelessWidget {
                 ),
               ),
       ),
-      viewModelBuilder: () => locator<ProfileViewModel>(),
+      viewModelBuilder: () => ProfileViewModel(),
     );
   }
 
@@ -66,7 +64,6 @@ class ProfileView extends StatelessWidget {
   Widget _profileSettingsList(model) {
     return Expanded(
       child: ListView(
-        key: PageStorageKey('profile-setting-list'),
         children: [
           _profileSettingsWidget(
             text: 'Personal Information',

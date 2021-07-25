@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:stacked_firebase_auth/stacked_firebase_auth.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
@@ -66,12 +67,14 @@ abstract class AuthenticationViewModel extends FormViewModel {
         client: Client(
           clientId: client.uid,
           clientEmail: client.email,
-          clientType: 'user',
+          clientType: describeEnum(ClientType.user),
           clientRegistrationDate: defaultRegistrationDate,
         ),
       );
 
-      navigationService.replaceWith(successRoute);
+      if (client.email != null) {
+        navigationService.replaceWith(successRoute);
+      }
     } else {
       if (!authResult.hasError && authResult.user == null) {
         log.wtf(

@@ -1,5 +1,4 @@
 import 'package:places_service/places_service.dart';
-import 'package:stacked/stacked.dart';
 import 'package:stacked_firebase_auth/stacked_firebase_auth.dart';
 import 'package:stacked_services/stacked_services.dart';
 import 'package:xyz_prototype/app/app.locator.dart';
@@ -17,6 +16,10 @@ class StartUpViewModel extends AuthenticationViewModel {
       locator<FirebaseAuthenticationService>();
 
   Future<void> runStartupLogic() async {
+    _placesService.initialize(
+      apiKey: 'AIzaSyBzUeZcsTXODsZai6nbke65SyV_hbKdf7E',
+    );
+
     if (_userService.hasLoggedInUser) {
       log.v('We have a user session on disk. Sync the user profile ...');
       await _userService.syncUserAccount();

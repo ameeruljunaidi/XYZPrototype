@@ -42,6 +42,7 @@ dependencies:
   places_service: ^0.1.0+2
   provider: ^5.0.0
   pull_to_refresh: ^2.0.0
+  restart_app: ^1.0.3
   stacked: ^2.2.2
   stacked_firebase_auth: ^0.2.5
   stacked_services: ^0.8.10
@@ -64,8 +65,8 @@ flutter:
   # the material Icons class.
   uses-material-design: true
   # To add assets to your application, add an assets section, like this:
-  # assets:
-    # - assets/images/f
+  assets:
+  - assets/images/
   #   - images/a_dot_ham.jpeg
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.

@@ -41,6 +41,11 @@ class UserService {
       await _firestoreApi.createUser(client: client);
       _currentClient = client;
       log.v('_currentUser has been saved');
+    } else if (currentUser!.isAnonymous) {
+      log.v('User is currently anonymojus. Create a new account.');
+      await _firestoreApi.createUser(client: client);
+      _currentClient = client;
+      log.v('_currentUser has been created and saved');
     }
   }
 }

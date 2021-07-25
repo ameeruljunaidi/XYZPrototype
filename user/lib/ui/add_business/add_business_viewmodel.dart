@@ -50,7 +50,7 @@ class AddBusinessViewModel extends FormViewModel {
     }
 
     notifyListeners();
-    _navigationService.back();
+    _navigationService.clearStackAndShow(Routes.homeView);
 
     setBusy(false);
   }
