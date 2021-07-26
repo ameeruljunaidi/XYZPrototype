@@ -25,3 +25,6 @@ double screenWidthPercentage(BuildContext context, {double percentage = 1}) =>
 
 // Borders
 BorderRadius defaultBorderRadius = BorderRadius.circular(16.0);
+
+// Default back butto
+const IconData defaultBackIcon = Icons.arrow_back_ios_new;

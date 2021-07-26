@@ -6,6 +6,7 @@ import 'package:xyz_prototype/app/app.logger.dart';
 import 'package:xyz_prototype/constants/app_keys.dart';
 import 'package:xyz_prototype/exceptions/firestore_api_exceptions.dart';
 import 'package:xyz_prototype/models/application_models.dart';
+import 'package:collection/collection.dart';
 
 class FirestoreApi {
   // Log everything that is happening in this api call
@@ -33,6 +34,10 @@ class FirestoreApi {
   // Getting a stream controller for gigs
   final StreamController<List<Gig>> _gigsController =
       StreamController<List<Gig>>.broadcast();
+
+  // Getting a stream controller for currentuser
+  final StreamController<Client> _clientController =
+      StreamController<Client>.broadcast();
 
   // Firebase functions that get stuff /////////////////////////////////////////
 
@@ -123,6 +128,36 @@ class FirestoreApi {
     );
 
     return _gigsController.stream;
+  }
+
+  // Stream for current user
+  Stream getUserRealtime(String clientId) {
+    log.v('client for user stream $clientId');
+
+    userCollection.snapshots().listen(
+      (userSnapshot) {
+        if (userSnapshot.docs.isNotEmpty) {
+          var user = userSnapshot.docs
+              .map((snapshot) =>
+                  Client.fromJson(snapshot.data() as Map<String, dynamic>))
+              // .where((mappedItem) => mappedItem.clientId == clientId)
+              .firstWhereOrNull(
+                  (mappedItem) => mappedItem.clientId == clientId);
+
+          log.v('user retrieved from firebase');
+
+          _clientController.add(
+            user ??
+                Client(
+                    clientId: 'anonymous',
+                    clientType: 'anonymous',
+                    clientRegistrationDate: 'anonymous'),
+          );
+        }
+      },
+    );
+
+    return _clientController.stream;
   }
 
   // Firebase functions for CRUD ///////////////////////////////////////////////

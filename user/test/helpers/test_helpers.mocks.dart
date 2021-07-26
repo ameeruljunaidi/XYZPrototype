@@ -70,6 +70,15 @@ class MockUserService extends _i1.Mock implements _i6.UserService {
           Invocation.method(#syncOrCreateUserAccount, [], {#client: client}),
           returnValue: Future<void>.value(),
           returnValueForMissingStub: Future<void>.value()) as _i7.Future<void>);
+  @override
+  _i7.Future<void> logOut() =>
+      (super.noSuchMethod(Invocation.method(#logOut, []),
+          returnValue: Future<void>.value(),
+          returnValueForMissingStub: Future<void>.value()) as _i7.Future<void>);
+  @override
+  void listenToUser() =>
+      super.noSuchMethod(Invocation.method(#listenToUser, []),
+          returnValueForMissingStub: null);
 }
 
 /// A class which mocks [NavigationService].
@@ -459,6 +468,14 @@ class MockFirestoreApi extends _i1.Mock implements _i20.FirestoreApi {
               returnValue: Future<List<_i8.Gig?>>.value(<_i8.Gig?>[]))
           as _i7.Future<List<_i8.Gig?>>);
   @override
+  _i7.Stream<dynamic> getGigsRealtime(_i8.Client? client) =>
+      (super.noSuchMethod(Invocation.method(#getGigsRealtime, [client]),
+          returnValue: Stream<dynamic>.empty()) as _i7.Stream<dynamic>);
+  @override
+  _i7.Stream<dynamic> getUserRealtime(String? clientId) =>
+      (super.noSuchMethod(Invocation.method(#getUserRealtime, [clientId]),
+          returnValue: Stream<dynamic>.empty()) as _i7.Stream<dynamic>);
+  @override
   _i7.Future<void> createUser({_i8.Client? client}) =>
       (super.noSuchMethod(Invocation.method(#createUser, [], {#client: client}),
           returnValue: Future<void>.value(),
@@ -480,6 +497,10 @@ class MockFirestoreApi extends _i1.Mock implements _i20.FirestoreApi {
   _i7.Future<bool> addGig({_i8.Gig? gig}) =>
       (super.noSuchMethod(Invocation.method(#addGig, [], {#gig: gig}),
           returnValue: Future<bool>.value(false)) as _i7.Future<bool>);
+  @override
+  _i7.Future<dynamic> deleteGig(String? gigId) =>
+      (super.noSuchMethod(Invocation.method(#deleteGig, [gigId]),
+          returnValue: Future<dynamic>.value()) as _i7.Future<dynamic>);
   @override
   _i7.Future<bool> isCityServiced({String? city}) =>
       (super.noSuchMethod(Invocation.method(#isCityServiced, [], {#city: city}),

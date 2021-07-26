@@ -1,4 +1,3 @@
-import 'package:flutter_phoenix/flutter_phoenix.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked_firebase_auth/stacked_firebase_auth.dart';
 import 'package:stacked_services/stacked_services.dart';
@@ -9,20 +8,12 @@ import 'package:xyz_prototype/enums/dialog_type.dart';
 import 'package:xyz_prototype/models/application_models.dart';
 import 'package:xyz_prototype/services/user_service.dart';
 
-class ProfileViewModel extends FutureViewModel<void> {
+class ProfileViewModel extends BaseViewModel {
   final _navigationService = locator<NavigationService>();
   final _userService = locator<UserService>();
   final _dialogService = locator<DialogService>();
   final _firebaseAuthenticationService =
       locator<FirebaseAuthenticationService>();
-
-  @override
-  Future<void> futureToRun() => _userService.syncUserAccount();
-
-  Future<void> syncUserAccount() async {
-    await futureToRun();
-    notifyListeners();
-  }
 
   Client clientData() {
     return _userService.currentUser ??
@@ -34,8 +25,6 @@ class ProfileViewModel extends FutureViewModel<void> {
 
   Future<void> goToAddBusiness() async {
     await _navigationService.navigateTo(Routes.addBusinessView);
-    await syncUserAccount();
-    notifyListeners();
   }
 
   void goToLoginView() {
@@ -76,5 +65,11 @@ class ProfileViewModel extends FutureViewModel<void> {
         _navigationService.navigateTo(Routes.addBusinessView);
       }
     }
+  }
+
+  void listenToUser() {
+    setBusy(true);
+    _userService.listenToUser();
+    setBusy(false);
   }
 }

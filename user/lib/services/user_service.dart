@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:stacked_firebase_auth/stacked_firebase_auth.dart';
 import 'package:xyz_prototype/api/firestore_api.dart';
 import 'package:xyz_prototype/app/app.locator.dart';
@@ -52,5 +54,23 @@ class UserService {
   Future<void> logOut() async {
     _firebaseAuthenticationService.logout();
     _currentClient = null;
+  }
+
+  void listenToUser() {
+    final _clientId = _firebaseAuthenticationService.currentUser!.uid;
+
+    _firestoreApi.getUserRealtime(_clientId).listen(
+      (userData) {
+        Client updatedClient = userData;
+        if (updatedClient.clientEmail != null) {
+          _currentClient = updatedClient;
+        } else {
+          _currentClient = Client(
+              clientId: 'anonymous',
+              clientRegistrationDate: 'anonymous',
+              clientType: 'anonymous');
+        }
+      },
+    );
   }
 }

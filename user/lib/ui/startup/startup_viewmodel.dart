@@ -1,4 +1,3 @@
-import 'package:flutter_phoenix/flutter_phoenix.dart';
 import 'package:places_service/places_service.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked_firebase_auth/stacked_firebase_auth.dart';

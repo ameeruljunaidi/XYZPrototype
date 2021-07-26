@@ -26,9 +26,9 @@ class GigManagerView extends StatelessWidget {
                       Align(
                         alignment: Alignment.centerLeft,
                         child: IconButton(
-                          onPressed: model.goBack,
+                          onPressed: () => Navigator.of(context).pop(),
                           icon: Icon(
-                            Icons.arrow_back_ios,
+                            defaultBackIcon,
                             color: Colors.black,
                           ),
                         ),
@@ -47,20 +47,26 @@ class GigManagerView extends StatelessWidget {
                     ),
                   ),
                   verticalSpaceRegular,
-                  model.gigs != null
-                      ? Expanded(
-                          child: ListView.builder(
-                            itemBuilder: (context, index) {
-                              return _gigCard(context, model, index);
-                            },
-                            itemCount: model.gigs!.length,
-                          ),
-                        )
-                      : Center(
-                          child: CircularProgressIndicator(
-                            valueColor: AlwaysStoppedAnimation(kcPrimaryColor),
-                          ),
-                        ),
+                  if (model.gigs != null)
+                    Expanded(
+                      child: ListView.builder(
+                        itemBuilder: (context, index) {
+                          return _gigCard(context, model, index);
+                        },
+                        itemCount: model.gigs!.length,
+                      ),
+                    )
+                  else if (model.isBusy)
+                    Center(
+                      child: CircularProgressIndicator(
+                        valueColor: AlwaysStoppedAnimation(kcPrimaryColor),
+                      ),
+                    )
+                  else if (model.gigs == null)
+                    Align(
+                      alignment: Alignment.bottomLeft,
+                      child: Text('Click add gig to start becoming a gigger!'),
+                    )
                 ],
               ),
             ),

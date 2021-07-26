@@ -1,6 +1,5 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
-import 'package:xyz_prototype/app/app.router.dart';
 import 'package:xyz_prototype/ui/startup/startup_viewmodel.dart';
 
 import '../helpers/test_helpers.dart';
