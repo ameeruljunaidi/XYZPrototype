@@ -41,23 +41,47 @@ class AddGigView extends StatelessWidget with $AddGigView {
               child: ViewModelBuilder<AddGigViewModel>.reactive(
                 onModelReady: (model) => listenToFormUpdated(model),
                 builder: (context, model, child) => Scaffold(
-                  body: SafeArea(
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 24.0),
+                  body: Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 24.0),
+                    child: SingleChildScrollView(
                       child: Column(
-                        children: [
+                        children: <Widget>[
                           Icon(Icons.drag_handle),
                           verticalSpaceRegular,
-                          Center(
-                            child: BoxText.headingTwo(
-                                'This is where you will add your gig.'),
+                          Align(
+                            alignment: Alignment.centerLeft,
+                            child:
+                                BoxText.headingTwo('Add details to your gig'),
                           ),
                           verticalSpaceMedium,
+                          Align(
+                            alignment: Alignment.centerLeft,
+                            child: BoxText.body(
+                              'Title',
+                              align: TextAlign.left,
+                              color: Colors.black,
+                            ),
+                          ),
+                          verticalSpaceSmall,
                           BoxInputField(
                             controller: gigTitleController,
                             placeholder: 'Gig Title',
                           ),
-                          Spacer(),
+                          verticalSpaceMedium,
+                          Align(
+                            alignment: Alignment.centerLeft,
+                            child: BoxText.body(
+                              'Upload Image',
+                              align: TextAlign.left,
+                              color: Colors.black,
+                            ),
+                          ),
+                          verticalSpaceSmall,
+                          BoxButton.outline(
+                            title: 'Select Image to Upload',
+                            onTap: () => model.selectImage(),
+                          ),
+                          verticalSpaceRegular,
                           _addGigButton(model),
                         ],
                       ),
@@ -75,7 +99,7 @@ class AddGigView extends StatelessWidget with $AddGigView {
 
   Widget _addGigButton(model) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 8.0),
+      padding: const EdgeInsets.symmetric(vertical: 8.0),
       child: Center(
         child: Align(
           alignment: Alignment.bottomCenter,

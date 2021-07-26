@@ -3,6 +3,7 @@ import 'package:stacked/stacked_annotations.dart';
 import 'package:stacked_firebase_auth/stacked_firebase_auth.dart';
 import 'package:stacked_services/stacked_services.dart';
 import 'package:xyz_prototype/api/firestore_api.dart';
+import 'package:xyz_prototype/services/cloud_storage_service.dart';
 import 'package:xyz_prototype/services/user_service.dart';
 import 'package:xyz_prototype/ui/add_business/add_business_view.dart';
 import 'package:xyz_prototype/ui/add_gig/add_gig_view.dart';
@@ -22,6 +23,7 @@ import 'package:xyz_prototype/ui/profile/profile_viewmodel.dart';
 import 'package:xyz_prototype/ui/search/search_view.dart';
 import 'package:xyz_prototype/ui/search/search_viewmodel.dart';
 import 'package:xyz_prototype/ui/startup/startup_view.dart';
+import 'package:xyz_prototype/utils/image_selector.dart';
 
 @StackedApp(
   routes: [
@@ -50,6 +52,8 @@ import 'package:xyz_prototype/ui/startup/startup_view.dart';
     LazySingleton(classType: SearchViewModel),
     LazySingleton(classType: NotificationsViewModel),
     LazySingleton(classType: ProfileViewModel),
+    LazySingleton(classType: CloudStorageService),
+    Singleton(classType: ImageSelector),
     Singleton(classType: FirebaseAuthenticationService),
   ],
   logger: StackedLogger(),

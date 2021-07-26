@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
 import 'package:xyz_prototype/api/firestore_api.dart';
@@ -6,8 +8,10 @@ import 'package:xyz_prototype/app/app.logger.dart';
 import 'package:xyz_prototype/enums/basic_dialog_status.dart';
 import 'package:xyz_prototype/enums/dialog_type.dart';
 import 'package:xyz_prototype/models/application_models.dart';
+import 'package:xyz_prototype/services/cloud_storage_service.dart';
 import 'package:xyz_prototype/services/user_service.dart';
 import 'package:xyz_prototype/ui/add_gig/add_gig_view.form.dart';
+import 'package:xyz_prototype/utils/image_selector.dart';
 
 class AddGigViewModel extends FormViewModel {
   final log = getLogger('AddBusinessViewModel');
@@ -15,6 +19,11 @@ class AddGigViewModel extends FormViewModel {
   final _dialogService = locator<DialogService>();
   final _userService = locator<UserService>();
   final _firestoreApi = locator<FirestoreApi>();
+  final _imageSelector = locator<ImageSelector>();
+  final _cloudStorageService = locator<CloudStorageService>();
+
+  File _selectedImage = File('');
+  File get selectedImage => _selectedImage;
 
   @override
   void setFormStatus() {}
@@ -58,5 +67,15 @@ class AddGigViewModel extends FormViewModel {
 
   void goBack() {
     _navigationService.back();
+  }
+
+  Future selectImage() async {
+    var tempImage = await _imageSelector.selectImage();
+    log.v('image retrieved: $tempImage');
+
+    if (tempImage != null) {
+      _selectedImage = tempImage as File;
+      notifyListeners();
+    }
   }
 }
