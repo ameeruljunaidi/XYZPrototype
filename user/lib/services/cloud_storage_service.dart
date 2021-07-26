@@ -1,10 +1,11 @@
 import 'dart:io';
 
 import 'package:firebase_storage/firebase_storage.dart';
+import 'package:image_picker/image_picker.dart';
 
 class CloudStorageService {
   Future<CloudStorageResult> uploadImage({
-    required File imageToUpload,
+    required XFile? imageToUpload,
     required String title,
   }) async {
     var imageFileName =
@@ -13,7 +14,8 @@ class CloudStorageService {
     final Reference firebaseStorageRef =
         FirebaseStorage.instance.ref().child(imageFileName);
 
-    UploadTask uploadTask = firebaseStorageRef.putFile(imageToUpload);
+    UploadTask uploadTask =
+        firebaseStorageRef.putFile(File(imageToUpload!.path));
 
     TaskSnapshot storageSnapshot = await uploadTask;
 

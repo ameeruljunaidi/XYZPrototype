@@ -29,7 +29,7 @@ const TextStyle bodyStyle = TextStyle(
 );
 
 const TextStyle subheadingStyle = TextStyle(
-  fontSize: 20,
+  fontSize: 18,
   fontWeight: FontWeight.w400,
 );
 

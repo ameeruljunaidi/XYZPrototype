@@ -45,5 +45,11 @@
 	<array>
 		<string>_dartobservatory._tcp</string>
 	</array>
+	<key>NSMicrophoneUsageDescription</key>
+	<string></string>
+	<key>NSCameraUsageDescription</key>
+	<string></string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string></string>
 </dict>
 </plist>

@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:image_picker/image_picker.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
 import 'package:xyz_prototype/api/firestore_api.dart';
@@ -22,21 +23,28 @@ class AddGigViewModel extends FormViewModel {
   final _imageSelector = locator<ImageSelector>();
   final _cloudStorageService = locator<CloudStorageService>();
 
-  File _selectedImage = File('');
-  File get selectedImage => _selectedImage;
+  XFile? _selectedImage;
+  XFile? get selectedImage => _selectedImage;
 
   @override
   void setFormStatus() {}
 
   Future<void> addGig() async {
+    setBusy(true);
+
+    CloudStorageResult storageResult;
+
     final _currentUser = _userService.currentUser!;
 
-    final gig = Gig(
-      gigTitle: gigTitleValue,
-      gigVendorId: _currentUser.clientVendorId,
+    storageResult = await _cloudStorageService.uploadImage(
+      imageToUpload: _selectedImage,
+      title: gigTitleValue ?? 'untitled',
     );
 
-    setBusy(true);
+    final gig = Gig(
+        gigTitle: gigTitleValue,
+        gigVendorId: _currentUser.clientVendorId,
+        gigPhotos: [storageResult.imageUrl]);
 
     log.v('gigTitle from view: $gigTitleValue');
 
@@ -70,12 +78,16 @@ class AddGigViewModel extends FormViewModel {
   }
 
   Future selectImage() async {
-    var tempImage = await _imageSelector.selectImage();
+    var tempImage = await _imageSelector.selectImage(ImageSource.gallery);
     log.v('image retrieved: $tempImage');
 
     if (tempImage != null) {
-      _selectedImage = tempImage as File;
+      _selectedImage = tempImage;
+      log.v('image picked: $_selectedImage');
       notifyListeners();
+    } else {
+      log.v('image not picked');
+      return;
     }
   }
 }

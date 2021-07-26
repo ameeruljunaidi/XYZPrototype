@@ -82,6 +82,10 @@ class AddGigView extends StatelessWidget with $AddGigView {
                             onTap: () => model.selectImage(),
                           ),
                           verticalSpaceRegular,
+                          Text(model.selectedImage != null
+                              ? model.selectedImage!.name
+                              : 'No image'),
+                          verticalSpaceRegular,
                           _addGigButton(model),
                         ],
                       ),
@@ -104,6 +108,7 @@ class AddGigView extends StatelessWidget with $AddGigView {
         child: Align(
           alignment: Alignment.bottomCenter,
           child: BoxButton(
+            busy: model.isBusy,
             title: 'Confirm Add Gig',
             onTap: () => model.addGig(),
           ),
