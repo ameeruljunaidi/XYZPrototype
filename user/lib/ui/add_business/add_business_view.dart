@@ -17,60 +17,65 @@ class AddBusinessView extends StatelessWidget with $AddBusinessView {
 
   @override
   Widget build(BuildContext context) {
-    return ViewModelBuilder<AddBusinessViewModel>.reactive(
-      onModelReady: (model) => listenToFormUpdated(model),
-      builder: (context, model, child) => Scaffold(
-        bottomNavigationBar: Visibility(
-          // visible: ,
-          child: Container(
-            margin: EdgeInsets.fromLTRB(20.0, 0.0, 20.0, 60.0),
-            child: BoxButton(
-              title: 'Continue',
-              busy: model.isBusy,
-              // disabled: ,
-              onTap: () => model.submitBusinessRegistration(),
-            ),
-          ),
-        ),
-        body: SafeArea(
-          child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 24.0),
-            child: Column(
-              children: [
-                Align(
-                  alignment: Alignment.centerLeft,
-                  child: IconButton(
-                    padding: EdgeInsets.zero,
-                    icon: Icon(defaultBackIcon, color: Colors.black),
-                    onPressed: model.cancelAddBusiness,
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 8.0),
+      child: Center(
+        child: Align(
+          alignment: Alignment.bottomCenter,
+          child: BoxButton(
+            title: 'Become a Gigger',
+            onTap: () => defaultBottomSheet(
+              context: context,
+              builder: (context) => Container(
+                height: screenHeightPercentage(context, percentage: 0.9),
+                child: ViewModelBuilder<AddBusinessViewModel>.reactive(
+                  onModelReady: (model) => listenToFormUpdated(model),
+                  builder: (context, model, child) => Scaffold(
+                    body: Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 24.0),
+                      child: SingleChildScrollView(
+                        child: Column(
+                          children: [
+                            Icon(Icons.drag_handle),
+                            verticalSpaceRegular,
+                            Center(
+                              child: BoxText.headingTwo(
+                                  'Add details about your business'),
+                            ),
+                            verticalSpaceMedium,
+                            BoxInputField(
+                              controller: businessNameController,
+                              placeholder: 'Business Name',
+                            ),
+                            verticalSpaceMedium,
+                            BoxInputField(
+                              controller: businessDescriptionController,
+                              placeholder: 'Business Description',
+                            ),
+                            verticalSpaceMedium,
+                            BoxInputField(
+                              controller: businessWebsiteController,
+                              placeholder: 'Business Website',
+                            ),
+                            verticalSpaceLarge,
+                            BoxButton(
+                              title: 'Continue',
+                              busy: model.isBusy,
+                              // disabled: ,
+                              onTap: () => model.submitBusinessRegistration(),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
                   ),
+                  viewModelBuilder: () => AddBusinessViewModel(),
                 ),
-                verticalSpaceTiny,
-                Center(
-                  child: BoxText.headingTwo(
-                      'This is where you will add your business.'),
-                ),
-                verticalSpaceMedium,
-                BoxInputField(
-                  controller: businessNameController,
-                  placeholder: 'Business Name',
-                ),
-                verticalSpaceMedium,
-                BoxInputField(
-                  controller: businessDescriptionController,
-                  placeholder: 'Business Description',
-                ),
-                verticalSpaceMedium,
-                BoxInputField(
-                  controller: businessWebsiteController,
-                  placeholder: 'Business Website',
-                ),
-              ],
+              ),
             ),
           ),
         ),
       ),
-      viewModelBuilder: () => AddBusinessViewModel(),
     );
   }
 }

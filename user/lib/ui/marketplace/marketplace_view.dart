@@ -30,61 +30,56 @@ class MarketPlaceView extends StatelessWidget with $MarketPlaceView {
       disposeViewModel: false,
       initialiseSpecialViewModelsOnce: true,
       builder: (context, model, child) => Scaffold(
-        body: ColorfulSafeArea(
-          color: kcVeryLightGreyColor,
-          child: Container(
-            color: kcVeryLightGreyColor,
-            child: Column(
-              children: [
-                _searchBar(),
-                Expanded(
-                  child: ListView(
-                    children: [
-                      verticalSpaceMedium,
-                      Padding(
-                        padding:
-                            const EdgeInsets.only(left: 24.0, right: 120.0),
-                        child: BoxText.headline('What would you like to do?'),
+        body: SafeArea(
+          child: Column(
+            children: [
+              _searchBar(),
+              Expanded(
+                child: ListView(
+                  children: [
+                    verticalSpaceMedium,
+                    Padding(
+                      padding: const EdgeInsets.only(left: 24.0, right: 120.0),
+                      child: BoxText.headline('What would you like to do?'),
+                    ),
+                    verticalSpaceMedium,
+                    SingleChildScrollView(
+                      scrollDirection: Axis.horizontal,
+                      child: Row(
+                        children: _icons
+                            .asMap()
+                            .entries
+                            .map((e) => _buildIcon(context, e.key, model))
+                            .toList(),
                       ),
-                      verticalSpaceMedium,
-                      SingleChildScrollView(
-                        scrollDirection: Axis.horizontal,
-                        child: Row(
-                          children: _icons
-                              .asMap()
-                              .entries
-                              .map((e) => _buildIcon(context, e.key, model))
-                              .toList(),
-                        ),
-                      ),
-                      verticalSpaceRegular,
-                      Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 24.0),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            BoxText.headingThree(
-                              'Top Services',
-                              align: TextAlign.start,
+                    ),
+                    verticalSpaceRegular,
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 24.0),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          BoxText.headingThree(
+                            'Top Services',
+                            align: TextAlign.start,
+                          ),
+                          TextButton(
+                            onPressed: () {},
+                            child: Text(
+                              'See All',
+                              style: TextStyle(
+                                  color: kcAccentColor, fontSize: 16.0),
                             ),
-                            TextButton(
-                              onPressed: () {},
-                              child: Text(
-                                'See All',
-                                style: TextStyle(
-                                    color: kcAccentColor, fontSize: 16.0),
-                              ),
-                            ),
-                          ],
-                        ),
+                          ),
+                        ],
                       ),
-                      _servicesCarousel(context),
-                    ],
-                  ),
+                    ),
+                    _servicesCarousel(context),
+                  ],
                 ),
-              ],
-            ),
+              ),
+            ],
           ),
         ),
       ),
@@ -93,7 +88,7 @@ class MarketPlaceView extends StatelessWidget with $MarketPlaceView {
   }
 
   Widget _servicesCarousel(context) {
-    final _carouselHeight = screenHeightPercentage(context, percentage: 0.34);
+    final _carouselHeight = screenHeightPercentage(context, percentage: 0.36);
     final _cardWidth = screenWidthPercentage(context, percentage: 0.50);
 
     return Container(
@@ -108,7 +103,6 @@ class MarketPlaceView extends StatelessWidget with $MarketPlaceView {
           return Container(
             margin: EdgeInsets.only(top: 16.0, bottom: 16.0, left: 16.0),
             width: _cardWidth,
-            // color: Colors.red,
             child: Stack(
               alignment: Alignment.topCenter,
               children: <Widget>[
@@ -151,16 +145,7 @@ class MarketPlaceView extends StatelessWidget with $MarketPlaceView {
                   ),
                 ),
                 Container(
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: defaultBorderRadius,
-                    boxShadow: [
-                      BoxShadow(
-                          color: Colors.black26,
-                          offset: Offset(0.0, 2.0),
-                          blurRadius: 6.0)
-                    ],
-                  ),
+                  decoration: defaultBoxDecoration,
                   child: Stack(
                     children: <Widget>[
                       ClipRRect(
@@ -174,21 +159,27 @@ class MarketPlaceView extends StatelessWidget with $MarketPlaceView {
                       ),
                       Positioned(
                         bottom: 0.0,
-                        child: Container(
-                          width: _cardWidth,
-                          color: Colors.black26,
-                          child: Padding(
-                            padding: const EdgeInsets.only(
-                              left: 8.0,
-                              bottom: 8.0,
-                              top: 8.0,
-                            ),
-                            child: Text(
-                              subCategories.subCategory!,
-                              style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 24.0,
-                                fontWeight: FontWeight.w600,
+                        child: ClipRRect(
+                          borderRadius: BorderRadius.only(
+                            bottomLeft: Radius.circular(16.0),
+                            bottomRight: Radius.circular(16.0),
+                          ),
+                          child: Container(
+                            width: _cardWidth * 0.9,
+                            color: Colors.black12,
+                            child: Padding(
+                              padding: const EdgeInsets.only(
+                                left: 8.0,
+                                bottom: 8.0,
+                                top: 8.0,
+                              ),
+                              child: Text(
+                                subCategories.subCategory!,
+                                style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 24.0,
+                                  fontWeight: FontWeight.w600,
+                                ),
                               ),
                             ),
                           ),
@@ -250,39 +241,8 @@ class MarketPlaceView extends StatelessWidget with $MarketPlaceView {
             placeholder: 'Search for Service Around You',
             textAlign: TextAlign.center,
             tapOnly: true,
-            fillColor: Colors.white,
           ),
         ],
-      ),
-    );
-  }
-
-  Widget _servicesHorizontalScrollView(context, textKey) {
-    return Container(
-      height: screenHeightPercentage(context, percentage: 0.16),
-      width: double.infinity,
-      child: ListView.builder(
-        key: PageStorageKey(textKey),
-        padding: EdgeInsets.only(left: 8.0),
-        scrollDirection: Axis.horizontal,
-        itemBuilder: (context, index) {
-          return Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16.0),
-            child: AspectRatio(
-              aspectRatio: 1,
-              child: ClipRRect(
-                borderRadius: defaultBorderRadius,
-                child: Container(
-                  color: kcLightGreyColor,
-                  height: double.maxFinite,
-                  // color: Colors.blue,
-                  child: Placeholder(),
-                ),
-              ),
-            ),
-          );
-        },
-        itemCount: 5,
       ),
     );
   }

@@ -4,37 +4,37 @@ import 'package:xyz_ui/src/shared/app_colors.dart';
 // Text Styles
 
 const TextStyle heading1Style = TextStyle(
-  fontSize: 34,
+  fontSize: 28,
   fontWeight: FontWeight.w400,
 );
 
 const TextStyle heading2Style = TextStyle(
-  fontSize: 28,
-  fontWeight: FontWeight.w600,
-);
-
-const TextStyle heading3Style = TextStyle(
   fontSize: 24,
   fontWeight: FontWeight.w600,
 );
 
+const TextStyle heading3Style = TextStyle(
+  fontSize: 20,
+  fontWeight: FontWeight.w600,
+);
+
 const TextStyle headlineStyle = TextStyle(
-  fontSize: 30,
+  fontSize: 24,
   fontWeight: FontWeight.w700,
 );
 
 const TextStyle bodyStyle = TextStyle(
-  fontSize: 16,
+  fontSize: 12,
   fontWeight: FontWeight.w400,
 );
 
 const TextStyle subheadingStyle = TextStyle(
-  fontSize: 18,
+  fontSize: 16,
   fontWeight: FontWeight.w400,
 );
 
 const TextStyle captionStyle = TextStyle(
-  fontSize: 12,
+  fontSize: 10,
   fontWeight: FontWeight.w400,
 );
 
@@ -44,4 +44,4 @@ const TextStyle ktsMediumGreyBodyText = TextStyle(
 );
 
 // Font Sizing
-const double kBodyTextSize = 16;
+const double kBodyTextSize = 12;

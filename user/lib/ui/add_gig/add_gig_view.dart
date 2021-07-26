@@ -25,78 +25,56 @@ class AddGigView extends StatelessWidget with $AddGigView {
           size: 32.0,
         ),
         onPressed: () {
-          showModalBottomSheet(
-            isScrollControlled: true,
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.vertical(
-                top: Radius.circular(24.0),
-              ),
-            ),
-            clipBehavior: Clip.antiAliasWithSaveLayer,
+          defaultBottomSheet(
             context: context,
             builder: (context) => Container(
-              decoration: BoxDecoration(
-                  borderRadius: BorderRadius.all(Radius.circular(200))),
               height: screenHeightPercentage(context, percentage: 0.9),
               child: ViewModelBuilder<AddGigViewModel>.reactive(
                 onModelReady: (model) => listenToFormUpdated(model),
                 builder: (context, model, child) => Scaffold(
-                  body: Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 24.0),
-                    child: SingleChildScrollView(
-                      child: Column(
-                        children: <Widget>[
-                          Icon(Icons.drag_handle),
-                          verticalSpaceRegular,
-                          Align(
-                            alignment: Alignment.centerLeft,
-                            child:
-                                BoxText.headingTwo('Add details to your gig'),
-                          ),
-                          verticalSpaceMedium,
-                          Align(
-                            alignment: Alignment.centerLeft,
-                            child: BoxText.body(
-                              'Title',
-                              align: TextAlign.left,
-                              color: Colors.black,
-                            ),
-                          ),
-                          verticalSpaceSmall,
-                          BoxInputField(
-                            controller: gigTitleController,
-                            placeholder: 'Gig Title',
-                          ),
-                          verticalSpaceMedium,
-                          Align(
-                            alignment: Alignment.centerLeft,
-                            child: BoxText.body(
-                              'Upload Image',
-                              align: TextAlign.left,
-                              color: Colors.black,
-                            ),
-                          ),
-                          verticalSpaceSmall,
-                          BoxButton.outline(
-                            title: 'Select Image to Upload',
-                            onTap: () => model.selectImage(),
-                          ),
-                          verticalSpaceRegular,
-                          Text(model.selectedImage != null
-                              ? model.selectedImage!.name
-                              : 'No image'),
-                          verticalSpaceRegular,
-                          _addGigButton(model),
-                        ],
-                      ),
-                    ),
-                  ),
+                  body: _widgetBody(model),
                 ),
                 viewModelBuilder: () => AddGigViewModel(),
               ),
             ),
           );
         },
+      ),
+    );
+  }
+
+  Widget _widgetBody(model) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 24.0),
+      child: SingleChildScrollView(
+        child: Column(
+          children: <Widget>[
+            Icon(Icons.drag_handle),
+            verticalSpaceRegular,
+            Align(
+              alignment: Alignment.centerLeft,
+              child: BoxText.headingTwo('Add details to your gig'),
+            ),
+            verticalSpaceMedium,
+            BoxInputField(
+              controller: gigTitleController,
+              placeholder: 'Gig Title',
+            ),
+            verticalSpaceMedium,
+            defaultTextBoxTitle('Upload Image'),
+            verticalSpaceSmall,
+            BoxButton.outline(
+              title: 'Select Image to Upload',
+              onTap: () => model.selectImage(),
+            ),
+            verticalSpaceRegular,
+            Text(model.selectedImage != null
+                ? model.selectedImage!.name
+                : 'No image'),
+            verticalSpaceRegular,
+            _addGigButton(model),
+          ],
+        ),
       ),
     );
   }

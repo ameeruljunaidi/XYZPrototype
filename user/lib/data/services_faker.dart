@@ -26,7 +26,7 @@ final List<SubCategory> subCategoryFaker = [
   SubCategory(
     subCategory: 'Performance',
     subCategoryCount: 45,
-    subCategoryDescription: 'A performance coach can help you with your goals',
+    subCategoryDescription: 'A coach to help you with your goals',
     subCategoryImgUrl: 'assets/images/performance-image.jpeg',
   ),
   SubCategory(

@@ -13,8 +13,10 @@ class HomeView extends StatelessWidget {
       builder: (context, model, child) => Scaffold(
         bottomNavigationBar: BottomNavigationBar(
           type: BottomNavigationBarType.fixed,
-          iconSize: 32.0,
+          iconSize: 24.0,
           selectedItemColor: kcPrimaryColor,
+          selectedFontSize: 12.0,
+          unselectedFontSize: 12.0,
           currentIndex: model.currentIndex,
           onTap: model.setIndex,
           items: [

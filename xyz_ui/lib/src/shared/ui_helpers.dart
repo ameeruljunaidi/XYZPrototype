@@ -1,5 +1,7 @@
 // Horizontal Spacing
 import 'package:flutter/material.dart';
+import 'package:xyz_ui/src/widgets/box_text.dart';
+import 'package:xyz_ui/xyz_ui.dart';
 
 const Widget horizontalSpaceTiny = SizedBox(width: 5.0);
 const Widget horizontalSpaceSmall = SizedBox(width: 10.0);
@@ -26,5 +28,44 @@ double screenWidthPercentage(BuildContext context, {double percentage = 1}) =>
 // Borders
 BorderRadius defaultBorderRadius = BorderRadius.circular(16.0);
 
-// Default back butto
-const IconData defaultBackIcon = Icons.arrow_back_ios_new;
+// Default back button
+const IconData defaultBackIcon = Icons.arrow_back;
+
+// Default box with shaodw
+BoxDecoration defaultBoxDecoration = BoxDecoration(
+  color: Colors.white,
+  borderRadius: defaultBorderRadius,
+  boxShadow: [
+    BoxShadow(
+      color: Colors.black26,
+      offset: Offset(0.0, 2.0),
+      blurRadius: 6.0,
+    )
+  ],
+);
+
+// Defautl bottom modal items
+Future defaultBottomSheet({context, builder}) {
+  return showModalBottomSheet(
+      isScrollControlled: true,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.vertical(
+          top: Radius.circular(16.0),
+        ),
+      ),
+      clipBehavior: Clip.antiAliasWithSaveLayer,
+      context: context,
+      builder: builder);
+}
+
+// Default title for textbox
+Widget defaultTextBoxTitle(title) {
+  return Align(
+    alignment: Alignment.centerLeft,
+    child: BoxText.body(
+      title,
+      align: TextAlign.left,
+      color: Colors.black,
+    ),
+  );
+}

@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
 import 'package:xyz_prototype/app/app.locator.dart';
 import 'package:xyz_prototype/constants/app_keys.dart';
+import 'package:xyz_prototype/ui/add_business/add_business_view.dart';
 import 'package:xyz_prototype/ui/login/login_view.dart';
 import 'package:xyz_prototype/ui/profile/profile_viewmodel.dart';
 import 'package:xyz_ui/xyz_ui.dart';
@@ -20,25 +21,21 @@ class ProfileView extends StatelessWidget {
       disposeViewModel: false,
       initialiseSpecialViewModelsOnce: true,
       builder: (context, model, child) => Scaffold(
-        body: model.clientData().clientEmail == null
-            ? Padding(
-                padding: const EdgeInsets.all(24.0),
-                child: Center(
-                  child: LoginView(),
-                ),
-              )
-            : ColorfulSafeArea(
-                color: kcVeryLightGreyColor,
-                child: Column(
-                  children: [
-                    _profileWidget(context, model),
-                    _profileSettingsList(model),
-                    if (model.clientData().clientType ==
-                        describeEnum(ClientType.user))
-                      _becomeSellerButton(model),
-                  ],
-                ),
-              ),
+        body: ColorfulSafeArea(
+          color: kcVeryLightGreyColor,
+          child: Column(
+            children: [
+              _profileWidget(context, model),
+              verticalSpaceRegular,
+              _profileSettingsList(model),
+              if (model.clientData().isAnonymous) LoginView(),
+              if (model.clientData().clientType ==
+                      describeEnum(ClientType.user) &&
+                  !model.clientData().isAnonymous)
+                AddBusinessView(),
+            ],
+          ),
+        ),
       ),
       viewModelBuilder: () => locator<ProfileViewModel>(),
     );
@@ -67,57 +64,63 @@ class ProfileView extends StatelessWidget {
       child: ListView(
         key: PageStorageKey('profile-setting-list'),
         children: [
-          _profileSettingsWidget(
-            text: 'View Profile',
-            icon: Icon(Icons.person),
-            onTap: () {},
-          ),
-          _profileSettingsWidget(
-            text: 'Payments and Payouts',
-            icon: Icon(Icons.credit_card),
-            onTap: () {},
-          ),
+          if (!model.clientData().isAnonymous)
+            _profileSettingsWidget(
+              text: 'View Profile',
+              icon: Icon(Icons.person),
+              onTap: model.inProgressNotifier,
+            ),
+          if (!model.clientData().isAnonymous)
+            _profileSettingsWidget(
+              text: 'Payments and Payouts',
+              icon: Icon(Icons.credit_card),
+              onTap: model.inProgressNotifier,
+            ),
           if (model.clientData().clientType ==
-              describeEnum(ClientType.business))
+                  describeEnum(ClientType.business) &&
+              !model.clientData().isAnonymous)
             _profileSettingsWidget(
               text: 'Manage Gigs',
               icon: Icon(Icons.work),
               onTap: model.goToGigManagerView,
             ),
-          _profileSettingsWidget(
-            text: 'Manage Requests',
-            icon: Icon(Icons.request_quote),
-            onTap: () {},
-          ),
-          _profileSettingsWidget(
-            text: 'Orders',
-            icon: Icon(Icons.list_alt),
-            onTap: () {},
-          ),
+          if (!model.clientData().isAnonymous)
+            _profileSettingsWidget(
+              text: 'Manage Requests',
+              icon: Icon(Icons.request_quote),
+              onTap: model.inProgressNotifier,
+            ),
+          if (!model.clientData().isAnonymous)
+            _profileSettingsWidget(
+              text: 'Orders',
+              icon: Icon(Icons.list_alt),
+              onTap: model.inProgressNotifier,
+            ),
           _profileSettingsWidget(
             text: 'Get Help',
             icon: Icon(Icons.help_outline),
-            onTap: () {},
+            onTap: model.inProgressNotifier,
           ),
           _profileSettingsWidget(
             text: 'Give Us Feedback',
             icon: Icon(Icons.question_answer),
-            onTap: () {},
+            onTap: model.inProgressNotifier,
           ),
           _profileSettingsWidget(
             text: 'Terms of Service',
             icon: Icon(Icons.gavel),
-            onTap: () {},
+            onTap: model.inProgressNotifier,
           ),
-          _profileSettingsWidget(
-            text: 'Log Out',
-            onTap: () => model.logOut(),
-            icon: Icon(
-              Icons.logout,
-              color: Colors.red,
+          if (!model.clientData().isAnonymous)
+            _profileSettingsWidget(
+              text: 'Log Out',
+              onTap: () => model.logOut(),
+              icon: Icon(
+                Icons.logout,
+                color: Colors.red,
+              ),
+              textColor: Colors.red,
             ),
-            textColor: Colors.red,
-          ),
           verticalSpaceRegular,
           BoxText.caption(
             'v. 0.01 (XYZ-PROTOTYPE)',
@@ -130,53 +133,83 @@ class ProfileView extends StatelessWidget {
   }
 
   Widget _profileWidget(context, model) {
-    final String _clientEmail = model.clientData().clientEmail;
-    final String _getClientType = model.clientData().clientType;
+    final String _clientEmail = model.clientData().clientEmail ?? '';
+    final String _getClientType = model.clientData().clientType ?? '';
     final String _clientType = _getClientType.capitalizeFirstofEach;
+
+    final _profileCardHeight =
+        screenHeightPercentage(context, percentage: 0.15);
+
+    bool _isAnonymous = model.clientData().isAnonymous;
+
+    final List<Widget> _clientNameDisplay = [
+      Align(
+        alignment: Alignment.centerLeft,
+        child: BoxText.body(
+          // TODO: Add the name here
+          'Name: TODO',
+          align: TextAlign.left,
+        ),
+      ),
+      verticalSpaceSmall,
+    ];
+
+    final List<Widget> _clientEmailDisplay = [
+      Align(
+        alignment: Alignment.centerLeft,
+        child: BoxText.body(
+          'Email: $_clientEmail',
+          align: TextAlign.left,
+        ),
+      ),
+      verticalSpaceSmall,
+    ];
+
+    final List<Widget> _clientTypeDisplay = [
+      Align(
+        alignment: Alignment.centerLeft,
+        child: BoxText.body(
+          'Type: $_clientType',
+          align: TextAlign.left,
+        ),
+      ),
+      verticalSpaceSmall,
+    ];
 
     return Container(
       color: kcVeryLightGreyColor,
-      height: screenHeightPercentage(context, percentage: 0.15),
+      height: _profileCardHeight,
       width: double.infinity,
       child: Row(
         children: [
           Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 20.0),
-            child: CircleAvatar(
-              backgroundColor: kcMediumGreyColor,
-              radius: 56.0,
-              child: Placeholder(),
+            padding: const EdgeInsets.only(left: 24.0, right: 8.0),
+            child: InkWell(
+              child: CircleAvatar(
+                backgroundColor: kcMediumGreyColor,
+                radius: _profileCardHeight * 0.4,
+                child: model.clientData().isAnonymous
+                    ? Icon(Icons.people, color: Colors.white)
+                    // TODO: Change when client already has avatar
+                    : BoxText.body('Add Photo', color: Colors.white),
+              ),
+              // TODO: Implement on tap
+              onTap: model.inProgressNotifier,
             ),
           ),
           horizontalSpaceRegular,
           Column(
             mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              BoxText.body(
-                'Email: $_clientEmail',
-              ),
-              verticalSpaceRegular,
-              BoxText.body(
-                '$_clientType',
-              ),
+              if (!_isAnonymous) verticalSpaceSmall,
+              if (!_isAnonymous) ..._clientNameDisplay,
+              if (!_isAnonymous) ..._clientEmailDisplay,
+              if (!_isAnonymous) ..._clientTypeDisplay,
+              if (_isAnonymous) BoxText.body('Login to Create a Profile'),
             ],
           ),
         ],
-      ),
-    );
-  }
-
-  Widget _becomeSellerButton(model) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 8.0),
-      child: Center(
-        child: Align(
-          alignment: Alignment.bottomCenter,
-          child: BoxButton(
-            title: 'Become a Gigger',
-            onTap: model.goToAddBusiness,
-          ),
-        ),
       ),
     );
   }

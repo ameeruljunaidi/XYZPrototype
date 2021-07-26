@@ -17,56 +17,60 @@ class LoginView extends StatelessWidget with $LoginView {
 
   @override
   Widget build(BuildContext context) {
-    return BoxButton(
-      title: 'Login/Sign Up',
-      onTap: () {
-        showModalBottomSheet(
-          isScrollControlled: true,
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.vertical(
-              top: Radius.circular(24.0),
-            ),
-          ),
-          clipBehavior: Clip.antiAliasWithSaveLayer,
-          context: context,
-          builder: (context) => Container(
-            decoration: BoxDecoration(
-                borderRadius: BorderRadius.all(Radius.circular(200))),
-            height: screenHeightPercentage(context, percentage: 0.9),
-            child: ViewModelBuilder<LoginViewModel>.reactive(
-              onModelReady: (model) => listenToFormUpdated(model),
-              builder: (context, model, child) => Scaffold(
-                body: AuthenticationLayout(
-                  title: 'Welcome',
-                  subtitle: 'Enter your email address and password to sign in.',
-                  mainButtonTitle: 'SIGN IN',
-                  form: Column(
-                    children: <Widget>[
-                      BoxInputField(
-                        controller: emailController,
-                        placeholder: 'Email',
-                      ),
-                      verticalSpaceRegular,
-                      BoxInputField(
-                        placeholder: 'Password',
-                        controller: passwordController,
-                      ),
-                    ],
-                  ),
-                  onSignInWithGoogle: model.useGoogleAuthentication,
-                  onSignInWithApple: model.useGoogleAuthentication,
-                  onMainButtonTapped: () => model.saveData(),
-                  onCreateAccountTapped: model.navigateToCreateAccount,
-                  validationMessage: model.validationMessage,
-                  onForgotPassword: () {},
-                  busy: model.isBusy,
-                ),
+    return Padding(
+      padding: const EdgeInsets.all(24.0),
+      child: BoxButton(
+        title: 'Login or Sign Up to Continue',
+        onTap: () {
+          showModalBottomSheet(
+            isScrollControlled: true,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.vertical(
+                top: Radius.circular(24.0),
               ),
-              viewModelBuilder: () => LoginViewModel(),
             ),
-          ),
-        );
-      },
+            clipBehavior: Clip.antiAliasWithSaveLayer,
+            context: context,
+            builder: (context) => Container(
+              decoration: BoxDecoration(
+                  borderRadius: BorderRadius.all(Radius.circular(200))),
+              height: screenHeightPercentage(context, percentage: 0.9),
+              child: ViewModelBuilder<LoginViewModel>.reactive(
+                onModelReady: (model) => listenToFormUpdated(model),
+                builder: (context, model, child) => Scaffold(
+                  body: AuthenticationLayout(
+                    title: 'Welcome',
+                    subtitle:
+                        'Enter your email address and password to sign in.',
+                    mainButtonTitle: 'SIGN IN',
+                    form: Column(
+                      children: <Widget>[
+                        BoxInputField(
+                          controller: emailController,
+                          placeholder: 'Email',
+                        ),
+                        verticalSpaceRegular,
+                        BoxInputField(
+                          placeholder: 'Password',
+                          controller: passwordController,
+                        ),
+                      ],
+                    ),
+                    onSignInWithGoogle: model.useGoogleAuthentication,
+                    onSignInWithApple: model.useGoogleAuthentication,
+                    onMainButtonTapped: () => model.saveData(),
+                    onCreateAccountTapped: model.navigateToCreateAccount,
+                    validationMessage: model.validationMessage,
+                    onForgotPassword: () {},
+                    busy: model.isBusy,
+                  ),
+                ),
+                viewModelBuilder: () => LoginViewModel(),
+              ),
+            ),
+          );
+        },
+      ),
     );
   }
 }

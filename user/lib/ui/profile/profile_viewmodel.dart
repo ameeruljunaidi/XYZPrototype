@@ -72,4 +72,18 @@ class ProfileViewModel extends BaseViewModel {
     _userService.listenToUser();
     setBusy(false);
   }
+
+  void inProgressNotifier() async {
+    var inProgressDialog = await _dialogService.showCustomDialog(
+      variant: DialogType.basic,
+      data: BasicDialogStatus.warning,
+      mainButtonTitle: 'Ok',
+      title: 'This Feature Is In Progress',
+      description: 'We are working on something big, stay tuned!',
+    );
+
+    if (inProgressDialog!.confirmed) {
+      return;
+    }
+  }
 }

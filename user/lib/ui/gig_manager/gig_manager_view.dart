@@ -13,63 +13,29 @@ class GigManagerView extends StatelessWidget {
     return ViewModelBuilder<GigManagerViewModel>.reactive(
       onModelReady: (model) => model.listenToGigs(),
       builder: (context, model, child) => Scaffold(
-        body: ColorfulSafeArea(
-          color: kcVeryLightGreyColor,
-          child: Container(
-            color: kcVeryLightGreyColor,
-            child: Padding(
-              padding: EdgeInsets.symmetric(horizontal: 24.0),
-              child: Column(
-                children: [
-                  Row(
-                    children: [
-                      Align(
-                        alignment: Alignment.centerLeft,
-                        child: IconButton(
-                          onPressed: () => Navigator.of(context).pop(),
-                          icon: Icon(
-                            defaultBackIcon,
-                            color: Colors.black,
-                          ),
-                        ),
-                      ),
-                      Spacer(),
-                      BoxText.body('Add Gig'),
-                      AddGigView(),
-                    ],
-                  ),
-                  verticalSpaceSmall,
-                  Align(
-                    alignment: Alignment.centerLeft,
-                    child: BoxText.headingThree(
-                      'Your Gigs',
-                      align: TextAlign.left,
-                    ),
-                  ),
-                  verticalSpaceRegular,
-                  if (model.gigs != null)
-                    Expanded(
-                      child: ListView.builder(
-                        itemBuilder: (context, index) {
-                          return _gigCard(context, model, index);
-                        },
-                        itemCount: model.gigs!.length,
-                      ),
-                    )
-                  else if (model.isBusy)
-                    Center(
-                      child: CircularProgressIndicator(
-                        valueColor: AlwaysStoppedAnimation(kcPrimaryColor),
-                      ),
-                    )
-                  else if (model.gigs == null)
-                    Align(
-                      alignment: Alignment.bottomLeft,
-                      child: Text('Click add gig to start becoming a gigger!'),
-                    )
-                ],
+        appBar: AppBar(
+          backgroundColor: Colors.transparent,
+          bottomOpacity: 0.0,
+          elevation: 0.0,
+          foregroundColor: Colors.black,
+          iconTheme: IconThemeData(
+            color: Colors.black, //change your color here
+          ),
+          actions: [
+            Align(
+              alignment: Alignment.center,
+              child: BoxText.body(
+                'Add Gig',
+                align: TextAlign.center,
               ),
             ),
+            AddGigView(),
+          ],
+        ),
+        body: SafeArea(
+          child: Padding(
+            padding: EdgeInsets.symmetric(horizontal: 24.0),
+            child: _gigManagerBody(model),
           ),
         ),
       ),
@@ -77,7 +43,45 @@ class GigManagerView extends StatelessWidget {
     );
   }
 
+  Widget _gigManagerBody(model) {
+    return Column(
+      children: [
+        verticalSpaceSmall,
+        Align(
+          alignment: Alignment.centerLeft,
+          child: BoxText.headingThree(
+            'Your Gigs',
+            align: TextAlign.left,
+          ),
+        ),
+        verticalSpaceRegular,
+        if (model.gigs != null)
+          Expanded(
+            child: ListView.builder(
+              itemBuilder: (context, index) {
+                return _gigCard(context, model, index);
+              },
+              itemCount: model.gigs!.length,
+            ),
+          )
+        else if (model.isBusy)
+          Center(
+            child: CircularProgressIndicator(
+              valueColor: AlwaysStoppedAnimation(kcPrimaryColor),
+            ),
+          )
+        else if (model.gigs == null)
+          Align(
+            alignment: Alignment.bottomLeft,
+            child: Text('Click add gig to start becoming a gigger!'),
+          )
+      ],
+    );
+  }
+
   Widget _gigCard(context, model, index) {
+    final _gigAtIndex = model.gigs[index];
+
     return Column(
       children: [
         verticalSpaceTiny,
@@ -94,21 +98,52 @@ class GigManagerView extends StatelessWidget {
                     bottom: 8.0,
                     right: 8.0,
                   ),
-                  child: ClipRRect(
-                    borderRadius: defaultBorderRadius,
-                    child: Container(
-                      height: double.maxFinite,
-                      color: kcVeryLightGreyColor,
-                      child: Placeholder(),
-                    ),
-                  ),
+                  child: _gigAtIndex.gigPhotos.length == 0 ||
+                          _gigAtIndex.gigPhotos[0] == ''
+                      ? Container(
+                          // height: double.maxFinite,
+                          decoration: defaultBoxDecoration,
+                          child: Center(
+                            child: Text('No Image'),
+                          ),
+                        )
+                      : Container(
+                          decoration: defaultBoxDecoration,
+                          child: ClipRRect(
+                            borderRadius: defaultBorderRadius,
+                            child: Image(
+                              loadingBuilder: (BuildContext context,
+                                  Widget child,
+                                  ImageChunkEvent? loadingProgress) {
+                                if (loadingProgress == null) {
+                                  return child;
+                                }
+                                return Center(
+                                  child: CircularProgressIndicator(
+                                    color: kcPrimaryColor,
+                                    value: loadingProgress.expectedTotalBytes !=
+                                            null
+                                        ? loadingProgress
+                                                .cumulativeBytesLoaded /
+                                            loadingProgress.expectedTotalBytes!
+                                        : null,
+                                  ),
+                                );
+                              },
+                              height: 50.0,
+                              width: 50.0,
+                              image: NetworkImage(_gigAtIndex.gigPhotos[0]),
+                              fit: BoxFit.cover,
+                            ),
+                          ),
+                        ),
                 ),
               ),
               horizontalSpaceSmall,
               Column(
                 children: [
                   verticalSpaceTiny,
-                  BoxText.subheading(model.gigs[index].gigTitle),
+                  BoxText.subheading(_gigAtIndex.gigTitle ?? 'Untitled'),
                 ],
               ),
               Spacer(),

@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:image_picker/image_picker.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
@@ -36,10 +34,17 @@ class AddGigViewModel extends FormViewModel {
 
     final _currentUser = _userService.currentUser!;
 
-    storageResult = await _cloudStorageService.uploadImage(
-      imageToUpload: _selectedImage,
-      title: gigTitleValue ?? 'untitled',
-    );
+    if (_selectedImage != null) {
+      storageResult = await _cloudStorageService.uploadImage(
+        imageToUpload: _selectedImage,
+        title: gigTitleValue ?? 'untitled',
+      );
+    } else {
+      storageResult = CloudStorageResult(
+        imageUrl: '',
+        imageFileName: '',
+      );
+    }
 
     final gig = Gig(
         gigTitle: gigTitleValue,
