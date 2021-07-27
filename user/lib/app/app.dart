@@ -9,6 +9,7 @@ import 'package:xyz_prototype/ui/add_business/add_business_view.dart';
 import 'package:xyz_prototype/ui/add_gig/add_gig_view.dart';
 import 'package:xyz_prototype/ui/address_selection/address_selection_view.dart';
 import 'package:xyz_prototype/ui/create_account/create_account_view.dart';
+import 'package:xyz_prototype/ui/gig_edit/gig_edit_view.dart';
 import 'package:xyz_prototype/ui/gig_manager/gig_manager_view.dart';
 import 'package:xyz_prototype/ui/home/home_view.dart';
 import 'package:xyz_prototype/ui/inbox/inbox_view.dart';
@@ -40,6 +41,7 @@ import 'package:xyz_prototype/utils/image_selector.dart';
     MaterialRoute(page: ProfileView),
     MaterialRoute(page: AddGigView),
     MaterialRoute(page: GigManagerView),
+    MaterialRoute(page: GigEditView),
   ],
   dependencies: [
     LazySingleton(classType: NavigationService),

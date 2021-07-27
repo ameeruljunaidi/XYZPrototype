@@ -18,7 +18,7 @@ class AddGigView extends StatelessWidget with $AddGigView {
     return Container();
   }
 
-  Future addGigModalOne(context) {
+  Future addGigModal(context) {
     return defaultBottomSheet(
       context: context,
       builder: (context) => Container(

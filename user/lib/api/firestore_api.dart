@@ -327,6 +327,11 @@ class FirestoreApi {
     await gigsCollection.doc(gigId).delete();
   }
 
+  // Updating a vendor's gig
+  Future updateGig(Gig gig) async {
+    await gigsCollection.doc(gig.gigId).update(gig.toJson());
+  }
+
   // Other firebase functions //////////////////////////////////////////////////
 
   // Check if the city is serviced

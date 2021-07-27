@@ -13,6 +13,7 @@ import '../ui/add_business/add_business_view.dart';
 import '../ui/add_gig/add_gig_view.dart';
 import '../ui/address_selection/address_selection_view.dart';
 import '../ui/create_account/create_account_view.dart';
+import '../ui/gig_edit/gig_edit_view.dart';
 import '../ui/gig_manager/gig_manager_view.dart';
 import '../ui/home/home_view.dart';
 import '../ui/inbox/inbox_view.dart';
@@ -37,6 +38,7 @@ class Routes {
   static const String profileView = '/profile-view';
   static const String addGigView = '/add-gig-view';
   static const String gigManagerView = '/gig-manager-view';
+  static const String gigEditView = '/gig-edit-view';
   static const all = <String>{
     startupView,
     homeView,
@@ -51,6 +53,7 @@ class Routes {
     profileView,
     addGigView,
     gigManagerView,
+    gigEditView,
   };
 }
 
@@ -71,6 +74,7 @@ class StackedRouter extends RouterBase {
     RouteDef(Routes.profileView, page: ProfileView),
     RouteDef(Routes.addGigView, page: AddGigView),
     RouteDef(Routes.gigManagerView, page: GigManagerView),
+    RouteDef(Routes.gigEditView, page: GigEditView),
   ];
   @override
   Map<Type, StackedRouteFactory> get pagesMap => _pagesMap;
@@ -168,6 +172,12 @@ class StackedRouter extends RouterBase {
     GigManagerView: (data) {
       return MaterialPageRoute<dynamic>(
         builder: (context) => const GigManagerView(),
+        settings: data,
+      );
+    },
+    GigEditView: (data) {
+      return MaterialPageRoute<dynamic>(
+        builder: (context) => const GigEditView(),
         settings: data,
       );
     },

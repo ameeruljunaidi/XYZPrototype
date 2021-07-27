@@ -502,6 +502,10 @@ class MockFirestoreApi extends _i1.Mock implements _i20.FirestoreApi {
       (super.noSuchMethod(Invocation.method(#deleteGig, [gigId]),
           returnValue: Future<dynamic>.value()) as _i7.Future<dynamic>);
   @override
+  _i7.Future<dynamic> updateGig(_i8.Gig? gig) =>
+      (super.noSuchMethod(Invocation.method(#updateGig, [gig]),
+          returnValue: Future<dynamic>.value()) as _i7.Future<dynamic>);
+  @override
   _i7.Future<bool> isCityServiced({String? city}) =>
       (super.noSuchMethod(Invocation.method(#isCityServiced, [], {#city: city}),
           returnValue: Future<bool>.value(false)) as _i7.Future<bool>);

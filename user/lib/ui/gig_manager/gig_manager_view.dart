@@ -13,14 +13,9 @@ class GigManagerView extends StatelessWidget {
     return ViewModelBuilder<GigManagerViewModel>.reactive(
       onModelReady: (model) => model.listenToGigs(),
       builder: (context, model, child) => Scaffold(
-        appBar: AppBar(
-          backgroundColor: Colors.transparent,
-          bottomOpacity: 0.0,
-          elevation: 0.0,
-          foregroundColor: Colors.black,
-          iconTheme: IconThemeData(
-            color: Colors.black, //change your color here
-          ),
+        appBar: defaultAppbar(
+          context,
+          model,
           actions: [
             Align(
               alignment: Alignment.center,
@@ -31,7 +26,7 @@ class GigManagerView extends StatelessWidget {
             ),
             IconButton(
               icon: Icon(Icons.add),
-              onPressed: () => model.showAddGigModalOne(context),
+              onPressed: () => model.showAddGigModal(context),
             )
           ],
         ),
@@ -91,75 +86,80 @@ class GigManagerView extends StatelessWidget {
         Container(
           height: screenHeightPercentage(context, percentage: 0.15),
           width: double.infinity,
-          child: Row(
-            children: <Widget>[
-              AspectRatio(
-                aspectRatio: 1,
-                child: Padding(
-                  padding: const EdgeInsets.only(
-                    top: 8.0,
-                    bottom: 8.0,
-                    right: 8.0,
-                  ),
-                  child: _gigAtIndex.gigPhotos.length == 0 ||
-                          _gigAtIndex.gigPhotos[0] == ''
-                      ? Container(
-                          // height: double.maxFinite,
-                          decoration: defaultBoxDecoration,
-                          child: Center(
-                            child: Text('No Image'),
-                          ),
-                        )
-                      : Container(
-                          decoration: defaultBoxDecoration,
-                          child: ClipRRect(
-                            borderRadius: defaultBorderRadius,
-                            child: Image(
-                              loadingBuilder: (BuildContext context,
-                                  Widget child,
-                                  ImageChunkEvent? loadingProgress) {
-                                if (loadingProgress == null) {
-                                  return child;
-                                }
-                                return Center(
-                                  child: CircularProgressIndicator(
-                                    color: kcPrimaryColor,
-                                    value: loadingProgress.expectedTotalBytes !=
-                                            null
-                                        ? loadingProgress
-                                                .cumulativeBytesLoaded /
-                                            loadingProgress.expectedTotalBytes!
-                                        : null,
-                                  ),
-                                );
-                              },
-                              height: 50.0,
-                              width: 50.0,
-                              image: NetworkImage(_gigAtIndex.gigPhotos[0]),
-                              fit: BoxFit.cover,
+          child: InkWell(
+            onTap: model.goToGigEdit,
+            child: Row(
+              children: <Widget>[
+                AspectRatio(
+                  aspectRatio: 1,
+                  child: Padding(
+                    padding: const EdgeInsets.only(
+                      top: 8.0,
+                      bottom: 8.0,
+                      right: 8.0,
+                    ),
+                    child: _gigAtIndex.gigPhotos.length == 0 ||
+                            _gigAtIndex.gigPhotos[0] == ''
+                        ? Container(
+                            // height: double.maxFinite,
+                            decoration: defaultBoxDecoration,
+                            child: Center(
+                              child: Text('No Image'),
+                            ),
+                          )
+                        : Container(
+                            decoration: defaultBoxDecoration,
+                            child: ClipRRect(
+                              borderRadius: defaultBorderRadius,
+                              child: Image(
+                                loadingBuilder: (BuildContext context,
+                                    Widget child,
+                                    ImageChunkEvent? loadingProgress) {
+                                  if (loadingProgress == null) {
+                                    return child;
+                                  }
+                                  return Center(
+                                    child: CircularProgressIndicator(
+                                      color: kcPrimaryColor,
+                                      value:
+                                          loadingProgress.expectedTotalBytes !=
+                                                  null
+                                              ? loadingProgress
+                                                      .cumulativeBytesLoaded /
+                                                  loadingProgress
+                                                      .expectedTotalBytes!
+                                              : null,
+                                    ),
+                                  );
+                                },
+                                height: 50.0,
+                                width: 50.0,
+                                image: NetworkImage(_gigAtIndex.gigPhotos[0]),
+                                fit: BoxFit.cover,
+                              ),
                             ),
                           ),
-                        ),
-                ),
-              ),
-              horizontalSpaceSmall,
-              Column(
-                children: [
-                  verticalSpaceTiny,
-                  BoxText.subheading(_gigAtIndex.gigTitle ?? 'Untitled'),
-                ],
-              ),
-              Spacer(),
-              Align(
-                alignment: Alignment.centerRight,
-                child: IconButton(
-                  onPressed: () => model.removeGig(index),
-                  icon: Icon(
-                    Icons.delete,
                   ),
                 ),
-              ),
-            ],
+                horizontalSpaceSmall,
+                Column(
+                  children: [
+                    verticalSpaceTiny,
+                    BoxText.subheading(_gigAtIndex.gigTitle ?? 'Untitled'),
+                  ],
+                ),
+                Spacer(),
+                // Align(
+                //   alignment: Alignment.centerRight,
+                //   child: IconButton(
+                //     onPressed: () => model.removeGig(index),
+                //     icon: Icon(
+                //       Icons.delete,
+                //     ),
+                //   ),
+                // ),
+              ],
+            ),
           ),
         ),
         verticalSpaceTiny,

@@ -3,6 +3,7 @@ import 'package:stacked_services/stacked_services.dart';
 import 'package:xyz_prototype/api/firestore_api.dart';
 import 'package:xyz_prototype/app/app.locator.dart';
 import 'package:xyz_prototype/app/app.logger.dart';
+import 'package:xyz_prototype/app/app.router.dart';
 import 'package:xyz_prototype/enums/basic_dialog_status.dart';
 import 'package:xyz_prototype/enums/dialog_type.dart';
 import 'package:xyz_prototype/models/application_models.dart';
@@ -78,8 +79,12 @@ class GigManagerViewModel extends BaseViewModel {
     }
   }
 
-  void showAddGigModalOne(context) async {
-    await _addGigService.addGigModalOne(context);
+  void showAddGigModal(context) async {
+    await _addGigService.addGigModal(context);
     notifyListeners();
+  }
+
+  void goToGigEdit() {
+    _navigationService.navigateTo(Routes.gigEditView);
   }
 }
