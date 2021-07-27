@@ -54,6 +54,8 @@ import 'package:xyz_prototype/utils/image_selector.dart';
     LazySingleton(classType: ProfileViewModel),
     LazySingleton(classType: CloudStorageService),
     LazySingleton(classType: LoginView),
+    LazySingleton(classType: CreateAccountView),
+    LazySingleton(classType: AddBusinessView),
     Singleton(classType: ImageSelector),
     Singleton(classType: FirebaseAuthenticationService),
   ],

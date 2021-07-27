@@ -45,7 +45,7 @@ BoxDecoration defaultBoxDecoration = BoxDecoration(
 );
 
 // Defautl bottom modal items
-Future defaultBottomSheet({context, builder}) {
+Future defaultBottomSheet({required context, required builder}) {
   return showModalBottomSheet(
       isScrollControlled: true,
       shape: RoundedRectangleBorder(

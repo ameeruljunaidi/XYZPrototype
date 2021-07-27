@@ -21,18 +21,9 @@ class LoginView extends StatelessWidget with $LoginView {
   }
 
   Future loginModal(context) {
-    return showModalBottomSheet(
-      isScrollControlled: true,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.vertical(
-          top: Radius.circular(24.0),
-        ),
-      ),
-      clipBehavior: Clip.antiAliasWithSaveLayer,
+    return defaultBottomSheet(
       context: context,
       builder: (context) => Container(
-        decoration:
-            BoxDecoration(borderRadius: BorderRadius.all(Radius.circular(200))),
         height: screenHeightPercentage(context, percentage: 0.9),
         child: ViewModelBuilder<LoginViewModel>.reactive(
           onModelReady: (model) => listenToFormUpdated(model),
@@ -57,7 +48,8 @@ class LoginView extends StatelessWidget with $LoginView {
               onSignInWithGoogle: model.useGoogleAuthentication,
               onSignInWithApple: model.useGoogleAuthentication,
               onMainButtonTapped: () => model.saveData(),
-              onCreateAccountTapped: model.navigateToCreateAccount,
+              onCreateAccountTapped: () =>
+                  model.navigateToCreateAccount(context),
               validationMessage: model.validationMessage,
               onForgotPassword: () {},
               busy: model.isBusy,

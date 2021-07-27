@@ -29,14 +29,23 @@ class ProfileView extends StatelessWidget {
               verticalSpaceRegular,
               _profileSettingsList(model),
               if (model.clientData().isAnonymous)
-                TextButton(
-                  onPressed: () => model.goToLoginView(context),
-                  child: Text('Log In'),
+                Padding(
+                  padding: const EdgeInsets.all(24.0),
+                  child: BoxButton(
+                    onTap: () => model.goToLoginView(context),
+                    title: 'Log In or Sign Up',
+                  ),
                 ),
               if (model.clientData().clientType ==
                       describeEnum(ClientType.user) &&
                   !model.clientData().isAnonymous)
-                AddBusinessView(),
+                Padding(
+                  padding: const EdgeInsets.all(24.0),
+                  child: BoxButton(
+                    title: 'Become a Partner',
+                    onTap: () => model.goToAddBusiness(context),
+                  ),
+                ),
             ],
           ),
         ),
@@ -210,7 +219,11 @@ class ProfileView extends StatelessWidget {
               if (!_isAnonymous) ..._clientNameDisplay,
               if (!_isAnonymous) ..._clientEmailDisplay,
               if (!_isAnonymous) ..._clientTypeDisplay,
-              if (_isAnonymous) BoxText.body('Login to Create a Profile'),
+              if (_isAnonymous)
+                InkWell(
+                  onTap: () => model.goToLoginView(context),
+                  child: BoxText.body('Log In or Sign Up to Create a Profile'),
+                ),
             ],
           ),
         ],

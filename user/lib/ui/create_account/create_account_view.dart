@@ -18,68 +18,50 @@ class CreateAccountView extends StatelessWidget with $CreateAccountView {
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: () {
-        showModalBottomSheet(
-          isScrollControlled: true,
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.vertical(
-              top: Radius.circular(24.0),
-            ),
-          ),
-          clipBehavior: Clip.antiAliasWithSaveLayer,
-          context: context,
-          builder: (context) => Container(
-            decoration: BoxDecoration(
-                borderRadius: BorderRadius.all(Radius.circular(200))),
-            height: screenHeightPercentage(context, percentage: 0.9),
-            child: ViewModelBuilder<CreateAccountViewModel>.reactive(
-              onModelReady: (model) => listenToFormUpdated(model),
-              builder: (context, model, child) => Scaffold(
-                body: AuthenticationLayout(
-                  title: 'Create Account',
-                  subtitle: 'Enter your name, email, and password to sign up.',
-                  mainButtonTitle: 'SIGN UP',
-                  form: Column(
-                    children: <Widget>[
-                      BoxInputField(
-                        placeholder: 'Full Name',
-                        controller: fullNameController,
-                      ),
-                      verticalSpaceRegular,
-                      BoxInputField(
-                        placeholder: 'Email',
-                        controller: emailController,
-                      ),
-                      verticalSpaceRegular,
-                      BoxInputField(
-                        placeholder: 'Password',
-                        controller: passwordController,
-                      ),
-                    ],
+    return Container();
+  }
+
+  Future signUpModal(context) {
+    return defaultBottomSheet(
+      context: context,
+      builder: (context) => Container(
+        decoration:
+            BoxDecoration(borderRadius: BorderRadius.all(Radius.circular(200))),
+        height: screenHeightPercentage(context, percentage: 0.9),
+        child: ViewModelBuilder<CreateAccountViewModel>.reactive(
+          onModelReady: (model) => listenToFormUpdated(model),
+          builder: (context, model, child) => Scaffold(
+            body: AuthenticationLayout(
+              title: 'Create Account',
+              subtitle: 'Enter your name, email, and password to sign up.',
+              mainButtonTitle: 'SIGN UP',
+              form: Column(
+                children: <Widget>[
+                  BoxInputField(
+                    placeholder: 'Full Name',
+                    controller: fullNameController,
                   ),
-                  busy: model.isBusy,
-                  showTermsText: true,
-                  onMainButtonTapped: () => model.saveData(),
-                  onBackPressed: model.navigateBack,
-                  validationMessage: model.validationMessage,
-                ),
+                  verticalSpaceRegular,
+                  BoxInputField(
+                    placeholder: 'Email',
+                    controller: emailController,
+                  ),
+                  verticalSpaceRegular,
+                  BoxInputField(
+                    placeholder: 'Password',
+                    controller: passwordController,
+                  ),
+                ],
               ),
-              viewModelBuilder: () => CreateAccountViewModel(),
+              busy: model.isBusy,
+              showTermsText: true,
+              onMainButtonTapped: () => model.saveData(),
+              onBackPressed: model.navigateBack,
+              validationMessage: model.validationMessage,
             ),
           ),
-        );
-      },
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: <Widget>[
-          Text('Don\'t have an account?'),
-          horizontalSpaceTiny,
-          Text(
-            'Create an account',
-            style: TextStyle(color: kcPrimaryColor),
-          ),
-        ],
+          viewModelBuilder: () => CreateAccountViewModel(),
+        ),
       ),
     );
   }

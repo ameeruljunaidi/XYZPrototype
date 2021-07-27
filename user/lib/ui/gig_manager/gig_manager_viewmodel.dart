@@ -57,7 +57,7 @@ class GigManagerViewModel extends BaseViewModel {
     );
   }
 
-  Future removeGig(int index) async {
+  void removeGig(int index) async {
     var dialogResponse = await _dialogService.showCustomDialog(
       variant: DialogType.basic,
       data: BasicDialogStatus.warning,

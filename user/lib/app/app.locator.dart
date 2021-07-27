@@ -15,6 +15,8 @@ import 'package:stacked_services/stacked_services.dart';
 import '../api/firestore_api.dart';
 import '../services/cloud_storage_service.dart';
 import '../services/user_service.dart';
+import '../ui/add_business/add_business_view.dart';
+import '../ui/create_account/create_account_view.dart';
 import '../ui/inbox/inbox_viewmodel.dart';
 import '../ui/login/login_view.dart';
 import '../ui/marketplace/marketplace_viewmodel.dart';
@@ -43,6 +45,8 @@ void setupLocator({String? environment, EnvironmentFilter? environmentFilter}) {
   locator.registerLazySingleton(() => ProfileViewModel());
   locator.registerLazySingleton(() => CloudStorageService());
   locator.registerLazySingleton(() => LoginView());
+  locator.registerLazySingleton(() => CreateAccountView());
+  locator.registerLazySingleton(() => AddBusinessView());
   locator.registerSingleton(ImageSelector());
   locator.registerSingleton(FirebaseAuthenticationService());
 }

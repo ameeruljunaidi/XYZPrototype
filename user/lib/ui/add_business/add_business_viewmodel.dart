@@ -1,9 +1,9 @@
 import 'package:stacked/stacked.dart';
+import 'package:stacked_firebase_auth/stacked_firebase_auth.dart';
 import 'package:stacked_services/stacked_services.dart';
 import 'package:xyz_prototype/api/firestore_api.dart';
 import 'package:xyz_prototype/app/app.locator.dart';
 import 'package:xyz_prototype/app/app.logger.dart';
-import 'package:xyz_prototype/app/app.router.dart';
 import 'package:xyz_prototype/constants/app_keys.dart';
 import 'package:xyz_prototype/constants/app_strings.dart';
 import 'package:xyz_prototype/models/application_models.dart';
@@ -21,7 +21,7 @@ class AddBusinessViewModel extends FormViewModel {
   void setFormStatus() {}
 
   Future<void> submitBusinessRegistration() async {
-    final business = Business(
+    final _business = Business(
       businessRegistrationDate: defaultRegistrationDate,
       businessName: businessNameValue,
       businessDescription: businessDescriptionValue,
@@ -30,13 +30,13 @@ class AddBusinessViewModel extends FormViewModel {
 
     setBusy(true);
 
-    log.v('Business info: $business');
+    log.v('Business info: $_business');
 
-    final user = _userService.currentUser!;
+    final _user = _userService.currentUser!;
 
     final saveSucess = await _firestoreApi.saveBusiness(
-      business: business,
-      client: user,
+      business: _business,
+      client: _user,
     );
 
     if (!saveSucess) {
@@ -49,10 +49,10 @@ class AddBusinessViewModel extends FormViewModel {
       log.v('Business saved! You can now add gigs!');
     }
 
-    notifyListeners();
-    _navigationService.clearStackAndShow(Routes.homeView);
-
     setBusy(false);
+
+    _navigationService.back();
+    notifyListeners();
   }
 
   void cancelAddBusiness() {

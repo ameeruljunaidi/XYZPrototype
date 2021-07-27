@@ -114,7 +114,21 @@ class AuthenticationLayout extends StatelessWidget {
               ),
             ),
             verticalSpaceRegular,
-            if (onCreateAccountTapped != null) CreateAccountView(),
+            if (onCreateAccountTapped != null)
+              GestureDetector(
+                onTap: onCreateAccountTapped,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    Text('Don\'t have an account?'),
+                    horizontalSpaceTiny,
+                    Text(
+                      'Create an account',
+                      style: TextStyle(color: kcPrimaryColor),
+                    ),
+                  ],
+                ),
+              ),
             if (showTermsText == true)
               Text(
                 'By signing up you agree ot our terms, conditions, and privacy policy',
