@@ -7,11 +7,13 @@ import 'package:xyz_prototype/enums/basic_dialog_status.dart';
 import 'package:xyz_prototype/enums/dialog_type.dart';
 import 'package:xyz_prototype/models/application_models.dart';
 import 'package:xyz_prototype/services/user_service.dart';
+import 'package:xyz_prototype/ui/login/login_view.dart';
 
 class ProfileViewModel extends BaseViewModel {
   final _navigationService = locator<NavigationService>();
   final _userService = locator<UserService>();
   final _dialogService = locator<DialogService>();
+  final _loginService = locator<LoginView>();
   final _firebaseAuthenticationService =
       locator<FirebaseAuthenticationService>();
 
@@ -27,8 +29,9 @@ class ProfileViewModel extends BaseViewModel {
     await _navigationService.navigateTo(Routes.addBusinessView);
   }
 
-  void goToLoginView() {
-    _navigationService.navigateTo(Routes.loginView);
+  void goToLoginView(context) async {
+    await _loginService.loginModal(context);
+    notifyListeners();
   }
 
   void logOut() async {

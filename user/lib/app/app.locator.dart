@@ -16,6 +16,7 @@ import '../api/firestore_api.dart';
 import '../services/cloud_storage_service.dart';
 import '../services/user_service.dart';
 import '../ui/inbox/inbox_viewmodel.dart';
+import '../ui/login/login_view.dart';
 import '../ui/marketplace/marketplace_viewmodel.dart';
 import '../ui/notifications/notification_viewmodel.dart';
 import '../ui/profile/profile_viewmodel.dart';
@@ -41,6 +42,7 @@ void setupLocator({String? environment, EnvironmentFilter? environmentFilter}) {
   locator.registerLazySingleton(() => NotificationsViewModel());
   locator.registerLazySingleton(() => ProfileViewModel());
   locator.registerLazySingleton(() => CloudStorageService());
+  locator.registerLazySingleton(() => LoginView());
   locator.registerSingleton(ImageSelector());
   locator.registerSingleton(FirebaseAuthenticationService());
 }

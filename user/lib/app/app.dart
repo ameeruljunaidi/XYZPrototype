@@ -53,6 +53,7 @@ import 'package:xyz_prototype/utils/image_selector.dart';
     LazySingleton(classType: NotificationsViewModel),
     LazySingleton(classType: ProfileViewModel),
     LazySingleton(classType: CloudStorageService),
+    LazySingleton(classType: LoginView),
     Singleton(classType: ImageSelector),
     Singleton(classType: FirebaseAuthenticationService),
   ],

@@ -28,7 +28,11 @@ class ProfileView extends StatelessWidget {
               _profileWidget(context, model),
               verticalSpaceRegular,
               _profileSettingsList(model),
-              if (model.clientData().isAnonymous) LoginView(),
+              if (model.clientData().isAnonymous)
+                TextButton(
+                  onPressed: () => model.goToLoginView(context),
+                  child: Text('Log In'),
+                ),
               if (model.clientData().clientType ==
                       describeEnum(ClientType.user) &&
                   !model.clientData().isAnonymous)

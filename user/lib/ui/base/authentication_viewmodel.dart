@@ -71,7 +71,6 @@ abstract class AuthenticationViewModel extends FormViewModel {
 
       if (client.email != null) {
         navigationService.back();
-        notifyListeners();
       }
     } else {
       if (!authResult.hasError && authResult.user == null) {
