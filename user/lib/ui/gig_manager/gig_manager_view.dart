@@ -29,7 +29,10 @@ class GigManagerView extends StatelessWidget {
                 align: TextAlign.center,
               ),
             ),
-            AddGigView(),
+            IconButton(
+              icon: Icon(Icons.add),
+              onPressed: () => model.showAddGigModalOne(context),
+            )
           ],
         ),
         body: SafeArea(

@@ -15,30 +15,21 @@ class AddGigView extends StatelessWidget with $AddGigView {
 
   @override
   Widget build(BuildContext context) {
-    return Align(
-      alignment: Alignment.centerRight,
-      child: IconButton(
-        padding: EdgeInsets.zero,
-        icon: Icon(
-          Icons.add,
-          color: Colors.black,
-          size: 32.0,
+    return Container();
+  }
+
+  Future addGigModalOne(context) {
+    return defaultBottomSheet(
+      context: context,
+      builder: (context) => Container(
+        height: screenHeightPercentage(context, percentage: 0.9),
+        child: ViewModelBuilder<AddGigViewModel>.reactive(
+          onModelReady: (model) => listenToFormUpdated(model),
+          builder: (context, model, child) => Scaffold(
+            body: _widgetBody(model),
+          ),
+          viewModelBuilder: () => AddGigViewModel(),
         ),
-        onPressed: () {
-          defaultBottomSheet(
-            context: context,
-            builder: (context) => Container(
-              height: screenHeightPercentage(context, percentage: 0.9),
-              child: ViewModelBuilder<AddGigViewModel>.reactive(
-                onModelReady: (model) => listenToFormUpdated(model),
-                builder: (context, model, child) => Scaffold(
-                  body: _widgetBody(model),
-                ),
-                viewModelBuilder: () => AddGigViewModel(),
-              ),
-            ),
-          );
-        },
       ),
     );
   }
