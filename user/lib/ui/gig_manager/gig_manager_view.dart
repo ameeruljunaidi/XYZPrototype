@@ -1,7 +1,7 @@
 import 'package:colorful_safe_area/colorful_safe_area.dart';
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
-import 'package:xyz_prototype/ui/add_gig/add_gig_view.dart';
+import 'package:xyz_prototype/ui/add_gig/add_gig_title_view.dart';
 import 'package:xyz_prototype/ui/gig_manager/gig_manager_viewmodel.dart';
 import 'package:xyz_ui/xyz_ui.dart';
 
@@ -26,7 +26,7 @@ class GigManagerView extends StatelessWidget {
             ),
             IconButton(
               icon: Icon(Icons.add),
-              onPressed: () => model.showAddGigModal(context),
+              onPressed: model.goToAddGig,
             )
           ],
         ),
@@ -87,7 +87,7 @@ class GigManagerView extends StatelessWidget {
           height: screenHeightPercentage(context, percentage: 0.15),
           width: double.infinity,
           child: InkWell(
-            onTap: model.goToGigEdit,
+            onTap: () {},
             child: Row(
               children: <Widget>[
                 AspectRatio(

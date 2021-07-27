@@ -9,23 +9,23 @@
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
 
-const String GigTitleValueKey = 'gigTitle';
+const String GigTitleTestValueKey = 'gigTitleTest';
 
-mixin $AddGigView on StatelessWidget {
-  final TextEditingController gigTitleController = TextEditingController();
-  final FocusNode gigTitleFocusNode = FocusNode();
+mixin $AddGigPhotosView on StatelessWidget {
+  final TextEditingController gigTitleTestController = TextEditingController();
+  final FocusNode gigTitleTestFocusNode = FocusNode();
 
   /// Registers a listener on every generated controller that calls [model.setData()]
   /// with the latest textController values
   void listenToFormUpdated(FormViewModel model) {
-    gigTitleController.addListener(() => _updateFormData(model));
+    gigTitleTestController.addListener(() => _updateFormData(model));
   }
 
   /// Updates the formData on the FormViewModel
   void _updateFormData(FormViewModel model) => model.setData(
         model.formValueMap
           ..addAll({
-            GigTitleValueKey: gigTitleController.text,
+            GigTitleTestValueKey: gigTitleTestController.text,
           }),
       );
 
@@ -33,14 +33,15 @@ mixin $AddGigView on StatelessWidget {
   void disposeForm() {
     // The dispose function for a TextEditingController sets all listeners to null
 
-    gigTitleController.dispose();
+    gigTitleTestController.dispose();
   }
 }
 
 extension ValueProperties on FormViewModel {
-  String? get gigTitleValue => this.formValueMap[GigTitleValueKey];
+  String? get gigTitleTestValue => this.formValueMap[GigTitleTestValueKey];
 
-  bool get hasGigTitle => this.formValueMap.containsKey(GigTitleValueKey);
+  bool get hasGigTitleTest =>
+      this.formValueMap.containsKey(GigTitleTestValueKey);
 }
 
 extension Methods on FormViewModel {}

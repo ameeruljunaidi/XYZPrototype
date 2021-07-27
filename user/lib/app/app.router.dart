@@ -10,7 +10,8 @@ import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
 
 import '../ui/add_business/add_business_view.dart';
-import '../ui/add_gig/add_gig_view.dart';
+import '../ui/add_gig/add_gig_photos_view.dart';
+import '../ui/add_gig/add_gig_title_view.dart';
 import '../ui/address_selection/address_selection_view.dart';
 import '../ui/create_account/create_account_view.dart';
 import '../ui/gig_edit/gig_edit_view.dart';
@@ -36,9 +37,10 @@ class Routes {
   static const String searchView = '/search-view';
   static const String notificationsView = '/notifications-view';
   static const String profileView = '/profile-view';
-  static const String addGigView = '/add-gig-view';
   static const String gigManagerView = '/gig-manager-view';
   static const String gigEditView = '/gig-edit-view';
+  static const String addGigTitleView = '/add-gig-title-view';
+  static const String addGigPhotosView = '/add-gig-photos-view';
   static const all = <String>{
     startupView,
     homeView,
@@ -51,9 +53,10 @@ class Routes {
     searchView,
     notificationsView,
     profileView,
-    addGigView,
     gigManagerView,
     gigEditView,
+    addGigTitleView,
+    addGigPhotosView,
   };
 }
 
@@ -72,9 +75,10 @@ class StackedRouter extends RouterBase {
     RouteDef(Routes.searchView, page: SearchView),
     RouteDef(Routes.notificationsView, page: NotificationsView),
     RouteDef(Routes.profileView, page: ProfileView),
-    RouteDef(Routes.addGigView, page: AddGigView),
     RouteDef(Routes.gigManagerView, page: GigManagerView),
     RouteDef(Routes.gigEditView, page: GigEditView),
+    RouteDef(Routes.addGigTitleView, page: AddGigTitleView),
+    RouteDef(Routes.addGigPhotosView, page: AddGigPhotosView),
   ];
   @override
   Map<Type, StackedRouteFactory> get pagesMap => _pagesMap;
@@ -160,15 +164,6 @@ class StackedRouter extends RouterBase {
         settings: data,
       );
     },
-    AddGigView: (data) {
-      var args = data.getArgs<AddGigViewArguments>(
-        orElse: () => AddGigViewArguments(),
-      );
-      return MaterialPageRoute<dynamic>(
-        builder: (context) => AddGigView(key: args.key),
-        settings: data,
-      );
-    },
     GigManagerView: (data) {
       return MaterialPageRoute<dynamic>(
         builder: (context) => const GigManagerView(),
@@ -178,6 +173,24 @@ class StackedRouter extends RouterBase {
     GigEditView: (data) {
       return MaterialPageRoute<dynamic>(
         builder: (context) => const GigEditView(),
+        settings: data,
+      );
+    },
+    AddGigTitleView: (data) {
+      var args = data.getArgs<AddGigTitleViewArguments>(
+        orElse: () => AddGigTitleViewArguments(),
+      );
+      return MaterialPageRoute<dynamic>(
+        builder: (context) => AddGigTitleView(key: args.key),
+        settings: data,
+      );
+    },
+    AddGigPhotosView: (data) {
+      var args = data.getArgs<AddGigPhotosViewArguments>(
+        orElse: () => AddGigPhotosViewArguments(),
+      );
+      return MaterialPageRoute<dynamic>(
+        builder: (context) => AddGigPhotosView(key: args.key),
         settings: data,
       );
     },
@@ -218,8 +231,14 @@ class MarketPlaceViewArguments {
   MarketPlaceViewArguments({this.key});
 }
 
-/// AddGigView arguments holder class
-class AddGigViewArguments {
+/// AddGigTitleView arguments holder class
+class AddGigTitleViewArguments {
   final Key? key;
-  AddGigViewArguments({this.key});
+  AddGigTitleViewArguments({this.key});
+}
+
+/// AddGigPhotosView arguments holder class
+class AddGigPhotosViewArguments {
+  final Key? key;
+  AddGigPhotosViewArguments({this.key});
 }

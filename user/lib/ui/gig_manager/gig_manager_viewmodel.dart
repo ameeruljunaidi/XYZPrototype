@@ -8,7 +8,7 @@ import 'package:xyz_prototype/enums/basic_dialog_status.dart';
 import 'package:xyz_prototype/enums/dialog_type.dart';
 import 'package:xyz_prototype/models/application_models.dart';
 import 'package:xyz_prototype/services/user_service.dart';
-import 'package:xyz_prototype/ui/add_gig/add_gig_view.dart';
+import 'package:xyz_prototype/ui/add_gig/add_gig_title_view.dart';
 
 class GigManagerViewModel extends BaseViewModel {
   final log = getLogger('MarketPlaceViewModel');
@@ -16,7 +16,6 @@ class GigManagerViewModel extends BaseViewModel {
   final _firestoreApi = locator<FirestoreApi>();
   final _dialogService = locator<DialogService>();
   final _userService = locator<UserService>();
-  final _addGigService = locator<AddGigView>();
 
   List<Gig?>? _gigs;
   List<Gig?>? get gigs => _gigs;
@@ -79,12 +78,7 @@ class GigManagerViewModel extends BaseViewModel {
     }
   }
 
-  void showAddGigModal(context) async {
-    await _addGigService.addGigModal(context);
-    notifyListeners();
-  }
-
-  void goToGigEdit() {
-    _navigationService.navigateTo(Routes.gigEditView);
+  void goToAddGig() {
+    _navigationService.navigateTo(Routes.addGigTitleView);
   }
 }

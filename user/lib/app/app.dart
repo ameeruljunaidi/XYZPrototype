@@ -6,7 +6,8 @@ import 'package:xyz_prototype/api/firestore_api.dart';
 import 'package:xyz_prototype/services/cloud_storage_service.dart';
 import 'package:xyz_prototype/services/user_service.dart';
 import 'package:xyz_prototype/ui/add_business/add_business_view.dart';
-import 'package:xyz_prototype/ui/add_gig/add_gig_view.dart';
+import 'package:xyz_prototype/ui/add_gig/add_gig_title_view.dart';
+import 'package:xyz_prototype/ui/add_gig/add_gig_photos_view.dart';
 import 'package:xyz_prototype/ui/address_selection/address_selection_view.dart';
 import 'package:xyz_prototype/ui/create_account/create_account_view.dart';
 import 'package:xyz_prototype/ui/gig_edit/gig_edit_view.dart';
@@ -39,9 +40,10 @@ import 'package:xyz_prototype/utils/image_selector.dart';
     MaterialRoute(page: SearchView),
     MaterialRoute(page: NotificationsView),
     MaterialRoute(page: ProfileView),
-    MaterialRoute(page: AddGigView),
     MaterialRoute(page: GigManagerView),
     MaterialRoute(page: GigEditView),
+    MaterialRoute(page: AddGigTitleView),
+    MaterialRoute(page: AddGigPhotosView),
   ],
   dependencies: [
     LazySingleton(classType: NavigationService),
@@ -58,7 +60,6 @@ import 'package:xyz_prototype/utils/image_selector.dart';
     LazySingleton(classType: LoginView),
     LazySingleton(classType: CreateAccountView),
     LazySingleton(classType: AddBusinessView),
-    LazySingleton(classType: AddGigView),
     Singleton(classType: ImageSelector),
     Singleton(classType: FirebaseAuthenticationService),
   ],

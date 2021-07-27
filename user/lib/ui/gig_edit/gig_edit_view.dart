@@ -14,26 +14,27 @@ class GigEditView extends StatelessWidget {
     return ViewModelBuilder<GigEditViewModel>.reactive(
       builder: (context, model, child) => Scaffold(
         body: DraggableScrollableSheet(
-            initialChildSize: _sheetHeighPercentage * 0.75,
-            minChildSize: _sheetHeighPercentage * 0.5,
-            maxChildSize: _sheetHeighPercentage,
-            builder: (context, scrollController) {
-              return SingleChildScrollView(
-                physics: ClampingScrollPhysics(),
-                controller: scrollController,
-                child: Container(
-                  height: _sheetHeight,
-                  decoration: BoxDecoration(
-                    color: Colors.blue,
-                    borderRadius: BorderRadius.only(
-                      topRight: Radius.circular(16.0),
-                      topLeft: Radius.circular(16.0),
-                    ),
+          initialChildSize: _sheetHeighPercentage * 0.75,
+          minChildSize: _sheetHeighPercentage * 0.5,
+          maxChildSize: _sheetHeighPercentage,
+          builder: (context, scrollController) {
+            return SingleChildScrollView(
+              physics: ClampingScrollPhysics(),
+              controller: scrollController,
+              child: Container(
+                height: _sheetHeight,
+                decoration: BoxDecoration(
+                  color: Colors.blue,
+                  borderRadius: BorderRadius.only(
+                    topRight: Radius.circular(16.0),
+                    topLeft: Radius.circular(16.0),
                   ),
-                  child: _sheetBody(model),
                 ),
-              );
-            }),
+                child: _sheetBody(model),
+              ),
+            );
+          },
+        ),
       ),
       viewModelBuilder: () => GigEditViewModel(),
     );

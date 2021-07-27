@@ -44,24 +44,6 @@ BoxDecoration defaultBoxDecoration = BoxDecoration(
   ],
 );
 
-// Defautl bottom modal items
-Future defaultBottomSheet({
-  required context,
-  required builder,
-  isScrollControlled = true,
-}) {
-  return showModalBottomSheet(
-      isScrollControlled: isScrollControlled,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.vertical(
-          top: Radius.circular(16.0),
-        ),
-      ),
-      clipBehavior: Clip.antiAliasWithSaveLayer,
-      context: context,
-      builder: builder);
-}
-
 // Default title for textbox
 Widget defaultTextBoxTitle(title) {
   return Align(
@@ -74,16 +56,33 @@ Widget defaultTextBoxTitle(title) {
   );
 }
 
-// Default appbar
-AppBar defaultAppbar(context, model, {actions}) {
-  return AppBar(
-    backgroundColor: Colors.transparent,
-    bottomOpacity: 0.0,
-    elevation: 0.0,
-    foregroundColor: Colors.black,
-    iconTheme: IconThemeData(
-      color: Colors.black, //change your color here
-    ),
-    actions: actions,
+// Go back and continue on modal
+Widget defaultBackAndContinue({required goBack, required goContinue}) {
+  return Row(
+    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+    children: [
+      InkWell(
+        onTap: goBack,
+        child: Row(
+          children: [
+            Icon(Icons.arrow_left),
+            BoxText.body('Previous'),
+          ],
+        ),
+      ),
+      ElevatedButton(
+        onPressed: goContinue,
+        child: Text('Continue'),
+        style: ButtonStyle(
+          backgroundColor: MaterialStateProperty.all<Color>(kcPrimaryColor),
+          elevation: MaterialStateProperty.all<double>(0),
+          shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+            RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(8.0),
+            ),
+          ),
+        ),
+      ),
+    ],
   );
 }

@@ -10,9 +10,6 @@ class BoxText extends StatelessWidget {
   const BoxText.headingOne(this.text, {TextAlign align = TextAlign.start})
       : style = heading1Style,
         alignment = align;
-  const BoxText.headingTwo(this.text, {TextAlign align = TextAlign.start})
-      : style = heading2Style,
-        alignment = align;
   const BoxText.headingThree(this.text, {TextAlign align = TextAlign.start})
       : style = heading3Style,
         alignment = align;
@@ -21,6 +18,11 @@ class BoxText extends StatelessWidget {
         alignment = align;
   const BoxText.caption(this.text, {TextAlign align = TextAlign.start})
       : style = captionStyle,
+        alignment = align;
+
+  BoxText.headingTwo(this.text,
+      {TextAlign align = TextAlign.start, color = Colors.black})
+      : style = heading2Style.copyWith(color: color),
         alignment = align;
 
   BoxText.subheading(this.text,

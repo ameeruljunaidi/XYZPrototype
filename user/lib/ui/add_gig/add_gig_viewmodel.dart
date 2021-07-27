@@ -4,12 +4,15 @@ import 'package:stacked_services/stacked_services.dart';
 import 'package:xyz_prototype/api/firestore_api.dart';
 import 'package:xyz_prototype/app/app.locator.dart';
 import 'package:xyz_prototype/app/app.logger.dart';
+import 'package:xyz_prototype/app/app.router.dart';
 import 'package:xyz_prototype/enums/basic_dialog_status.dart';
 import 'package:xyz_prototype/enums/dialog_type.dart';
 import 'package:xyz_prototype/models/application_models.dart';
 import 'package:xyz_prototype/services/cloud_storage_service.dart';
 import 'package:xyz_prototype/services/user_service.dart';
-import 'package:xyz_prototype/ui/add_gig/add_gig_view.form.dart';
+import 'package:xyz_prototype/ui/add_gig/add_gig_photos_view.dart';
+import 'package:xyz_prototype/ui/add_gig/add_gig_title_view.form.dart';
+import 'package:xyz_prototype/ui/add_gig/add_gig_photos_view.form.dart';
 import 'package:xyz_prototype/utils/image_selector.dart';
 
 class AddGigViewModel extends FormViewModel {
@@ -94,5 +97,13 @@ class AddGigViewModel extends FormViewModel {
       log.v('image not picked');
       return;
     }
+  }
+
+  void goToAddPhoto() {
+    _navigationService.navigateWithTransition(
+      AddGigPhotosView(),
+      duration: Duration(seconds: 0),
+      transition: 'fade',
+    );
   }
 }
