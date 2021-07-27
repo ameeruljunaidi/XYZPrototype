@@ -44,7 +44,8 @@ class ProfileViewModel extends BaseViewModel {
     if (logOut!.confirmed) {
       _userService.logOut();
       _firebaseAuthenticationService.loginAnonymously();
-      _navigationService.clearStackAndShow(Routes.homeView);
+      _navigationService.back();
+      notifyListeners();
     }
   }
 

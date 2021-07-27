@@ -17,9 +17,6 @@ abstract class AuthenticationViewModel extends FormViewModel {
   final FirebaseAuthenticationService _firebaseAuthenticationService =
       locator<FirebaseAuthenticationService>();
 
-  final String successRoute;
-  AuthenticationViewModel({required this.successRoute});
-
   @override
   void setFormStatus() {}
 
@@ -73,7 +70,8 @@ abstract class AuthenticationViewModel extends FormViewModel {
       );
 
       if (client.email != null) {
-        navigationService.clearStackAndShow(successRoute);
+        navigationService.back();
+        notifyListeners();
       }
     } else {
       if (!authResult.hasError && authResult.user == null) {
