@@ -22,6 +22,7 @@ class LoginView extends StatelessWidget with $LoginView {
 
   Future loginModal(context) {
     return defaultBottomSheet(
+      isScrollControlled: true,
       context: context,
       builder: (context) => Container(
         height: screenHeightPercentage(context, percentage: 0.9),
