@@ -8,6 +8,8 @@ import 'package:xyz_ui/xyz_ui.dart';
 @FormView(
   fields: [
     FormTextField(name: 'gigTitle'),
+    FormTextField(name: 'gigSubtitle'),
+    FormTextField(name: 'gigDescription'),
   ],
 )
 class AddGigTitleView extends StatelessWidget with $AddGigTitleView {
@@ -26,12 +28,30 @@ class AddGigTitleView extends StatelessWidget with $AddGigTitleView {
             initialPercentage: 0.5,
             minPercentage: 0.25,
             heading: 'Add details to your gig',
+            subheading:
+                'Give a short title, catchy subtitle, and brief description of your service. Don\'t worry, you can tweak and perfect these details later!',
             children: <Widget>[
               defaultTextBoxTitle('Gig Title'),
               verticalSpaceSmall,
               BoxInputField(
                 controller: gigTitleController,
                 placeholder: 'Gig Title',
+              ),
+              verticalSpaceRegular,
+              defaultTextBoxTitle('Gig Subtitle'),
+              verticalSpaceSmall,
+              BoxInputField(
+                controller: gigSubtitleController,
+                placeholder: 'Gig Subtitle',
+              ),
+              verticalSpaceRegular,
+              defaultTextBoxTitle('Gig Description'),
+              verticalSpaceSmall,
+              BoxInputField(
+                keyboardType: TextInputType.multiline,
+                maxLines: null,
+                controller: gigDescriptionController,
+                placeholder: 'Gig Description',
               ),
               verticalSpaceMedium,
               defaultBackAndContinue(

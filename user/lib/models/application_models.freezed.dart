@@ -1841,7 +1841,7 @@ class _$GigTearOff {
       {String? gigId,
       String? gigVendorId,
       String? gigTitle,
-      String? gitSubtitle,
+      String? gigSubtitle,
       String? gigDescription,
       List<String>? gigPhotos,
       List<String>? gigFeatures,
@@ -1856,7 +1856,7 @@ class _$GigTearOff {
       gigId: gigId,
       gigVendorId: gigVendorId,
       gigTitle: gigTitle,
-      gitSubtitle: gitSubtitle,
+      gigSubtitle: gigSubtitle,
       gigDescription: gigDescription,
       gigPhotos: gigPhotos,
       gigFeatures: gigFeatures,
@@ -1883,7 +1883,7 @@ mixin _$Gig {
   String? get gigId => throw _privateConstructorUsedError;
   String? get gigVendorId => throw _privateConstructorUsedError;
   String? get gigTitle => throw _privateConstructorUsedError;
-  String? get gitSubtitle => throw _privateConstructorUsedError;
+  String? get gigSubtitle => throw _privateConstructorUsedError;
   String? get gigDescription => throw _privateConstructorUsedError;
   List<String>? get gigPhotos => throw _privateConstructorUsedError;
   List<String>? get gigFeatures => throw _privateConstructorUsedError;
@@ -1908,7 +1908,7 @@ abstract class $GigCopyWith<$Res> {
       {String? gigId,
       String? gigVendorId,
       String? gigTitle,
-      String? gitSubtitle,
+      String? gigSubtitle,
       String? gigDescription,
       List<String>? gigPhotos,
       List<String>? gigFeatures,
@@ -1936,7 +1936,7 @@ class _$GigCopyWithImpl<$Res> implements $GigCopyWith<$Res> {
     Object? gigId = freezed,
     Object? gigVendorId = freezed,
     Object? gigTitle = freezed,
-    Object? gitSubtitle = freezed,
+    Object? gigSubtitle = freezed,
     Object? gigDescription = freezed,
     Object? gigPhotos = freezed,
     Object? gigFeatures = freezed,
@@ -1961,9 +1961,9 @@ class _$GigCopyWithImpl<$Res> implements $GigCopyWith<$Res> {
           ? _value.gigTitle
           : gigTitle // ignore: cast_nullable_to_non_nullable
               as String?,
-      gitSubtitle: gitSubtitle == freezed
-          ? _value.gitSubtitle
-          : gitSubtitle // ignore: cast_nullable_to_non_nullable
+      gigSubtitle: gigSubtitle == freezed
+          ? _value.gigSubtitle
+          : gigSubtitle // ignore: cast_nullable_to_non_nullable
               as String?,
       gigDescription: gigDescription == freezed
           ? _value.gigDescription
@@ -2029,7 +2029,7 @@ abstract class _$GigsCopyWith<$Res> implements $GigCopyWith<$Res> {
       {String? gigId,
       String? gigVendorId,
       String? gigTitle,
-      String? gitSubtitle,
+      String? gigSubtitle,
       String? gigDescription,
       List<String>? gigPhotos,
       List<String>? gigFeatures,
@@ -2059,7 +2059,7 @@ class __$GigsCopyWithImpl<$Res> extends _$GigCopyWithImpl<$Res>
     Object? gigId = freezed,
     Object? gigVendorId = freezed,
     Object? gigTitle = freezed,
-    Object? gitSubtitle = freezed,
+    Object? gigSubtitle = freezed,
     Object? gigDescription = freezed,
     Object? gigPhotos = freezed,
     Object? gigFeatures = freezed,
@@ -2084,9 +2084,9 @@ class __$GigsCopyWithImpl<$Res> extends _$GigCopyWithImpl<$Res>
           ? _value.gigTitle
           : gigTitle // ignore: cast_nullable_to_non_nullable
               as String?,
-      gitSubtitle: gitSubtitle == freezed
-          ? _value.gitSubtitle
-          : gitSubtitle // ignore: cast_nullable_to_non_nullable
+      gigSubtitle: gigSubtitle == freezed
+          ? _value.gigSubtitle
+          : gigSubtitle // ignore: cast_nullable_to_non_nullable
               as String?,
       gigDescription: gigDescription == freezed
           ? _value.gigDescription
@@ -2139,7 +2139,7 @@ class _$_Gigs with DiagnosticableTreeMixin implements _Gigs {
       {this.gigId,
       this.gigVendorId,
       this.gigTitle,
-      this.gitSubtitle,
+      this.gigSubtitle,
       this.gigDescription,
       this.gigPhotos,
       this.gigFeatures,
@@ -2161,7 +2161,7 @@ class _$_Gigs with DiagnosticableTreeMixin implements _Gigs {
   @override
   final String? gigTitle;
   @override
-  final String? gitSubtitle;
+  final String? gigSubtitle;
   @override
   final String? gigDescription;
   @override
@@ -2185,7 +2185,7 @@ class _$_Gigs with DiagnosticableTreeMixin implements _Gigs {
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'Gig(gigId: $gigId, gigVendorId: $gigVendorId, gigTitle: $gigTitle, gitSubtitle: $gitSubtitle, gigDescription: $gigDescription, gigPhotos: $gigPhotos, gigFeatures: $gigFeatures, gigFaqs: $gigFaqs, gigReviews: $gigReviews, gigCategory: $gigCategory, gigSubCategory: $gigSubCategory, gigFilters: $gigFilters, gigPrice: $gigPrice, gigLocation: $gigLocation)';
+    return 'Gig(gigId: $gigId, gigVendorId: $gigVendorId, gigTitle: $gigTitle, gigSubtitle: $gigSubtitle, gigDescription: $gigDescription, gigPhotos: $gigPhotos, gigFeatures: $gigFeatures, gigFaqs: $gigFaqs, gigReviews: $gigReviews, gigCategory: $gigCategory, gigSubCategory: $gigSubCategory, gigFilters: $gigFilters, gigPrice: $gigPrice, gigLocation: $gigLocation)';
   }
 
   @override
@@ -2196,7 +2196,7 @@ class _$_Gigs with DiagnosticableTreeMixin implements _Gigs {
       ..add(DiagnosticsProperty('gigId', gigId))
       ..add(DiagnosticsProperty('gigVendorId', gigVendorId))
       ..add(DiagnosticsProperty('gigTitle', gigTitle))
-      ..add(DiagnosticsProperty('gitSubtitle', gitSubtitle))
+      ..add(DiagnosticsProperty('gigSubtitle', gigSubtitle))
       ..add(DiagnosticsProperty('gigDescription', gigDescription))
       ..add(DiagnosticsProperty('gigPhotos', gigPhotos))
       ..add(DiagnosticsProperty('gigFeatures', gigFeatures))
@@ -2221,9 +2221,9 @@ class _$_Gigs with DiagnosticableTreeMixin implements _Gigs {
             (identical(other.gigTitle, gigTitle) ||
                 const DeepCollectionEquality()
                     .equals(other.gigTitle, gigTitle)) &&
-            (identical(other.gitSubtitle, gitSubtitle) ||
+            (identical(other.gigSubtitle, gigSubtitle) ||
                 const DeepCollectionEquality()
-                    .equals(other.gitSubtitle, gitSubtitle)) &&
+                    .equals(other.gigSubtitle, gigSubtitle)) &&
             (identical(other.gigDescription, gigDescription) ||
                 const DeepCollectionEquality()
                     .equals(other.gigDescription, gigDescription)) &&
@@ -2262,7 +2262,7 @@ class _$_Gigs with DiagnosticableTreeMixin implements _Gigs {
       const DeepCollectionEquality().hash(gigId) ^
       const DeepCollectionEquality().hash(gigVendorId) ^
       const DeepCollectionEquality().hash(gigTitle) ^
-      const DeepCollectionEquality().hash(gitSubtitle) ^
+      const DeepCollectionEquality().hash(gigSubtitle) ^
       const DeepCollectionEquality().hash(gigDescription) ^
       const DeepCollectionEquality().hash(gigPhotos) ^
       const DeepCollectionEquality().hash(gigFeatures) ^
@@ -2290,7 +2290,7 @@ abstract class _Gigs implements Gig {
       {String? gigId,
       String? gigVendorId,
       String? gigTitle,
-      String? gitSubtitle,
+      String? gigSubtitle,
       String? gigDescription,
       List<String>? gigPhotos,
       List<String>? gigFeatures,
@@ -2311,7 +2311,7 @@ abstract class _Gigs implements Gig {
   @override
   String? get gigTitle => throw _privateConstructorUsedError;
   @override
-  String? get gitSubtitle => throw _privateConstructorUsedError;
+  String? get gigSubtitle => throw _privateConstructorUsedError;
   @override
   String? get gigDescription => throw _privateConstructorUsedError;
   @override

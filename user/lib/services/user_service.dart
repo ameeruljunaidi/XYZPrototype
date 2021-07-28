@@ -8,7 +8,6 @@ import 'package:xyz_prototype/models/application_models.dart';
 
 class UserService {
   final log = getLogger('UserService');
-
   final _firestoreApi = locator<FirestoreApi>();
   final _firebaseAuthenticationService =
       locator<FirebaseAuthenticationService>();

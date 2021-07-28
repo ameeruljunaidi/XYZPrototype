@@ -2,39 +2,47 @@ import 'dart:io';
 
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:xyz_prototype/models/application_models.dart';
 
 class CloudStorageService {
-  Future<CloudStorageResult> uploadImage({
-    required XFile? imageToUpload,
+  Future<List<String>> uploadGigPhotos({
+    List<XFile>? imagesToUpload,
     required String title,
+    required Client client,
   }) async {
-    var imageFileName =
-        title + DateTime.now().millisecondsSinceEpoch.toString();
+    List<String> cloudStorageResult = [];
 
-    final Reference firebaseStorageRef =
-        FirebaseStorage.instance.ref().child(imageFileName);
+    if (imagesToUpload != null) {
+      for (var imageInList in imagesToUpload) {
+        var counter = 1;
 
-    UploadTask uploadTask =
-        firebaseStorageRef.putFile(File(imageToUpload!.path));
+        var imageFileName = title.replaceAll("\\s+", "") +
+            '-' +
+            counter.toString() +
+            '-' +
+            DateTime.now().millisecondsSinceEpoch.toString();
 
-    TaskSnapshot storageSnapshot = await uploadTask;
+        final Reference firebaseStorageRef = FirebaseStorage.instance
+            .ref()
+            .child('userFiles')
+            .child(client.clientId)
+            .child('gigPhotos')
+            .child(imageFileName);
 
-    var downloadUrl = await storageSnapshot.ref.getDownloadURL();
+        UploadTask uploadTask =
+            firebaseStorageRef.putFile(File(imageInList.path));
 
-    var url = downloadUrl.toString();
-    return CloudStorageResult(
-      imageUrl: url,
-      imageFileName: imageFileName,
-    );
+        TaskSnapshot storageSnapshot = await uploadTask;
+
+        var downloadUrl = await storageSnapshot.ref.getDownloadURL();
+
+        var url = downloadUrl.toString();
+
+        cloudStorageResult.add(url);
+        counter++;
+      }
+    }
+
+    return cloudStorageResult;
   }
-}
-
-class CloudStorageResult {
-  final String imageUrl;
-  final String imageFileName;
-
-  CloudStorageResult({
-    required this.imageUrl,
-    required this.imageFileName,
-  });
 }

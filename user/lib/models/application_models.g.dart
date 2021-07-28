@@ -173,7 +173,7 @@ _$_Gigs _$_$_GigsFromJson(Map<String, dynamic> json) {
     gigId: json['gigId'] as String?,
     gigVendorId: json['gigVendorId'] as String?,
     gigTitle: json['gigTitle'] as String?,
-    gitSubtitle: json['gitSubtitle'] as String?,
+    gigSubtitle: json['gigSubtitle'] as String?,
     gigDescription: json['gigDescription'] as String?,
     gigPhotos:
         (json['gigPhotos'] as List<dynamic>?)?.map((e) => e as String).toList(),
@@ -200,7 +200,7 @@ Map<String, dynamic> _$_$_GigsToJson(_$_Gigs instance) => <String, dynamic>{
       'gigId': instance.gigId,
       'gigVendorId': instance.gigVendorId,
       'gigTitle': instance.gigTitle,
-      'gitSubtitle': instance.gitSubtitle,
+      'gigSubtitle': instance.gigSubtitle,
       'gigDescription': instance.gigDescription,
       'gigPhotos': instance.gigPhotos,
       'gigFeatures': instance.gigFeatures,

@@ -77,6 +77,7 @@ Widget defaultFakeCardBody(
   required minPercentage,
   required heading,
   required children,
+  subheading,
   goBack,
 }) {
   return Container(
@@ -86,9 +87,21 @@ Widget defaultFakeCardBody(
         SafeArea(
           child: Padding(
             padding: const EdgeInsets.all(24.0),
-            child: BoxText.headingTwo(
-              heading,
-              color: Colors.white,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                BoxText.headingTwo(
+                  heading,
+                  color: Colors.white,
+                ),
+                if (subheading != null) verticalSpaceSmall,
+                if (subheading != null)
+                  BoxText.body(
+                    subheading,
+                    color: Colors.white,
+                  ),
+              ],
             ),
           ),
         ),

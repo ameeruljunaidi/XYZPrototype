@@ -4,11 +4,10 @@ import 'package:stacked_services/stacked_services.dart';
 import 'package:xyz_prototype/api/firestore_api.dart';
 import 'package:xyz_prototype/app/app.locator.dart';
 import 'package:xyz_prototype/app/app.logger.dart';
-import 'package:xyz_prototype/app/app.router.dart';
 import 'package:xyz_prototype/enums/basic_dialog_status.dart';
 import 'package:xyz_prototype/enums/dialog_type.dart';
-import 'package:xyz_prototype/models/application_models.dart';
 import 'package:xyz_prototype/services/cloud_storage_service.dart';
+import 'package:xyz_prototype/services/gig_service.dart';
 import 'package:xyz_prototype/services/user_service.dart';
 import 'package:xyz_prototype/ui/add_gig/add_gig_photos_view.dart';
 import 'package:xyz_prototype/ui/add_gig/add_gig_title_view.form.dart';
@@ -23,9 +22,10 @@ class AddGigViewModel extends FormViewModel {
   final _firestoreApi = locator<FirestoreApi>();
   final _imageSelector = locator<ImageSelector>();
   final _cloudStorageService = locator<CloudStorageService>();
+  final _gigService = locator<GigService>();
 
-  XFile? _selectedImage;
-  XFile? get selectedImage => _selectedImage;
+  List<XFile>? _selectedImages;
+  List<XFile>? get selectedImage => _selectedImages;
 
   @override
   void setFormStatus() {}
@@ -33,30 +33,30 @@ class AddGigViewModel extends FormViewModel {
   Future<void> addGig() async {
     setBusy(true);
 
-    CloudStorageResult storageResult;
+    List<String> storageResult = [];
 
     final _currentUser = _userService.currentUser!;
+    final _loadedGig = _gigService.currentGig!;
 
-    if (_selectedImage != null) {
-      storageResult = await _cloudStorageService.uploadImage(
-        imageToUpload: _selectedImage,
-        title: gigTitleValue ?? 'untitled',
-      );
-    } else {
-      storageResult = CloudStorageResult(
-        imageUrl: '',
-        imageFileName: '',
+    log.v('loadedGig: $_loadedGig');
+
+    if (_selectedImages != null) {
+      storageResult = await _cloudStorageService.uploadGigPhotos(
+        client: _currentUser,
+        imagesToUpload: _selectedImages,
+        title: _loadedGig.gigTitle ?? 'untitled',
       );
     }
 
-    final gig = Gig(
-        gigTitle: gigTitleValue,
-        gigVendorId: _currentUser.clientVendorId,
-        gigPhotos: [storageResult.imageUrl]);
-
-    log.v('gigTitle from view: $gigTitleValue');
+    final gig = _loadedGig.copyWith(
+      gigVendorId: _currentUser.clientVendorId,
+      gigPhotos: storageResult,
+    );
+    log.v('log for storage result $storageResult');
 
     final addSuccess = await _firestoreApi.addGig(gig: gig);
+    log.v('log for gig to upload: $gig');
+    log.v('log for addSuccess: $addSuccess');
 
     if (!addSuccess) {
       await _dialogService.showCustomDialog(
@@ -76,7 +76,7 @@ class AddGigViewModel extends FormViewModel {
       );
     }
 
-    _navigationService.back();
+    _navigationService.popRepeated(2);
 
     setBusy(false);
   }
@@ -86,12 +86,12 @@ class AddGigViewModel extends FormViewModel {
   }
 
   Future selectImage() async {
-    var tempImage = await _imageSelector.selectImage(ImageSource.gallery);
+    var tempImage = await _imageSelector.selectImage(multi: true);
     log.v('image retrieved: $tempImage');
 
     if (tempImage != null) {
-      _selectedImage = tempImage;
-      log.v('image picked: $_selectedImage');
+      _selectedImages = tempImage;
+      log.v('image picked: $_selectedImages');
       notifyListeners();
     } else {
       log.v('image not picked');
@@ -100,9 +100,14 @@ class AddGigViewModel extends FormViewModel {
   }
 
   void goToAddPhoto() {
+    _gigService.initGig(
+      gigTitle: gigTitleValue,
+      gigSubtitle: gigSubtitleValue,
+      gigDescription: gigDescriptionValue,
+    );
+
     _navigationService.navigateWithTransition(
       AddGigPhotosView(),
-      duration: Duration(seconds: 0),
       transition: 'fade',
     );
   }

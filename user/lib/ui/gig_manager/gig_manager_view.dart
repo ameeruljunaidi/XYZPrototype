@@ -62,12 +62,12 @@ class GigManagerView extends StatelessWidget {
               itemCount: model.gigs!.length,
             ),
           )
-        else if (model.isBusy)
-          Center(
-            child: CircularProgressIndicator(
-              valueColor: AlwaysStoppedAnimation(kcPrimaryColor),
-            ),
-          )
+        // else if (model.isBusy)
+        //   Center(
+        //     child: CircularProgressIndicator(
+        //       valueColor: AlwaysStoppedAnimation(kcPrimaryColor),
+        //     ),
+        //   )
         else if (model.gigs == null)
           Align(
             alignment: Alignment.bottomLeft,
@@ -90,74 +90,38 @@ class GigManagerView extends StatelessWidget {
             onTap: () {},
             child: Row(
               children: <Widget>[
-                AspectRatio(
-                  aspectRatio: 1,
-                  child: Padding(
-                    padding: const EdgeInsets.only(
-                      top: 8.0,
-                      bottom: 8.0,
-                      right: 8.0,
-                    ),
-                    child: _gigAtIndex.gigPhotos.length == 0 ||
-                            _gigAtIndex.gigPhotos[0] == ''
-                        ? Container(
-                            // height: double.maxFinite,
-                            decoration: defaultBoxDecoration,
-                            child: Center(
-                              child: Text('No Image'),
-                            ),
-                          )
-                        : Container(
-                            decoration: defaultBoxDecoration,
-                            child: ClipRRect(
-                              borderRadius: defaultBorderRadius,
-                              child: Image(
-                                loadingBuilder: (BuildContext context,
-                                    Widget child,
-                                    ImageChunkEvent? loadingProgress) {
-                                  if (loadingProgress == null) {
-                                    return child;
-                                  }
-                                  return Center(
-                                    child: CircularProgressIndicator(
-                                      color: kcPrimaryColor,
-                                      value:
-                                          loadingProgress.expectedTotalBytes !=
-                                                  null
-                                              ? loadingProgress
-                                                      .cumulativeBytesLoaded /
-                                                  loadingProgress
-                                                      .expectedTotalBytes!
-                                              : null,
-                                    ),
-                                  );
-                                },
-                                height: 50.0,
-                                width: 50.0,
-                                image: NetworkImage(_gigAtIndex.gigPhotos[0]),
-                                fit: BoxFit.cover,
-                              ),
-                            ),
-                          ),
+                gigPhotos(_gigAtIndex),
+                horizontalSpaceSmall,
+                Expanded(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      verticalSpaceSmall,
+                      Align(
+                        alignment: Alignment.centerLeft,
+                        child: BoxText.subheading(
+                          _gigAtIndex.gigTitle ?? 'Untitled',
+                          fontWeight: FontWeight.bold,
+                          align: TextAlign.left,
+                        ),
+                      ),
+                      verticalSpaceTiny,
+                      BoxText.body(
+                        _gigAtIndex.gigSubtitle ?? '',
+                      ),
+                      verticalSpaceRegular,
+                      BoxText.body(
+                        _gigAtIndex.gigDescription ?? '',
+                      ),
+                    ],
                   ),
                 ),
-                horizontalSpaceSmall,
-                Column(
-                  children: [
-                    verticalSpaceTiny,
-                    BoxText.subheading(_gigAtIndex.gigTitle ?? 'Untitled'),
-                  ],
-                ),
-                Spacer(),
-                // Align(
-                //   alignment: Alignment.centerRight,
-                //   child: IconButton(
-                //     onPressed: () => model.removeGig(index),
-                //     icon: Icon(
-                //       Icons.delete,
-                //     ),
-                //   ),
-                // ),
+                // Spacer(),
+                // IconButton(
+                //   onPressed: () => model.removeGig(index),
+                //   icon: Icon(Icons.delete),
+                // )
               ],
             ),
           ),
@@ -165,6 +129,55 @@ class GigManagerView extends StatelessWidget {
         verticalSpaceTiny,
         Divider(),
       ],
+    );
+  }
+
+  AspectRatio gigPhotos(_gigAtIndex) {
+    return AspectRatio(
+      aspectRatio: 1,
+      child: Padding(
+        padding: const EdgeInsets.only(
+          top: 8.0,
+          bottom: 8.0,
+          right: 8.0,
+        ),
+        child:
+            _gigAtIndex.gigPhotos.length == 0 || _gigAtIndex.gigPhotos[0] == ''
+                ? Container(
+                    // height: double.maxFinite,
+                    decoration: defaultBoxDecoration,
+                    child: Center(
+                      child: Text('No Image'),
+                    ),
+                  )
+                : Container(
+                    decoration: defaultBoxDecoration,
+                    child: ClipRRect(
+                      borderRadius: defaultBorderRadius,
+                      child: Image(
+                        loadingBuilder: (BuildContext context, Widget child,
+                            ImageChunkEvent? loadingProgress) {
+                          if (loadingProgress == null) {
+                            return child;
+                          }
+                          return Center(
+                            child: CircularProgressIndicator(
+                              color: kcPrimaryColor,
+                              value: loadingProgress.expectedTotalBytes != null
+                                  ? loadingProgress.cumulativeBytesLoaded /
+                                      loadingProgress.expectedTotalBytes!
+                                  : null,
+                            ),
+                          );
+                        },
+                        height: 50.0,
+                        width: 50.0,
+                        image: NetworkImage(_gigAtIndex.gigPhotos[0]),
+                        fit: BoxFit.cover,
+                      ),
+                    ),
+                  ),
+      ),
     );
   }
 }

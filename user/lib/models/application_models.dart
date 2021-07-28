@@ -99,7 +99,7 @@ class Gig with _$Gig {
     String? gigId,
     String? gigVendorId,
     String? gigTitle,
-    String? gitSubtitle,
+    String? gigSubtitle,
     String? gigDescription,
     List<String>? gigPhotos,
     List<String>? gigFeatures,

@@ -6,6 +6,7 @@ class BoxText extends StatelessWidget {
   final String text;
   final TextStyle style;
   final TextAlign alignment;
+  final TextOverflow overflow = TextOverflow.visible;
 
   const BoxText.headingOne(this.text, {TextAlign align = TextAlign.start})
       : style = heading1Style,
@@ -25,9 +26,12 @@ class BoxText extends StatelessWidget {
       : style = heading2Style.copyWith(color: color),
         alignment = align;
 
-  BoxText.subheading(this.text,
-      {TextAlign align = TextAlign.start, color = Colors.black})
-      : style = subheadingStyle.copyWith(color: color),
+  BoxText.subheading(
+    this.text, {
+    TextAlign align = TextAlign.start,
+    color = Colors.black,
+    fontWeight = FontWeight.normal,
+  })  : style = subheadingStyle.copyWith(color: color, fontWeight: fontWeight),
         alignment = align;
 
   BoxText.body(this.text,
@@ -41,6 +45,7 @@ class BoxText extends StatelessWidget {
       text,
       style: style,
       textAlign: alignment,
+      overflow: overflow,
     );
   }
 }

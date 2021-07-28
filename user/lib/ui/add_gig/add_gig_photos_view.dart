@@ -23,7 +23,6 @@ class AddGigPhotosView extends StatelessWidget with $AddGigPhotosView {
           model,
           initialPercentage: 0.5,
           minPercentage: 0.25,
-          goBack: model.goBack,
           heading: 'Add photos to your gig',
           children: <Widget>[
             defaultTextBoxTitle('Upload Image'),
@@ -33,18 +32,31 @@ class AddGigPhotosView extends StatelessWidget with $AddGigPhotosView {
               onTap: () => model.selectImage(),
             ),
             verticalSpaceRegular,
-            Text(model.selectedImage != null
-                ? model.selectedImage!.name
-                : 'No image'),
+            _addGigButton(model),
             verticalSpaceRegular,
             defaultBackAndContinue(
               goBack: model.goBack,
-              goContinue: () => model.addGig(),
             ),
           ],
         ),
       ),
       viewModelBuilder: () => AddGigViewModel(),
+    );
+  }
+
+  Widget _addGigButton(model) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 8.0),
+      child: Center(
+        child: Align(
+          alignment: Alignment.bottomCenter,
+          child: BoxButton(
+            busy: model.isBusy,
+            title: 'Confirm Add Gig',
+            onTap: () => model.addGig(),
+          ),
+        ),
+      ),
     );
   }
 }

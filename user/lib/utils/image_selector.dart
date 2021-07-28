@@ -1,12 +1,21 @@
 import 'package:image_picker/image_picker.dart';
 
 class ImageSelector {
-  Future<XFile?> selectImage(ImageSource source) async {
+  Future selectImage({
+    ImageSource source = ImageSource.gallery,
+    bool multi = false,
+  }) async {
     final ImagePicker _picker = ImagePicker();
 
-    return await _picker.pickImage(
-      source: source,
-      imageQuality: 25,
-    );
+    if (!multi) {
+      return await _picker.pickImage(
+        source: source,
+        imageQuality: 10,
+      );
+    } else {
+      return await _picker.pickMultiImage(
+        imageQuality: 10,
+      );
+    }
   }
 }
