@@ -14,12 +14,8 @@ class CloudStorageService {
 
     if (imagesToUpload != null) {
       for (var imageInList in imagesToUpload) {
-        var counter = 1;
-
-        var imageFileName = title.replaceAll("\\s+", "") +
-            '-' +
-            counter.toString() +
-            '-' +
+        var imageFileName = title.replaceAll(" ", "") +
+            '_' +
             DateTime.now().millisecondsSinceEpoch.toString();
 
         final Reference firebaseStorageRef = FirebaseStorage.instance
@@ -39,7 +35,6 @@ class CloudStorageService {
         var url = downloadUrl.toString();
 
         cloudStorageResult.add(url);
-        counter++;
       }
     }
 

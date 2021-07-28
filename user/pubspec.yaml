@@ -50,6 +50,8 @@ dependencies:
   stacked: ^2.2.2
   stacked_firebase_auth: ^0.2.5
   stacked_services: ^0.8.10
+  transparent_image: ^2.0.0
+  carousel_images: ^1.1.2
 
 dev_dependencies:
   flutter_test:

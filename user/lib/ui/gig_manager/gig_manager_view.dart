@@ -2,6 +2,7 @@ import 'package:colorful_safe_area/colorful_safe_area.dart';
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
 import 'package:xyz_prototype/ui/add_gig/add_gig_title_view.dart';
+import 'package:xyz_prototype/ui/dumb_widgets/carousel_image.dart';
 import 'package:xyz_prototype/ui/gig_manager/gig_manager_viewmodel.dart';
 import 'package:xyz_ui/xyz_ui.dart';
 
@@ -62,12 +63,12 @@ class GigManagerView extends StatelessWidget {
               itemCount: model.gigs!.length,
             ),
           )
-        // else if (model.isBusy)
-        //   Center(
-        //     child: CircularProgressIndicator(
-        //       valueColor: AlwaysStoppedAnimation(kcPrimaryColor),
-        //     ),
-        //   )
+        else if (model.isBusy)
+          Center(
+            child: CircularProgressIndicator(
+              valueColor: AlwaysStoppedAnimation(kcPrimaryColor),
+            ),
+          )
         else if (model.gigs == null)
           Align(
             alignment: Alignment.bottomLeft,
@@ -86,44 +87,12 @@ class GigManagerView extends StatelessWidget {
         Container(
           height: screenHeightPercentage(context, percentage: 0.15),
           width: double.infinity,
-          child: InkWell(
-            onTap: () {},
-            child: Row(
-              children: <Widget>[
-                gigPhotos(_gigAtIndex),
-                horizontalSpaceSmall,
-                Expanded(
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      verticalSpaceSmall,
-                      Align(
-                        alignment: Alignment.centerLeft,
-                        child: BoxText.subheading(
-                          _gigAtIndex.gigTitle ?? 'Untitled',
-                          fontWeight: FontWeight.bold,
-                          align: TextAlign.left,
-                        ),
-                      ),
-                      verticalSpaceTiny,
-                      BoxText.body(
-                        _gigAtIndex.gigSubtitle ?? '',
-                      ),
-                      verticalSpaceRegular,
-                      BoxText.body(
-                        _gigAtIndex.gigDescription ?? '',
-                      ),
-                    ],
-                  ),
-                ),
-                // Spacer(),
-                // IconButton(
-                //   onPressed: () => model.removeGig(index),
-                //   icon: Icon(Icons.delete),
-                // )
-              ],
-            ),
+          child: Row(
+            children: <Widget>[
+              gigPhotos(_gigAtIndex),
+              horizontalSpaceSmall,
+              _cardItems(_gigAtIndex),
+            ],
           ),
         ),
         verticalSpaceTiny,
@@ -132,52 +101,60 @@ class GigManagerView extends StatelessWidget {
     );
   }
 
-  AspectRatio gigPhotos(_gigAtIndex) {
+  Widget _cardItems(_gigAtIndex) {
+    return Expanded(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          verticalSpaceSmall,
+          Align(
+            alignment: Alignment.centerLeft,
+            child: BoxText.subheading(
+              _gigAtIndex.gigTitle ?? 'Untitled',
+              fontWeight: FontWeight.bold,
+              align: TextAlign.left,
+            ),
+          ),
+          verticalSpaceTiny,
+          BoxText.body(
+            _gigAtIndex.gigSubtitle ?? '',
+          ),
+          verticalSpaceRegular,
+          BoxText.body(
+            _gigAtIndex.gigDescription ?? '',
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget gigPhotos(_gigAtIndex) {
     return AspectRatio(
       aspectRatio: 1,
-      child: Padding(
-        padding: const EdgeInsets.only(
-          top: 8.0,
-          bottom: 8.0,
-          right: 8.0,
-        ),
-        child:
-            _gigAtIndex.gigPhotos.length == 0 || _gigAtIndex.gigPhotos[0] == ''
-                ? Container(
-                    // height: double.maxFinite,
-                    decoration: defaultBoxDecoration,
-                    child: Center(
-                      child: Text('No Image'),
-                    ),
-                  )
-                : Container(
-                    decoration: defaultBoxDecoration,
-                    child: ClipRRect(
-                      borderRadius: defaultBorderRadius,
-                      child: Image(
-                        loadingBuilder: (BuildContext context, Widget child,
-                            ImageChunkEvent? loadingProgress) {
-                          if (loadingProgress == null) {
-                            return child;
-                          }
-                          return Center(
-                            child: CircularProgressIndicator(
-                              color: kcPrimaryColor,
-                              value: loadingProgress.expectedTotalBytes != null
-                                  ? loadingProgress.cumulativeBytesLoaded /
-                                      loadingProgress.expectedTotalBytes!
-                                  : null,
-                            ),
-                          );
-                        },
-                        height: 50.0,
-                        width: 50.0,
-                        image: NetworkImage(_gigAtIndex.gigPhotos[0]),
-                        fit: BoxFit.cover,
-                      ),
-                    ),
-                  ),
-      ),
+      child: _gigAtIndex.gigPhotos.length == 0
+          ? Container(
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: defaultBorderRadius,
+                border: Border.all(color: kcVeryLightGreyColor),
+              ),
+              child: Center(
+                child: Text('No Image'),
+              ),
+            )
+          : _carouselSlider(_gigAtIndex),
+    );
+  }
+
+  Widget _carouselSlider(_gigAtIndex) {
+    return CarouselImages(
+      scaleFactor: 1,
+      listImages: _gigAtIndex.gigPhotos,
+      height: double.infinity,
+      borderRadius: 16.0,
+      cachedNetworkImage: true,
+      verticalAlignment: Alignment.topCenter,
     );
   }
 }

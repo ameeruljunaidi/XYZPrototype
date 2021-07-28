@@ -186,11 +186,8 @@ class StackedRouter extends RouterBase {
       );
     },
     AddGigPhotosView: (data) {
-      var args = data.getArgs<AddGigPhotosViewArguments>(
-        orElse: () => AddGigPhotosViewArguments(),
-      );
       return MaterialPageRoute<dynamic>(
-        builder: (context) => AddGigPhotosView(key: args.key),
+        builder: (context) => const AddGigPhotosView(),
         settings: data,
       );
     },
@@ -235,10 +232,4 @@ class MarketPlaceViewArguments {
 class AddGigTitleViewArguments {
   final Key? key;
   AddGigTitleViewArguments({this.key});
-}
-
-/// AddGigPhotosView arguments holder class
-class AddGigPhotosViewArguments {
-  final Key? key;
-  AddGigPhotosViewArguments({this.key});
 }

@@ -11,7 +11,6 @@ import 'package:xyz_prototype/services/gig_service.dart';
 import 'package:xyz_prototype/services/user_service.dart';
 import 'package:xyz_prototype/ui/add_gig/add_gig_photos_view.dart';
 import 'package:xyz_prototype/ui/add_gig/add_gig_title_view.form.dart';
-import 'package:xyz_prototype/ui/add_gig/add_gig_photos_view.form.dart';
 import 'package:xyz_prototype/utils/image_selector.dart';
 
 class AddGigViewModel extends FormViewModel {
