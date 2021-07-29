@@ -5,8 +5,6 @@ import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
 import 'package:xyz_prototype/app/app.locator.dart';
 import 'package:xyz_prototype/constants/app_keys.dart';
-import 'package:xyz_prototype/ui/add_business/add_business_view.dart';
-import 'package:xyz_prototype/ui/login/login_view.dart';
 import 'package:xyz_prototype/ui/profile/profile_viewmodel.dart';
 import 'package:xyz_ui/xyz_ui.dart';
 import 'package:xyz_prototype/extensions/string_extensions.dart';

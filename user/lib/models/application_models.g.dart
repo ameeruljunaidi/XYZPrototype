@@ -210,3 +210,39 @@ Map<String, dynamic> _$_$_GigsToJson(_$_Gigs instance) => <String, dynamic>{
       'gigPrice': instance.gigPrice,
       'gigLocation': instance.gigLocation,
     };
+
+_$_Service _$_$_ServiceFromJson(Map<String, dynamic> json) {
+  return _$_Service(
+    serviceId: json['serviceId'] as String?,
+    serviceName: json['serviceName'] as String?,
+    serviceCategory: json['serviceCategory'] as String?,
+    serviceSubcategory: json['serviceSubcategory'] as String?,
+    servicePriceTypes: (json['servicePriceTypes'] as List<dynamic>?)
+        ?.map((e) => e as String)
+        .toList(),
+  );
+}
+
+Map<String, dynamic> _$_$_ServiceToJson(_$_Service instance) =>
+    <String, dynamic>{
+      'serviceId': instance.serviceId,
+      'serviceName': instance.serviceName,
+      'serviceCategory': instance.serviceCategory,
+      'serviceSubcategory': instance.serviceSubcategory,
+      'servicePriceTypes': instance.servicePriceTypes,
+    };
+
+_$_ServiceSubCategory _$_$_ServiceSubCategoryFromJson(
+    Map<String, dynamic> json) {
+  return _$_ServiceSubCategory(
+    serviceSubCategoryId: json['serviceSubCategoryId'] as String?,
+    serviceSubCategoryName: json['serviceSubCategoryName'] as String?,
+  );
+}
+
+Map<String, dynamic> _$_$_ServiceSubCategoryToJson(
+        _$_ServiceSubCategory instance) =>
+    <String, dynamic>{
+      'serviceSubCategoryId': instance.serviceSubCategoryId,
+      'serviceSubCategoryName': instance.serviceSubCategoryName,
+    };

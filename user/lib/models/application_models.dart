@@ -114,3 +114,28 @@ class Gig with _$Gig {
 
   factory Gig.fromJson(Map<String, dynamic> json) => _$GigFromJson(json);
 }
+
+@freezed
+class Service with _$Service {
+  factory Service({
+    String? serviceId,
+    String? serviceName,
+    String? serviceCategory,
+    String? serviceSubcategory,
+    List<String>? servicePriceTypes,
+  }) = _Service;
+
+  factory Service.fromJson(Map<String, dynamic> json) =>
+      _$ServiceFromJson(json);
+}
+
+@freezed
+class ServiceSubCategory with _$ServiceSubCategory {
+  factory ServiceSubCategory({
+    String? serviceSubCategoryId,
+    String? serviceSubCategoryName,
+  }) = _ServiceSubCategory;
+
+  factory ServiceSubCategory.fromJson(Map<String, dynamic> json) =>
+      _$ServiceSubCategoryFromJson(json);
+}

@@ -5,6 +5,7 @@ import 'package:stacked_services/stacked_services.dart';
 import 'package:xyz_prototype/api/firestore_api.dart';
 import 'package:xyz_prototype/services/cloud_storage_service.dart';
 import 'package:xyz_prototype/services/gig_service.dart';
+import 'package:xyz_prototype/services/realtime_database_service.dart';
 import 'package:xyz_prototype/services/user_service.dart';
 import 'package:xyz_prototype/ui/add_business/add_business_view.dart';
 import 'package:xyz_prototype/ui/add_gig/add_gig_location_view.dart';
@@ -64,6 +65,7 @@ import 'package:xyz_prototype/utils/image_selector.dart';
     LazySingleton(classType: CreateAccountView),
     LazySingleton(classType: AddBusinessView),
     LazySingleton(classType: GigService),
+    LazySingleton(classType: RealtimeService),
     Singleton(classType: ImageSelector),
     Singleton(classType: FirebaseAuthenticationService),
   ],
