@@ -9,6 +9,7 @@ import 'package:xyz_prototype/enums/dialog_type.dart';
 import 'package:xyz_prototype/services/cloud_storage_service.dart';
 import 'package:xyz_prototype/services/gig_service.dart';
 import 'package:xyz_prototype/services/user_service.dart';
+import 'package:xyz_prototype/ui/add_gig/add_gig_location_view.dart';
 import 'package:xyz_prototype/ui/add_gig/add_gig_photos_view.dart';
 import 'package:xyz_prototype/ui/add_gig/add_gig_title_view.form.dart';
 import 'package:xyz_prototype/utils/image_selector.dart';
@@ -75,13 +76,29 @@ class AddGigViewModel extends FormViewModel {
       );
     }
 
-    _navigationService.popRepeated(2);
+    _navigationService.popRepeated(3);
 
     setBusy(false);
   }
 
   void goBack() {
     _navigationService.back();
+  }
+
+  void cancelAddGig() {
+    setBusy(true);
+    final _loadedGig = _gigService.currentGig;
+
+    if (_loadedGig != null) {
+      if (_loadedGig.gigId != null || _loadedGig.gigId == '') {
+        _firestoreApi.deleteGig(_loadedGig.gigId!);
+        _gigService.clearGig();
+      }
+    }
+
+    setBusy(false);
+    _navigationService.back();
+    notifyListeners();
   }
 
   Future selectImage() async {
@@ -99,15 +116,31 @@ class AddGigViewModel extends FormViewModel {
   }
 
   void goToAddPhoto() {
-    _gigService.initGig(
-      gigTitle: gigTitleValue,
-      gigSubtitle: gigSubtitleValue,
-      gigDescription: gigDescriptionValue,
-    );
-
     _navigationService.navigateWithTransition(
       AddGigPhotosView(),
       transition: 'fade',
     );
+  }
+
+  void goToAddLocation() {
+    final _currentUser = _userService.currentUser!;
+
+    _gigService.clearGig();
+
+    _gigService.initGig(
+      gigTitle: gigTitleValue,
+      gigSubtitle: gigSubtitleValue,
+      gigDescription: gigDescriptionValue,
+      gigVendorId: _currentUser.clientVendorId,
+    );
+
+    final _loadedGig = _gigService.currentGig;
+
+    if (_loadedGig != null) {
+      _firestoreApi.addGig(gig: _loadedGig);
+    }
+
+    _navigationService.navigateWithTransition(AddGigLocationView(),
+        transition: 'fade');
   }
 }

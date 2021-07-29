@@ -55,8 +55,8 @@ class AddGigTitleView extends StatelessWidget with $AddGigTitleView {
               ),
               verticalSpaceMedium,
               defaultBackAndContinue(
-                goBack: model.goBack,
-                goContinue: model.goToAddPhoto,
+                goBack: model.cancelAddGig,
+                goContinue: model.goToAddLocation,
               )
             ],
           ),

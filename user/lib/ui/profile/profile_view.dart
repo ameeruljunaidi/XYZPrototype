@@ -17,7 +17,7 @@ class ProfileView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ViewModelBuilder<ProfileViewModel>.reactive(
-      // onModelReady: (model) => model.listenToUser(),
+      onModelReady: (model) => model.listenToUser(),
       disposeViewModel: false,
       initialiseSpecialViewModelsOnce: true,
       builder: (context, model, child) => Scaffold(

@@ -26,64 +26,82 @@ class MarketPlaceView extends StatelessWidget with $MarketPlaceView {
 
   @override
   Widget build(BuildContext context) {
-    return ViewModelBuilder<MarketPlaceViewModel>.reactive(
-      disposeViewModel: false,
-      initialiseSpecialViewModelsOnce: true,
-      builder: (context, model, child) => Scaffold(
-        body: SafeArea(
-          child: Column(
-            children: [
-              _searchBar(),
-              Expanded(
-                child: ListView(
-                  children: [
-                    verticalSpaceMedium,
-                    Padding(
-                      padding: const EdgeInsets.only(left: 24.0, right: 120.0),
-                      child: BoxText.headline('What would you like to do?'),
-                    ),
-                    verticalSpaceMedium,
-                    SingleChildScrollView(
-                      scrollDirection: Axis.horizontal,
-                      child: Row(
-                        children: _icons
-                            .asMap()
-                            .entries
-                            .map((e) => _buildIcon(context, e.key, model))
-                            .toList(),
-                      ),
-                    ),
-                    verticalSpaceRegular,
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 24.0),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          BoxText.headingThree(
-                            'Top Services',
-                            align: TextAlign.start,
-                          ),
-                          TextButton(
-                            onPressed: () {},
-                            child: Text(
-                              'See All',
-                              style: TextStyle(
-                                  color: kcAccentColor, fontSize: 16.0),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                    _servicesCarousel(context),
-                  ],
-                ),
-              ),
-            ],
+    return GestureDetector(
+      onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
+      child: ViewModelBuilder<MarketPlaceViewModel>.reactive(
+        onModelReady: (model) => model.listenToUser(),
+        disposeViewModel: false,
+        initialiseSpecialViewModelsOnce: true,
+        builder: (context, model, child) => Scaffold(
+          body: SafeArea(
+            child: Column(
+              children: [
+                _searchBar(),
+                _servicesBar(context, model),
+                if (model.clientData().clientAddress == null &&
+                    model.clientData().clientEmail != null)
+                  _addLocationButton(model),
+              ],
+            ),
           ),
         ),
+        viewModelBuilder: () => locator<MarketPlaceViewModel>(),
       ),
-      viewModelBuilder: () => locator<MarketPlaceViewModel>(),
+    );
+  }
+
+  Padding _addLocationButton(MarketPlaceViewModel model) {
+    return Padding(
+      padding: const EdgeInsets.all(24.0),
+      child:
+          BoxButton(title: 'Add Location', onTap: model.goToAddressSelection),
+    );
+  }
+
+  Expanded _servicesBar(BuildContext context, MarketPlaceViewModel model) {
+    return Expanded(
+      child: ListView(
+        children: [
+          verticalSpaceMedium,
+          Padding(
+            padding: const EdgeInsets.only(left: 24.0, right: 120.0),
+            child: BoxText.headline('What would you like to do?'),
+          ),
+          verticalSpaceMedium,
+          SingleChildScrollView(
+            scrollDirection: Axis.horizontal,
+            child: Row(
+              children: _icons
+                  .asMap()
+                  .entries
+                  .map((e) => _buildIcon(context, e.key, model))
+                  .toList(),
+            ),
+          ),
+          verticalSpaceRegular,
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 24.0),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                BoxText.headingThree(
+                  'Top Services',
+                  align: TextAlign.start,
+                ),
+                TextButton(
+                  onPressed: () {},
+                  child: Text(
+                    'See All',
+                    style: TextStyle(color: kcAccentColor, fontSize: 16.0),
+                  ),
+                ),
+              ],
+            ),
+          ),
+          _servicesCarousel(context),
+        ],
+      ),
     );
   }
 

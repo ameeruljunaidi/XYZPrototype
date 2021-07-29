@@ -55,7 +55,7 @@ class UserService {
     _currentClient = null;
   }
 
-  void listenToUser() {
+  void listenToUser() async {
     final _clientId = _firebaseAuthenticationService.currentUser!.uid;
 
     _firestoreApi.getUserRealtime(_clientId).listen(

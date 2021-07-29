@@ -109,7 +109,7 @@ class Gig with _$Gig {
     String? gigSubCategory,
     Map<String, dynamic>? gigFilters,
     Map<String, dynamic>? gigPrice,
-    Address? gigLocation,
+    String? gigLocation,
   }) = _Gigs;
 
   factory Gig.fromJson(Map<String, dynamic> json) => _$GigFromJson(json);

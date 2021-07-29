@@ -22,9 +22,10 @@ class ProfileViewModel extends BaseViewModel {
   Client clientData() {
     return _userService.currentUser ??
         Client(
-            clientId: 'anonymous',
-            clientType: 'anonymous',
-            clientRegistrationDate: 'anonymous');
+          clientId: 'anonymous',
+          clientType: 'anonymous',
+          clientRegistrationDate: 'anonymous',
+        );
   }
 
   void goToAddBusiness(context) async {

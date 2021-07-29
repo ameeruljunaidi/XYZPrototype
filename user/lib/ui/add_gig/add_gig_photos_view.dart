@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
 import 'package:xyz_prototype/ui/add_gig/add_gig_viewmodel.dart';
+import 'package:xyz_prototype/ui/dumb_widgets/add_gig_button.dart';
 import 'package:xyz_ui/xyz_ui.dart';
 
 class AddGigPhotosView extends StatelessWidget {
@@ -24,7 +25,7 @@ class AddGigPhotosView extends StatelessWidget {
               onTap: () => model.selectImage(),
             ),
             verticalSpaceRegular,
-            _addGigButton(model),
+            addGigButton(model),
             verticalSpaceRegular,
             defaultBackAndContinue(
               goBack: model.goBack,
@@ -33,22 +34,6 @@ class AddGigPhotosView extends StatelessWidget {
         ),
       ),
       viewModelBuilder: () => AddGigViewModel(),
-    );
-  }
-
-  Widget _addGigButton(model) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 8.0),
-      child: Center(
-        child: Align(
-          alignment: Alignment.bottomCenter,
-          child: BoxButton(
-            busy: model.isBusy,
-            title: 'Confirm Add Gig',
-            onTap: () => model.addGig(),
-          ),
-        ),
-      ),
     );
   }
 }

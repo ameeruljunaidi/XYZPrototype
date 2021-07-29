@@ -10,6 +10,7 @@ import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
 
 import '../ui/add_business/add_business_view.dart';
+import '../ui/add_gig/add_gig_location_view.dart';
 import '../ui/add_gig/add_gig_photos_view.dart';
 import '../ui/add_gig/add_gig_title_view.dart';
 import '../ui/address_selection/address_selection_view.dart';
@@ -41,6 +42,7 @@ class Routes {
   static const String gigEditView = '/gig-edit-view';
   static const String addGigTitleView = '/add-gig-title-view';
   static const String addGigPhotosView = '/add-gig-photos-view';
+  static const String addGigLocationView = '/add-gig-location-view';
   static const all = <String>{
     startupView,
     homeView,
@@ -57,6 +59,7 @@ class Routes {
     gigEditView,
     addGigTitleView,
     addGigPhotosView,
+    addGigLocationView,
   };
 }
 
@@ -79,6 +82,7 @@ class StackedRouter extends RouterBase {
     RouteDef(Routes.gigEditView, page: GigEditView),
     RouteDef(Routes.addGigTitleView, page: AddGigTitleView),
     RouteDef(Routes.addGigPhotosView, page: AddGigPhotosView),
+    RouteDef(Routes.addGigLocationView, page: AddGigLocationView),
   ];
   @override
   Map<Type, StackedRouteFactory> get pagesMap => _pagesMap;
@@ -191,6 +195,15 @@ class StackedRouter extends RouterBase {
         settings: data,
       );
     },
+    AddGigLocationView: (data) {
+      var args = data.getArgs<AddGigLocationViewArguments>(
+        orElse: () => AddGigLocationViewArguments(),
+      );
+      return MaterialPageRoute<dynamic>(
+        builder: (context) => AddGigLocationView(key: args.key),
+        settings: data,
+      );
+    },
   };
 }
 
@@ -232,4 +245,10 @@ class MarketPlaceViewArguments {
 class AddGigTitleViewArguments {
   final Key? key;
   AddGigTitleViewArguments({this.key});
+}
+
+/// AddGigLocationView arguments holder class
+class AddGigLocationViewArguments {
+  final Key? key;
+  AddGigLocationViewArguments({this.key});
 }

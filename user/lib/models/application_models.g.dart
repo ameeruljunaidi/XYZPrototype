@@ -190,9 +190,7 @@ _$_Gigs _$_$_GigsFromJson(Map<String, dynamic> json) {
     gigSubCategory: json['gigSubCategory'] as String?,
     gigFilters: json['gigFilters'] as Map<String, dynamic>?,
     gigPrice: json['gigPrice'] as Map<String, dynamic>?,
-    gigLocation: json['gigLocation'] == null
-        ? null
-        : Address.fromJson(json['gigLocation'] as Map<String, dynamic>),
+    gigLocation: json['gigLocation'] as String?,
   );
 }
 

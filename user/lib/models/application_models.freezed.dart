@@ -1851,7 +1851,7 @@ class _$GigTearOff {
       String? gigSubCategory,
       Map<String, dynamic>? gigFilters,
       Map<String, dynamic>? gigPrice,
-      Address? gigLocation}) {
+      String? gigLocation}) {
     return _Gigs(
       gigId: gigId,
       gigVendorId: gigVendorId,
@@ -1893,7 +1893,7 @@ mixin _$Gig {
   String? get gigSubCategory => throw _privateConstructorUsedError;
   Map<String, dynamic>? get gigFilters => throw _privateConstructorUsedError;
   Map<String, dynamic>? get gigPrice => throw _privateConstructorUsedError;
-  Address? get gigLocation => throw _privateConstructorUsedError;
+  String? get gigLocation => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -1918,9 +1918,7 @@ abstract class $GigCopyWith<$Res> {
       String? gigSubCategory,
       Map<String, dynamic>? gigFilters,
       Map<String, dynamic>? gigPrice,
-      Address? gigLocation});
-
-  $AddressCopyWith<$Res>? get gigLocation;
+      String? gigLocation});
 }
 
 /// @nodoc
@@ -2004,19 +2002,8 @@ class _$GigCopyWithImpl<$Res> implements $GigCopyWith<$Res> {
       gigLocation: gigLocation == freezed
           ? _value.gigLocation
           : gigLocation // ignore: cast_nullable_to_non_nullable
-              as Address?,
+              as String?,
     ));
-  }
-
-  @override
-  $AddressCopyWith<$Res>? get gigLocation {
-    if (_value.gigLocation == null) {
-      return null;
-    }
-
-    return $AddressCopyWith<$Res>(_value.gigLocation!, (value) {
-      return _then(_value.copyWith(gigLocation: value));
-    });
   }
 }
 
@@ -2039,10 +2026,7 @@ abstract class _$GigsCopyWith<$Res> implements $GigCopyWith<$Res> {
       String? gigSubCategory,
       Map<String, dynamic>? gigFilters,
       Map<String, dynamic>? gigPrice,
-      Address? gigLocation});
-
-  @override
-  $AddressCopyWith<$Res>? get gigLocation;
+      String? gigLocation});
 }
 
 /// @nodoc
@@ -2127,7 +2111,7 @@ class __$GigsCopyWithImpl<$Res> extends _$GigCopyWithImpl<$Res>
       gigLocation: gigLocation == freezed
           ? _value.gigLocation
           : gigLocation // ignore: cast_nullable_to_non_nullable
-              as Address?,
+              as String?,
     ));
   }
 }
@@ -2181,7 +2165,7 @@ class _$_Gigs with DiagnosticableTreeMixin implements _Gigs {
   @override
   final Map<String, dynamic>? gigPrice;
   @override
-  final Address? gigLocation;
+  final String? gigLocation;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
@@ -2300,7 +2284,7 @@ abstract class _Gigs implements Gig {
       String? gigSubCategory,
       Map<String, dynamic>? gigFilters,
       Map<String, dynamic>? gigPrice,
-      Address? gigLocation}) = _$_Gigs;
+      String? gigLocation}) = _$_Gigs;
 
   factory _Gigs.fromJson(Map<String, dynamic> json) = _$_Gigs.fromJson;
 
@@ -2331,7 +2315,7 @@ abstract class _Gigs implements Gig {
   @override
   Map<String, dynamic>? get gigPrice => throw _privateConstructorUsedError;
   @override
-  Address? get gigLocation => throw _privateConstructorUsedError;
+  String? get gigLocation => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
   _$GigsCopyWith<_Gigs> get copyWith => throw _privateConstructorUsedError;

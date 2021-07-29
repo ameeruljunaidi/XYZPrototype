@@ -55,35 +55,3 @@ Widget defaultTextBoxTitle(title) {
     ),
   );
 }
-
-// Go back and continue on modal
-Widget defaultBackAndContinue({required goBack, goContinue}) {
-  return Row(
-    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-    children: [
-      InkWell(
-        onTap: goBack,
-        child: Row(
-          children: [
-            Icon(Icons.arrow_left),
-            BoxText.body('Previous'),
-          ],
-        ),
-      ),
-      if (goContinue != null)
-        ElevatedButton(
-          onPressed: goContinue,
-          child: Text('Continue'),
-          style: ButtonStyle(
-            backgroundColor: MaterialStateProperty.all<Color>(kcPrimaryColor),
-            elevation: MaterialStateProperty.all<double>(0),
-            shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-              RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(8.0),
-              ),
-            ),
-          ),
-        ),
-    ],
-  );
-}

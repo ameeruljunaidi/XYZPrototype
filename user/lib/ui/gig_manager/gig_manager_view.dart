@@ -58,17 +58,18 @@ class GigManagerView extends StatelessWidget {
           Expanded(
             child: ListView.builder(
               itemBuilder: (context, index) {
-                return _gigCard(context, model, index);
+                final gigs = model.gigs![index];
+                return _gigCard(context, model, index, ObjectKey(gigs));
               },
               itemCount: model.gigs!.length,
             ),
           )
-        else if (model.isBusy)
-          Center(
-            child: CircularProgressIndicator(
-              valueColor: AlwaysStoppedAnimation(kcPrimaryColor),
-            ),
-          )
+        // else if (model.isBusy)
+        //   Center(
+        //     child: CircularProgressIndicator(
+        //       valueColor: AlwaysStoppedAnimation(kcPrimaryColor),
+        //     ),
+        //   )
         else if (model.gigs == null)
           Align(
             alignment: Alignment.bottomLeft,
@@ -78,10 +79,11 @@ class GigManagerView extends StatelessWidget {
     );
   }
 
-  Widget _gigCard(context, model, index) {
+  Widget _gigCard(context, model, index, key) {
     final _gigAtIndex = model.gigs[index];
 
     return Column(
+      key: key,
       children: [
         verticalSpaceTiny,
         Container(
@@ -132,7 +134,7 @@ class GigManagerView extends StatelessWidget {
   Widget gigPhotos(_gigAtIndex) {
     return AspectRatio(
       aspectRatio: 1,
-      child: _gigAtIndex.gigPhotos.length == 0
+      child: _gigAtIndex.gigPhotos == null
           ? Container(
               decoration: BoxDecoration(
                 color: Colors.white,

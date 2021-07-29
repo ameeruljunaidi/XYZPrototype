@@ -2,9 +2,15 @@ import 'dart:io';
 
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:xyz_prototype/app/app.locator.dart';
+import 'package:xyz_prototype/app/app.logger.dart';
 import 'package:xyz_prototype/models/application_models.dart';
+import 'package:xyz_prototype/services/gig_service.dart';
 
 class CloudStorageService {
+  final log = getLogger('cloudStorageService');
+  final _gigService = locator<GigService>();
+
   Future<List<String>> uploadGigPhotos({
     List<XFile>? imagesToUpload,
     required String title,
@@ -12,17 +18,21 @@ class CloudStorageService {
   }) async {
     List<String> cloudStorageResult = [];
 
-    if (imagesToUpload != null) {
+    final _loadedGig = _gigService.currentGig;
+
+    if (imagesToUpload != null && _loadedGig != null) {
       for (var imageInList in imagesToUpload) {
-        var imageFileName = title.replaceAll(" ", "") +
-            '_' +
-            DateTime.now().millisecondsSinceEpoch.toString();
+        var imageFileName = _loadedGig.gigId ??
+            title.replaceAll(" ", "") +
+                '_' +
+                DateTime.now().millisecondsSinceEpoch.toString();
 
         final Reference firebaseStorageRef = FirebaseStorage.instance
             .ref()
             .child('userFiles')
             .child(client.clientId)
             .child('gigPhotos')
+            .child(_loadedGig.gigId ?? 'unidentifiedGig')
             .child(imageFileName);
 
         UploadTask uploadTask =

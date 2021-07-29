@@ -2,15 +2,18 @@ import 'dart:async';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/foundation.dart';
+import 'package:xyz_prototype/app/app.locator.dart';
 import 'package:xyz_prototype/app/app.logger.dart';
 import 'package:xyz_prototype/constants/app_keys.dart';
 import 'package:xyz_prototype/exceptions/firestore_api_exceptions.dart';
 import 'package:xyz_prototype/models/application_models.dart';
 import 'package:collection/collection.dart';
+import 'package:xyz_prototype/services/gig_service.dart';
 
 class FirestoreApi {
   // Log everything that is happening in this api call
   final log = getLogger('firestoreApi');
+  final _gigService = locator<GigService>();
 
   // Collection reference for firebas
   final CollectionReference userCollection =
@@ -29,6 +32,11 @@ class FirestoreApi {
 
   CollectionReference getAddressCollectionForUser(String clientId) {
     return userCollection.doc(clientId).collection(AddressFirestoreKey);
+  }
+
+  // Get collection reference based on gigId
+  CollectionReference getAddressCollectionForGig(String gigId) {
+    return gigsCollection.doc(gigId).collection(AddressFirestoreKey);
   }
 
   // Getting a stream controller for gigs
@@ -177,32 +185,55 @@ class FirestoreApi {
   }
 
   // Saving the users adderss
-  Future<bool> saveClientAddress({
+  Future<bool> saveAddress({
     required Address address,
-    required Client user,
+    Client? user,
+    Gig? gig,
   }) async {
     log.i('Saved address: $address');
 
     try {
-      final addressDoc = getAddressCollectionForUser(user.clientId).doc();
-      final newAddressId = addressDoc.id;
-      log.v('Address will be stored with id:$newAddressId');
+      if (user != null && gig == null) {
+        final addressDoc = getAddressCollectionForUser(user.clientId).doc();
+        final newAddressId = addressDoc.id;
+        log.v('Address will be stored with id:$newAddressId');
 
-      await addressDoc.set(
-        address.copyWith(id: newAddressId).toJson(),
-      );
+        await addressDoc.set(
+          address.copyWith(id: newAddressId).toJson(),
+        );
 
-      final hasDefaultAddress = user.hasAddress;
+        final hasDefaultAddress = user.hasAddress;
 
-      if (!hasDefaultAddress) {
-        log.v('User has not default address, set current to default');
-        await userCollection
-            .doc(user.clientId)
-            .set(user.copyWith(clientAddress: newAddressId).toJson());
-        log.v('User ${user.clientId} defaultAddress set to $newAddressId');
+        if (!hasDefaultAddress) {
+          log.v('User has not default address, set current to default');
+
+          await userCollection.doc(user.clientId).set(
+                user.copyWith(clientAddress: newAddressId).toJson(),
+              );
+          log.v('User ${user.clientId} defaultAddress set to $newAddressId');
+        }
+
+        return true;
+      } else if (gig != null) {
+        log.v('See gig loaded from form: $gig');
+        final addressDoc = getAddressCollectionForGig(gig.gigId!).doc();
+        final newAddressId = addressDoc.id;
+        log.v('Address will be stored with id:$newAddressId');
+
+        await addressDoc.set(
+          address.copyWith(id: newAddressId).toJson(),
+        );
+
+        await gigsCollection.doc(gig.gigId).update(
+              gig.copyWith(gigLocation: newAddressId).toJson(),
+            );
+
+        _gigService.addGigAddress(newAddressId);
+
+        return true;
       }
 
-      return true;
+      return false;
     } on Exception catch (e) {
       log.e('We could not save the users addres. $e');
 
@@ -305,20 +336,38 @@ class FirestoreApi {
   Future<bool> addGig({required Gig gig}) async {
     log.i('Gig loaded: $gig');
 
-    final gigDoc = gigsCollection.doc();
-    final newGigId = gigDoc.id;
-    log.v('newGigId will be $newGigId');
+    if (gig.gigId == null || gig.gigId == '') {
+      final gigDoc = gigsCollection.doc();
+      final newGigId = gigDoc.id;
+      log.v('newGigId will be $newGigId');
 
-    try {
-      await gigDoc.set(gig.copyWith(gigId: newGigId).toJson());
-      log.v('Gig will be stored at id: $newGigId');
+      try {
+        await gigDoc.set(gig.copyWith(gigId: newGigId).toJson());
+        log.v('Gig will be stored at id: $newGigId');
 
-      return true;
-    } on Exception catch (e) {
-      log.e('We could no add the gig. $e');
+        _gigService.addGigId(newGigId);
 
-      return false;
+        return true;
+      } on Exception catch (e) {
+        log.e('We could no add the gig. $e');
+
+        return false;
+      }
+    } else if (gig.gigId != null) {
+      final gigDoc = gigsCollection.doc(gig.gigId);
+
+      try {
+        await gigDoc.update(gig.toJson());
+
+        return true;
+      } on Exception catch (e) {
+        log.e('We could not update the gig. $e');
+
+        return false;
+      }
     }
+
+    return false;
   }
 
   // Deleting a vendor's gig
