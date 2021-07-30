@@ -53,17 +53,28 @@ DraggableScrollableSheet _defaultDraggableBottomSheet(context, model,
   );
 }
 
-Widget _defaultFakeCardBodyContent(context, model, {children, goBack}) {
+Widget _defaultFakeCardBodyContent(
+  context,
+  model, {
+  children,
+  goBack,
+  removePadding = false,
+}) {
   return SingleChildScrollView(
     child: Column(
       children: [
         _defaultModalBar(model, onPressed: goBack),
-        Padding(
-          padding: const EdgeInsets.all(24.0),
-          child: Column(
+        if (!removePadding)
+          Padding(
+            padding: defaultPaddingAll,
+            child: Column(
+              children: children,
+            ),
+          ),
+        if (removePadding)
+          Column(
             children: children,
           ),
-        ),
       ],
     ),
   );
@@ -77,6 +88,7 @@ Widget defaultFakeCardBody(
   required minPercentage,
   required heading,
   required children,
+  removePadding = false,
   subheading,
   goBack,
 }) {
@@ -86,7 +98,7 @@ Widget defaultFakeCardBody(
       children: [
         SafeArea(
           child: Padding(
-            padding: const EdgeInsets.all(24.0),
+            padding: defaultPaddingAll,
             child: Column(
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -115,6 +127,7 @@ Widget defaultFakeCardBody(
             model,
             children: children,
             goBack: goBack,
+            removePadding: removePadding,
           ),
         )
       ],

@@ -1,8 +1,7 @@
+import 'package:stacked_firebase_auth/stacked_firebase_auth.dart';
 import 'package:stacked_services/stacked_services.dart';
 import 'package:xyz_prototype/app/app.locator.dart';
-import 'package:xyz_prototype/app/app.router.dart';
 import 'package:xyz_prototype/ui/base/authentication_viewmodel.dart';
-import 'package:stacked_firebase_auth/stacked_firebase_auth.dart';
 import 'package:xyz_prototype/ui/create_account/create_account_view.dart';
 import 'package:xyz_prototype/ui/login/login_view.form.dart';
 

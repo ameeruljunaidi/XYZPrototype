@@ -1,5 +1,7 @@
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:xyz_prototype/app/app.logger.dart';
 import 'package:firebase_database/firebase_database.dart';
+import 'package:xyz_prototype/constants/app_urls.dart';
 import 'package:xyz_prototype/models/application_models.dart';
 
 class RealtimeService {
@@ -11,6 +13,9 @@ class RealtimeService {
   List<String>? _categoriesList;
   List<String>? get categoriesList => _categoriesList;
 
+  List<String>? _subCategoriesList;
+  List<String>? get subCcategoriesList => _subCategoriesList;
+
   final databaseServicesRef = FirebaseDatabase.instance
       .reference()
       .child('1HtxWhWuZKoEdkqflRuc3BaPOVsZSLB5F91mjIjtG-S4')
@@ -19,7 +24,7 @@ class RealtimeService {
   final databaseServiceSubCategoriesRef = FirebaseDatabase.instance
       .reference()
       .child('1HtxWhWuZKoEdkqflRuc3BaPOVsZSLB5F91mjIjtG-S4')
-      .child('gigSubcategory');
+      .child('gigSubCategory');
 
   Future<List<Service>> getServices() async {
     final List<Service> _services = [];
@@ -78,23 +83,60 @@ class RealtimeService {
     return List<String>.from(_categoriesListDup);
   }
 
-  List<String> getSubCategories() {
-    final _subCategoriesListDup = [];
+  Future<String> getServiceSubCategoryPhotoUrl(
+      String serviceSubCategoryId) async {
+    final Reference _firebaseStorageRef = FirebaseStorage.instance
+        .ref()
+        .child('assets')
+        .child('serviceSubCategoryPhotos')
+        .child('$serviceSubCategoryId.jpeg');
 
-    if (_allServiceList != null) {
-      _allServiceList!.forEach(
-        (service) {
-          _subCategoriesListDup.add(service.serviceSubcategory);
-        },
-      );
+    try {
+      var _downloadUrl = await _firebaseStorageRef.getDownloadURL();
+      var _url = _downloadUrl.toString();
 
-      final _subCategoriesList = [
-        ...{..._subCategoriesListDup}
-      ];
-
-      log.v('list of subCategories: $_subCategoriesList');
-      return List<String>.from(_subCategoriesList);
+      return _url;
+    } catch (e) {
+      log.e('firebase storage error: $e');
+      return NoPhotoUrl;
     }
-    return List<String>.from(_subCategoriesListDup);
+  }
+
+  Future<List<ServiceSubCategory>> getSubCategories() async {
+    final List<ServiceSubCategory> _subCategoriesList = [];
+
+    await databaseServiceSubCategoriesRef.get().then(
+      (snapshot) async {
+        if (snapshot != null) {
+          final _snapshotValue = snapshot.value;
+          final _snapshotValueMap = Map<String, dynamic>.from(_snapshotValue);
+          log.v('snapshotValueRetrieved: $_snapshotValue');
+
+          for (var entry in _snapshotValueMap.entries) {
+            await forEachServiceSubCategory(
+              entry.value,
+              _subCategoriesList,
+            );
+          }
+
+          return _subCategoriesList;
+        }
+      },
+    );
+    return _subCategoriesList;
+  }
+
+  Future<void> forEachServiceSubCategory(
+      subCategoryData, _subCategoriesList) async {
+    final _subCategoryPhoto = await getServiceSubCategoryPhotoUrl(
+        subCategoryData['serviceSubCategoryId']);
+
+    _subCategoriesList.add(
+      ServiceSubCategory(
+        serviceSubCategoryId: subCategoryData['serviceSubCategoryId'],
+        serviceSubCategoryName: subCategoryData['serviceSubCategory'],
+        serviceSubCategoryPhoto: _subCategoryPhoto,
+      ),
+    );
   }
 }

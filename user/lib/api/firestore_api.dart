@@ -370,6 +370,26 @@ class FirestoreApi {
     return false;
   }
 
+  // Updating user avatar
+  Future<bool> addUserAvatar({
+    required Client client,
+    required String avatarUrl,
+  }) async {
+    log.i('client loaded: $client');
+
+    try {
+      final userDocument = userCollection.doc(client.clientId);
+      await userDocument.update(
+        client.copyWith(clientAvatar: avatarUrl).toJson(),
+      );
+
+      return true;
+    } catch (e) {
+      throw FirestoreApiException(
+          message: 'Failed to upload user avatar', devDetails: '$e');
+    }
+  }
+
   // Deleting a vendor's gig
   Future deleteGig(String gigId) async {
     log.v('got gigId: $gigId');

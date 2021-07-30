@@ -8,7 +8,6 @@ import 'package:xyz_prototype/enums/basic_dialog_status.dart';
 import 'package:xyz_prototype/enums/dialog_type.dart';
 import 'package:xyz_prototype/models/application_models.dart';
 import 'package:xyz_prototype/services/user_service.dart';
-import 'package:xyz_prototype/ui/add_gig/add_gig_title_view.dart';
 
 class GigManagerViewModel extends BaseViewModel {
   final log = getLogger('MarketPlaceViewModel');

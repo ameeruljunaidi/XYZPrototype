@@ -23,6 +23,7 @@ import 'package:xyz_prototype/ui/marketplace/marketplace_view.dart';
 import 'package:xyz_prototype/ui/marketplace/marketplace_viewmodel.dart';
 import 'package:xyz_prototype/ui/notifications/notification_view.dart';
 import 'package:xyz_prototype/ui/notifications/notification_viewmodel.dart';
+import 'package:xyz_prototype/ui/profile/profile_add_avatar_view.dart';
 import 'package:xyz_prototype/ui/profile/profile_view.dart';
 import 'package:xyz_prototype/ui/profile/profile_viewmodel.dart';
 import 'package:xyz_prototype/ui/search/search_view.dart';
@@ -48,6 +49,7 @@ import 'package:xyz_prototype/utils/image_selector.dart';
     MaterialRoute(page: AddGigTitleView),
     MaterialRoute(page: AddGigPhotosView),
     MaterialRoute(page: AddGigLocationView),
+    MaterialRoute(page: ProfileAddAvatarView),
   ],
   dependencies: [
     LazySingleton(classType: NavigationService),

@@ -2,7 +2,6 @@ import 'dart:io';
 
 import 'package:auth_buttons/auth_buttons.dart';
 import 'package:flutter/material.dart';
-import 'package:xyz_prototype/ui/create_account/create_account_view.dart';
 import 'package:xyz_ui/xyz_ui.dart';
 
 class AuthenticationLayout extends StatelessWidget {

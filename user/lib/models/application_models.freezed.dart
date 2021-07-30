@@ -2590,10 +2590,13 @@ class _$ServiceSubCategoryTearOff {
   const _$ServiceSubCategoryTearOff();
 
   _ServiceSubCategory call(
-      {String? serviceSubCategoryId, String? serviceSubCategoryName}) {
+      {String? serviceSubCategoryId,
+      String? serviceSubCategoryName,
+      String? serviceSubCategoryPhoto}) {
     return _ServiceSubCategory(
       serviceSubCategoryId: serviceSubCategoryId,
       serviceSubCategoryName: serviceSubCategoryName,
+      serviceSubCategoryPhoto: serviceSubCategoryPhoto,
     );
   }
 
@@ -2609,6 +2612,7 @@ const $ServiceSubCategory = _$ServiceSubCategoryTearOff();
 mixin _$ServiceSubCategory {
   String? get serviceSubCategoryId => throw _privateConstructorUsedError;
   String? get serviceSubCategoryName => throw _privateConstructorUsedError;
+  String? get serviceSubCategoryPhoto => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -2621,7 +2625,10 @@ abstract class $ServiceSubCategoryCopyWith<$Res> {
   factory $ServiceSubCategoryCopyWith(
           ServiceSubCategory value, $Res Function(ServiceSubCategory) then) =
       _$ServiceSubCategoryCopyWithImpl<$Res>;
-  $Res call({String? serviceSubCategoryId, String? serviceSubCategoryName});
+  $Res call(
+      {String? serviceSubCategoryId,
+      String? serviceSubCategoryName,
+      String? serviceSubCategoryPhoto});
 }
 
 /// @nodoc
@@ -2637,6 +2644,7 @@ class _$ServiceSubCategoryCopyWithImpl<$Res>
   $Res call({
     Object? serviceSubCategoryId = freezed,
     Object? serviceSubCategoryName = freezed,
+    Object? serviceSubCategoryPhoto = freezed,
   }) {
     return _then(_value.copyWith(
       serviceSubCategoryId: serviceSubCategoryId == freezed
@@ -2646,6 +2654,10 @@ class _$ServiceSubCategoryCopyWithImpl<$Res>
       serviceSubCategoryName: serviceSubCategoryName == freezed
           ? _value.serviceSubCategoryName
           : serviceSubCategoryName // ignore: cast_nullable_to_non_nullable
+              as String?,
+      serviceSubCategoryPhoto: serviceSubCategoryPhoto == freezed
+          ? _value.serviceSubCategoryPhoto
+          : serviceSubCategoryPhoto // ignore: cast_nullable_to_non_nullable
               as String?,
     ));
   }
@@ -2658,7 +2670,10 @@ abstract class _$ServiceSubCategoryCopyWith<$Res>
           _ServiceSubCategory value, $Res Function(_ServiceSubCategory) then) =
       __$ServiceSubCategoryCopyWithImpl<$Res>;
   @override
-  $Res call({String? serviceSubCategoryId, String? serviceSubCategoryName});
+  $Res call(
+      {String? serviceSubCategoryId,
+      String? serviceSubCategoryName,
+      String? serviceSubCategoryPhoto});
 }
 
 /// @nodoc
@@ -2676,6 +2691,7 @@ class __$ServiceSubCategoryCopyWithImpl<$Res>
   $Res call({
     Object? serviceSubCategoryId = freezed,
     Object? serviceSubCategoryName = freezed,
+    Object? serviceSubCategoryPhoto = freezed,
   }) {
     return _then(_ServiceSubCategory(
       serviceSubCategoryId: serviceSubCategoryId == freezed
@@ -2685,6 +2701,10 @@ class __$ServiceSubCategoryCopyWithImpl<$Res>
       serviceSubCategoryName: serviceSubCategoryName == freezed
           ? _value.serviceSubCategoryName
           : serviceSubCategoryName // ignore: cast_nullable_to_non_nullable
+              as String?,
+      serviceSubCategoryPhoto: serviceSubCategoryPhoto == freezed
+          ? _value.serviceSubCategoryPhoto
+          : serviceSubCategoryPhoto // ignore: cast_nullable_to_non_nullable
               as String?,
     ));
   }
@@ -2696,7 +2716,9 @@ class _$_ServiceSubCategory
     with DiagnosticableTreeMixin
     implements _ServiceSubCategory {
   _$_ServiceSubCategory(
-      {this.serviceSubCategoryId, this.serviceSubCategoryName});
+      {this.serviceSubCategoryId,
+      this.serviceSubCategoryName,
+      this.serviceSubCategoryPhoto});
 
   factory _$_ServiceSubCategory.fromJson(Map<String, dynamic> json) =>
       _$_$_ServiceSubCategoryFromJson(json);
@@ -2705,10 +2727,12 @@ class _$_ServiceSubCategory
   final String? serviceSubCategoryId;
   @override
   final String? serviceSubCategoryName;
+  @override
+  final String? serviceSubCategoryPhoto;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'ServiceSubCategory(serviceSubCategoryId: $serviceSubCategoryId, serviceSubCategoryName: $serviceSubCategoryName)';
+    return 'ServiceSubCategory(serviceSubCategoryId: $serviceSubCategoryId, serviceSubCategoryName: $serviceSubCategoryName, serviceSubCategoryPhoto: $serviceSubCategoryPhoto)';
   }
 
   @override
@@ -2717,8 +2741,10 @@ class _$_ServiceSubCategory
     properties
       ..add(DiagnosticsProperty('type', 'ServiceSubCategory'))
       ..add(DiagnosticsProperty('serviceSubCategoryId', serviceSubCategoryId))
+      ..add(
+          DiagnosticsProperty('serviceSubCategoryName', serviceSubCategoryName))
       ..add(DiagnosticsProperty(
-          'serviceSubCategoryName', serviceSubCategoryName));
+          'serviceSubCategoryPhoto', serviceSubCategoryPhoto));
   }
 
   @override
@@ -2730,14 +2756,19 @@ class _$_ServiceSubCategory
                     other.serviceSubCategoryId, serviceSubCategoryId)) &&
             (identical(other.serviceSubCategoryName, serviceSubCategoryName) ||
                 const DeepCollectionEquality().equals(
-                    other.serviceSubCategoryName, serviceSubCategoryName)));
+                    other.serviceSubCategoryName, serviceSubCategoryName)) &&
+            (identical(
+                    other.serviceSubCategoryPhoto, serviceSubCategoryPhoto) ||
+                const DeepCollectionEquality().equals(
+                    other.serviceSubCategoryPhoto, serviceSubCategoryPhoto)));
   }
 
   @override
   int get hashCode =>
       runtimeType.hashCode ^
       const DeepCollectionEquality().hash(serviceSubCategoryId) ^
-      const DeepCollectionEquality().hash(serviceSubCategoryName);
+      const DeepCollectionEquality().hash(serviceSubCategoryName) ^
+      const DeepCollectionEquality().hash(serviceSubCategoryPhoto);
 
   @JsonKey(ignore: true)
   @override
@@ -2753,7 +2784,8 @@ class _$_ServiceSubCategory
 abstract class _ServiceSubCategory implements ServiceSubCategory {
   factory _ServiceSubCategory(
       {String? serviceSubCategoryId,
-      String? serviceSubCategoryName}) = _$_ServiceSubCategory;
+      String? serviceSubCategoryName,
+      String? serviceSubCategoryPhoto}) = _$_ServiceSubCategory;
 
   factory _ServiceSubCategory.fromJson(Map<String, dynamic> json) =
       _$_ServiceSubCategory.fromJson;
@@ -2762,6 +2794,8 @@ abstract class _ServiceSubCategory implements ServiceSubCategory {
   String? get serviceSubCategoryId => throw _privateConstructorUsedError;
   @override
   String? get serviceSubCategoryName => throw _privateConstructorUsedError;
+  @override
+  String? get serviceSubCategoryPhoto => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
   _$ServiceSubCategoryCopyWith<_ServiceSubCategory> get copyWith =>

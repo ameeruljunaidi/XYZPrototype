@@ -3,12 +3,10 @@ import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
 import 'package:xyz_prototype/app/app.locator.dart';
 import 'package:xyz_prototype/app/app.logger.dart';
-import 'package:xyz_prototype/app/app.router.dart';
 import 'package:xyz_prototype/constants/app_strings.dart';
 import 'package:xyz_prototype/models/application_models.dart';
 import 'package:xyz_prototype/services/gig_service.dart';
 import 'package:xyz_prototype/services/user_service.dart';
-import 'package:xyz_prototype/ui/add_gig/add_gig_photos_view.dart';
 import 'package:xyz_prototype/ui/address_selection/address_selection_view.form.dart';
 
 abstract class LocationSelectionViewModel extends FormViewModel {

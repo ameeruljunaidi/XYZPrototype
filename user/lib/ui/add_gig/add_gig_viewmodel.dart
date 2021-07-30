@@ -25,7 +25,7 @@ class AddGigViewModel extends FormViewModel {
   final _gigService = locator<GigService>();
 
   List<XFile>? _selectedImages;
-  List<XFile>? get selectedImage => _selectedImages;
+  List<XFile>? get selectedImages => _selectedImages;
 
   @override
   void setFormStatus() {}
@@ -72,7 +72,6 @@ class AddGigViewModel extends FormViewModel {
         title: 'Gig successfully added',
         description: 'You gig has been added',
         mainButtonTitle: 'Ok',
-        secondaryButtonTitle: 'Go Back',
       );
     }
 

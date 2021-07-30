@@ -50,4 +50,35 @@ class CloudStorageService {
 
     return cloudStorageResult;
   }
+
+  Future<String> uploadUserAvatar({
+    required XFile? imageToUpload,
+    required Client client,
+  }) async {
+    if (imageToUpload != null) {
+      var imageFileName = client.clientId +
+          '_' +
+          DateTime.now().millisecondsSinceEpoch.toString();
+
+      final Reference firebaseStorageRef = FirebaseStorage.instance
+          .ref()
+          .child('userFiles')
+          .child(client.clientId)
+          .child('userPhotos')
+          .child(imageFileName);
+
+      UploadTask uploadTask =
+          firebaseStorageRef.putFile(File(imageToUpload.path));
+
+      TaskSnapshot storageSnapshot = await uploadTask;
+
+      var downloadUrl = await storageSnapshot.ref.getDownloadURL();
+
+      var url = downloadUrl.toString();
+
+      return url;
+    }
+
+    throw UnimplementedError();
+  }
 }

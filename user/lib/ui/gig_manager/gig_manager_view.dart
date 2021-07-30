@@ -1,7 +1,5 @@
-import 'package:colorful_safe_area/colorful_safe_area.dart';
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
-import 'package:xyz_prototype/ui/add_gig/add_gig_title_view.dart';
 import 'package:xyz_prototype/ui/dumb_widgets/carousel_image.dart';
 import 'package:xyz_prototype/ui/gig_manager/gig_manager_viewmodel.dart';
 import 'package:xyz_ui/xyz_ui.dart';

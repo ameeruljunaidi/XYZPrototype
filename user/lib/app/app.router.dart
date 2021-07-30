@@ -22,6 +22,7 @@ import '../ui/inbox/inbox_view.dart';
 import '../ui/login/login_view.dart';
 import '../ui/marketplace/marketplace_view.dart';
 import '../ui/notifications/notification_view.dart';
+import '../ui/profile/profile_add_avatar_view.dart';
 import '../ui/profile/profile_view.dart';
 import '../ui/search/search_view.dart';
 import '../ui/startup/startup_view.dart';
@@ -43,6 +44,7 @@ class Routes {
   static const String addGigTitleView = '/add-gig-title-view';
   static const String addGigPhotosView = '/add-gig-photos-view';
   static const String addGigLocationView = '/add-gig-location-view';
+  static const String profileAddAvatarView = '/profile-add-avatar-view';
   static const all = <String>{
     startupView,
     homeView,
@@ -60,6 +62,7 @@ class Routes {
     addGigTitleView,
     addGigPhotosView,
     addGigLocationView,
+    profileAddAvatarView,
   };
 }
 
@@ -83,6 +86,7 @@ class StackedRouter extends RouterBase {
     RouteDef(Routes.addGigTitleView, page: AddGigTitleView),
     RouteDef(Routes.addGigPhotosView, page: AddGigPhotosView),
     RouteDef(Routes.addGigLocationView, page: AddGigLocationView),
+    RouteDef(Routes.profileAddAvatarView, page: ProfileAddAvatarView),
   ];
   @override
   Map<Type, StackedRouteFactory> get pagesMap => _pagesMap;
@@ -201,6 +205,12 @@ class StackedRouter extends RouterBase {
       );
       return MaterialPageRoute<dynamic>(
         builder: (context) => AddGigLocationView(key: args.key),
+        settings: data,
+      );
+    },
+    ProfileAddAvatarView: (data) {
+      return MaterialPageRoute<dynamic>(
+        builder: (context) => const ProfileAddAvatarView(),
         settings: data,
       );
     },

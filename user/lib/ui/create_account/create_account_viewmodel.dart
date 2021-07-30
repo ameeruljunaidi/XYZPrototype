@@ -3,7 +3,6 @@ import 'package:stacked/stacked.dart';
 // ignore: implementation_imports
 import 'package:stacked_firebase_auth/src/firebase_authentication_service.dart';
 import 'package:xyz_prototype/app/app.locator.dart';
-import 'package:xyz_prototype/app/app.router.dart';
 import 'package:xyz_prototype/ui/base/authentication_viewmodel.dart';
 import 'package:xyz_prototype/ui/create_account/create_account_view.form.dart';
 

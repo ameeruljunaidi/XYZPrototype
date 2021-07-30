@@ -8,6 +8,7 @@ import 'package:xyz_prototype/constants/app_keys.dart';
 import 'package:xyz_prototype/exceptions/firestore_api_exceptions.dart';
 import 'package:xyz_prototype/models/application_models.dart';
 import 'package:xyz_prototype/services/user_service.dart';
+import 'package:xyz_prototype/ui/create_account/create_account_view.form.dart';
 
 abstract class AuthenticationViewModel extends FormViewModel {
   final log = getLogger('AuthenticationViewModel');
@@ -63,6 +64,7 @@ abstract class AuthenticationViewModel extends FormViewModel {
       await userService.syncOrCreateUserAccount(
         client: Client(
           clientId: client.uid,
+          clientName: fullNameValue,
           clientEmail: client.email,
           clientType: describeEnum(ClientType.user),
           clientRegistrationDate: defaultRegistrationDate,

@@ -25,6 +25,13 @@ double screenHeightPercentage(BuildContext context, {double percentage = 1}) =>
 double screenWidthPercentage(BuildContext context, {double percentage = 1}) =>
     screenWidth(context) * percentage;
 
+// Default paddings
+const EdgeInsets defaultPaddingAll = const EdgeInsets.all(24.0);
+const EdgeInsets defaultPaddingHorizontal =
+    const EdgeInsets.symmetric(horizontal: 24.0);
+const EdgeInsets defaultPaddingVertical =
+    const EdgeInsets.symmetric(vertical: 24.0);
+
 // Borders
 BorderRadius defaultBorderRadius = BorderRadius.circular(16.0);
 

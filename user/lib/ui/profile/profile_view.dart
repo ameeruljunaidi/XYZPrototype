@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
 import 'package:xyz_prototype/app/app.locator.dart';
 import 'package:xyz_prototype/constants/app_keys.dart';
+import 'package:xyz_prototype/constants/app_urls.dart';
 import 'package:xyz_prototype/ui/profile/profile_viewmodel.dart';
 import 'package:xyz_ui/xyz_ui.dart';
 import 'package:xyz_prototype/extensions/string_extensions.dart';
@@ -23,27 +24,15 @@ class ProfileView extends StatelessWidget {
           color: kcVeryLightGreyColor,
           child: Column(
             children: [
-              _profileWidget(context, model),
+              _profileTopBar(context, model),
               verticalSpaceRegular,
               _profileSettingsList(model),
               if (model.clientData().isAnonymous)
-                Padding(
-                  padding: const EdgeInsets.all(24.0),
-                  child: BoxButton(
-                    onTap: () => model.goToLoginView(context),
-                    title: 'Log In or Sign Up',
-                  ),
-                ),
+                _logInOrSignUpButton(model, context),
               if (model.clientData().clientType ==
                       describeEnum(ClientType.user) &&
                   !model.clientData().isAnonymous)
-                Padding(
-                  padding: const EdgeInsets.all(24.0),
-                  child: BoxButton(
-                    title: 'Become a Partner',
-                    onTap: () => model.goToAddBusiness(context),
-                  ),
-                ),
+                _becomeBusinessButton(model, context),
             ],
           ),
         ),
@@ -52,11 +41,31 @@ class ProfileView extends StatelessWidget {
     );
   }
 
+  Widget _becomeBusinessButton(ProfileViewModel model, BuildContext context) {
+    return Padding(
+      padding: defaultPaddingAll,
+      child: BoxButton(
+        title: 'Become a Partner',
+        onTap: () => model.goToAddBusiness(context),
+      ),
+    );
+  }
+
+  Widget _logInOrSignUpButton(ProfileViewModel model, BuildContext context) {
+    return Padding(
+      padding: defaultPaddingAll,
+      child: BoxButton(
+        onTap: () => model.goToLoginView(context),
+        title: 'Log In or Sign Up',
+      ),
+    );
+  }
+
   Widget _profileSettingsWidget({text, onTap, tileColor, textColor, icon}) {
     return Column(
       children: [
         ListTile(
-          contentPadding: EdgeInsets.symmetric(horizontal: 32.0),
+          contentPadding: defaultPaddingHorizontal,
           title: BoxText.subheading(
             text,
             color: textColor,
@@ -143,7 +152,7 @@ class ProfileView extends StatelessWidget {
     );
   }
 
-  Widget _profileWidget(context, model) {
+  Widget _profileTopBar(context, model) {
     final String _clientEmail = model.clientData().clientEmail ?? '';
     final String _getClientType = model.clientData().clientType ?? '';
     final String _clientType = _getClientType.capitalizeFirstofEach;
@@ -157,9 +166,9 @@ class ProfileView extends StatelessWidget {
       Align(
         alignment: Alignment.centerLeft,
         child: BoxText.body(
-          // TODO: Add the name here
-          'Name: TODO',
+          '${model.clientData().clientName ?? ''}',
           align: TextAlign.left,
+          color: Colors.black,
         ),
       ),
       verticalSpaceSmall,
@@ -169,7 +178,7 @@ class ProfileView extends StatelessWidget {
       Align(
         alignment: Alignment.centerLeft,
         child: BoxText.body(
-          'Email: $_clientEmail',
+          '$_clientEmail',
           align: TextAlign.left,
         ),
       ),
@@ -180,7 +189,7 @@ class ProfileView extends StatelessWidget {
       Align(
         alignment: Alignment.centerLeft,
         child: BoxText.body(
-          'Type: $_clientType',
+          '$_clientType',
           align: TextAlign.left,
         ),
       ),
@@ -199,13 +208,13 @@ class ProfileView extends StatelessWidget {
               child: CircleAvatar(
                 backgroundColor: kcMediumGreyColor,
                 radius: _profileCardHeight * 0.4,
-                child: model.clientData().isAnonymous
-                    ? Icon(Icons.people, color: Colors.white)
-                    // TODO: Change when client already has avatar
-                    : BoxText.body('Add Photo', color: Colors.white),
+                foregroundImage: model.clientData().clientAvatar != null
+                    ? NetworkImage(
+                        model.clientData().clientAvatar ?? NoPhotoUrl)
+                    : null,
+                child: _circleAvatarContent(model),
               ),
-              // TODO: Implement on tap
-              onTap: model.inProgressNotifier,
+              onTap: model.goToAddUserAvatar,
             ),
           ),
           horizontalSpaceRegular,
@@ -227,5 +236,15 @@ class ProfileView extends StatelessWidget {
         ],
       ),
     );
+  }
+
+  Widget _circleAvatarContent(model) {
+    if (model.clientData().isAnonymous) {
+      return Icon(Icons.people, color: Colors.white);
+    } else if (model.clientData().clientAvatar == null) {
+      return BoxText.body('Add Photo', color: Colors.white);
+    } else {
+      return Container();
+    }
   }
 }

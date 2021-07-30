@@ -134,6 +134,7 @@ class ServiceSubCategory with _$ServiceSubCategory {
   factory ServiceSubCategory({
     String? serviceSubCategoryId,
     String? serviceSubCategoryName,
+    String? serviceSubCategoryPhoto,
   }) = _ServiceSubCategory;
 
   factory ServiceSubCategory.fromJson(Map<String, dynamic> json) =>

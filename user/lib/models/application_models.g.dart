@@ -237,6 +237,7 @@ _$_ServiceSubCategory _$_$_ServiceSubCategoryFromJson(
   return _$_ServiceSubCategory(
     serviceSubCategoryId: json['serviceSubCategoryId'] as String?,
     serviceSubCategoryName: json['serviceSubCategoryName'] as String?,
+    serviceSubCategoryPhoto: json['serviceSubCategoryPhoto'] as String?,
   );
 }
 
@@ -245,4 +246,5 @@ Map<String, dynamic> _$_$_ServiceSubCategoryToJson(
     <String, dynamic>{
       'serviceSubCategoryId': instance.serviceSubCategoryId,
       'serviceSubCategoryName': instance.serviceSubCategoryName,
+      'serviceSubCategoryPhoto': instance.serviceSubCategoryPhoto,
     };

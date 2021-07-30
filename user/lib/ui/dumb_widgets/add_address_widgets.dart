@@ -26,23 +26,30 @@ Widget placesList(model, addressController) {
         children: [
           ...model.autoCompleteResults
               .map(
-                (autoCompleteResults) => Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 10.0),
-                  child: AutoCompleteListItem(
-                    state: autoCompleteResults.secondaryText ?? '',
-                    city: autoCompleteResults.mainText ?? '',
-                    onTap: () {
-                      SystemChannels.textInput.invokeMethod('TextInput.hide');
-                      model.selectSelectedSuggestion(autoCompleteResults);
-                      addressController.text =
-                          "${autoCompleteResults.mainText}";
-                    },
-                  ),
+                (autoCompleteResults) => _autoCompleteResultsList(
+                  autoCompleteResults,
+                  model,
+                  addressController,
                 ),
               )
               .toList(),
         ],
       ),
+    ),
+  );
+}
+
+Widget _autoCompleteResultsList(autoCompleteResults, model, addressController) {
+  return Padding(
+    padding: const EdgeInsets.symmetric(horizontal: 10.0),
+    child: AutoCompleteListItem(
+      state: autoCompleteResults.secondaryText ?? '',
+      city: autoCompleteResults.mainText ?? '',
+      onTap: () {
+        SystemChannels.textInput.invokeMethod('TextInput.hide');
+        model.selectSelectedSuggestion(autoCompleteResults);
+        addressController.text = "${autoCompleteResults.mainText}";
+      },
     ),
   );
 }
