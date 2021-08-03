@@ -44,7 +44,7 @@ class AddGigPhotosView extends StatelessWidget {
     );
   }
 
-  Widget _addImagesButton(AddGigViewModel model) {
+  Widget _addImagesButton(model) {
     return Padding(
       padding: defaultPaddingHorizontal,
       child: BoxButton.outline(
