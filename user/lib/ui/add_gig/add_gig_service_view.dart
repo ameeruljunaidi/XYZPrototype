@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
-import 'package:xyz_prototype/ui/add_gig/add_gig_viewmodel.dart';
+import 'package:xyz_prototype/ui/add_gig/add_gig_service_viewmodel.dart';
+import 'package:xyz_prototype/ui/base/add_gig_viewmodel.dart';
 import 'package:xyz_ui/xyz_ui.dart';
 
 class AddGigServiceView extends StatelessWidget {
@@ -8,7 +9,7 @@ class AddGigServiceView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ViewModelBuilder<AddGigViewModel>.reactive(
+    return ViewModelBuilder<AddGigServiceViewModel>.reactive(
       onModelReady: (model) => model.getServicesFromSubCategory(),
       builder: (context, model, child) => Scaffold(
         body: defaultSliverScreen(
@@ -21,11 +22,11 @@ class AddGigServiceView extends StatelessWidget {
           sliverBodyContent: _listOfServices(context, model),
         ),
       ),
-      viewModelBuilder: () => AddGigViewModel(),
+      viewModelBuilder: () => AddGigServiceViewModel(),
     );
   }
 
-  Widget _listOfServices(context, AddGigViewModel model) {
+  Widget _listOfServices(context, model) {
     if (model.servicesList != null) {
       return SliverPadding(
         padding: EdgeInsets.only(
@@ -47,9 +48,9 @@ class AddGigServiceView extends StatelessWidget {
                     color: _selectedIndex ? kcVeryLightGreyColor : Colors.white,
                     borderRadius: defaultBorderRadius,
                     border: Border.all(
-                        color:
-                            _selectedIndex ? Colors.black : kcMediumGreyColor,
-                        width: _selectedIndex ? 2 : 1),
+                      color: _selectedIndex ? Colors.black : kcMediumGreyColor,
+                      width: _selectedIndex ? 2 : 1,
+                    ),
                   ),
                   padding: defaultPaddingAll,
                   child: Text(

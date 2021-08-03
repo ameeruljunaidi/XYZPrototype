@@ -10,7 +10,7 @@ import 'package:xyz_prototype/services/service_services.dart';
 import 'package:xyz_prototype/services/user_service.dart';
 import 'package:xyz_prototype/ui/add_business/add_business_view.dart';
 import 'package:xyz_prototype/ui/add_gig/add_gig_location_view.dart';
-import 'package:xyz_prototype/ui/add_gig/add_gig_price.dart';
+import 'package:xyz_prototype/ui/add_gig/add_gig_price_view.dart';
 import 'package:xyz_prototype/ui/add_gig/add_gig_service_view.dart';
 import 'package:xyz_prototype/ui/add_gig/add_gig_subcategory_view.dart';
 import 'package:xyz_prototype/ui/add_gig/add_gig_title_view.dart';

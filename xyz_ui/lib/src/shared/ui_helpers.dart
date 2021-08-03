@@ -11,7 +11,7 @@ const Widget horizontalSpaceLarge = SizedBox(width: 50.0);
 
 const Widget verticalSpaceTiny = SizedBox(height: 5.0);
 const Widget verticalSpaceSmall = SizedBox(height: 10.0);
-const Widget verticalSpaceRegular = SizedBox(height: 18.0);
+const Widget verticalSpaceRegular = SizedBox(height: 16.0);
 const Widget verticalSpaceMedium = SizedBox(height: 25.0);
 const Widget verticalSpaceLarge = SizedBox(height: 50.0);
 
@@ -37,11 +37,13 @@ double screenWidthPercentage(BuildContext context, {double percentage = 1}) =>
     screenWidth(context) * percentage;
 
 // Default paddings
-const EdgeInsets defaultPaddingAll = const EdgeInsets.all(24.0);
-const EdgeInsets defaultPaddingHorizontal =
-    const EdgeInsets.symmetric(horizontal: 24.0);
-const EdgeInsets defaultPaddingVertical =
-    const EdgeInsets.symmetric(vertical: 24.0);
+double defaultPaddingValue = 24.0;
+
+EdgeInsets defaultPaddingAll = EdgeInsets.all(defaultPaddingValue);
+EdgeInsets defaultPaddingHorizontal =
+    EdgeInsets.symmetric(horizontal: defaultPaddingValue);
+EdgeInsets defaultPaddingVertical =
+    EdgeInsets.symmetric(vertical: defaultPaddingValue);
 
 // Borders
 BorderRadius defaultBorderRadius = BorderRadius.circular(8.0);

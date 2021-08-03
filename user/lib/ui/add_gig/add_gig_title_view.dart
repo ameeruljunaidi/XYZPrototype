@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked/stacked_annotations.dart';
 import 'package:xyz_prototype/ui/add_gig/add_gig_title_view.form.dart';
-import 'package:xyz_prototype/ui/add_gig/add_gig_viewmodel.dart';
+import 'package:xyz_prototype/ui/add_gig/add_gig_title_viewmodel.dart';
+import 'package:xyz_prototype/ui/base/add_gig_viewmodel.dart';
 import 'package:xyz_ui/xyz_ui.dart';
 
 @FormView(
@@ -19,7 +20,7 @@ class AddGigTitleView extends StatelessWidget with $AddGigTitleView {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
-      child: ViewModelBuilder<AddGigViewModel>.reactive(
+      child: ViewModelBuilder<AddGigTitleViewModel>.reactive(
         onModelReady: (model) => listenToFormUpdated(model),
         builder: (context, model, child) => Scaffold(
           body: defaultSliverScreen(
@@ -32,7 +33,7 @@ class AddGigTitleView extends StatelessWidget with $AddGigTitleView {
             sliverBodyContent: _mainBodyContent(context, model),
           ),
         ),
-        viewModelBuilder: () => AddGigViewModel(),
+        viewModelBuilder: () => AddGigTitleViewModel(),
       ),
     );
   }

@@ -46,4 +46,6 @@ class GigService {
   void clearGig() {
     _currentGig = Gig();
   }
+
+  void cancelAddGig() {}
 }

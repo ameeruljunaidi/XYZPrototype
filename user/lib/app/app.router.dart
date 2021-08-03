@@ -12,7 +12,7 @@ import 'package:stacked/stacked.dart';
 import '../ui/add_business/add_business_view.dart';
 import '../ui/add_gig/add_gig_location_view.dart';
 import '../ui/add_gig/add_gig_photos_view.dart';
-import '../ui/add_gig/add_gig_price.dart';
+import '../ui/add_gig/add_gig_price_view.dart';
 import '../ui/add_gig/add_gig_service_view.dart';
 import '../ui/add_gig/add_gig_subcategory_view.dart';
 import '../ui/add_gig/add_gig_title_view.dart';

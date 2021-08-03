@@ -2,7 +2,8 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
-import 'package:xyz_prototype/ui/add_gig/add_gig_viewmodel.dart';
+import 'package:xyz_prototype/ui/add_gig/add_gig_photos_viewmodel.dart';
+import 'package:xyz_prototype/ui/base/add_gig_viewmodel.dart';
 import 'package:xyz_prototype/ui/dumb_widgets/add_gig_button.dart';
 import 'package:xyz_ui/xyz_ui.dart';
 
@@ -11,7 +12,7 @@ class AddGigPhotosView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ViewModelBuilder<AddGigViewModel>.reactive(
+    return ViewModelBuilder<AddGigPhotosViewModel>.reactive(
       builder: (context, model, child) => Scaffold(
         body: defaultSliverScreen(
           context,
@@ -22,7 +23,7 @@ class AddGigPhotosView extends StatelessWidget {
           sliverBodyContent: _mainBodyContent(context, model),
         ),
       ),
-      viewModelBuilder: () => AddGigViewModel(),
+      viewModelBuilder: () => AddGigPhotosViewModel(),
     );
   }
 

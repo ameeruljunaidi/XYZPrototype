@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
-import 'package:xyz_prototype/ui/add_gig/add_gig_viewmodel.dart';
+import 'package:xyz_prototype/ui/add_gig/add_gig_subcategory_viewmodel.dart';
+import 'package:xyz_prototype/ui/base/add_gig_viewmodel.dart';
 import 'package:xyz_ui/xyz_ui.dart';
 
 class AddGigSubCategoryView extends StatelessWidget {
@@ -8,7 +9,7 @@ class AddGigSubCategoryView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ViewModelBuilder<AddGigViewModel>.reactive(
+    return ViewModelBuilder<AddGigSubCategoryViewModel>.reactive(
       onModelReady: (model) => model.getSubCategories(),
       builder: (context, model, child) => Scaffold(
         body: defaultSliverScreen(
@@ -21,7 +22,7 @@ class AddGigSubCategoryView extends StatelessWidget {
           goContinue: model.goToAddService,
         ),
       ),
-      viewModelBuilder: () => AddGigViewModel(),
+      viewModelBuilder: () => AddGigSubCategoryViewModel(),
     );
   }
 
