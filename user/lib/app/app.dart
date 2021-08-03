@@ -6,9 +6,13 @@ import 'package:xyz_prototype/api/firestore_api.dart';
 import 'package:xyz_prototype/services/cloud_storage_service.dart';
 import 'package:xyz_prototype/services/gig_service.dart';
 import 'package:xyz_prototype/services/realtime_database_service.dart';
+import 'package:xyz_prototype/services/service_services.dart';
 import 'package:xyz_prototype/services/user_service.dart';
 import 'package:xyz_prototype/ui/add_business/add_business_view.dart';
 import 'package:xyz_prototype/ui/add_gig/add_gig_location_view.dart';
+import 'package:xyz_prototype/ui/add_gig/add_gig_price.dart';
+import 'package:xyz_prototype/ui/add_gig/add_gig_service_view.dart';
+import 'package:xyz_prototype/ui/add_gig/add_gig_subcategory_view.dart';
 import 'package:xyz_prototype/ui/add_gig/add_gig_title_view.dart';
 import 'package:xyz_prototype/ui/add_gig/add_gig_photos_view.dart';
 import 'package:xyz_prototype/ui/address_selection/address_selection_view.dart';
@@ -50,6 +54,9 @@ import 'package:xyz_prototype/utils/image_selector.dart';
     MaterialRoute(page: AddGigPhotosView),
     MaterialRoute(page: AddGigLocationView),
     MaterialRoute(page: ProfileAddAvatarView),
+    MaterialRoute(page: AddGigSubCategoryView),
+    MaterialRoute(page: AddGigServiceView),
+    MaterialRoute(page: AddGigPriceView),
   ],
   dependencies: [
     LazySingleton(classType: NavigationService),
@@ -68,6 +75,7 @@ import 'package:xyz_prototype/utils/image_selector.dart';
     LazySingleton(classType: AddBusinessView),
     LazySingleton(classType: GigService),
     LazySingleton(classType: RealtimeService),
+    LazySingleton(classType: ServiceService),
     Singleton(classType: ImageSelector),
     Singleton(classType: FirebaseAuthenticationService),
   ],

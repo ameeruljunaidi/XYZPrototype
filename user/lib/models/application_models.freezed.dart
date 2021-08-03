@@ -1849,8 +1849,9 @@ class _$GigTearOff {
       Map<String, double>? gigReviews,
       String? gigCategory,
       String? gigSubCategory,
+      String? gigServiceType,
       Map<String, dynamic>? gigFilters,
-      Map<String, dynamic>? gigPrice,
+      Map<String, Map<String, dynamic>>? gigPrice,
       String? gigLocation}) {
     return _Gigs(
       gigId: gigId,
@@ -1864,6 +1865,7 @@ class _$GigTearOff {
       gigReviews: gigReviews,
       gigCategory: gigCategory,
       gigSubCategory: gigSubCategory,
+      gigServiceType: gigServiceType,
       gigFilters: gigFilters,
       gigPrice: gigPrice,
       gigLocation: gigLocation,
@@ -1891,8 +1893,10 @@ mixin _$Gig {
   Map<String, double>? get gigReviews => throw _privateConstructorUsedError;
   String? get gigCategory => throw _privateConstructorUsedError;
   String? get gigSubCategory => throw _privateConstructorUsedError;
+  String? get gigServiceType => throw _privateConstructorUsedError;
   Map<String, dynamic>? get gigFilters => throw _privateConstructorUsedError;
-  Map<String, dynamic>? get gigPrice => throw _privateConstructorUsedError;
+  Map<String, Map<String, dynamic>>? get gigPrice =>
+      throw _privateConstructorUsedError;
   String? get gigLocation => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -1916,8 +1920,9 @@ abstract class $GigCopyWith<$Res> {
       Map<String, double>? gigReviews,
       String? gigCategory,
       String? gigSubCategory,
+      String? gigServiceType,
       Map<String, dynamic>? gigFilters,
-      Map<String, dynamic>? gigPrice,
+      Map<String, Map<String, dynamic>>? gigPrice,
       String? gigLocation});
 }
 
@@ -1942,6 +1947,7 @@ class _$GigCopyWithImpl<$Res> implements $GigCopyWith<$Res> {
     Object? gigReviews = freezed,
     Object? gigCategory = freezed,
     Object? gigSubCategory = freezed,
+    Object? gigServiceType = freezed,
     Object? gigFilters = freezed,
     Object? gigPrice = freezed,
     Object? gigLocation = freezed,
@@ -1991,6 +1997,10 @@ class _$GigCopyWithImpl<$Res> implements $GigCopyWith<$Res> {
           ? _value.gigSubCategory
           : gigSubCategory // ignore: cast_nullable_to_non_nullable
               as String?,
+      gigServiceType: gigServiceType == freezed
+          ? _value.gigServiceType
+          : gigServiceType // ignore: cast_nullable_to_non_nullable
+              as String?,
       gigFilters: gigFilters == freezed
           ? _value.gigFilters
           : gigFilters // ignore: cast_nullable_to_non_nullable
@@ -1998,7 +2008,7 @@ class _$GigCopyWithImpl<$Res> implements $GigCopyWith<$Res> {
       gigPrice: gigPrice == freezed
           ? _value.gigPrice
           : gigPrice // ignore: cast_nullable_to_non_nullable
-              as Map<String, dynamic>?,
+              as Map<String, Map<String, dynamic>>?,
       gigLocation: gigLocation == freezed
           ? _value.gigLocation
           : gigLocation // ignore: cast_nullable_to_non_nullable
@@ -2024,8 +2034,9 @@ abstract class _$GigsCopyWith<$Res> implements $GigCopyWith<$Res> {
       Map<String, double>? gigReviews,
       String? gigCategory,
       String? gigSubCategory,
+      String? gigServiceType,
       Map<String, dynamic>? gigFilters,
-      Map<String, dynamic>? gigPrice,
+      Map<String, Map<String, dynamic>>? gigPrice,
       String? gigLocation});
 }
 
@@ -2051,6 +2062,7 @@ class __$GigsCopyWithImpl<$Res> extends _$GigCopyWithImpl<$Res>
     Object? gigReviews = freezed,
     Object? gigCategory = freezed,
     Object? gigSubCategory = freezed,
+    Object? gigServiceType = freezed,
     Object? gigFilters = freezed,
     Object? gigPrice = freezed,
     Object? gigLocation = freezed,
@@ -2100,6 +2112,10 @@ class __$GigsCopyWithImpl<$Res> extends _$GigCopyWithImpl<$Res>
           ? _value.gigSubCategory
           : gigSubCategory // ignore: cast_nullable_to_non_nullable
               as String?,
+      gigServiceType: gigServiceType == freezed
+          ? _value.gigServiceType
+          : gigServiceType // ignore: cast_nullable_to_non_nullable
+              as String?,
       gigFilters: gigFilters == freezed
           ? _value.gigFilters
           : gigFilters // ignore: cast_nullable_to_non_nullable
@@ -2107,7 +2123,7 @@ class __$GigsCopyWithImpl<$Res> extends _$GigCopyWithImpl<$Res>
       gigPrice: gigPrice == freezed
           ? _value.gigPrice
           : gigPrice // ignore: cast_nullable_to_non_nullable
-              as Map<String, dynamic>?,
+              as Map<String, Map<String, dynamic>>?,
       gigLocation: gigLocation == freezed
           ? _value.gigLocation
           : gigLocation // ignore: cast_nullable_to_non_nullable
@@ -2131,6 +2147,7 @@ class _$_Gigs with DiagnosticableTreeMixin implements _Gigs {
       this.gigReviews,
       this.gigCategory,
       this.gigSubCategory,
+      this.gigServiceType,
       this.gigFilters,
       this.gigPrice,
       this.gigLocation});
@@ -2161,15 +2178,17 @@ class _$_Gigs with DiagnosticableTreeMixin implements _Gigs {
   @override
   final String? gigSubCategory;
   @override
+  final String? gigServiceType;
+  @override
   final Map<String, dynamic>? gigFilters;
   @override
-  final Map<String, dynamic>? gigPrice;
+  final Map<String, Map<String, dynamic>>? gigPrice;
   @override
   final String? gigLocation;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'Gig(gigId: $gigId, gigVendorId: $gigVendorId, gigTitle: $gigTitle, gigSubtitle: $gigSubtitle, gigDescription: $gigDescription, gigPhotos: $gigPhotos, gigFeatures: $gigFeatures, gigFaqs: $gigFaqs, gigReviews: $gigReviews, gigCategory: $gigCategory, gigSubCategory: $gigSubCategory, gigFilters: $gigFilters, gigPrice: $gigPrice, gigLocation: $gigLocation)';
+    return 'Gig(gigId: $gigId, gigVendorId: $gigVendorId, gigTitle: $gigTitle, gigSubtitle: $gigSubtitle, gigDescription: $gigDescription, gigPhotos: $gigPhotos, gigFeatures: $gigFeatures, gigFaqs: $gigFaqs, gigReviews: $gigReviews, gigCategory: $gigCategory, gigSubCategory: $gigSubCategory, gigServiceType: $gigServiceType, gigFilters: $gigFilters, gigPrice: $gigPrice, gigLocation: $gigLocation)';
   }
 
   @override
@@ -2188,6 +2207,7 @@ class _$_Gigs with DiagnosticableTreeMixin implements _Gigs {
       ..add(DiagnosticsProperty('gigReviews', gigReviews))
       ..add(DiagnosticsProperty('gigCategory', gigCategory))
       ..add(DiagnosticsProperty('gigSubCategory', gigSubCategory))
+      ..add(DiagnosticsProperty('gigServiceType', gigServiceType))
       ..add(DiagnosticsProperty('gigFilters', gigFilters))
       ..add(DiagnosticsProperty('gigPrice', gigPrice))
       ..add(DiagnosticsProperty('gigLocation', gigLocation));
@@ -2229,6 +2249,9 @@ class _$_Gigs with DiagnosticableTreeMixin implements _Gigs {
             (identical(other.gigSubCategory, gigSubCategory) ||
                 const DeepCollectionEquality()
                     .equals(other.gigSubCategory, gigSubCategory)) &&
+            (identical(other.gigServiceType, gigServiceType) ||
+                const DeepCollectionEquality()
+                    .equals(other.gigServiceType, gigServiceType)) &&
             (identical(other.gigFilters, gigFilters) ||
                 const DeepCollectionEquality()
                     .equals(other.gigFilters, gigFilters)) &&
@@ -2254,6 +2277,7 @@ class _$_Gigs with DiagnosticableTreeMixin implements _Gigs {
       const DeepCollectionEquality().hash(gigReviews) ^
       const DeepCollectionEquality().hash(gigCategory) ^
       const DeepCollectionEquality().hash(gigSubCategory) ^
+      const DeepCollectionEquality().hash(gigServiceType) ^
       const DeepCollectionEquality().hash(gigFilters) ^
       const DeepCollectionEquality().hash(gigPrice) ^
       const DeepCollectionEquality().hash(gigLocation);
@@ -2282,8 +2306,9 @@ abstract class _Gigs implements Gig {
       Map<String, double>? gigReviews,
       String? gigCategory,
       String? gigSubCategory,
+      String? gigServiceType,
       Map<String, dynamic>? gigFilters,
-      Map<String, dynamic>? gigPrice,
+      Map<String, Map<String, dynamic>>? gigPrice,
       String? gigLocation}) = _$_Gigs;
 
   factory _Gigs.fromJson(Map<String, dynamic> json) = _$_Gigs.fromJson;
@@ -2311,9 +2336,12 @@ abstract class _Gigs implements Gig {
   @override
   String? get gigSubCategory => throw _privateConstructorUsedError;
   @override
+  String? get gigServiceType => throw _privateConstructorUsedError;
+  @override
   Map<String, dynamic>? get gigFilters => throw _privateConstructorUsedError;
   @override
-  Map<String, dynamic>? get gigPrice => throw _privateConstructorUsedError;
+  Map<String, Map<String, dynamic>>? get gigPrice =>
+      throw _privateConstructorUsedError;
   @override
   String? get gigLocation => throw _privateConstructorUsedError;
   @override
@@ -2592,11 +2620,17 @@ class _$ServiceSubCategoryTearOff {
   _ServiceSubCategory call(
       {String? serviceSubCategoryId,
       String? serviceSubCategoryName,
-      String? serviceSubCategoryPhoto}) {
+      String? serviceSubCategoryPhoto,
+      List<String>? serviceSuggestedFeatures,
+      List<String>? serviceSuggestedFeaturesTypes,
+      List<String>? serviceSugggestedQuoteDetails}) {
     return _ServiceSubCategory(
       serviceSubCategoryId: serviceSubCategoryId,
       serviceSubCategoryName: serviceSubCategoryName,
       serviceSubCategoryPhoto: serviceSubCategoryPhoto,
+      serviceSuggestedFeatures: serviceSuggestedFeatures,
+      serviceSuggestedFeaturesTypes: serviceSuggestedFeaturesTypes,
+      serviceSugggestedQuoteDetails: serviceSugggestedQuoteDetails,
     );
   }
 
@@ -2613,6 +2647,12 @@ mixin _$ServiceSubCategory {
   String? get serviceSubCategoryId => throw _privateConstructorUsedError;
   String? get serviceSubCategoryName => throw _privateConstructorUsedError;
   String? get serviceSubCategoryPhoto => throw _privateConstructorUsedError;
+  List<String>? get serviceSuggestedFeatures =>
+      throw _privateConstructorUsedError;
+  List<String>? get serviceSuggestedFeaturesTypes =>
+      throw _privateConstructorUsedError;
+  List<String>? get serviceSugggestedQuoteDetails =>
+      throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -2628,7 +2668,10 @@ abstract class $ServiceSubCategoryCopyWith<$Res> {
   $Res call(
       {String? serviceSubCategoryId,
       String? serviceSubCategoryName,
-      String? serviceSubCategoryPhoto});
+      String? serviceSubCategoryPhoto,
+      List<String>? serviceSuggestedFeatures,
+      List<String>? serviceSuggestedFeaturesTypes,
+      List<String>? serviceSugggestedQuoteDetails});
 }
 
 /// @nodoc
@@ -2645,6 +2688,9 @@ class _$ServiceSubCategoryCopyWithImpl<$Res>
     Object? serviceSubCategoryId = freezed,
     Object? serviceSubCategoryName = freezed,
     Object? serviceSubCategoryPhoto = freezed,
+    Object? serviceSuggestedFeatures = freezed,
+    Object? serviceSuggestedFeaturesTypes = freezed,
+    Object? serviceSugggestedQuoteDetails = freezed,
   }) {
     return _then(_value.copyWith(
       serviceSubCategoryId: serviceSubCategoryId == freezed
@@ -2659,6 +2705,18 @@ class _$ServiceSubCategoryCopyWithImpl<$Res>
           ? _value.serviceSubCategoryPhoto
           : serviceSubCategoryPhoto // ignore: cast_nullable_to_non_nullable
               as String?,
+      serviceSuggestedFeatures: serviceSuggestedFeatures == freezed
+          ? _value.serviceSuggestedFeatures
+          : serviceSuggestedFeatures // ignore: cast_nullable_to_non_nullable
+              as List<String>?,
+      serviceSuggestedFeaturesTypes: serviceSuggestedFeaturesTypes == freezed
+          ? _value.serviceSuggestedFeaturesTypes
+          : serviceSuggestedFeaturesTypes // ignore: cast_nullable_to_non_nullable
+              as List<String>?,
+      serviceSugggestedQuoteDetails: serviceSugggestedQuoteDetails == freezed
+          ? _value.serviceSugggestedQuoteDetails
+          : serviceSugggestedQuoteDetails // ignore: cast_nullable_to_non_nullable
+              as List<String>?,
     ));
   }
 }
@@ -2673,7 +2731,10 @@ abstract class _$ServiceSubCategoryCopyWith<$Res>
   $Res call(
       {String? serviceSubCategoryId,
       String? serviceSubCategoryName,
-      String? serviceSubCategoryPhoto});
+      String? serviceSubCategoryPhoto,
+      List<String>? serviceSuggestedFeatures,
+      List<String>? serviceSuggestedFeaturesTypes,
+      List<String>? serviceSugggestedQuoteDetails});
 }
 
 /// @nodoc
@@ -2692,6 +2753,9 @@ class __$ServiceSubCategoryCopyWithImpl<$Res>
     Object? serviceSubCategoryId = freezed,
     Object? serviceSubCategoryName = freezed,
     Object? serviceSubCategoryPhoto = freezed,
+    Object? serviceSuggestedFeatures = freezed,
+    Object? serviceSuggestedFeaturesTypes = freezed,
+    Object? serviceSugggestedQuoteDetails = freezed,
   }) {
     return _then(_ServiceSubCategory(
       serviceSubCategoryId: serviceSubCategoryId == freezed
@@ -2706,6 +2770,18 @@ class __$ServiceSubCategoryCopyWithImpl<$Res>
           ? _value.serviceSubCategoryPhoto
           : serviceSubCategoryPhoto // ignore: cast_nullable_to_non_nullable
               as String?,
+      serviceSuggestedFeatures: serviceSuggestedFeatures == freezed
+          ? _value.serviceSuggestedFeatures
+          : serviceSuggestedFeatures // ignore: cast_nullable_to_non_nullable
+              as List<String>?,
+      serviceSuggestedFeaturesTypes: serviceSuggestedFeaturesTypes == freezed
+          ? _value.serviceSuggestedFeaturesTypes
+          : serviceSuggestedFeaturesTypes // ignore: cast_nullable_to_non_nullable
+              as List<String>?,
+      serviceSugggestedQuoteDetails: serviceSugggestedQuoteDetails == freezed
+          ? _value.serviceSugggestedQuoteDetails
+          : serviceSugggestedQuoteDetails // ignore: cast_nullable_to_non_nullable
+              as List<String>?,
     ));
   }
 }
@@ -2718,7 +2794,10 @@ class _$_ServiceSubCategory
   _$_ServiceSubCategory(
       {this.serviceSubCategoryId,
       this.serviceSubCategoryName,
-      this.serviceSubCategoryPhoto});
+      this.serviceSubCategoryPhoto,
+      this.serviceSuggestedFeatures,
+      this.serviceSuggestedFeaturesTypes,
+      this.serviceSugggestedQuoteDetails});
 
   factory _$_ServiceSubCategory.fromJson(Map<String, dynamic> json) =>
       _$_$_ServiceSubCategoryFromJson(json);
@@ -2729,10 +2808,16 @@ class _$_ServiceSubCategory
   final String? serviceSubCategoryName;
   @override
   final String? serviceSubCategoryPhoto;
+  @override
+  final List<String>? serviceSuggestedFeatures;
+  @override
+  final List<String>? serviceSuggestedFeaturesTypes;
+  @override
+  final List<String>? serviceSugggestedQuoteDetails;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'ServiceSubCategory(serviceSubCategoryId: $serviceSubCategoryId, serviceSubCategoryName: $serviceSubCategoryName, serviceSubCategoryPhoto: $serviceSubCategoryPhoto)';
+    return 'ServiceSubCategory(serviceSubCategoryId: $serviceSubCategoryId, serviceSubCategoryName: $serviceSubCategoryName, serviceSubCategoryPhoto: $serviceSubCategoryPhoto, serviceSuggestedFeatures: $serviceSuggestedFeatures, serviceSuggestedFeaturesTypes: $serviceSuggestedFeaturesTypes, serviceSugggestedQuoteDetails: $serviceSugggestedQuoteDetails)';
   }
 
   @override
@@ -2744,7 +2829,13 @@ class _$_ServiceSubCategory
       ..add(
           DiagnosticsProperty('serviceSubCategoryName', serviceSubCategoryName))
       ..add(DiagnosticsProperty(
-          'serviceSubCategoryPhoto', serviceSubCategoryPhoto));
+          'serviceSubCategoryPhoto', serviceSubCategoryPhoto))
+      ..add(DiagnosticsProperty(
+          'serviceSuggestedFeatures', serviceSuggestedFeatures))
+      ..add(DiagnosticsProperty(
+          'serviceSuggestedFeaturesTypes', serviceSuggestedFeaturesTypes))
+      ..add(DiagnosticsProperty(
+          'serviceSugggestedQuoteDetails', serviceSugggestedQuoteDetails));
   }
 
   @override
@@ -2760,7 +2851,22 @@ class _$_ServiceSubCategory
             (identical(
                     other.serviceSubCategoryPhoto, serviceSubCategoryPhoto) ||
                 const DeepCollectionEquality().equals(
-                    other.serviceSubCategoryPhoto, serviceSubCategoryPhoto)));
+                    other.serviceSubCategoryPhoto, serviceSubCategoryPhoto)) &&
+            (identical(
+                    other.serviceSuggestedFeatures, serviceSuggestedFeatures) ||
+                const DeepCollectionEquality().equals(
+                    other.serviceSuggestedFeatures,
+                    serviceSuggestedFeatures)) &&
+            (identical(other.serviceSuggestedFeaturesTypes,
+                    serviceSuggestedFeaturesTypes) ||
+                const DeepCollectionEquality().equals(
+                    other.serviceSuggestedFeaturesTypes,
+                    serviceSuggestedFeaturesTypes)) &&
+            (identical(other.serviceSugggestedQuoteDetails,
+                    serviceSugggestedQuoteDetails) ||
+                const DeepCollectionEquality().equals(
+                    other.serviceSugggestedQuoteDetails,
+                    serviceSugggestedQuoteDetails)));
   }
 
   @override
@@ -2768,7 +2874,10 @@ class _$_ServiceSubCategory
       runtimeType.hashCode ^
       const DeepCollectionEquality().hash(serviceSubCategoryId) ^
       const DeepCollectionEquality().hash(serviceSubCategoryName) ^
-      const DeepCollectionEquality().hash(serviceSubCategoryPhoto);
+      const DeepCollectionEquality().hash(serviceSubCategoryPhoto) ^
+      const DeepCollectionEquality().hash(serviceSuggestedFeatures) ^
+      const DeepCollectionEquality().hash(serviceSuggestedFeaturesTypes) ^
+      const DeepCollectionEquality().hash(serviceSugggestedQuoteDetails);
 
   @JsonKey(ignore: true)
   @override
@@ -2785,7 +2894,10 @@ abstract class _ServiceSubCategory implements ServiceSubCategory {
   factory _ServiceSubCategory(
       {String? serviceSubCategoryId,
       String? serviceSubCategoryName,
-      String? serviceSubCategoryPhoto}) = _$_ServiceSubCategory;
+      String? serviceSubCategoryPhoto,
+      List<String>? serviceSuggestedFeatures,
+      List<String>? serviceSuggestedFeaturesTypes,
+      List<String>? serviceSugggestedQuoteDetails}) = _$_ServiceSubCategory;
 
   factory _ServiceSubCategory.fromJson(Map<String, dynamic> json) =
       _$_ServiceSubCategory.fromJson;
@@ -2797,7 +2909,234 @@ abstract class _ServiceSubCategory implements ServiceSubCategory {
   @override
   String? get serviceSubCategoryPhoto => throw _privateConstructorUsedError;
   @override
+  List<String>? get serviceSuggestedFeatures =>
+      throw _privateConstructorUsedError;
+  @override
+  List<String>? get serviceSuggestedFeaturesTypes =>
+      throw _privateConstructorUsedError;
+  @override
+  List<String>? get serviceSugggestedQuoteDetails =>
+      throw _privateConstructorUsedError;
+  @override
   @JsonKey(ignore: true)
   _$ServiceSubCategoryCopyWith<_ServiceSubCategory> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+ServiceFeatures _$ServiceFeaturesFromJson(Map<String, dynamic> json) {
+  return _ServiceFeatures.fromJson(json);
+}
+
+/// @nodoc
+class _$ServiceFeaturesTearOff {
+  const _$ServiceFeaturesTearOff();
+
+  _ServiceFeatures call(
+      {String? serviceFeatureName,
+      String? serviceFeatureType,
+      String? serviceFeatureValue}) {
+    return _ServiceFeatures(
+      serviceFeatureName: serviceFeatureName,
+      serviceFeatureType: serviceFeatureType,
+      serviceFeatureValue: serviceFeatureValue,
+    );
+  }
+
+  ServiceFeatures fromJson(Map<String, Object> json) {
+    return ServiceFeatures.fromJson(json);
+  }
+}
+
+/// @nodoc
+const $ServiceFeatures = _$ServiceFeaturesTearOff();
+
+/// @nodoc
+mixin _$ServiceFeatures {
+  String? get serviceFeatureName => throw _privateConstructorUsedError;
+  String? get serviceFeatureType => throw _privateConstructorUsedError;
+  String? get serviceFeatureValue => throw _privateConstructorUsedError;
+
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+  @JsonKey(ignore: true)
+  $ServiceFeaturesCopyWith<ServiceFeatures> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $ServiceFeaturesCopyWith<$Res> {
+  factory $ServiceFeaturesCopyWith(
+          ServiceFeatures value, $Res Function(ServiceFeatures) then) =
+      _$ServiceFeaturesCopyWithImpl<$Res>;
+  $Res call(
+      {String? serviceFeatureName,
+      String? serviceFeatureType,
+      String? serviceFeatureValue});
+}
+
+/// @nodoc
+class _$ServiceFeaturesCopyWithImpl<$Res>
+    implements $ServiceFeaturesCopyWith<$Res> {
+  _$ServiceFeaturesCopyWithImpl(this._value, this._then);
+
+  final ServiceFeatures _value;
+  // ignore: unused_field
+  final $Res Function(ServiceFeatures) _then;
+
+  @override
+  $Res call({
+    Object? serviceFeatureName = freezed,
+    Object? serviceFeatureType = freezed,
+    Object? serviceFeatureValue = freezed,
+  }) {
+    return _then(_value.copyWith(
+      serviceFeatureName: serviceFeatureName == freezed
+          ? _value.serviceFeatureName
+          : serviceFeatureName // ignore: cast_nullable_to_non_nullable
+              as String?,
+      serviceFeatureType: serviceFeatureType == freezed
+          ? _value.serviceFeatureType
+          : serviceFeatureType // ignore: cast_nullable_to_non_nullable
+              as String?,
+      serviceFeatureValue: serviceFeatureValue == freezed
+          ? _value.serviceFeatureValue
+          : serviceFeatureValue // ignore: cast_nullable_to_non_nullable
+              as String?,
+    ));
+  }
+}
+
+/// @nodoc
+abstract class _$ServiceFeaturesCopyWith<$Res>
+    implements $ServiceFeaturesCopyWith<$Res> {
+  factory _$ServiceFeaturesCopyWith(
+          _ServiceFeatures value, $Res Function(_ServiceFeatures) then) =
+      __$ServiceFeaturesCopyWithImpl<$Res>;
+  @override
+  $Res call(
+      {String? serviceFeatureName,
+      String? serviceFeatureType,
+      String? serviceFeatureValue});
+}
+
+/// @nodoc
+class __$ServiceFeaturesCopyWithImpl<$Res>
+    extends _$ServiceFeaturesCopyWithImpl<$Res>
+    implements _$ServiceFeaturesCopyWith<$Res> {
+  __$ServiceFeaturesCopyWithImpl(
+      _ServiceFeatures _value, $Res Function(_ServiceFeatures) _then)
+      : super(_value, (v) => _then(v as _ServiceFeatures));
+
+  @override
+  _ServiceFeatures get _value => super._value as _ServiceFeatures;
+
+  @override
+  $Res call({
+    Object? serviceFeatureName = freezed,
+    Object? serviceFeatureType = freezed,
+    Object? serviceFeatureValue = freezed,
+  }) {
+    return _then(_ServiceFeatures(
+      serviceFeatureName: serviceFeatureName == freezed
+          ? _value.serviceFeatureName
+          : serviceFeatureName // ignore: cast_nullable_to_non_nullable
+              as String?,
+      serviceFeatureType: serviceFeatureType == freezed
+          ? _value.serviceFeatureType
+          : serviceFeatureType // ignore: cast_nullable_to_non_nullable
+              as String?,
+      serviceFeatureValue: serviceFeatureValue == freezed
+          ? _value.serviceFeatureValue
+          : serviceFeatureValue // ignore: cast_nullable_to_non_nullable
+              as String?,
+    ));
+  }
+}
+
+/// @nodoc
+@JsonSerializable()
+class _$_ServiceFeatures
+    with DiagnosticableTreeMixin
+    implements _ServiceFeatures {
+  _$_ServiceFeatures(
+      {this.serviceFeatureName,
+      this.serviceFeatureType,
+      this.serviceFeatureValue});
+
+  factory _$_ServiceFeatures.fromJson(Map<String, dynamic> json) =>
+      _$_$_ServiceFeaturesFromJson(json);
+
+  @override
+  final String? serviceFeatureName;
+  @override
+  final String? serviceFeatureType;
+  @override
+  final String? serviceFeatureValue;
+
+  @override
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
+    return 'ServiceFeatures(serviceFeatureName: $serviceFeatureName, serviceFeatureType: $serviceFeatureType, serviceFeatureValue: $serviceFeatureValue)';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty('type', 'ServiceFeatures'))
+      ..add(DiagnosticsProperty('serviceFeatureName', serviceFeatureName))
+      ..add(DiagnosticsProperty('serviceFeatureType', serviceFeatureType))
+      ..add(DiagnosticsProperty('serviceFeatureValue', serviceFeatureValue));
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other is _ServiceFeatures &&
+            (identical(other.serviceFeatureName, serviceFeatureName) ||
+                const DeepCollectionEquality()
+                    .equals(other.serviceFeatureName, serviceFeatureName)) &&
+            (identical(other.serviceFeatureType, serviceFeatureType) ||
+                const DeepCollectionEquality()
+                    .equals(other.serviceFeatureType, serviceFeatureType)) &&
+            (identical(other.serviceFeatureValue, serviceFeatureValue) ||
+                const DeepCollectionEquality()
+                    .equals(other.serviceFeatureValue, serviceFeatureValue)));
+  }
+
+  @override
+  int get hashCode =>
+      runtimeType.hashCode ^
+      const DeepCollectionEquality().hash(serviceFeatureName) ^
+      const DeepCollectionEquality().hash(serviceFeatureType) ^
+      const DeepCollectionEquality().hash(serviceFeatureValue);
+
+  @JsonKey(ignore: true)
+  @override
+  _$ServiceFeaturesCopyWith<_ServiceFeatures> get copyWith =>
+      __$ServiceFeaturesCopyWithImpl<_ServiceFeatures>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$_$_ServiceFeaturesToJson(this);
+  }
+}
+
+abstract class _ServiceFeatures implements ServiceFeatures {
+  factory _ServiceFeatures(
+      {String? serviceFeatureName,
+      String? serviceFeatureType,
+      String? serviceFeatureValue}) = _$_ServiceFeatures;
+
+  factory _ServiceFeatures.fromJson(Map<String, dynamic> json) =
+      _$_ServiceFeatures.fromJson;
+
+  @override
+  String? get serviceFeatureName => throw _privateConstructorUsedError;
+  @override
+  String? get serviceFeatureType => throw _privateConstructorUsedError;
+  @override
+  String? get serviceFeatureValue => throw _privateConstructorUsedError;
+  @override
+  @JsonKey(ignore: true)
+  _$ServiceFeaturesCopyWith<_ServiceFeatures> get copyWith =>
       throw _privateConstructorUsedError;
 }

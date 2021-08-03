@@ -25,8 +25,11 @@ class CreateAccountView extends StatelessWidget with $CreateAccountView {
     return defaultBottomSheet(
       context: context,
       builder: (context) => Container(
-        decoration:
-            BoxDecoration(borderRadius: BorderRadius.all(Radius.circular(200))),
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.all(
+            Radius.circular(defaultBorderRadiusValue),
+          ),
+        ),
         height: screenHeightPercentage(context, percentage: 0.9),
         child: ViewModelBuilder<CreateAccountViewModel>.reactive(
           onModelReady: (model) => listenToFormUpdated(model),

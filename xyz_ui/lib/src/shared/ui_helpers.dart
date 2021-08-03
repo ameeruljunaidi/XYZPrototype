@@ -18,9 +18,20 @@ const Widget verticalSpaceLarge = SizedBox(height: 50.0);
 // Screen Size helpers
 double screenWidth(BuildContext context) => MediaQuery.of(context).size.width;
 double screenHeight(BuildContext context) => MediaQuery.of(context).size.height;
+double screenHeightClean(BuildContext context) =>
+    MediaQuery.of(context).size.height -
+    MediaQuery.of(context).padding.top -
+    MediaQuery.of(context).padding.bottom;
+
+double screenTopPadding(BuildContext context) =>
+    MediaQuery.of(context).padding.top;
 
 double screenHeightPercentage(BuildContext context, {double percentage = 1}) =>
     screenHeight(context) * percentage;
+
+double screenHeightCleanPercentage(BuildContext context,
+        {double percentage = 1}) =>
+    screenHeightClean(context) * percentage;
 
 double screenWidthPercentage(BuildContext context, {double percentage = 1}) =>
     screenWidth(context) * percentage;
@@ -33,7 +44,8 @@ const EdgeInsets defaultPaddingVertical =
     const EdgeInsets.symmetric(vertical: 24.0);
 
 // Borders
-BorderRadius defaultBorderRadius = BorderRadius.circular(16.0);
+BorderRadius defaultBorderRadius = BorderRadius.circular(8.0);
+double defaultBorderRadiusValue = 8.0;
 
 // Default back button
 const IconData defaultBackIcon = Icons.arrow_back;

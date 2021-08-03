@@ -7,23 +7,40 @@ class GigService {
   Gig? _currentGig;
   Gig? get currentGig => _currentGig;
 
-  void initGig({gigTitle, gigSubtitle, gigDescription, gigVendorId}) {
-    final gig = Gig(
-      gigTitle: gigTitle,
-      gigSubtitle: gigSubtitle,
-      gigDescription: gigDescription,
-      gigVendorId: gigVendorId,
-    );
-
-    _currentGig = gig;
+  void initGig(gigSubcategory) {
+    addGigSubCategory(gigSubcategory);
   }
 
   void addGigId(gigId) {
     _currentGig = _currentGig!.copyWith(gigId: gigId);
   }
 
-  void addGigAddress(gigAddress) {
-    _currentGig = _currentGig!.copyWith(gigLocation: gigAddress);
+  void addGigSubCategory(gigSubcategory) {
+    _currentGig = _currentGig!.copyWith(gigSubCategory: gigSubcategory);
+  }
+
+  void addGigService(gigService) {
+    _currentGig = _currentGig!.copyWith(gigServiceType: gigService);
+  }
+
+  void addGigTitle(gigTitle, gigSubtitle, gigDescription) {
+    _currentGig = _currentGig!.copyWith(
+      gigTitle: gigTitle,
+      gigSubtitle: gigSubtitle,
+      gigDescription: gigDescription,
+    );
+  }
+
+  void addGigLocation(gigLocation) {
+    _currentGig = _currentGig!.copyWith(gigLocation: gigLocation);
+  }
+
+  void addGigPhotos(gigPhotos) {
+    _currentGig = _currentGig!.copyWith(gigPhotos: gigPhotos);
+  }
+
+  void addGigVendorId(gigVendorId) {
+    _currentGig = _currentGig!.copyWith(gigVendorId: gigVendorId);
   }
 
   void clearGig() {

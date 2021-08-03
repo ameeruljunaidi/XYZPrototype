@@ -26,8 +26,8 @@ class GigEditView extends StatelessWidget {
                 decoration: BoxDecoration(
                   color: Colors.blue,
                   borderRadius: BorderRadius.only(
-                    topRight: Radius.circular(16.0),
-                    topLeft: Radius.circular(16.0),
+                    topRight: Radius.circular(defaultBorderRadiusValue),
+                    topLeft: Radius.circular(defaultBorderRadiusValue),
                   ),
                 ),
                 child: _sheetBody(model),

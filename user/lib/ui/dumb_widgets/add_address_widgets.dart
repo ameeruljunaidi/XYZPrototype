@@ -54,8 +54,12 @@ Widget _autoCompleteResultsList(autoCompleteResults, model, addressController) {
   );
 }
 
-List<Widget> addressSelectionBody(model, addressController,
-    {header, subHeader}) {
+List<Widget> addressSelectionBody(
+  model,
+  addressController, {
+  header,
+  subHeader,
+}) {
   return [
     Align(
       alignment: Alignment.centerLeft,

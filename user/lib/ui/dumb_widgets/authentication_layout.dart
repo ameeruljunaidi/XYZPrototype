@@ -94,7 +94,7 @@ class AuthenticationLayout extends StatelessWidget {
                 alignment: Alignment.center,
                 decoration: BoxDecoration(
                   color: kcPrimaryColor,
-                  borderRadius: BorderRadius.circular(8.0),
+                  borderRadius: BorderRadius.circular(defaultBorderRadiusValue),
                 ),
                 child: busy!
                     ? CircularProgressIndicator(

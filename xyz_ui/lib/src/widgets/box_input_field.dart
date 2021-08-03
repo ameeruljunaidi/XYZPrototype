@@ -1,5 +1,6 @@
 import 'package:xyz_ui/src/shared/app_colors.dart';
 import 'package:flutter/material.dart';
+import 'package:xyz_ui/src/shared/ui_helpers.dart';
 
 class BoxInputField extends StatelessWidget {
   final TextEditingController controller;
@@ -16,7 +17,7 @@ class BoxInputField extends StatelessWidget {
   final maxLines;
 
   final circularBorder = OutlineInputBorder(
-    borderRadius: BorderRadius.circular(8),
+    borderRadius: BorderRadius.circular(defaultBorderRadiusValue),
   );
 
   BoxInputField({

@@ -96,13 +96,4 @@ abstract class LocationSelectionViewModel extends FormViewModel {
 
     notifyListeners();
   }
-
-  void forceAddress() {
-    log.v(
-        'User tried to cancel without choosing location, force choose address');
-    _dialogService.showDialog(
-      title: 'Please choose a location to continue.',
-      buttonTitle: 'Ok',
-    );
-  }
 }

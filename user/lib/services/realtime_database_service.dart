@@ -136,6 +136,12 @@ class RealtimeService {
         serviceSubCategoryId: subCategoryData['serviceSubCategoryId'],
         serviceSubCategoryName: subCategoryData['serviceSubCategory'],
         serviceSubCategoryPhoto: _subCategoryPhoto,
+        serviceSuggestedFeatures:
+            subCategoryData['serviceSuggestedFeatures']['List'].split(','),
+        serviceSuggestedFeaturesTypes:
+            subCategoryData['serviceSuggestedFeatures']['Type'].split(','),
+        serviceSugggestedQuoteDetails:
+            subCategoryData['serviceSuggestedQuoteDetails'].split(','),
       ),
     );
   }

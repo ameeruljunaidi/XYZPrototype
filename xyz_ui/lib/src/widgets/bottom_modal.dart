@@ -1,5 +1,6 @@
 // Defautl bottom modal items
 import 'package:flutter/material.dart';
+import 'package:xyz_ui/src/shared/ui_helpers.dart';
 
 Future defaultBottomSheet({
   required context,
@@ -10,7 +11,7 @@ Future defaultBottomSheet({
       isScrollControlled: isScrollControlled,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.vertical(
-          top: Radius.circular(16.0),
+          top: Radius.circular(defaultBorderRadiusValue),
         ),
       ),
       clipBehavior: Clip.antiAliasWithSaveLayer,

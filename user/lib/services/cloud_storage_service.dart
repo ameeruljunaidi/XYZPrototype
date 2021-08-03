@@ -22,10 +22,9 @@ class CloudStorageService {
 
     if (imagesToUpload != null && _loadedGig != null) {
       for (var imageInList in imagesToUpload) {
-        var imageFileName = _loadedGig.gigId ??
-            title.replaceAll(" ", "") +
-                '_' +
-                DateTime.now().millisecondsSinceEpoch.toString();
+        var imageFileName = title.replaceAll(" ", "") +
+            '_' +
+            DateTime.now().millisecondsSinceEpoch.toString();
 
         final Reference firebaseStorageRef = FirebaseStorage.instance
             .ref()

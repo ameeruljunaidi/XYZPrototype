@@ -1,8 +1,6 @@
 import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
-import 'package:xyz_prototype/constants/app_urls.dart';
 import 'package:xyz_prototype/ui/profile/profile_viewmodel.dart';
 import 'package:xyz_ui/xyz_ui.dart';
 
@@ -14,14 +12,25 @@ class ProfileAddAvatarView extends StatelessWidget {
     return ViewModelBuilder<ProfileViewModel>.reactive(
       onModelReady: (model) => model.listenToUser(),
       builder: (context, model, child) => Scaffold(
-        body: defaultFakeCardBody(
-          context,
-          model,
-          initialPercentage: 0.6,
-          minPercentage: 0.3,
-          heading: model.clientData().clientAvatar == null
-              ? 'Add your profile avatar'
-              : 'Update your profile avatar',
+          body: defaultSliverScreen(
+        context,
+        model,
+        cancelButton: model.goBack,
+        goBack: model.goBack,
+        heading: model.clientData().clientAvatar == null
+            ? 'Add your profile avatar'
+            : 'Update your profile avatar',
+        sliverBodyContent: _mainBody(context, model),
+      )),
+      viewModelBuilder: () => ProfileViewModel(),
+    );
+  }
+
+  Widget _mainBody(context, model) {
+    return SliverToBoxAdapter(
+      child: Padding(
+        padding: defaultPaddingAll,
+        child: Column(
           children: <Widget>[
             _selectImageButton(model),
             verticalSpaceRegular,
@@ -32,13 +41,9 @@ class ProfileAddAvatarView extends StatelessWidget {
             verticalSpaceRegular,
             _addUserAvatarButton(model),
             verticalSpaceMedium,
-            defaultBackAndContinue(
-              goBack: model.goBack,
-            )
           ],
         ),
       ),
-      viewModelBuilder: () => ProfileViewModel(),
     );
   }
 

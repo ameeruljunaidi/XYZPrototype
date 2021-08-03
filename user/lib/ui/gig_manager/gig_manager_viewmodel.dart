@@ -78,6 +78,6 @@ class GigManagerViewModel extends BaseViewModel {
   }
 
   void goToAddGig() {
-    _navigationService.navigateTo(Routes.addGigTitleView);
+    _navigationService.navigateTo(Routes.addGigSubCategoryView);
   }
 }

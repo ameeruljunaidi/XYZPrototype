@@ -12,6 +12,9 @@ import 'package:stacked/stacked.dart';
 import '../ui/add_business/add_business_view.dart';
 import '../ui/add_gig/add_gig_location_view.dart';
 import '../ui/add_gig/add_gig_photos_view.dart';
+import '../ui/add_gig/add_gig_price.dart';
+import '../ui/add_gig/add_gig_service_view.dart';
+import '../ui/add_gig/add_gig_subcategory_view.dart';
 import '../ui/add_gig/add_gig_title_view.dart';
 import '../ui/address_selection/address_selection_view.dart';
 import '../ui/create_account/create_account_view.dart';
@@ -45,6 +48,9 @@ class Routes {
   static const String addGigPhotosView = '/add-gig-photos-view';
   static const String addGigLocationView = '/add-gig-location-view';
   static const String profileAddAvatarView = '/profile-add-avatar-view';
+  static const String addGigSubCategoryView = '/add-gig-sub-category-view';
+  static const String addGigServiceView = '/add-gig-service-view';
+  static const String addGigPriceView = '/add-gig-price-view';
   static const all = <String>{
     startupView,
     homeView,
@@ -63,6 +69,9 @@ class Routes {
     addGigPhotosView,
     addGigLocationView,
     profileAddAvatarView,
+    addGigSubCategoryView,
+    addGigServiceView,
+    addGigPriceView,
   };
 }
 
@@ -87,6 +96,9 @@ class StackedRouter extends RouterBase {
     RouteDef(Routes.addGigPhotosView, page: AddGigPhotosView),
     RouteDef(Routes.addGigLocationView, page: AddGigLocationView),
     RouteDef(Routes.profileAddAvatarView, page: ProfileAddAvatarView),
+    RouteDef(Routes.addGigSubCategoryView, page: AddGigSubCategoryView),
+    RouteDef(Routes.addGigServiceView, page: AddGigServiceView),
+    RouteDef(Routes.addGigPriceView, page: AddGigPriceView),
   ];
   @override
   Map<Type, StackedRouteFactory> get pagesMap => _pagesMap;
@@ -214,6 +226,27 @@ class StackedRouter extends RouterBase {
         settings: data,
       );
     },
+    AddGigSubCategoryView: (data) {
+      return MaterialPageRoute<dynamic>(
+        builder: (context) => const AddGigSubCategoryView(),
+        settings: data,
+      );
+    },
+    AddGigServiceView: (data) {
+      return MaterialPageRoute<dynamic>(
+        builder: (context) => const AddGigServiceView(),
+        settings: data,
+      );
+    },
+    AddGigPriceView: (data) {
+      var args = data.getArgs<AddGigPriceViewArguments>(
+        orElse: () => AddGigPriceViewArguments(),
+      );
+      return MaterialPageRoute<dynamic>(
+        builder: (context) => AddGigPriceView(key: args.key),
+        settings: data,
+      );
+    },
   };
 }
 
@@ -261,4 +294,10 @@ class AddGigTitleViewArguments {
 class AddGigLocationViewArguments {
   final Key? key;
   AddGigLocationViewArguments({this.key});
+}
+
+/// AddGigPriceView arguments holder class
+class AddGigPriceViewArguments {
+  final Key? key;
+  AddGigPriceViewArguments({this.key});
 }

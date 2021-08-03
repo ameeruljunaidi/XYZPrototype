@@ -188,8 +188,11 @@ _$_Gigs _$_$_GigsFromJson(Map<String, dynamic> json) {
     ),
     gigCategory: json['gigCategory'] as String?,
     gigSubCategory: json['gigSubCategory'] as String?,
+    gigServiceType: json['gigServiceType'] as String?,
     gigFilters: json['gigFilters'] as Map<String, dynamic>?,
-    gigPrice: json['gigPrice'] as Map<String, dynamic>?,
+    gigPrice: (json['gigPrice'] as Map<String, dynamic>?)?.map(
+      (k, e) => MapEntry(k, e as Map<String, dynamic>),
+    ),
     gigLocation: json['gigLocation'] as String?,
   );
 }
@@ -206,6 +209,7 @@ Map<String, dynamic> _$_$_GigsToJson(_$_Gigs instance) => <String, dynamic>{
       'gigReviews': instance.gigReviews,
       'gigCategory': instance.gigCategory,
       'gigSubCategory': instance.gigSubCategory,
+      'gigServiceType': instance.gigServiceType,
       'gigFilters': instance.gigFilters,
       'gigPrice': instance.gigPrice,
       'gigLocation': instance.gigLocation,
@@ -238,6 +242,18 @@ _$_ServiceSubCategory _$_$_ServiceSubCategoryFromJson(
     serviceSubCategoryId: json['serviceSubCategoryId'] as String?,
     serviceSubCategoryName: json['serviceSubCategoryName'] as String?,
     serviceSubCategoryPhoto: json['serviceSubCategoryPhoto'] as String?,
+    serviceSuggestedFeatures:
+        (json['serviceSuggestedFeatures'] as List<dynamic>?)
+            ?.map((e) => e as String)
+            .toList(),
+    serviceSuggestedFeaturesTypes:
+        (json['serviceSuggestedFeaturesTypes'] as List<dynamic>?)
+            ?.map((e) => e as String)
+            .toList(),
+    serviceSugggestedQuoteDetails:
+        (json['serviceSugggestedQuoteDetails'] as List<dynamic>?)
+            ?.map((e) => e as String)
+            .toList(),
   );
 }
 
@@ -247,4 +263,22 @@ Map<String, dynamic> _$_$_ServiceSubCategoryToJson(
       'serviceSubCategoryId': instance.serviceSubCategoryId,
       'serviceSubCategoryName': instance.serviceSubCategoryName,
       'serviceSubCategoryPhoto': instance.serviceSubCategoryPhoto,
+      'serviceSuggestedFeatures': instance.serviceSuggestedFeatures,
+      'serviceSuggestedFeaturesTypes': instance.serviceSuggestedFeaturesTypes,
+      'serviceSugggestedQuoteDetails': instance.serviceSugggestedQuoteDetails,
+    };
+
+_$_ServiceFeatures _$_$_ServiceFeaturesFromJson(Map<String, dynamic> json) {
+  return _$_ServiceFeatures(
+    serviceFeatureName: json['serviceFeatureName'] as String?,
+    serviceFeatureType: json['serviceFeatureType'] as String?,
+    serviceFeatureValue: json['serviceFeatureValue'] as String?,
+  );
+}
+
+Map<String, dynamic> _$_$_ServiceFeaturesToJson(_$_ServiceFeatures instance) =>
+    <String, dynamic>{
+      'serviceFeatureName': instance.serviceFeatureName,
+      'serviceFeatureType': instance.serviceFeatureType,
+      'serviceFeatureValue': instance.serviceFeatureValue,
     };

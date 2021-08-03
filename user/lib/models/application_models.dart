@@ -107,8 +107,9 @@ class Gig with _$Gig {
     Map<String, double>? gigReviews,
     String? gigCategory,
     String? gigSubCategory,
+    String? gigServiceType,
     Map<String, dynamic>? gigFilters,
-    Map<String, dynamic>? gigPrice,
+    Map<String, Map<String, dynamic>>? gigPrice,
     String? gigLocation,
   }) = _Gigs;
 
@@ -135,8 +136,23 @@ class ServiceSubCategory with _$ServiceSubCategory {
     String? serviceSubCategoryId,
     String? serviceSubCategoryName,
     String? serviceSubCategoryPhoto,
+    List<String>? serviceSuggestedFeatures,
+    List<String>? serviceSuggestedFeaturesTypes,
+    List<String>? serviceSugggestedQuoteDetails,
   }) = _ServiceSubCategory;
 
   factory ServiceSubCategory.fromJson(Map<String, dynamic> json) =>
       _$ServiceSubCategoryFromJson(json);
+}
+
+@freezed
+class ServiceFeatures with _$ServiceFeatures {
+  factory ServiceFeatures({
+    String? serviceFeatureName,
+    String? serviceFeatureType,
+    String? serviceFeatureValue,
+  }) = _ServiceFeatures;
+
+  factory ServiceFeatures.fromJson(Map<String, dynamic> json) =>
+      _$ServiceFeaturesFromJson(json);
 }

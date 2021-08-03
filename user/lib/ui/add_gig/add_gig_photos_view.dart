@@ -13,26 +13,33 @@ class AddGigPhotosView extends StatelessWidget {
   Widget build(BuildContext context) {
     return ViewModelBuilder<AddGigViewModel>.reactive(
       builder: (context, model, child) => Scaffold(
-        body: defaultFakeCardBody(
+        body: defaultSliverScreen(
           context,
           model,
-          initialPercentage: 0.75,
-          minPercentage: 0.4,
+          cancelButton: model.goBack,
+          goBack: model.goBack,
           heading: 'Add photos to your gig',
-          removePadding: true,
-          children: <Widget>[
-            verticalSpaceMedium,
-            _addImagesButton(model),
-            verticalSpaceRegular,
-            _imagesPreviewGrid(context, model),
-            verticalSpaceSmall,
-            _addGIgButtonCustom(model),
-            verticalSpaceRegular,
-            _backAndContinueCustom(model),
-          ],
+          sliverBodyContent: _mainBodyContent(context, model),
         ),
       ),
       viewModelBuilder: () => AddGigViewModel(),
+    );
+  }
+
+  Widget _mainBodyContent(context, model) {
+    return SliverToBoxAdapter(
+      child: Column(
+        children: <Widget>[
+          verticalSpaceMedium,
+          _addImagesButton(model),
+          verticalSpaceRegular,
+          _imagesPreviewGrid(context, model),
+          verticalSpaceSmall,
+          _addGIgButtonCustom(model),
+          verticalSpaceRegular,
+          _backAndContinueCustom(context, model),
+        ],
+      ),
     );
   }
 
@@ -46,10 +53,11 @@ class AddGigPhotosView extends StatelessWidget {
     );
   }
 
-  Widget _backAndContinueCustom(AddGigViewModel model) {
+  Widget _backAndContinueCustom(context, AddGigViewModel model) {
     return Padding(
       padding: defaultPaddingHorizontal,
       child: defaultBackAndContinue(
+        context,
         goBack: model.goBack,
       ),
     );

@@ -303,8 +303,8 @@ class MarketPlaceView extends StatelessWidget with $MarketPlaceView {
             bottom: 0.0,
             child: ClipRRect(
               borderRadius: BorderRadius.only(
-                bottomLeft: Radius.circular(16.0),
-                bottomRight: Radius.circular(16.0),
+                bottomLeft: Radius.circular(defaultBorderRadiusValue),
+                bottomRight: Radius.circular(defaultBorderRadiusValue),
               ),
               child: Container(
                 width: _cardWidth * 0.9,

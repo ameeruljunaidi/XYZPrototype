@@ -48,6 +48,7 @@ class CarouselImages extends StatefulWidget {
 
 class _CarouselImagesState extends State<CarouselImages> {
   late PageController _pageController;
+  // ignore: unused_field
   double _currentPageValue = 0.0;
 
   @override

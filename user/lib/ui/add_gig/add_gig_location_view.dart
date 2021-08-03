@@ -19,18 +19,18 @@ class AddGigLocationView extends StatelessWidget with $AddGigLocationView {
       onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
       child: ViewModelBuilder<AddGigLocationViewModel>.reactive(
         onModelReady: (model) => listenToFormUpdated(model),
-        builder: (context, model, child) => WillPopScope(
-          onWillPop: model.cancelAddGig,
-          child: Scaffold(
-            appBar: defaultAppbar(context, model),
-            bottomNavigationBar: addAddressButton(model, AddGigPhotosView()),
-            body: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 24.0),
-              child: Column(
-                children: addressSelectionBody(model, addressController,
-                    header: 'Give your service a location',
-                    subHeader:
-                        'Having a location would allow us to target potential customers for you better!'),
+        builder: (context, model, child) => Scaffold(
+          appBar: defaultAppbar(context, model),
+          bottomNavigationBar: addAddressButton(model, AddGigPhotosView()),
+          body: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 24.0),
+            child: Column(
+              children: addressSelectionBody(
+                model,
+                addressController,
+                header: 'Give your service a location',
+                subHeader:
+                    'Having a location would allow us to target potential customers for you better!',
               ),
             ),
           ),

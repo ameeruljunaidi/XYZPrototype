@@ -152,7 +152,7 @@ class GigManagerView extends StatelessWidget {
       scaleFactor: 1,
       listImages: _gigAtIndex.gigPhotos,
       height: double.infinity,
-      borderRadius: 16.0,
+      borderRadius: defaultBorderRadiusValue,
       cachedNetworkImage: true,
       verticalAlignment: Alignment.topCenter,
     );

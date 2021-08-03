@@ -228,7 +228,9 @@ class FirestoreApi {
               gig.copyWith(gigLocation: newAddressId).toJson(),
             );
 
-        _gigService.addGigAddress(newAddressId);
+        _gigService.addGigLocation(newAddressId);
+
+        log.i('addressView check: ${_gigService.currentGig}');
 
         return true;
       }
