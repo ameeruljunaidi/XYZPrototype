@@ -70,8 +70,6 @@ class AddGigPriceView extends StatelessWidget with $AddGigPriceView {
           // Get the title of the price tier
           final _pageTitle = model.getPricePackageTitle(pageIndex);
 
-          _inputController(pageIndex) {}
-
           if (pageIndex <= 2) {
             // If feature list is not empty, build the list
             if (model.suggestedFeaturesList != null) {

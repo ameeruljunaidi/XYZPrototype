@@ -1,4 +1,3 @@
-import 'package:stacked/stacked.dart';
 import 'package:xyz_prototype/app/app.locator.dart';
 import 'package:xyz_prototype/services/gig_service.dart';
 import 'package:xyz_prototype/services/service_services.dart';

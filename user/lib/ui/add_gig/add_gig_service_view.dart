@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
 import 'package:xyz_prototype/ui/add_gig/add_gig_service_viewmodel.dart';
-import 'package:xyz_prototype/ui/base/add_gig_viewmodel.dart';
 import 'package:xyz_ui/xyz_ui.dart';
 
 class AddGigServiceView extends StatelessWidget {

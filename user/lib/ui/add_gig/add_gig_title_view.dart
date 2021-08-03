@@ -3,7 +3,6 @@ import 'package:stacked/stacked.dart';
 import 'package:stacked/stacked_annotations.dart';
 import 'package:xyz_prototype/ui/add_gig/add_gig_title_view.form.dart';
 import 'package:xyz_prototype/ui/add_gig/add_gig_title_viewmodel.dart';
-import 'package:xyz_prototype/ui/base/add_gig_viewmodel.dart';
 import 'package:xyz_ui/xyz_ui.dart';
 
 @FormView(

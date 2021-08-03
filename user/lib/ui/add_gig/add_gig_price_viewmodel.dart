@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:stacked/stacked.dart';
 import 'package:xyz_prototype/app/app.locator.dart';
 import 'package:xyz_prototype/app/app.logger.dart';
 import 'package:xyz_prototype/models/application_models.dart';
