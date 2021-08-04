@@ -6,6 +6,7 @@ import 'package:xyz_prototype/app/app.logger.dart';
 import 'package:xyz_prototype/app/app.router.dart';
 import 'package:xyz_prototype/enums/basic_dialog_status.dart';
 import 'package:xyz_prototype/enums/dialog_type.dart';
+import 'package:xyz_prototype/models/application_models.dart';
 import 'package:xyz_prototype/services/gig_service.dart';
 import 'package:xyz_prototype/ui/add_gig/add_gig_location_view.dart';
 import 'package:xyz_prototype/ui/add_gig/add_gig_photos_view.dart';
@@ -13,6 +14,7 @@ import 'package:xyz_prototype/ui/add_gig/add_gig_price_view.dart';
 import 'package:xyz_prototype/ui/add_gig/add_gig_service_view.dart';
 import 'package:xyz_prototype/ui/add_gig/add_gig_title_view.dart';
 import 'package:xyz_prototype/ui/add_gig/add_gig_title_view.form.dart';
+import 'package:xyz_prototype/ui/add_gig/add_gig_price_view.form.dart';
 
 class AddGigViewModel extends FormViewModel {
   final log = getLogger('AddBusinessViewModel');
@@ -126,5 +128,55 @@ class AddGigViewModel extends FormViewModel {
     _navigationService.clearTillFirstAndShow(Routes.gigManagerView);
     setBusy(false);
     notifyListeners();
+  }
+
+  // List of controllers from price page
+  List<ServiceFeatures>? customFeatures = [];
+
+  ServiceFeatures? getCustomeFeaturesControllers(index) {
+    customFeatures = [
+      ServiceFeatures(
+        serviceFeatureName: customFeature1TitleValue ?? '',
+        serviceFeatureValue: customFeature1ValueValue ?? '',
+      ),
+      ServiceFeatures(
+        serviceFeatureName: customFeature2TitleValue ?? '',
+        serviceFeatureValue: customFeature2ValueValue ?? '',
+      ),
+      ServiceFeatures(
+        serviceFeatureName: customFeature3TitleValue ?? '',
+        serviceFeatureValue: customFeature3ValueValue ?? '',
+      ),
+      ServiceFeatures(
+        serviceFeatureName: customFeature4TitleValue ?? '',
+        serviceFeatureValue: customFeature4ValueValue ?? '',
+      ),
+      ServiceFeatures(
+        serviceFeatureName: customFeature5TitleValue ?? '',
+        serviceFeatureValue: customFeature5ValueValue ?? '',
+      ),
+      ServiceFeatures(
+        serviceFeatureName: customFeature6TitleValue ?? '',
+        serviceFeatureValue: customFeature6ValueValue ?? '',
+      ),
+      ServiceFeatures(
+        serviceFeatureName: customFeature7TitleValue ?? '',
+        serviceFeatureValue: customFeature7ValueValue ?? '',
+      ),
+      ServiceFeatures(
+        serviceFeatureName: customFeature8TitleValue ?? '',
+        serviceFeatureValue: customFeature8ValueValue ?? '',
+      ),
+      ServiceFeatures(
+        serviceFeatureName: customFeature9TitleValue ?? '',
+        serviceFeatureValue: customFeature9ValueValue ?? '',
+      ),
+      ServiceFeatures(
+        serviceFeatureName: customFeature10TitleValue ?? '',
+        serviceFeatureValue: customFeature10ValueValue ?? '',
+      ),
+    ];
+
+    return customFeatures![index];
   }
 }
