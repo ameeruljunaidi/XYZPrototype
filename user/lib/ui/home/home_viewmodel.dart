@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
+import 'package:xyz_prototype/ui/favorites/favorites_view.dart';
 import 'package:xyz_prototype/ui/inbox/inbox_view.dart';
 import 'package:xyz_prototype/ui/marketplace/marketplace_view.dart';
-import 'package:xyz_prototype/ui/notifications/notification_view.dart';
+
 import 'package:xyz_prototype/ui/profile/profile_view.dart';
 import 'package:xyz_prototype/ui/search/search_view.dart';
 
@@ -12,11 +13,11 @@ class HomeViewModel extends IndexTrackingViewModel {
       case 0:
         return MarketPlaceView();
       case 1:
-        return InboxView();
+        return FavoritesView();
       case 2:
         return SearchView();
       case 3:
-        return NotificationsView();
+        return InboxView();
       case 4:
         return ProfileView();
       default:

@@ -15,7 +15,7 @@ class AddGigServiceViewModel extends AddGigViewModel {
     final _loadedGig = _gigService.currentGig;
 
     final _serviceList = await _serviceService.getServiceListFromSubCategory(
-      _loadedGig!.gigSubCategory!,
+      _loadedGig!.gigCategory!,
     );
 
     _servicesList = _serviceList;

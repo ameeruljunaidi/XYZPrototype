@@ -15,7 +15,7 @@ class AddGigServiceView extends StatelessWidget {
           context,
           model,
           cancelButton: () => model.cancelAddGig(),
-          goBack: model.goBack,
+          goBack: model.cancelAddGig,
           goContinue: model.goToAddTitle,
           heading: 'Choose a Service',
           sliverBodyContent: _listOfServices(context, model),

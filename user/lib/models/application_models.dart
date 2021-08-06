@@ -99,17 +99,14 @@ class Gig with _$Gig {
     String? gigId,
     String? gigVendorId,
     String? gigTitle,
-    String? gigSubtitle,
     String? gigDescription,
     List<String>? gigPhotos,
-    List<String>? gigFeatures,
     Map<String, String>? gigFaqs,
     Map<String, double>? gigReviews,
     String? gigCategory,
-    String? gigSubCategory,
     String? gigServiceType,
-    Map<String, dynamic>? gigFilters,
     Map<String, Map<String, dynamic>>? gigPrice,
+    bool? gigQuote,
     String? gigLocation,
   }) = _Gigs;
 

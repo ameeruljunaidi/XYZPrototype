@@ -4,10 +4,16 @@ import 'package:sliver_tools/sliver_tools.dart';
 import 'package:xyz_ui/xyz_ui.dart';
 
 // Go back and continue on modal
-Widget defaultBackAndContinue(context, {required goBack, goContinue}) {
+Widget defaultBackAndContinue(
+  context, {
+  required goBack,
+  goContinue,
+  continueButton = true,
+  backgroundColor = Colors.white,
+}) {
   return Container(
     width: screenWidth(context),
-    color: Colors.white,
+    color: backgroundColor,
     child: Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
@@ -26,19 +32,30 @@ Widget defaultBackAndContinue(context, {required goBack, goContinue}) {
             ],
           ),
         ),
-        if (goContinue != null)
+        if (continueButton)
           ElevatedButton(
             onPressed: goContinue,
             child: Text(
               'Continue',
             ),
             style: ButtonStyle(
-              backgroundColor: MaterialStateProperty.all<Color>(kcPrimaryColor),
-              elevation: MaterialStateProperty.all<double>(0),
-              shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(8.0),
-                ),
+              backgroundColor: MaterialStateProperty.resolveWith<Color>(
+                (Set<MaterialState> states) {
+                  if (states.contains(MaterialState.pressed))
+                    return kcPrimaryColor;
+                  else if (states.contains(MaterialState.disabled))
+                    return Colors.grey;
+                  return kcPrimaryColor; // Use the component's default.
+                },
+              ),
+              foregroundColor: MaterialStateProperty.resolveWith<Color>(
+                (Set<MaterialState> states) {
+                  if (states.contains(MaterialState.pressed))
+                    return kcPrimaryColor;
+                  else if (states.contains(MaterialState.disabled))
+                    return Colors.white;
+                  return Colors.white; // Use the component's default.
+                },
               ),
             ),
           ),
@@ -103,39 +120,28 @@ SliverFillRemaining emptyWhiteSpaceSliverBottom() {
   );
 }
 
-SliverAppBar appBarSliver({required cancelButton}) {
-  return SliverAppBar(
-    floating: true,
-    pinned: true,
-    leading: IconButton(
-      onPressed: cancelButton,
-      icon: Icon(Icons.cancel),
-    ),
-    actions: [
-      Container(
-        decoration: BoxDecoration(borderRadius: defaultBorderRadius),
-        child: Center(
-          child: Padding(
-            padding: defaultPaddingHorizontal,
-            child: Container(
-              padding: EdgeInsets.symmetric(
-                horizontal: 8.0,
-                vertical: 4.0,
-              ),
-              decoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius: defaultBorderRadius,
-              ),
-              child: Text(
-                'Get Help',
-                style: TextStyle(color: kcPrimaryColor),
-              ),
-            ),
+Container getHelpAppBarButton({color = Colors.white}) {
+  return Container(
+    decoration: BoxDecoration(borderRadius: defaultBorderRadius),
+    child: Center(
+      child: Padding(
+        padding: defaultPaddingHorizontal,
+        child: Container(
+          padding: EdgeInsets.symmetric(
+            horizontal: 8.0,
+            vertical: 4.0,
+          ),
+          decoration: BoxDecoration(
+            color: color,
+            borderRadius: defaultBorderRadius,
+          ),
+          child: Text(
+            'Get Help',
+            style: TextStyle(color: kcPrimaryColor),
           ),
         ),
       ),
-    ],
-    backgroundColor: kcPrimaryColor,
+    ),
   );
 }
 
@@ -189,7 +195,12 @@ Container defaultSliverScreen(
       children: [
         CustomScrollView(
           slivers: [
-            appBarSliver(cancelButton: cancelButton),
+            defaultAppBarSliver(
+              cancelButton: cancelButton,
+              actions: [
+                getHelpAppBarButton(),
+              ],
+            ),
             headingContentSliver(context, heading: heading),
             mainBodySliver(
               context,

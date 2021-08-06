@@ -7,6 +7,17 @@ import 'package:xyz_ui/xyz_ui.dart';
 class GigManagerView extends StatelessWidget {
   const GigManagerView({Key? key}) : super(key: key);
 
+  static const _colorDebug = [
+    // Colors.red,
+    // Colors.blue,
+    // Colors.green,
+    // Colors.grey,
+    null,
+    null,
+    null,
+    null
+  ];
+
   @override
   Widget build(BuildContext context) {
     return ViewModelBuilder<GigManagerViewModel>.reactive(
@@ -15,135 +26,65 @@ class GigManagerView extends StatelessWidget {
         appBar: defaultAppbar(
           context,
           model,
-          actions: [
-            Align(
-              alignment: Alignment.center,
-              child: BoxText.body(
-                'Add Gig',
-                align: TextAlign.center,
-              ),
-            ),
-            IconButton(
-              icon: Icon(Icons.add),
-              onPressed: model.goToAddGig,
-            )
-          ],
+          actions: [..._addGigButton(context, model)],
         ),
-        body: SafeArea(
-          child: Padding(
-            padding: EdgeInsets.symmetric(horizontal: 24.0),
-            child: _gigManagerBody(model),
-          ),
+        body: Column(
+          children: <Widget>[
+            _screenHeading(context),
+            _gigsBuilder(context, model),
+          ],
         ),
       ),
       viewModelBuilder: () => GigManagerViewModel(),
     );
   }
 
-  Widget _gigManagerBody(model) {
-    return Column(
-      children: [
-        verticalSpaceSmall,
-        Align(
-          alignment: Alignment.centerLeft,
-          child: BoxText.headingThree(
-            'Your Gigs',
-            align: TextAlign.left,
-          ),
-        ),
-        verticalSpaceRegular,
-        if (model.gigs != null)
-          Expanded(
-            child: ListView.builder(
-              itemBuilder: (context, index) {
-                final gigs = model.gigs![index];
-                return _gigCard(context, model, index, ObjectKey(gigs));
-              },
-              itemCount: model.gigs!.length,
-            ),
-          )
-        // else if (model.isBusy)
-        //   Center(
-        //     child: CircularProgressIndicator(
-        //       valueColor: AlwaysStoppedAnimation(kcPrimaryColor),
-        //     ),
-        //   )
-        else if (model.gigs == null)
-          Align(
-            alignment: Alignment.bottomLeft,
-            child: Text('Click add gig to start becoming a gigger!'),
-          )
-      ],
-    );
+  Widget _gigsBuilder(BuildContext context, GigManagerViewModel model) {
+    if (model.gigs != null) {
+      return ListView.separated(
+          padding: EdgeInsets.symmetric(vertical: defaultPaddingValueSmall),
+          shrinkWrap: true,
+          itemBuilder: (context, gigIndex) {
+            return _gigsCard(context, model, gigIndex, key);
+          },
+          separatorBuilder: (context, gigIndex) {
+            return verticalSpaceRegular;
+          },
+          itemCount: model.gigs!.length);
+    } else {
+      return Container(
+        width: double.infinity,
+        color: _colorDebug[1],
+        padding: defaultPaddingAllSmallVertical,
+        child: Text('Click add gig to start adding gigs!'),
+      );
+    }
   }
 
-  Widget _gigCard(context, model, index, key) {
-    final _gigAtIndex = model.gigs[index];
+  Widget _gigsCard(
+    BuildContext context,
+    GigManagerViewModel model,
+    int index,
+    key,
+  ) {
+    final _gigAtIndex = model.gigs![index];
 
-    return Column(
-      key: key,
-      children: [
-        verticalSpaceTiny,
-        Container(
-          height: screenHeightPercentage(context, percentage: 0.15),
-          width: double.infinity,
-          child: Row(
+    return GestureDetector(
+      onTap: () {},
+      child: Container(
+        height: 96,
+        width: screenWidth(context),
+        color: _colorDebug[3],
+        child: Padding(
+          padding: defaultPaddingHorizontal,
+          child: Stack(
             children: <Widget>[
-              gigPhotos(_gigAtIndex),
-              horizontalSpaceSmall,
-              _cardItems(_gigAtIndex),
+              _activitiesDetails(context, _gigAtIndex),
+              _activitiesAvatar(_gigAtIndex),
             ],
           ),
         ),
-        verticalSpaceTiny,
-        Divider(),
-      ],
-    );
-  }
-
-  Widget _cardItems(_gigAtIndex) {
-    return Expanded(
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.start,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          verticalSpaceSmall,
-          Align(
-            alignment: Alignment.centerLeft,
-            child: BoxText.subheading(
-              _gigAtIndex.gigTitle ?? 'Untitled',
-              fontWeight: FontWeight.bold,
-              align: TextAlign.left,
-            ),
-          ),
-          verticalSpaceTiny,
-          BoxText.body(
-            _gigAtIndex.gigSubtitle ?? '',
-          ),
-          verticalSpaceRegular,
-          BoxText.body(
-            _gigAtIndex.gigDescription ?? '',
-          ),
-        ],
       ),
-    );
-  }
-
-  Widget gigPhotos(_gigAtIndex) {
-    return AspectRatio(
-      aspectRatio: 1,
-      child: _gigAtIndex.gigPhotos == null
-          ? Container(
-              decoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius: defaultBorderRadius,
-                border: Border.all(color: kcVeryLightGreyColor),
-              ),
-              child: Center(
-                child: Text('No Image'),
-              ),
-            )
-          : _carouselSlider(_gigAtIndex),
     );
   }
 
@@ -155,6 +96,108 @@ class GigManagerView extends StatelessWidget {
       borderRadius: defaultBorderRadiusValue,
       cachedNetworkImage: true,
       verticalAlignment: Alignment.topCenter,
+    );
+  }
+
+  Align _activitiesDetails(BuildContext context, _gigAtIndex) {
+    return Align(
+      alignment: Alignment.centerRight,
+      child: Container(
+        height: double.maxFinite,
+        width: 320,
+        decoration: BoxDecoration(
+          color: _colorDebug[0] != null ? _colorDebug[0] : Colors.white,
+          borderRadius: BorderRadius.only(
+            topRight: Radius.circular(16.0),
+            bottomRight: Radius.circular(16.0),
+          ),
+        ),
+        child: Padding(
+          padding: EdgeInsets.only(
+            top: 16.0,
+            bottom: 16.0,
+            left: 32.0,
+            right: 16.0,
+          ),
+          child: Container(
+            color: _colorDebug[1],
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+                Align(
+                  alignment: Alignment.centerLeft,
+                  child: Text(
+                    _gigAtIndex.gigTitle ?? 'Untitled',
+                    style: subheadingStyle,
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                  ),
+                ),
+                verticalSpaceTiny,
+                Align(
+                  alignment: Alignment.centerLeft,
+                  child: Text(
+                    _gigAtIndex.gigDescription ?? '',
+                    maxLines: 2,
+                    overflow: TextOverflow.ellipsis,
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+
+  Align _activitiesAvatar(_gigAtIndex) {
+    return Align(
+      alignment: Alignment.centerLeft,
+      child: Container(
+        decoration: defaultBoxDecoration(
+          color: Colors.white,
+          shadow: true,
+        ),
+        height: 64,
+        width: 64,
+        child: _gigAtIndex.gigPhotos == null
+            ? Container(
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: defaultBorderRadius,
+                  border: Border.all(color: kcVeryLightGreyColor),
+                ),
+                child: Center(
+                  child: Text('No Image'),
+                ),
+              )
+            : _carouselSlider(_gigAtIndex),
+      ),
+    );
+  }
+
+  List<Widget> _addGigButton(BuildContext context, GigManagerViewModel model) {
+    return [
+      Align(
+        alignment: Alignment.center,
+        child: BoxText.body(
+          'Add Gig',
+          align: TextAlign.center,
+        ),
+      ),
+      IconButton(
+        icon: Icon(Icons.add),
+        onPressed: model.goToAddGig,
+      )
+    ];
+  }
+
+  Container _screenHeading(BuildContext context) {
+    return Container(
+      padding: defaultPaddingHorizontal,
+      width: screenWidth(context),
+      color: _colorDebug[2],
+      child: BoxText.headline('Your Gigs'),
     );
   }
 }

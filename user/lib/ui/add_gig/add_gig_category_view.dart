@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
-import 'package:xyz_prototype/ui/add_gig/add_gig_subcategory_viewmodel.dart';
+import 'package:xyz_prototype/ui/add_gig/add_gig_category_viewmodel.dart';
 import 'package:xyz_ui/xyz_ui.dart';
 
-class AddGigSubCategoryView extends StatelessWidget {
-  const AddGigSubCategoryView({Key? key}) : super(key: key);
+class AddGigCategoryView extends StatelessWidget {
+  const AddGigCategoryView({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -14,7 +14,7 @@ class AddGigSubCategoryView extends StatelessWidget {
         body: defaultSliverScreen(
           context,
           model,
-          heading: 'Choose a Sub-Category',
+          heading: 'Choose a Category',
           sliverBodyContent: _serviceSubCategoriesGrid(context, model),
           cancelButton: () => model.cancelAddGig(),
           goBack: model.goBack,
@@ -48,9 +48,9 @@ class AddGigSubCategoryView extends StatelessWidget {
                     color: _selectedIndex ? kcVeryLightGreyColor : Colors.white,
                     borderRadius: defaultBorderRadius,
                     border: Border.all(
-                        color:
-                            _selectedIndex ? Colors.black : kcMediumGreyColor,
-                        width: _selectedIndex ? 2 : 1),
+                      color: _selectedIndex ? Colors.black : kcMediumGreyColor,
+                      width: _selectedIndex ? 2 : 1,
+                    ),
                   ),
                   margin: EdgeInsets.symmetric(horizontal: 4.0),
                   child: Center(

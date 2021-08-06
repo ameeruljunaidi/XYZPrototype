@@ -37,8 +37,6 @@ class AddGigPhotosView extends StatelessWidget {
           _imagesPreviewGrid(context, model),
           verticalSpaceSmall,
           _addGIgButtonCustom(model),
-          verticalSpaceRegular,
-          _backAndContinueCustom(context, model),
         ],
       ),
     );

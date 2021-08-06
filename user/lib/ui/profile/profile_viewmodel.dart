@@ -41,17 +41,6 @@ class ProfileViewModel extends BaseViewModel {
         );
   }
 
-  void goToAddBusiness(context) async {
-    await _addBusinessService.addBusinessModal(context);
-    await _userService.syncUserAccount();
-    notifyListeners();
-  }
-
-  void goToLoginView(context) async {
-    await _loginService.loginModal(context);
-    notifyListeners();
-  }
-
   void logOut() async {
     var logOut = await _dialogService.showCustomDialog(
       variant: DialogType.basic,
@@ -99,10 +88,6 @@ class ProfileViewModel extends BaseViewModel {
 
     notifyListeners();
     setBusy(false);
-  }
-
-  void goBack() {
-    _navigationService.back();
   }
 
   Future<void> addUserAvatar() async {
@@ -175,5 +160,26 @@ class ProfileViewModel extends BaseViewModel {
     if (inProgressDialog!.confirmed) {
       return;
     }
+  }
+
+  // Navigation functions
+
+  void goToAddBusiness(context) async {
+    await _addBusinessService.addBusinessModal(context);
+    await _userService.syncUserAccount();
+    notifyListeners();
+  }
+
+  void goToLoginView(context) async {
+    await _loginService.loginModal(context);
+    notifyListeners();
+  }
+
+  void goToVendorProfile() {
+    _navigationService.navigateTo(Routes.vendorProfileView);
+  }
+
+  void goBack() {
+    _navigationService.back();
   }
 }

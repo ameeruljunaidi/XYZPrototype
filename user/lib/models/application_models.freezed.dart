@@ -1841,33 +1841,27 @@ class _$GigTearOff {
       {String? gigId,
       String? gigVendorId,
       String? gigTitle,
-      String? gigSubtitle,
       String? gigDescription,
       List<String>? gigPhotos,
-      List<String>? gigFeatures,
       Map<String, String>? gigFaqs,
       Map<String, double>? gigReviews,
       String? gigCategory,
-      String? gigSubCategory,
       String? gigServiceType,
-      Map<String, dynamic>? gigFilters,
       Map<String, Map<String, dynamic>>? gigPrice,
+      bool? gigQuote,
       String? gigLocation}) {
     return _Gigs(
       gigId: gigId,
       gigVendorId: gigVendorId,
       gigTitle: gigTitle,
-      gigSubtitle: gigSubtitle,
       gigDescription: gigDescription,
       gigPhotos: gigPhotos,
-      gigFeatures: gigFeatures,
       gigFaqs: gigFaqs,
       gigReviews: gigReviews,
       gigCategory: gigCategory,
-      gigSubCategory: gigSubCategory,
       gigServiceType: gigServiceType,
-      gigFilters: gigFilters,
       gigPrice: gigPrice,
+      gigQuote: gigQuote,
       gigLocation: gigLocation,
     );
   }
@@ -1885,18 +1879,15 @@ mixin _$Gig {
   String? get gigId => throw _privateConstructorUsedError;
   String? get gigVendorId => throw _privateConstructorUsedError;
   String? get gigTitle => throw _privateConstructorUsedError;
-  String? get gigSubtitle => throw _privateConstructorUsedError;
   String? get gigDescription => throw _privateConstructorUsedError;
   List<String>? get gigPhotos => throw _privateConstructorUsedError;
-  List<String>? get gigFeatures => throw _privateConstructorUsedError;
   Map<String, String>? get gigFaqs => throw _privateConstructorUsedError;
   Map<String, double>? get gigReviews => throw _privateConstructorUsedError;
   String? get gigCategory => throw _privateConstructorUsedError;
-  String? get gigSubCategory => throw _privateConstructorUsedError;
   String? get gigServiceType => throw _privateConstructorUsedError;
-  Map<String, dynamic>? get gigFilters => throw _privateConstructorUsedError;
   Map<String, Map<String, dynamic>>? get gigPrice =>
       throw _privateConstructorUsedError;
+  bool? get gigQuote => throw _privateConstructorUsedError;
   String? get gigLocation => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -1912,17 +1903,14 @@ abstract class $GigCopyWith<$Res> {
       {String? gigId,
       String? gigVendorId,
       String? gigTitle,
-      String? gigSubtitle,
       String? gigDescription,
       List<String>? gigPhotos,
-      List<String>? gigFeatures,
       Map<String, String>? gigFaqs,
       Map<String, double>? gigReviews,
       String? gigCategory,
-      String? gigSubCategory,
       String? gigServiceType,
-      Map<String, dynamic>? gigFilters,
       Map<String, Map<String, dynamic>>? gigPrice,
+      bool? gigQuote,
       String? gigLocation});
 }
 
@@ -1939,17 +1927,14 @@ class _$GigCopyWithImpl<$Res> implements $GigCopyWith<$Res> {
     Object? gigId = freezed,
     Object? gigVendorId = freezed,
     Object? gigTitle = freezed,
-    Object? gigSubtitle = freezed,
     Object? gigDescription = freezed,
     Object? gigPhotos = freezed,
-    Object? gigFeatures = freezed,
     Object? gigFaqs = freezed,
     Object? gigReviews = freezed,
     Object? gigCategory = freezed,
-    Object? gigSubCategory = freezed,
     Object? gigServiceType = freezed,
-    Object? gigFilters = freezed,
     Object? gigPrice = freezed,
+    Object? gigQuote = freezed,
     Object? gigLocation = freezed,
   }) {
     return _then(_value.copyWith(
@@ -1965,10 +1950,6 @@ class _$GigCopyWithImpl<$Res> implements $GigCopyWith<$Res> {
           ? _value.gigTitle
           : gigTitle // ignore: cast_nullable_to_non_nullable
               as String?,
-      gigSubtitle: gigSubtitle == freezed
-          ? _value.gigSubtitle
-          : gigSubtitle // ignore: cast_nullable_to_non_nullable
-              as String?,
       gigDescription: gigDescription == freezed
           ? _value.gigDescription
           : gigDescription // ignore: cast_nullable_to_non_nullable
@@ -1976,10 +1957,6 @@ class _$GigCopyWithImpl<$Res> implements $GigCopyWith<$Res> {
       gigPhotos: gigPhotos == freezed
           ? _value.gigPhotos
           : gigPhotos // ignore: cast_nullable_to_non_nullable
-              as List<String>?,
-      gigFeatures: gigFeatures == freezed
-          ? _value.gigFeatures
-          : gigFeatures // ignore: cast_nullable_to_non_nullable
               as List<String>?,
       gigFaqs: gigFaqs == freezed
           ? _value.gigFaqs
@@ -1993,22 +1970,18 @@ class _$GigCopyWithImpl<$Res> implements $GigCopyWith<$Res> {
           ? _value.gigCategory
           : gigCategory // ignore: cast_nullable_to_non_nullable
               as String?,
-      gigSubCategory: gigSubCategory == freezed
-          ? _value.gigSubCategory
-          : gigSubCategory // ignore: cast_nullable_to_non_nullable
-              as String?,
       gigServiceType: gigServiceType == freezed
           ? _value.gigServiceType
           : gigServiceType // ignore: cast_nullable_to_non_nullable
               as String?,
-      gigFilters: gigFilters == freezed
-          ? _value.gigFilters
-          : gigFilters // ignore: cast_nullable_to_non_nullable
-              as Map<String, dynamic>?,
       gigPrice: gigPrice == freezed
           ? _value.gigPrice
           : gigPrice // ignore: cast_nullable_to_non_nullable
               as Map<String, Map<String, dynamic>>?,
+      gigQuote: gigQuote == freezed
+          ? _value.gigQuote
+          : gigQuote // ignore: cast_nullable_to_non_nullable
+              as bool?,
       gigLocation: gigLocation == freezed
           ? _value.gigLocation
           : gigLocation // ignore: cast_nullable_to_non_nullable
@@ -2026,17 +1999,14 @@ abstract class _$GigsCopyWith<$Res> implements $GigCopyWith<$Res> {
       {String? gigId,
       String? gigVendorId,
       String? gigTitle,
-      String? gigSubtitle,
       String? gigDescription,
       List<String>? gigPhotos,
-      List<String>? gigFeatures,
       Map<String, String>? gigFaqs,
       Map<String, double>? gigReviews,
       String? gigCategory,
-      String? gigSubCategory,
       String? gigServiceType,
-      Map<String, dynamic>? gigFilters,
       Map<String, Map<String, dynamic>>? gigPrice,
+      bool? gigQuote,
       String? gigLocation});
 }
 
@@ -2054,17 +2024,14 @@ class __$GigsCopyWithImpl<$Res> extends _$GigCopyWithImpl<$Res>
     Object? gigId = freezed,
     Object? gigVendorId = freezed,
     Object? gigTitle = freezed,
-    Object? gigSubtitle = freezed,
     Object? gigDescription = freezed,
     Object? gigPhotos = freezed,
-    Object? gigFeatures = freezed,
     Object? gigFaqs = freezed,
     Object? gigReviews = freezed,
     Object? gigCategory = freezed,
-    Object? gigSubCategory = freezed,
     Object? gigServiceType = freezed,
-    Object? gigFilters = freezed,
     Object? gigPrice = freezed,
+    Object? gigQuote = freezed,
     Object? gigLocation = freezed,
   }) {
     return _then(_Gigs(
@@ -2080,10 +2047,6 @@ class __$GigsCopyWithImpl<$Res> extends _$GigCopyWithImpl<$Res>
           ? _value.gigTitle
           : gigTitle // ignore: cast_nullable_to_non_nullable
               as String?,
-      gigSubtitle: gigSubtitle == freezed
-          ? _value.gigSubtitle
-          : gigSubtitle // ignore: cast_nullable_to_non_nullable
-              as String?,
       gigDescription: gigDescription == freezed
           ? _value.gigDescription
           : gigDescription // ignore: cast_nullable_to_non_nullable
@@ -2091,10 +2054,6 @@ class __$GigsCopyWithImpl<$Res> extends _$GigCopyWithImpl<$Res>
       gigPhotos: gigPhotos == freezed
           ? _value.gigPhotos
           : gigPhotos // ignore: cast_nullable_to_non_nullable
-              as List<String>?,
-      gigFeatures: gigFeatures == freezed
-          ? _value.gigFeatures
-          : gigFeatures // ignore: cast_nullable_to_non_nullable
               as List<String>?,
       gigFaqs: gigFaqs == freezed
           ? _value.gigFaqs
@@ -2108,22 +2067,18 @@ class __$GigsCopyWithImpl<$Res> extends _$GigCopyWithImpl<$Res>
           ? _value.gigCategory
           : gigCategory // ignore: cast_nullable_to_non_nullable
               as String?,
-      gigSubCategory: gigSubCategory == freezed
-          ? _value.gigSubCategory
-          : gigSubCategory // ignore: cast_nullable_to_non_nullable
-              as String?,
       gigServiceType: gigServiceType == freezed
           ? _value.gigServiceType
           : gigServiceType // ignore: cast_nullable_to_non_nullable
               as String?,
-      gigFilters: gigFilters == freezed
-          ? _value.gigFilters
-          : gigFilters // ignore: cast_nullable_to_non_nullable
-              as Map<String, dynamic>?,
       gigPrice: gigPrice == freezed
           ? _value.gigPrice
           : gigPrice // ignore: cast_nullable_to_non_nullable
               as Map<String, Map<String, dynamic>>?,
+      gigQuote: gigQuote == freezed
+          ? _value.gigQuote
+          : gigQuote // ignore: cast_nullable_to_non_nullable
+              as bool?,
       gigLocation: gigLocation == freezed
           ? _value.gigLocation
           : gigLocation // ignore: cast_nullable_to_non_nullable
@@ -2139,17 +2094,14 @@ class _$_Gigs with DiagnosticableTreeMixin implements _Gigs {
       {this.gigId,
       this.gigVendorId,
       this.gigTitle,
-      this.gigSubtitle,
       this.gigDescription,
       this.gigPhotos,
-      this.gigFeatures,
       this.gigFaqs,
       this.gigReviews,
       this.gigCategory,
-      this.gigSubCategory,
       this.gigServiceType,
-      this.gigFilters,
       this.gigPrice,
+      this.gigQuote,
       this.gigLocation});
 
   factory _$_Gigs.fromJson(Map<String, dynamic> json) =>
@@ -2162,13 +2114,9 @@ class _$_Gigs with DiagnosticableTreeMixin implements _Gigs {
   @override
   final String? gigTitle;
   @override
-  final String? gigSubtitle;
-  @override
   final String? gigDescription;
   @override
   final List<String>? gigPhotos;
-  @override
-  final List<String>? gigFeatures;
   @override
   final Map<String, String>? gigFaqs;
   @override
@@ -2176,19 +2124,17 @@ class _$_Gigs with DiagnosticableTreeMixin implements _Gigs {
   @override
   final String? gigCategory;
   @override
-  final String? gigSubCategory;
-  @override
   final String? gigServiceType;
   @override
-  final Map<String, dynamic>? gigFilters;
-  @override
   final Map<String, Map<String, dynamic>>? gigPrice;
+  @override
+  final bool? gigQuote;
   @override
   final String? gigLocation;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'Gig(gigId: $gigId, gigVendorId: $gigVendorId, gigTitle: $gigTitle, gigSubtitle: $gigSubtitle, gigDescription: $gigDescription, gigPhotos: $gigPhotos, gigFeatures: $gigFeatures, gigFaqs: $gigFaqs, gigReviews: $gigReviews, gigCategory: $gigCategory, gigSubCategory: $gigSubCategory, gigServiceType: $gigServiceType, gigFilters: $gigFilters, gigPrice: $gigPrice, gigLocation: $gigLocation)';
+    return 'Gig(gigId: $gigId, gigVendorId: $gigVendorId, gigTitle: $gigTitle, gigDescription: $gigDescription, gigPhotos: $gigPhotos, gigFaqs: $gigFaqs, gigReviews: $gigReviews, gigCategory: $gigCategory, gigServiceType: $gigServiceType, gigPrice: $gigPrice, gigQuote: $gigQuote, gigLocation: $gigLocation)';
   }
 
   @override
@@ -2199,17 +2145,14 @@ class _$_Gigs with DiagnosticableTreeMixin implements _Gigs {
       ..add(DiagnosticsProperty('gigId', gigId))
       ..add(DiagnosticsProperty('gigVendorId', gigVendorId))
       ..add(DiagnosticsProperty('gigTitle', gigTitle))
-      ..add(DiagnosticsProperty('gigSubtitle', gigSubtitle))
       ..add(DiagnosticsProperty('gigDescription', gigDescription))
       ..add(DiagnosticsProperty('gigPhotos', gigPhotos))
-      ..add(DiagnosticsProperty('gigFeatures', gigFeatures))
       ..add(DiagnosticsProperty('gigFaqs', gigFaqs))
       ..add(DiagnosticsProperty('gigReviews', gigReviews))
       ..add(DiagnosticsProperty('gigCategory', gigCategory))
-      ..add(DiagnosticsProperty('gigSubCategory', gigSubCategory))
       ..add(DiagnosticsProperty('gigServiceType', gigServiceType))
-      ..add(DiagnosticsProperty('gigFilters', gigFilters))
       ..add(DiagnosticsProperty('gigPrice', gigPrice))
+      ..add(DiagnosticsProperty('gigQuote', gigQuote))
       ..add(DiagnosticsProperty('gigLocation', gigLocation));
   }
 
@@ -2225,18 +2168,12 @@ class _$_Gigs with DiagnosticableTreeMixin implements _Gigs {
             (identical(other.gigTitle, gigTitle) ||
                 const DeepCollectionEquality()
                     .equals(other.gigTitle, gigTitle)) &&
-            (identical(other.gigSubtitle, gigSubtitle) ||
-                const DeepCollectionEquality()
-                    .equals(other.gigSubtitle, gigSubtitle)) &&
             (identical(other.gigDescription, gigDescription) ||
                 const DeepCollectionEquality()
                     .equals(other.gigDescription, gigDescription)) &&
             (identical(other.gigPhotos, gigPhotos) ||
                 const DeepCollectionEquality()
                     .equals(other.gigPhotos, gigPhotos)) &&
-            (identical(other.gigFeatures, gigFeatures) ||
-                const DeepCollectionEquality()
-                    .equals(other.gigFeatures, gigFeatures)) &&
             (identical(other.gigFaqs, gigFaqs) ||
                 const DeepCollectionEquality()
                     .equals(other.gigFaqs, gigFaqs)) &&
@@ -2246,18 +2183,15 @@ class _$_Gigs with DiagnosticableTreeMixin implements _Gigs {
             (identical(other.gigCategory, gigCategory) ||
                 const DeepCollectionEquality()
                     .equals(other.gigCategory, gigCategory)) &&
-            (identical(other.gigSubCategory, gigSubCategory) ||
-                const DeepCollectionEquality()
-                    .equals(other.gigSubCategory, gigSubCategory)) &&
             (identical(other.gigServiceType, gigServiceType) ||
                 const DeepCollectionEquality()
                     .equals(other.gigServiceType, gigServiceType)) &&
-            (identical(other.gigFilters, gigFilters) ||
-                const DeepCollectionEquality()
-                    .equals(other.gigFilters, gigFilters)) &&
             (identical(other.gigPrice, gigPrice) ||
                 const DeepCollectionEquality()
                     .equals(other.gigPrice, gigPrice)) &&
+            (identical(other.gigQuote, gigQuote) ||
+                const DeepCollectionEquality()
+                    .equals(other.gigQuote, gigQuote)) &&
             (identical(other.gigLocation, gigLocation) ||
                 const DeepCollectionEquality()
                     .equals(other.gigLocation, gigLocation)));
@@ -2269,17 +2203,14 @@ class _$_Gigs with DiagnosticableTreeMixin implements _Gigs {
       const DeepCollectionEquality().hash(gigId) ^
       const DeepCollectionEquality().hash(gigVendorId) ^
       const DeepCollectionEquality().hash(gigTitle) ^
-      const DeepCollectionEquality().hash(gigSubtitle) ^
       const DeepCollectionEquality().hash(gigDescription) ^
       const DeepCollectionEquality().hash(gigPhotos) ^
-      const DeepCollectionEquality().hash(gigFeatures) ^
       const DeepCollectionEquality().hash(gigFaqs) ^
       const DeepCollectionEquality().hash(gigReviews) ^
       const DeepCollectionEquality().hash(gigCategory) ^
-      const DeepCollectionEquality().hash(gigSubCategory) ^
       const DeepCollectionEquality().hash(gigServiceType) ^
-      const DeepCollectionEquality().hash(gigFilters) ^
       const DeepCollectionEquality().hash(gigPrice) ^
+      const DeepCollectionEquality().hash(gigQuote) ^
       const DeepCollectionEquality().hash(gigLocation);
 
   @JsonKey(ignore: true)
@@ -2298,17 +2229,14 @@ abstract class _Gigs implements Gig {
       {String? gigId,
       String? gigVendorId,
       String? gigTitle,
-      String? gigSubtitle,
       String? gigDescription,
       List<String>? gigPhotos,
-      List<String>? gigFeatures,
       Map<String, String>? gigFaqs,
       Map<String, double>? gigReviews,
       String? gigCategory,
-      String? gigSubCategory,
       String? gigServiceType,
-      Map<String, dynamic>? gigFilters,
       Map<String, Map<String, dynamic>>? gigPrice,
+      bool? gigQuote,
       String? gigLocation}) = _$_Gigs;
 
   factory _Gigs.fromJson(Map<String, dynamic> json) = _$_Gigs.fromJson;
@@ -2320,13 +2248,9 @@ abstract class _Gigs implements Gig {
   @override
   String? get gigTitle => throw _privateConstructorUsedError;
   @override
-  String? get gigSubtitle => throw _privateConstructorUsedError;
-  @override
   String? get gigDescription => throw _privateConstructorUsedError;
   @override
   List<String>? get gigPhotos => throw _privateConstructorUsedError;
-  @override
-  List<String>? get gigFeatures => throw _privateConstructorUsedError;
   @override
   Map<String, String>? get gigFaqs => throw _privateConstructorUsedError;
   @override
@@ -2334,14 +2258,12 @@ abstract class _Gigs implements Gig {
   @override
   String? get gigCategory => throw _privateConstructorUsedError;
   @override
-  String? get gigSubCategory => throw _privateConstructorUsedError;
-  @override
   String? get gigServiceType => throw _privateConstructorUsedError;
-  @override
-  Map<String, dynamic>? get gigFilters => throw _privateConstructorUsedError;
   @override
   Map<String, Map<String, dynamic>>? get gigPrice =>
       throw _privateConstructorUsedError;
+  @override
+  bool? get gigQuote => throw _privateConstructorUsedError;
   @override
   String? get gigLocation => throw _privateConstructorUsedError;
   @override

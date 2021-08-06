@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
+import 'package:flutter/widgets.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked/stacked_annotations.dart';
 import 'package:xyz_prototype/app/app.locator.dart';
+import 'package:xyz_prototype/constants/app_strings.dart';
 import 'package:xyz_prototype/models/application_models.dart';
 import 'package:xyz_prototype/ui/marketplace/marketplace_viewmodel.dart';
 import 'package:xyz_prototype/ui/marketplace/marketplace_view.form.dart';
@@ -16,6 +18,17 @@ import 'package:xyz_ui/xyz_ui.dart';
 class MarketPlaceView extends StatelessWidget with $MarketPlaceView {
   MarketPlaceView({Key? key}) : super(key: key);
 
+  static const _colorDebug = [
+    // Colors.red,
+    // Colors.blue,
+    // Colors.green,
+    // Colors.grey,
+    null,
+    null,
+    null,
+    null
+  ];
+
   List<IconData> _icons = [
     FontAwesomeIcons.plane,
     FontAwesomeIcons.bed,
@@ -25,7 +38,9 @@ class MarketPlaceView extends StatelessWidget with $MarketPlaceView {
     FontAwesomeIcons.amazon,
   ];
 
-  final _carouselHeightPct = 0.36;
+  final _circleWidthPct = 0.15;
+  final _carouselHeight = 350.0;
+  final _cardWidthPct = 0.50;
 
   @override
   Widget build(BuildContext context) {
@@ -42,7 +57,7 @@ class MarketPlaceView extends StatelessWidget with $MarketPlaceView {
           body: SafeArea(
             child: Column(
               children: [
-                _searchBar(),
+                _searchBar(model),
                 _marketPlaceBody(context, model),
                 if (model.clientData().clientAddress == null &&
                     model.clientData().clientEmail != null)
@@ -56,7 +71,7 @@ class MarketPlaceView extends StatelessWidget with $MarketPlaceView {
     );
   }
 
-  Widget _searchBar() {
+  Widget _searchBar(MarketPlaceViewModel model) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 24.0),
       child: Column(
@@ -64,9 +79,9 @@ class MarketPlaceView extends StatelessWidget with $MarketPlaceView {
           verticalSpaceRegular,
           BoxInputField(
             controller: TextEditingController(),
-            placeholder: 'Search for Service Around You',
+            placeholder: 'Search',
             textAlign: TextAlign.center,
-            tapOnly: true,
+            leading: Icon(Icons.search),
           ),
         ],
       ),
@@ -103,7 +118,7 @@ class MarketPlaceView extends StatelessWidget with $MarketPlaceView {
 
   Container _progressIndicatorForCarousel(BuildContext context) {
     return Container(
-      height: screenHeightPercentage(context, percentage: _carouselHeightPct),
+      height: 400,
       child: Center(
         child: CircularProgressIndicator(
           color: kcPrimaryColor,
@@ -112,50 +127,56 @@ class MarketPlaceView extends StatelessWidget with $MarketPlaceView {
     );
   }
 
-  SingleChildScrollView _iconsServicesListView(
+  Widget _iconsServicesListView(
     BuildContext context,
     MarketPlaceViewModel model,
   ) {
-    return SingleChildScrollView(
-      scrollDirection: Axis.horizontal,
-      child: Row(
-        children: _icons
-            .asMap()
-            .entries
-            .map((e) => _iconBuild(context, e.key, model))
-            .toList(),
-      ),
+    final _circleWidth = screenWidthPercentage(
+      context,
+      percentage: _circleWidthPct,
+    );
+    return Container(
+      height: _circleWidth,
+      child: ListView.separated(
+          padding: defaultPaddingHorizontal,
+          scrollDirection: Axis.horizontal,
+          itemBuilder: (context, index) {
+            return _iconBuild(context, index, model);
+          },
+          separatorBuilder: (context, index) {
+            return horizontalSpaceRegular;
+          },
+          itemCount: _icons.length),
     );
   }
 
   Widget _iconBuild(context, int index, model) {
-    final _circleHeight = screenHeightPercentage(context, percentage: 0.07);
+    final _circleWidth = screenWidthPercentage(
+      context,
+      percentage: _circleWidthPct,
+    );
 
-    return Padding(
-      padding: const EdgeInsets.only(left: 24.0),
-      child: Container(
-        height: _circleHeight,
-        width: _circleHeight,
-        decoration: BoxDecoration(
-          // Circle color
-          color: model.selectedIndex == index
-              ? kcAccentColorLight
-              : kcLightGreyColor,
-          borderRadius: BorderRadius.circular(_circleHeight / 2),
-        ),
-        child: InkWell(
-          customBorder: CircleBorder(),
-          onTap: () {
-            model.updateIndex(index);
-          },
-          child: Icon(
-            _icons[index],
-            size: _circleHeight / 2.1,
-            // Icon color
-            color: model.selectedIndex == index
-                ? kcPrimaryColor
-                : kcMediumGreyColor,
-          ),
+    return Container(
+      height: _circleWidth,
+      width: _circleWidth,
+      decoration: BoxDecoration(
+        // Circle color
+        color: model.selectedIndex == index
+            ? kcAccentColorLight
+            : kcLightGreyColor,
+        borderRadius: BorderRadius.circular(_circleWidth / 2),
+      ),
+      child: InkWell(
+        customBorder: CircleBorder(),
+        onTap: () {
+          model.updateIndex(index);
+        },
+        child: Icon(
+          _icons[index],
+          size: _circleWidth / 2.1,
+          // Icon color
+          color:
+              model.selectedIndex == index ? kcPrimaryColor : kcMediumGreyColor,
         ),
       ),
     );
@@ -163,7 +184,7 @@ class MarketPlaceView extends StatelessWidget with $MarketPlaceView {
 
   Padding _carouselServicesTitleAndSeeAll() {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 24.0),
+      padding: defaultPaddingHorizontal,
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         crossAxisAlignment: CrossAxisAlignment.center,
@@ -186,17 +207,20 @@ class MarketPlaceView extends StatelessWidget with $MarketPlaceView {
 
   // Listview builder for the caoursel
   Widget _carouselServicesBuilder(context, model) {
-    final _carouselHeight = screenHeightPercentage(
+    final _cardWidth = screenWidthPercentage(
       context,
-      percentage: _carouselHeightPct,
+      percentage: _cardWidthPct,
     );
-    final _cardWidth = screenWidthPercentage(context, percentage: 0.50);
 
     return Container(
-      height: _carouselHeight,
+      color: _colorDebug[0],
       width: double.infinity,
-      // color: Colors.blue,
-      child: ListView.builder(
+      height: _carouselHeight,
+      child: ListView.separated(
+        padding: defaultPaddingHorizontal,
+        separatorBuilder: (context, index) {
+          return horizontalSpaceRegular;
+        },
         scrollDirection: Axis.horizontal,
         itemBuilder: (context, index) {
           ServiceSubCategory subCategories = model.subCategoriesList[index];
@@ -213,46 +237,52 @@ class MarketPlaceView extends StatelessWidget with $MarketPlaceView {
   }
 
   // The carousel itself
-  Container _carouselServicesBody(
+  Widget _carouselServicesBody(
     double _cardWidth,
     double _carouselHeight,
     ServiceSubCategory subCategories,
   ) {
     return Container(
-      margin: EdgeInsets.only(top: 16.0, bottom: 16.0, left: 16.0),
-      width: _cardWidth,
-      child: Stack(
-        alignment: Alignment.topCenter,
+      decoration: defaultBoxDecoration(
+        color: Colors.white,
+        shadow: true,
+      ),
+      margin: EdgeInsets.symmetric(vertical: 8.0),
+      child: Column(
         children: <Widget>[
-          _backgroundCardInCarousel(_carouselHeight, _cardWidth),
           _imageCardInCarousel(
             subCategories,
             _carouselHeight,
             _cardWidth,
           ),
+          _backgroundCardInCarousel(_carouselHeight, _cardWidth),
         ],
       ),
     );
   }
 
   // The background card that goes behind the image
-  Positioned _backgroundCardInCarousel(
+  Widget _backgroundCardInCarousel(
     double _carouselHeight,
     double _cardWidth,
   ) {
-    return Positioned(
-      bottom: -8.0,
+    return Expanded(
       child: Container(
-        height: _carouselHeight * 0.5,
         width: _cardWidth,
         decoration: BoxDecoration(
-          color: Colors.white,
-          borderRadius: defaultBorderRadius,
+          color: _colorDebug[1] != null ? _colorDebug[1] : Colors.white,
+          borderRadius: BorderRadius.only(
+            bottomLeft: Radius.circular(defaultBorderRadiusValue),
+            bottomRight: Radius.circular(defaultBorderRadiusValue),
+          ),
         ),
         child: Padding(
-          padding: const EdgeInsets.all(16.0),
+          padding: EdgeInsets.symmetric(
+            vertical: 8.0,
+            horizontal: defaultPaddingValueSmall,
+          ),
           child: Column(
-            mainAxisAlignment: MainAxisAlignment.end,
+            mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
               Padding(
@@ -269,7 +299,9 @@ class MarketPlaceView extends StatelessWidget with $MarketPlaceView {
               Padding(
                 padding: const EdgeInsets.only(bottom: 8.0),
                 child: Text(
-                  'TODO',
+                  LoremIpsum,
+                  maxLines: 3,
+                  overflow: TextOverflow.ellipsis,
                   style: TextStyle(color: Colors.grey),
                 ),
               ),
@@ -281,54 +313,48 @@ class MarketPlaceView extends StatelessWidget with $MarketPlaceView {
   }
 
   // The images in the carousel themselves
-  Container _imageCardInCarousel(
+  Widget _imageCardInCarousel(
     ServiceSubCategory subCategories,
     double _carouselHeight,
     double _cardWidth,
   ) {
-    return Container(
-      decoration: defaultBoxDecoration,
-      child: Stack(
-        children: <Widget>[
-          ClipRRect(
-            borderRadius: defaultBorderRadius,
-            child: Image(
-              image: NetworkImage(subCategories.serviceSubCategoryPhoto!),
-              height: _carouselHeight * 0.6,
-              width: _cardWidth * 0.9,
-              fit: BoxFit.cover,
-            ),
+    return Stack(
+      children: <Widget>[
+        ClipRRect(
+          borderRadius: BorderRadius.only(
+            topLeft: Radius.circular(defaultBorderRadiusValue),
+            topRight: Radius.circular(defaultBorderRadiusValue),
           ),
-          Positioned(
-            bottom: 0.0,
-            child: ClipRRect(
-              borderRadius: BorderRadius.only(
-                bottomLeft: Radius.circular(defaultBorderRadiusValue),
-                bottomRight: Radius.circular(defaultBorderRadiusValue),
+          child: Image(
+            image: NetworkImage(subCategories.serviceSubCategoryPhoto!),
+            height: _cardWidth,
+            width: _cardWidth,
+            fit: BoxFit.cover,
+          ),
+        ),
+        Positioned(
+          bottom: 0.0,
+          child: Container(
+            width: _cardWidth,
+            color: Colors.black12,
+            child: Padding(
+              padding: const EdgeInsets.only(
+                left: 8.0,
+                bottom: 8.0,
+                top: 8.0,
               ),
-              child: Container(
-                width: _cardWidth * 0.9,
-                color: Colors.black12,
-                child: Padding(
-                  padding: const EdgeInsets.only(
-                    left: 8.0,
-                    bottom: 8.0,
-                    top: 8.0,
-                  ),
-                  child: Text(
-                    subCategories.serviceSubCategoryName!,
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 24.0,
-                      fontWeight: FontWeight.w600,
-                    ),
-                  ),
+              child: Text(
+                subCategories.serviceSubCategoryName!,
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 24.0,
+                  fontWeight: FontWeight.w600,
                 ),
               ),
             ),
           ),
-        ],
-      ),
+        ),
+      ],
     );
   }
 

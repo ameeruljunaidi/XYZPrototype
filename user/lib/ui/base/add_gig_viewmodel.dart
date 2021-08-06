@@ -4,59 +4,22 @@ import 'package:xyz_prototype/api/firestore_api.dart';
 import 'package:xyz_prototype/app/app.locator.dart';
 import 'package:xyz_prototype/app/app.logger.dart';
 import 'package:xyz_prototype/app/app.router.dart';
-import 'package:xyz_prototype/enums/basic_dialog_status.dart';
-import 'package:xyz_prototype/enums/dialog_type.dart';
-import 'package:xyz_prototype/models/application_models.dart';
 import 'package:xyz_prototype/services/gig_service.dart';
-import 'package:xyz_prototype/ui/add_gig/add_gig_location_view.dart';
 import 'package:xyz_prototype/ui/add_gig/add_gig_photos_view.dart';
+import 'package:xyz_prototype/ui/add_gig/add_gig_price_chooser_view.dart';
 import 'package:xyz_prototype/ui/add_gig/add_gig_price_view.dart';
 import 'package:xyz_prototype/ui/add_gig/add_gig_service_view.dart';
 import 'package:xyz_prototype/ui/add_gig/add_gig_title_view.dart';
 import 'package:xyz_prototype/ui/add_gig/add_gig_title_view.form.dart';
-import 'package:xyz_prototype/ui/add_gig/add_gig_price_view.form.dart';
 
 class AddGigViewModel extends FormViewModel {
   final log = getLogger('AddBusinessViewModel');
   final _navigationService = locator<NavigationService>();
-  final _dialogService = locator<DialogService>();
   final _firestoreApi = locator<FirestoreApi>();
   final _gigService = locator<GigService>();
 
   @override
   void setFormStatus() {}
-
-  // Function to add gig
-  Future<void> addGig() async {
-    setBusy(true);
-
-    var _loadedGig = _gigService.currentGig!;
-
-    _loadedGig = _gigService.currentGig!;
-    final addSuccess = await _firestoreApi.addGig(gig: _loadedGig);
-
-    if (!addSuccess) {
-      await _dialogService.showCustomDialog(
-        variant: DialogType.basic,
-        data: BasicDialogStatus.error,
-        mainButtonTitle: 'Go Back',
-        title: 'Could not add gig',
-      );
-    } else {
-      await _dialogService.showCustomDialog(
-        variant: DialogType.basic,
-        data: BasicDialogStatus.sucess,
-        title: 'Gig successfully added',
-        description: 'You gig has been added',
-        mainButtonTitle: 'Ok',
-      );
-    }
-
-    _navigationService.clearTillFirstAndShow(Routes.gigManagerView);
-    log.i('final check: ${_gigService.currentGig}');
-
-    setBusy(false);
-  }
 
   // Navigation functions
   void goBack() {
@@ -81,24 +44,6 @@ class AddGigViewModel extends FormViewModel {
     log.i('goToAddTitle check: ${_gigService.currentGig}');
   }
 
-  void goToAddLocation() {
-    _gigService.addGigTitle(
-      gigTitleValue,
-      gigSubtitleValue,
-      gigDescriptionValue,
-    );
-
-    final _loadedGig = _gigService.currentGig;
-
-    // Need to add gig to firestore to get gigId for address
-    _firestoreApi.addGig(gig: _loadedGig!);
-
-    _navigationService.navigateWithTransition(AddGigLocationView(),
-        transition: 'fade');
-
-    log.i('goToAddLocation check: ${_gigService.currentGig}');
-  }
-
   void goToAddPhoto() {
     _navigationService.navigateWithTransition(
       AddGigPhotosView(),
@@ -106,7 +51,19 @@ class AddGigViewModel extends FormViewModel {
     );
   }
 
+  void goToPriceChoose() {
+    _navigationService.navigateWithTransition(
+      AddGigPriceChooserView(),
+      transition: 'fade',
+    );
+  }
+
   void goToAddPrice() {
+    _gigService.addGigTitle(
+      gigTitleValue,
+      gigDescriptionValue,
+    );
+
     _navigationService.navigateWithTransition(
       AddGigPriceView(),
       transition: 'fade',
@@ -128,55 +85,5 @@ class AddGigViewModel extends FormViewModel {
     _navigationService.clearTillFirstAndShow(Routes.gigManagerView);
     setBusy(false);
     notifyListeners();
-  }
-
-  // List of controllers from price page
-  List<ServiceFeatures>? customFeatures = [];
-
-  ServiceFeatures? getCustomeFeaturesControllers(index) {
-    customFeatures = [
-      ServiceFeatures(
-        serviceFeatureName: customFeature1TitleValue ?? '',
-        serviceFeatureValue: customFeature1ValueValue ?? '',
-      ),
-      ServiceFeatures(
-        serviceFeatureName: customFeature2TitleValue ?? '',
-        serviceFeatureValue: customFeature2ValueValue ?? '',
-      ),
-      ServiceFeatures(
-        serviceFeatureName: customFeature3TitleValue ?? '',
-        serviceFeatureValue: customFeature3ValueValue ?? '',
-      ),
-      ServiceFeatures(
-        serviceFeatureName: customFeature4TitleValue ?? '',
-        serviceFeatureValue: customFeature4ValueValue ?? '',
-      ),
-      ServiceFeatures(
-        serviceFeatureName: customFeature5TitleValue ?? '',
-        serviceFeatureValue: customFeature5ValueValue ?? '',
-      ),
-      ServiceFeatures(
-        serviceFeatureName: customFeature6TitleValue ?? '',
-        serviceFeatureValue: customFeature6ValueValue ?? '',
-      ),
-      ServiceFeatures(
-        serviceFeatureName: customFeature7TitleValue ?? '',
-        serviceFeatureValue: customFeature7ValueValue ?? '',
-      ),
-      ServiceFeatures(
-        serviceFeatureName: customFeature8TitleValue ?? '',
-        serviceFeatureValue: customFeature8ValueValue ?? '',
-      ),
-      ServiceFeatures(
-        serviceFeatureName: customFeature9TitleValue ?? '',
-        serviceFeatureValue: customFeature9ValueValue ?? '',
-      ),
-      ServiceFeatures(
-        serviceFeatureName: customFeature10TitleValue ?? '',
-        serviceFeatureValue: customFeature10ValueValue ?? '',
-      ),
-    ];
-
-    return customFeatures![index];
   }
 }

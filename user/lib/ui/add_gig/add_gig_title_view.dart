@@ -8,7 +8,6 @@ import 'package:xyz_ui/xyz_ui.dart';
 @FormView(
   fields: [
     FormTextField(name: 'gigTitle'),
-    FormTextField(name: 'gigSubtitle'),
     FormTextField(name: 'gigDescription'),
   ],
 )
@@ -49,14 +48,7 @@ class AddGigTitleView extends StatelessWidget with $AddGigTitleView {
               controller: gigTitleController,
               placeholder: 'Gig Title',
             ),
-            verticalSpaceRegular,
-            defaultTextBoxTitle('Gig Subtitle'),
             verticalSpaceSmall,
-            BoxInputField(
-              controller: gigSubtitleController,
-              placeholder: 'Gig Subtitle',
-            ),
-            verticalSpaceRegular,
             defaultTextBoxTitle('Gig Description'),
             verticalSpaceSmall,
             BoxInputField(

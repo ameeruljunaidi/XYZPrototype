@@ -173,13 +173,9 @@ _$_Gigs _$_$_GigsFromJson(Map<String, dynamic> json) {
     gigId: json['gigId'] as String?,
     gigVendorId: json['gigVendorId'] as String?,
     gigTitle: json['gigTitle'] as String?,
-    gigSubtitle: json['gigSubtitle'] as String?,
     gigDescription: json['gigDescription'] as String?,
     gigPhotos:
         (json['gigPhotos'] as List<dynamic>?)?.map((e) => e as String).toList(),
-    gigFeatures: (json['gigFeatures'] as List<dynamic>?)
-        ?.map((e) => e as String)
-        .toList(),
     gigFaqs: (json['gigFaqs'] as Map<String, dynamic>?)?.map(
       (k, e) => MapEntry(k, e as String),
     ),
@@ -187,12 +183,11 @@ _$_Gigs _$_$_GigsFromJson(Map<String, dynamic> json) {
       (k, e) => MapEntry(k, (e as num).toDouble()),
     ),
     gigCategory: json['gigCategory'] as String?,
-    gigSubCategory: json['gigSubCategory'] as String?,
     gigServiceType: json['gigServiceType'] as String?,
-    gigFilters: json['gigFilters'] as Map<String, dynamic>?,
     gigPrice: (json['gigPrice'] as Map<String, dynamic>?)?.map(
       (k, e) => MapEntry(k, e as Map<String, dynamic>),
     ),
+    gigQuote: json['gigQuote'] as bool?,
     gigLocation: json['gigLocation'] as String?,
   );
 }
@@ -201,17 +196,14 @@ Map<String, dynamic> _$_$_GigsToJson(_$_Gigs instance) => <String, dynamic>{
       'gigId': instance.gigId,
       'gigVendorId': instance.gigVendorId,
       'gigTitle': instance.gigTitle,
-      'gigSubtitle': instance.gigSubtitle,
       'gigDescription': instance.gigDescription,
       'gigPhotos': instance.gigPhotos,
-      'gigFeatures': instance.gigFeatures,
       'gigFaqs': instance.gigFaqs,
       'gigReviews': instance.gigReviews,
       'gigCategory': instance.gigCategory,
-      'gigSubCategory': instance.gigSubCategory,
       'gigServiceType': instance.gigServiceType,
-      'gigFilters': instance.gigFilters,
       'gigPrice': instance.gigPrice,
+      'gigQuote': instance.gigQuote,
       'gigLocation': instance.gigLocation,
     };
 

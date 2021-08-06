@@ -8,25 +8,24 @@ class GigService {
   Gig? get currentGig => _currentGig;
 
   void initGig(gigSubcategory) {
-    addGigSubCategory(gigSubcategory);
+    addGigCategory(gigSubcategory);
   }
 
   void addGigId(gigId) {
     _currentGig = _currentGig!.copyWith(gigId: gigId);
   }
 
-  void addGigSubCategory(gigSubcategory) {
-    _currentGig = _currentGig!.copyWith(gigSubCategory: gigSubcategory);
+  void addGigCategory(gigCategory) {
+    _currentGig = _currentGig!.copyWith(gigCategory: gigCategory);
   }
 
   void addGigService(gigService) {
     _currentGig = _currentGig!.copyWith(gigServiceType: gigService);
   }
 
-  void addGigTitle(gigTitle, gigSubtitle, gigDescription) {
+  void addGigTitle(gigTitle, gigDescription) {
     _currentGig = _currentGig!.copyWith(
       gigTitle: gigTitle,
-      gigSubtitle: gigSubtitle,
       gigDescription: gigDescription,
     );
   }
@@ -41,6 +40,14 @@ class GigService {
 
   void addGigVendorId(gigVendorId) {
     _currentGig = _currentGig!.copyWith(gigVendorId: gigVendorId);
+  }
+
+  void addPriceData(gigPrice) {
+    _currentGig = _currentGig!.copyWith(gigPrice: gigPrice);
+  }
+
+  void addQuoteData(gigQuote) {
+    _currentGig = _currentGig!.copyWith(gigQuote: gigQuote);
   }
 
   void clearGig() {

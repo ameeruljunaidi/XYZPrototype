@@ -10,25 +10,28 @@ import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
 
 import '../ui/add_business/add_business_view.dart';
+import '../ui/add_gig/add_gig_category_view.dart';
 import '../ui/add_gig/add_gig_location_view.dart';
 import '../ui/add_gig/add_gig_photos_view.dart';
+import '../ui/add_gig/add_gig_price_chooser_view.dart';
 import '../ui/add_gig/add_gig_price_view.dart';
 import '../ui/add_gig/add_gig_service_view.dart';
-import '../ui/add_gig/add_gig_subcategory_view.dart';
 import '../ui/add_gig/add_gig_title_view.dart';
 import '../ui/address_selection/address_selection_view.dart';
+import '../ui/chat/chat_view.dart';
 import '../ui/create_account/create_account_view.dart';
+import '../ui/favorites/favorites_view.dart';
 import '../ui/gig_edit/gig_edit_view.dart';
 import '../ui/gig_manager/gig_manager_view.dart';
 import '../ui/home/home_view.dart';
 import '../ui/inbox/inbox_view.dart';
 import '../ui/login/login_view.dart';
 import '../ui/marketplace/marketplace_view.dart';
-import '../ui/notifications/notification_view.dart';
 import '../ui/profile/profile_add_avatar_view.dart';
 import '../ui/profile/profile_view.dart';
 import '../ui/search/search_view.dart';
 import '../ui/startup/startup_view.dart';
+import '../ui/vendor_profile/vendor_profile_view.dart';
 
 class Routes {
   static const String startupView = '/';
@@ -40,7 +43,7 @@ class Routes {
   static const String marketPlaceView = '/market-place-view';
   static const String inboxView = '/inbox-view';
   static const String searchView = '/search-view';
-  static const String notificationsView = '/notifications-view';
+  static const String favoritesView = '/favorites-view';
   static const String profileView = '/profile-view';
   static const String gigManagerView = '/gig-manager-view';
   static const String gigEditView = '/gig-edit-view';
@@ -48,9 +51,12 @@ class Routes {
   static const String addGigPhotosView = '/add-gig-photos-view';
   static const String addGigLocationView = '/add-gig-location-view';
   static const String profileAddAvatarView = '/profile-add-avatar-view';
-  static const String addGigSubCategoryView = '/add-gig-sub-category-view';
+  static const String addGigCategoryView = '/add-gig-category-view';
   static const String addGigServiceView = '/add-gig-service-view';
   static const String addGigPriceView = '/add-gig-price-view';
+  static const String addGigPriceChooserView = '/add-gig-price-chooser-view';
+  static const String vendorProfileView = '/vendor-profile-view';
+  static const String chatView = '/chat-view';
   static const all = <String>{
     startupView,
     homeView,
@@ -61,7 +67,7 @@ class Routes {
     marketPlaceView,
     inboxView,
     searchView,
-    notificationsView,
+    favoritesView,
     profileView,
     gigManagerView,
     gigEditView,
@@ -69,9 +75,12 @@ class Routes {
     addGigPhotosView,
     addGigLocationView,
     profileAddAvatarView,
-    addGigSubCategoryView,
+    addGigCategoryView,
     addGigServiceView,
     addGigPriceView,
+    addGigPriceChooserView,
+    vendorProfileView,
+    chatView,
   };
 }
 
@@ -88,7 +97,7 @@ class StackedRouter extends RouterBase {
     RouteDef(Routes.marketPlaceView, page: MarketPlaceView),
     RouteDef(Routes.inboxView, page: InboxView),
     RouteDef(Routes.searchView, page: SearchView),
-    RouteDef(Routes.notificationsView, page: NotificationsView),
+    RouteDef(Routes.favoritesView, page: FavoritesView),
     RouteDef(Routes.profileView, page: ProfileView),
     RouteDef(Routes.gigManagerView, page: GigManagerView),
     RouteDef(Routes.gigEditView, page: GigEditView),
@@ -96,9 +105,12 @@ class StackedRouter extends RouterBase {
     RouteDef(Routes.addGigPhotosView, page: AddGigPhotosView),
     RouteDef(Routes.addGigLocationView, page: AddGigLocationView),
     RouteDef(Routes.profileAddAvatarView, page: ProfileAddAvatarView),
-    RouteDef(Routes.addGigSubCategoryView, page: AddGigSubCategoryView),
+    RouteDef(Routes.addGigCategoryView, page: AddGigCategoryView),
     RouteDef(Routes.addGigServiceView, page: AddGigServiceView),
     RouteDef(Routes.addGigPriceView, page: AddGigPriceView),
+    RouteDef(Routes.addGigPriceChooserView, page: AddGigPriceChooserView),
+    RouteDef(Routes.vendorProfileView, page: VendorProfileView),
+    RouteDef(Routes.chatView, page: ChatView),
   ];
   @override
   Map<Type, StackedRouteFactory> get pagesMap => _pagesMap;
@@ -172,9 +184,9 @@ class StackedRouter extends RouterBase {
         settings: data,
       );
     },
-    NotificationsView: (data) {
+    FavoritesView: (data) {
       return MaterialPageRoute<dynamic>(
-        builder: (context) => const NotificationsView(),
+        builder: (context) => const FavoritesView(),
         settings: data,
       );
     },
@@ -226,9 +238,9 @@ class StackedRouter extends RouterBase {
         settings: data,
       );
     },
-    AddGigSubCategoryView: (data) {
+    AddGigCategoryView: (data) {
       return MaterialPageRoute<dynamic>(
-        builder: (context) => const AddGigSubCategoryView(),
+        builder: (context) => const AddGigCategoryView(),
         settings: data,
       );
     },
@@ -244,6 +256,27 @@ class StackedRouter extends RouterBase {
       );
       return MaterialPageRoute<dynamic>(
         builder: (context) => AddGigPriceView(key: args.key),
+        settings: data,
+      );
+    },
+    AddGigPriceChooserView: (data) {
+      return MaterialPageRoute<dynamic>(
+        builder: (context) => const AddGigPriceChooserView(),
+        settings: data,
+      );
+    },
+    VendorProfileView: (data) {
+      return MaterialPageRoute<dynamic>(
+        builder: (context) => const VendorProfileView(),
+        settings: data,
+      );
+    },
+    ChatView: (data) {
+      var args = data.getArgs<ChatViewArguments>(
+        orElse: () => ChatViewArguments(),
+      );
+      return MaterialPageRoute<dynamic>(
+        builder: (context) => ChatView(key: args.key),
         settings: data,
       );
     },
@@ -300,4 +333,10 @@ class AddGigLocationViewArguments {
 class AddGigPriceViewArguments {
   final Key? key;
   AddGigPriceViewArguments({this.key});
+}
+
+/// ChatView arguments holder class
+class ChatViewArguments {
+  final Key? key;
+  ChatViewArguments({this.key});
 }

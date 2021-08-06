@@ -1,60 +1,51 @@
 import 'package:flutter/material.dart';
-import 'package:sliver_tools/sliver_tools.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked/stacked_annotations.dart';
 import 'package:xyz_prototype/ui/add_gig/add_gig_price_viewmodel.dart';
 import 'package:xyz_prototype/ui/add_gig/add_gig_price_view.form.dart';
 import 'package:xyz_ui/xyz_ui.dart';
+import 'package:expandable_page_view/expandable_page_view.dart';
 
 @FormView(
   fields: [
     FormTextField(name: 'gigPriceTier1Title'),
     FormTextField(name: 'gigPriceTier1Description'),
+    FormTextField(name: 'gigPriceTier1Price'),
     FormTextField(name: 'gigPriceTier2Title'),
     FormTextField(name: 'gigPriceTier2Description'),
+    FormTextField(name: 'gigPriceTier2Price'),
     FormTextField(name: 'gigPriceTier3Title'),
     FormTextField(name: 'gigPriceTier3Description'),
-    FormTextField(name: 'customFeature1Title'),
-    FormTextField(name: 'customFeature1Value'),
-    FormTextField(name: 'customFeature2Title'),
-    FormTextField(name: 'customFeature2Value'),
-    FormTextField(name: 'customFeature3Title'),
-    FormTextField(name: 'customFeature3Value'),
-    FormTextField(name: 'customFeature4Title'),
-    FormTextField(name: 'customFeature4Value'),
-    FormTextField(name: 'customFeature5Title'),
-    FormTextField(name: 'customFeature5Value'),
-    FormTextField(name: 'customFeature6Title'),
-    FormTextField(name: 'customFeature6Value'),
-    FormTextField(name: 'customFeature7Title'),
-    FormTextField(name: 'customFeature7Value'),
-    FormTextField(name: 'customFeature8Title'),
-    FormTextField(name: 'customFeature8Value'),
-    FormTextField(name: 'customFeature9Title'),
-    FormTextField(name: 'customFeature9Value'),
-    FormTextField(name: 'customFeature10Title'),
-    FormTextField(name: 'customFeature10Value'),
+    FormTextField(name: 'gigPriceTier3Price'),
   ],
 )
 // ignore: must_be_immutable
 class AddGigPriceView extends StatelessWidget with $AddGigPriceView {
   AddGigPriceView({Key? key}) : super(key: key);
 
+  double _pageSelectorHeight = 48.0;
+
   @override
   Widget build(BuildContext context) {
     return ViewModelBuilder<AddGigPriceViewModel>.reactive(
-      onModelReady: (model) => model.getSuggestedFeaturesFromSubCategory(),
+      onModelReady: (model) {
+        listenToFormUpdated(model);
+        model.getDataForScreen();
+      },
       builder: (context, model, child) => Scaffold(
+        appBar: defaultAppbar(
+          context,
+          model,
+          appBarColor: kcPrimaryColor,
+          iconColor: Colors.white,
+          cancelButton: model.cancelAddGig,
+          actions: [getHelpAppBarButton(color: Colors.white)],
+        ),
         body: GestureDetector(
           onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
-          child: defaultSliverScreen(
-            context,
-            model,
-            heading: 'Price Your Service',
-            sliverBodyContent: _addGigPriceBody(context, model),
-            cancelButton: model.cancelAddGig,
-            goBack: model.goBack,
-            goContinue: model.goToAddLocation,
+          child: Container(
+            color: Colors.white,
+            child: _addGigPriceBody(context, model),
           ),
         ),
       ),
@@ -63,129 +54,173 @@ class AddGigPriceView extends StatelessWidget with $AddGigPriceView {
   }
 
   Widget _addGigPriceBody(context, model) {
-    return MultiSliver(
+    final bool _quotePage = model.selectedPricePage == 3;
+
+    return Stack(
       children: [
+        SingleChildScrollView(
+          child: Column(
+            children: [
+              SizedBox(height: _pageSelectorHeight),
+              _pagesView(context, model),
+              Container(height: 88.0, color: Colors.white),
+            ],
+          ),
+        ),
         _pagesSelector(model),
-        _pagesView(context, model),
+        defaultBackAndContinueSliver(
+          context,
+          model,
+          goBack: model.goBack,
+          goContinue: _quotePage ? model.goToAddLocation : null,
+        ),
       ],
     );
   }
 
-  Widget _pagesView(context, model) {
-    final int _customerFeatureCount = model.customFeaturesCount;
-
-    return SliverToBoxAdapter(
+  Widget _pagesView(context, AddGigPriceViewModel model) {
+    return Container(
+      color: kcPrimaryColor,
       child: Container(
-        height: screenHeight(context) * 2,
-        child: PageView.builder(
-          scrollDirection: Axis.horizontal,
-          controller: model.pageController,
-          itemCount: model.pages.length,
-          onPageChanged: (page) => model.updateSelectedPricePage(page),
-          itemBuilder: (context, pageIndex) {
-            // Change the loaded price tier depending on the page
-            // Get the title of the price tier
-            final _pageTitle = model.getPricePackageTitle(pageIndex);
-
-            TextEditingController _priceTitleController(mapIndex) {
-              Map<int, TextEditingController> _controller = {
-                0: gigPriceTier1TitleController,
-                1: gigPriceTier2TitleController,
-                2: gigPriceTier3TitleController,
-              };
-
-              return _controller[mapIndex]!;
-            }
-
-            TextEditingController _priceDescriptionController(mapIndex) {
-              Map<int, TextEditingController> _controller = {
-                0: gigPriceTier1DescriptionController,
-                1: gigPriceTier2DescriptionController,
-                2: gigPriceTier3DescriptionController,
-              };
-
-              return _controller[mapIndex]!;
-            }
-
-            if (pageIndex <= 2) {
-              // If feature list is not empty, build the list
-              if (model.suggestedFeaturesList != null) {
-                return Column(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    verticalSpaceMedium,
-                    _headingCutom(heading: 'Title & Description'),
-                    verticalSpaceRegular,
-                    _boxInputCustom(
-                      '$_pageTitle Title',
-                      _priceTitleController(pageIndex),
-                    ),
-                    verticalSpaceRegular,
-                    _boxInputCustom(
-                      '$_pageTitle Description',
-                      _priceDescriptionController(pageIndex),
-                    ),
-                    verticalSpaceRegular,
-                    _headingCutom(
-                        heading: 'Features',
-                        editTap: () {
-                          // TODO: Implement edit
-                        }),
-                    verticalSpaceRegular,
-                    _featuresListView(model, pageIndex),
-                    if (!model.isBusy && _customerFeatureCount < 10)
-                      _addCustomFeature(model),
-                  ],
-                );
-              } else {
-                return _progressIndicator();
-              }
-            } else {
-              return Center(child: Text('Quote'));
-            }
-          },
-        ),
-      ),
-    );
-  }
-
-  Widget _addCustomFeature(model) {
-    return Padding(
-      padding: defaultPaddingHorizontal,
-      child: ListTile(
-        title: Text('Add Custom Feature'),
-        contentPadding: EdgeInsets.zero,
-        subtitle: Text('Add up to 10 additional features'),
-        trailing: Icon(Icons.add),
-        onTap: () => model.addCustomFeature(),
-      ),
-    );
-  }
-
-  SliverToBoxAdapter _pagesSelector(model) {
-    return SliverToBoxAdapter(
-      child: Container(
-        height: 48.0,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.only(
             topLeft: Radius.circular(defaultBorderRadiusValue),
             topRight: Radius.circular(defaultBorderRadiusValue),
           ),
+          color: Colors.white,
         ),
-        child: ListView.builder(
-          physics: NeverScrollableScrollPhysics(),
-          scrollDirection: Axis.horizontal,
-          itemBuilder: (context, index) {
-            return _pageSelectorButton(
-              context,
-              pageTitle: model.pages[index],
-              position: index,
-              selected: index == model.selectedPricePage,
-              onTap: () => model.goToPageIndex(index),
+        child: _pagesViewBuilder(model),
+      ),
+    );
+  }
+
+  Widget _pagesViewBuilder(AddGigPriceViewModel model) {
+    // final int _customerFeatureCount = model.customFeaturesCount;
+
+    return ExpandablePageView.builder(
+      controller: model.pageController,
+      itemCount: model.pages!.length,
+      onPageChanged: (page) => model.updateSelectedPricePage(page),
+      itemBuilder: (context, pageIndex) {
+        // Change the loaded price tier depending on the page
+        // Get the title of the price tier
+        final _pageTitle = model.getPricePackageTitle(pageIndex);
+
+        TextEditingController _priceTitleController(int mapIndex) {
+          Map<int, TextEditingController> _controller = {
+            0: gigPriceTier1TitleController,
+            1: gigPriceTier2TitleController,
+            2: gigPriceTier3TitleController,
+          };
+
+          return _controller[mapIndex]!;
+        }
+
+        TextEditingController _priceDescriptionController(int mapIndex) {
+          Map<int, TextEditingController> _controller = {
+            0: gigPriceTier1DescriptionController,
+            1: gigPriceTier2DescriptionController,
+            2: gigPriceTier3DescriptionController,
+          };
+
+          return _controller[mapIndex]!;
+        }
+
+        TextEditingController _pricePriceController(int mapIndex) {
+          Map<int, TextEditingController> _controller = {
+            0: gigPriceTier1PriceController,
+            1: gigPriceTier2PriceController,
+            2: gigPriceTier3PriceController,
+          };
+
+          return _controller[mapIndex]!;
+        }
+
+        if (pageIndex <= 2) {
+          // If feature list is not empty, build the list
+          if (model.suggestedFeaturesList != null) {
+            return Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                verticalSpaceMedium,
+                _headingCutom(heading: 'Title & Description'),
+                verticalSpaceRegular,
+                _boxInputCustom(
+                  '$_pageTitle Title',
+                  _priceTitleController(pageIndex),
+                ),
+                verticalSpaceRegular,
+                _boxInputCustom(
+                  '$_pageTitle Description',
+                  _priceDescriptionController(pageIndex),
+                ),
+                verticalSpaceRegular,
+                _boxInputCustom(
+                  '$_pageTitle Price',
+                  _pricePriceController(pageIndex),
+                ),
+                verticalSpaceRegular,
+                _headingCutom(
+                  heading: 'Features',
+                ),
+                verticalSpaceRegular,
+                _featuresListView(model, pageIndex),
+                // if (!model.isBusy && _customerFeatureCount < 10)
+                //   _addCustomFeature(model),
+              ],
             );
-          },
-          itemCount: model.pages.length,
-        ),
+          } else {
+            return _progressIndicator();
+          }
+        } else if (pageIndex == 3) {
+          return Column(
+            children: [
+              verticalSpaceMedium,
+              _headingCutom(heading: 'Enable/Disable Quote'),
+              verticalSpaceRegular,
+              _quoteChooser(context, model),
+              verticalSpaceRegular,
+            ],
+          );
+        } else {
+          return Center(child: Text('Not Selected'));
+        }
+      },
+    );
+  }
+
+  // Widget _addCustomFeature(model) {
+  //   return Padding(
+  //     padding: defaultPaddingHorizontal,
+  //     child: ListTile(
+  //       title: Text('Add Custom Feature'),
+  //       contentPadding: EdgeInsets.zero,
+  //       subtitle: Text('Add up to 10 additional features'),
+  //       trailing: Icon(Icons.add),
+  //       onTap: () => model.addCustomFeature(),
+  //     ),
+  //   );
+  // }
+
+  Widget _pagesSelector(model) {
+    return Container(
+      height: _pageSelectorHeight,
+      decoration: BoxDecoration(
+        color: kcPrimaryColor,
+      ),
+      child: ListView.builder(
+        physics: NeverScrollableScrollPhysics(),
+        scrollDirection: Axis.horizontal,
+        itemBuilder: (context, index) {
+          return _pageSelectorButton(
+            context,
+            pageTitle: model.pages[index],
+            position: index,
+            selected: index == model.selectedPricePage,
+            onTap: () => model.goToPageIndex(index),
+          );
+        },
+        itemCount: model.pages.length,
       ),
     );
   }
@@ -223,19 +258,13 @@ class AddGigPriceView extends StatelessWidget with $AddGigPriceView {
         child: Center(
           child: AnimatedContainer(
             duration: Duration(milliseconds: 200),
-            width: screenWidth(context) / 4,
-            decoration: BoxDecoration(
-              border: selected
-                  ? Border(
-                      bottom: BorderSide(width: 2.0, color: Colors.black),
-                    )
-                  : null,
-            ),
             child: Align(
               alignment: Alignment.center,
               child: Text(
                 pageTitle,
                 style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 16.0,
                   fontWeight: selected ? FontWeight.bold : FontWeight.normal,
                 ),
                 textAlign: TextAlign.center,
@@ -340,7 +369,7 @@ class AddGigPriceView extends StatelessWidget with $AddGigPriceView {
     );
   }
 
-  Widget _boxInputCustom(title, controller) {
+  Widget _boxInputCustom(String title, TextEditingController controller) {
     return Padding(
       padding: defaultPaddingHorizontal,
       child: BoxInputField(
@@ -353,6 +382,44 @@ class AddGigPriceView extends StatelessWidget with $AddGigPriceView {
   Widget _progressIndicator() {
     return Center(
       child: CircularProgressIndicator(color: kcPrimaryColor),
+    );
+  }
+
+  Widget _quoteChooser(context, model) {
+    return ListView.builder(
+      shrinkWrap: true,
+      itemBuilder: (context, optionIndex) {
+        bool _selected = model.quoteOptionSelected == optionIndex;
+
+        return Padding(
+          padding: defaultPaddingHorizontal,
+          child: Container(
+            margin: EdgeInsets.only(
+              // right: defaultPaddingValue,
+              // left: defaultPaddingValue,
+              bottom: 16.0,
+            ),
+            decoration: BoxDecoration(
+              borderRadius: defaultBorderRadius,
+              border: Border.all(
+                color: Colors.black,
+                width: _selected ? 2 : 1,
+              ),
+            ),
+            child: ListTile(
+              onTap: () => model.selectQuoteOption(optionIndex),
+              title: Text(
+                model.quoteOptions[optionIndex],
+                style: TextStyle(
+                  fontWeight: _selected ? FontWeight.bold : FontWeight.normal,
+                ),
+              ),
+              tileColor: _selected ? kcVeryLightGreyColor : null,
+            ),
+          ),
+        );
+      },
+      itemCount: model.quoteOptions.length,
     );
   }
 }

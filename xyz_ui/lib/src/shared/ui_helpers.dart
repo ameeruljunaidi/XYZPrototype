@@ -5,7 +5,7 @@ import 'package:xyz_ui/xyz_ui.dart';
 
 const Widget horizontalSpaceTiny = SizedBox(width: 5.0);
 const Widget horizontalSpaceSmall = SizedBox(width: 10.0);
-const Widget horizontalSpaceRegular = SizedBox(width: 18.0);
+const Widget horizontalSpaceRegular = SizedBox(width: 16.0);
 const Widget horizontalSpaceMedium = SizedBox(width: 25.0);
 const Widget horizontalSpaceLarge = SizedBox(width: 50.0);
 
@@ -38,12 +38,19 @@ double screenWidthPercentage(BuildContext context, {double percentage = 1}) =>
 
 // Default paddings
 double defaultPaddingValue = 24.0;
+double defaultPaddingValueSmall = 16.0;
 
 EdgeInsets defaultPaddingAll = EdgeInsets.all(defaultPaddingValue);
+
 EdgeInsets defaultPaddingHorizontal =
     EdgeInsets.symmetric(horizontal: defaultPaddingValue);
 EdgeInsets defaultPaddingVertical =
     EdgeInsets.symmetric(vertical: defaultPaddingValue);
+
+EdgeInsets defaultPaddingAllSmallVertical = EdgeInsets.symmetric(
+  horizontal: defaultPaddingValue,
+  vertical: defaultPaddingValueSmall,
+);
 
 // Borders
 BorderRadius defaultBorderRadius = BorderRadius.circular(8.0);
@@ -53,17 +60,31 @@ double defaultBorderRadiusValue = 8.0;
 const IconData defaultBackIcon = Icons.arrow_back;
 
 // Default box with shaodw
-BoxDecoration defaultBoxDecoration = BoxDecoration(
-  color: Colors.white,
-  borderRadius: defaultBorderRadius,
-  boxShadow: [
-    BoxShadow(
-      color: Colors.black26,
-      offset: Offset(0.0, 2.0),
-      blurRadius: 6.0,
-    )
-  ],
-);
+BoxDecoration defaultBoxDecoration({
+  required color,
+  required bool shadow,
+  bool borderRadius = true,
+  borderColor,
+}) {
+  return BoxDecoration(
+    color: color,
+    borderRadius: borderRadius ? defaultBorderRadius : null,
+    boxShadow: shadow
+        ? [
+            BoxShadow(
+              color: Colors.black26,
+              offset: Offset(0.0, 2.0),
+              blurRadius: 6.0,
+            )
+          ]
+        : null,
+    border: borderColor != null
+        ? Border.all(
+            color: borderColor,
+          )
+        : null,
+  );
+}
 
 // Default title for textbox
 Widget defaultTextBoxTitle(title) {
@@ -76,3 +97,11 @@ Widget defaultTextBoxTitle(title) {
     ),
   );
 }
+
+// Default dividers
+Widget defaultDividers = Divider(
+  color: Colors.black,
+  indent: 8.0,
+  endIndent: 8.0,
+  thickness: 2,
+);

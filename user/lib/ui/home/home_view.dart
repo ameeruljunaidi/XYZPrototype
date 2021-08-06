@@ -1,5 +1,6 @@
 import 'package:animations/animations.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:stacked/stacked.dart';
 import 'package:xyz_prototype/ui/home/home_viewmodel.dart';
 import 'package:xyz_ui/xyz_ui.dart';
@@ -21,23 +22,23 @@ class HomeView extends StatelessWidget {
           onTap: model.setIndex,
           items: [
             bottomNavigationBarItem(
-              icon: Icons.home,
+              icon: Icons.home_outlined,
               label: 'Home',
             ),
             bottomNavigationBarItem(
-              icon: Icons.inbox,
-              label: 'Inbox',
+              icon: Icons.favorite_outline,
+              label: 'Favorites',
             ),
             bottomNavigationBarItem(
-              icon: Icons.search,
-              label: 'Search',
+              icon: FontAwesomeIcons.running,
+              label: 'Activities',
             ),
             bottomNavigationBarItem(
-              icon: Icons.notifications,
-              label: 'Notifications',
+              icon: Icons.chat_outlined,
+              label: 'Messages',
             ),
             bottomNavigationBarItem(
-              icon: Icons.list,
+              icon: Icons.person_outline_rounded,
               label: 'Profile',
             ),
           ],
@@ -68,7 +69,10 @@ class HomeView extends StatelessWidget {
     return BottomNavigationBarItem(
       icon: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 0.0, vertical: 4.0),
-        child: Icon(icon),
+        child: Icon(
+          icon,
+          color: Colors.black,
+        ),
       ),
       label: label,
     );

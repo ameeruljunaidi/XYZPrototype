@@ -88,7 +88,7 @@ class ProfileView extends StatelessWidget {
             _profileSettingsWidget(
               text: 'View Profile',
               icon: Icon(Icons.person),
-              onTap: model.inProgressNotifier,
+              onTap: model.goToVendorProfile,
             ),
           if (!model.clientData().isAnonymous)
             _profileSettingsWidget(
@@ -157,18 +157,20 @@ class ProfileView extends StatelessWidget {
     final String _getClientType = model.clientData().clientType ?? '';
     final String _clientType = _getClientType.capitalizeFirstofEach;
 
-    final _profileCardHeight =
-        screenHeightPercentage(context, percentage: 0.15);
+    final _profileCardHeight = screenHeightPercentage(
+      context,
+      percentage: 0.2,
+    ); // 25% of screenHeight
+    final _avatarRadius = _profileCardHeight * 0.35; // 35% of cardHeight
 
     bool _isAnonymous = model.clientData().isAnonymous;
 
     final List<Widget> _clientNameDisplay = [
       Align(
         alignment: Alignment.centerLeft,
-        child: BoxText.body(
+        child: BoxText.headingThree(
           '${model.clientData().clientName ?? ''}',
           align: TextAlign.left,
-          color: Colors.black,
         ),
       ),
       verticalSpaceSmall,
@@ -177,7 +179,7 @@ class ProfileView extends StatelessWidget {
     final List<Widget> _clientEmailDisplay = [
       Align(
         alignment: Alignment.centerLeft,
-        child: BoxText.body(
+        child: BoxText.subheading(
           '$_clientEmail',
           align: TextAlign.left,
         ),
@@ -207,7 +209,7 @@ class ProfileView extends StatelessWidget {
             child: InkWell(
               child: CircleAvatar(
                 backgroundColor: kcMediumGreyColor,
-                radius: _profileCardHeight * 0.4,
+                radius: _avatarRadius,
                 foregroundImage: model.clientData().clientAvatar != null
                     ? NetworkImage(
                         model.clientData().clientAvatar ?? NoPhotoUrl)
