@@ -1849,7 +1849,9 @@ class _$GigTearOff {
       String? gigServiceType,
       Map<String, Map<String, dynamic>>? gigPrice,
       bool? gigQuote,
-      String? gigLocation}) {
+      String? gigLocation,
+      double? gigRating,
+      int? gigRatingNumber}) {
     return _Gigs(
       gigId: gigId,
       gigVendorId: gigVendorId,
@@ -1863,6 +1865,8 @@ class _$GigTearOff {
       gigPrice: gigPrice,
       gigQuote: gigQuote,
       gigLocation: gigLocation,
+      gigRating: gigRating,
+      gigRatingNumber: gigRatingNumber,
     );
   }
 
@@ -1889,6 +1893,8 @@ mixin _$Gig {
       throw _privateConstructorUsedError;
   bool? get gigQuote => throw _privateConstructorUsedError;
   String? get gigLocation => throw _privateConstructorUsedError;
+  double? get gigRating => throw _privateConstructorUsedError;
+  int? get gigRatingNumber => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -1911,7 +1917,9 @@ abstract class $GigCopyWith<$Res> {
       String? gigServiceType,
       Map<String, Map<String, dynamic>>? gigPrice,
       bool? gigQuote,
-      String? gigLocation});
+      String? gigLocation,
+      double? gigRating,
+      int? gigRatingNumber});
 }
 
 /// @nodoc
@@ -1936,6 +1944,8 @@ class _$GigCopyWithImpl<$Res> implements $GigCopyWith<$Res> {
     Object? gigPrice = freezed,
     Object? gigQuote = freezed,
     Object? gigLocation = freezed,
+    Object? gigRating = freezed,
+    Object? gigRatingNumber = freezed,
   }) {
     return _then(_value.copyWith(
       gigId: gigId == freezed
@@ -1986,6 +1996,14 @@ class _$GigCopyWithImpl<$Res> implements $GigCopyWith<$Res> {
           ? _value.gigLocation
           : gigLocation // ignore: cast_nullable_to_non_nullable
               as String?,
+      gigRating: gigRating == freezed
+          ? _value.gigRating
+          : gigRating // ignore: cast_nullable_to_non_nullable
+              as double?,
+      gigRatingNumber: gigRatingNumber == freezed
+          ? _value.gigRatingNumber
+          : gigRatingNumber // ignore: cast_nullable_to_non_nullable
+              as int?,
     ));
   }
 }
@@ -2007,7 +2025,9 @@ abstract class _$GigsCopyWith<$Res> implements $GigCopyWith<$Res> {
       String? gigServiceType,
       Map<String, Map<String, dynamic>>? gigPrice,
       bool? gigQuote,
-      String? gigLocation});
+      String? gigLocation,
+      double? gigRating,
+      int? gigRatingNumber});
 }
 
 /// @nodoc
@@ -2033,6 +2053,8 @@ class __$GigsCopyWithImpl<$Res> extends _$GigCopyWithImpl<$Res>
     Object? gigPrice = freezed,
     Object? gigQuote = freezed,
     Object? gigLocation = freezed,
+    Object? gigRating = freezed,
+    Object? gigRatingNumber = freezed,
   }) {
     return _then(_Gigs(
       gigId: gigId == freezed
@@ -2083,6 +2105,14 @@ class __$GigsCopyWithImpl<$Res> extends _$GigCopyWithImpl<$Res>
           ? _value.gigLocation
           : gigLocation // ignore: cast_nullable_to_non_nullable
               as String?,
+      gigRating: gigRating == freezed
+          ? _value.gigRating
+          : gigRating // ignore: cast_nullable_to_non_nullable
+              as double?,
+      gigRatingNumber: gigRatingNumber == freezed
+          ? _value.gigRatingNumber
+          : gigRatingNumber // ignore: cast_nullable_to_non_nullable
+              as int?,
     ));
   }
 }
@@ -2102,7 +2132,9 @@ class _$_Gigs with DiagnosticableTreeMixin implements _Gigs {
       this.gigServiceType,
       this.gigPrice,
       this.gigQuote,
-      this.gigLocation});
+      this.gigLocation,
+      this.gigRating,
+      this.gigRatingNumber});
 
   factory _$_Gigs.fromJson(Map<String, dynamic> json) =>
       _$_$_GigsFromJson(json);
@@ -2131,10 +2163,14 @@ class _$_Gigs with DiagnosticableTreeMixin implements _Gigs {
   final bool? gigQuote;
   @override
   final String? gigLocation;
+  @override
+  final double? gigRating;
+  @override
+  final int? gigRatingNumber;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'Gig(gigId: $gigId, gigVendorId: $gigVendorId, gigTitle: $gigTitle, gigDescription: $gigDescription, gigPhotos: $gigPhotos, gigFaqs: $gigFaqs, gigReviews: $gigReviews, gigCategory: $gigCategory, gigServiceType: $gigServiceType, gigPrice: $gigPrice, gigQuote: $gigQuote, gigLocation: $gigLocation)';
+    return 'Gig(gigId: $gigId, gigVendorId: $gigVendorId, gigTitle: $gigTitle, gigDescription: $gigDescription, gigPhotos: $gigPhotos, gigFaqs: $gigFaqs, gigReviews: $gigReviews, gigCategory: $gigCategory, gigServiceType: $gigServiceType, gigPrice: $gigPrice, gigQuote: $gigQuote, gigLocation: $gigLocation, gigRating: $gigRating, gigRatingNumber: $gigRatingNumber)';
   }
 
   @override
@@ -2153,7 +2189,9 @@ class _$_Gigs with DiagnosticableTreeMixin implements _Gigs {
       ..add(DiagnosticsProperty('gigServiceType', gigServiceType))
       ..add(DiagnosticsProperty('gigPrice', gigPrice))
       ..add(DiagnosticsProperty('gigQuote', gigQuote))
-      ..add(DiagnosticsProperty('gigLocation', gigLocation));
+      ..add(DiagnosticsProperty('gigLocation', gigLocation))
+      ..add(DiagnosticsProperty('gigRating', gigRating))
+      ..add(DiagnosticsProperty('gigRatingNumber', gigRatingNumber));
   }
 
   @override
@@ -2194,7 +2232,13 @@ class _$_Gigs with DiagnosticableTreeMixin implements _Gigs {
                     .equals(other.gigQuote, gigQuote)) &&
             (identical(other.gigLocation, gigLocation) ||
                 const DeepCollectionEquality()
-                    .equals(other.gigLocation, gigLocation)));
+                    .equals(other.gigLocation, gigLocation)) &&
+            (identical(other.gigRating, gigRating) ||
+                const DeepCollectionEquality()
+                    .equals(other.gigRating, gigRating)) &&
+            (identical(other.gigRatingNumber, gigRatingNumber) ||
+                const DeepCollectionEquality()
+                    .equals(other.gigRatingNumber, gigRatingNumber)));
   }
 
   @override
@@ -2211,7 +2255,9 @@ class _$_Gigs with DiagnosticableTreeMixin implements _Gigs {
       const DeepCollectionEquality().hash(gigServiceType) ^
       const DeepCollectionEquality().hash(gigPrice) ^
       const DeepCollectionEquality().hash(gigQuote) ^
-      const DeepCollectionEquality().hash(gigLocation);
+      const DeepCollectionEquality().hash(gigLocation) ^
+      const DeepCollectionEquality().hash(gigRating) ^
+      const DeepCollectionEquality().hash(gigRatingNumber);
 
   @JsonKey(ignore: true)
   @override
@@ -2237,7 +2283,9 @@ abstract class _Gigs implements Gig {
       String? gigServiceType,
       Map<String, Map<String, dynamic>>? gigPrice,
       bool? gigQuote,
-      String? gigLocation}) = _$_Gigs;
+      String? gigLocation,
+      double? gigRating,
+      int? gigRatingNumber}) = _$_Gigs;
 
   factory _Gigs.fromJson(Map<String, dynamic> json) = _$_Gigs.fromJson;
 
@@ -2266,6 +2314,10 @@ abstract class _Gigs implements Gig {
   bool? get gigQuote => throw _privateConstructorUsedError;
   @override
   String? get gigLocation => throw _privateConstructorUsedError;
+  @override
+  double? get gigRating => throw _privateConstructorUsedError;
+  @override
+  int? get gigRatingNumber => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
   _$GigsCopyWith<_Gigs> get copyWith => throw _privateConstructorUsedError;

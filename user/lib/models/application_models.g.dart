@@ -189,6 +189,8 @@ _$_Gigs _$_$_GigsFromJson(Map<String, dynamic> json) {
     ),
     gigQuote: json['gigQuote'] as bool?,
     gigLocation: json['gigLocation'] as String?,
+    gigRating: (json['gigRating'] as num?)?.toDouble(),
+    gigRatingNumber: json['gigRatingNumber'] as int?,
   );
 }
 
@@ -205,6 +207,8 @@ Map<String, dynamic> _$_$_GigsToJson(_$_Gigs instance) => <String, dynamic>{
       'gigPrice': instance.gigPrice,
       'gigQuote': instance.gigQuote,
       'gigLocation': instance.gigLocation,
+      'gigRating': instance.gigRating,
+      'gigRatingNumber': instance.gigRatingNumber,
     };
 
 _$_Service _$_$_ServiceFromJson(Map<String, dynamic> json) {

@@ -16,12 +16,14 @@
   },
   "main": "lib/index.js",
   "dependencies": {
+    "faker": "^5.5.3",
     "firebase-admin": "^9.8.0",
     "firebase-backend": "^0.2.2",
     "firebase-functions": "^3.14.1",
     "rimraf": "^3.0.2"
   },
   "devDependencies": {
+    "@types/faker": "^5.5.7",
     "@typescript-eslint/eslint-plugin": "^3.9.1",
     "@typescript-eslint/parser": "^3.8.0",
     "eslint": "^7.6.0",

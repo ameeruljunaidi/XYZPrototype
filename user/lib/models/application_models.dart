@@ -108,6 +108,8 @@ class Gig with _$Gig {
     Map<String, Map<String, dynamic>>? gigPrice,
     bool? gigQuote,
     String? gigLocation,
+    double? gigRating,
+    int? gigRatingNumber,
   }) = _Gigs;
 
   factory Gig.fromJson(Map<String, dynamic> json) => _$GigFromJson(json);
