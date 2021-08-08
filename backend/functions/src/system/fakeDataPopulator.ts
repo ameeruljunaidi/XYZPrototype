@@ -1,5 +1,6 @@
 import { firestore } from "firebase-admin";
 import * as faker from "faker";
+// import realtimeData from "./xyzRealtimeData.json";
 
 function log(message: string) {
   console.log(`FakeDataPopulator | ${message}`);
@@ -23,6 +24,7 @@ export class FakeDataPopulator {
     }
   }
 
+  
   private async generateGigs() {
     log("generateGigs");
 
@@ -83,9 +85,9 @@ export class FakeDataPopulator {
           faq3: faker.lorem.paragraph(2),
         },
         gigReviews: {
-          "review1": faker.lorem.paragraph(2),
-          "review2": faker.lorem.paragraph(2),
-          "review3": faker.lorem.paragraph(2),
+          review1: faker.lorem.paragraph(2),
+          review2: faker.lorem.paragraph(2),
+          review3: faker.lorem.paragraph(2),
         },
         gigQuote: faker.datatype.boolean(),
         gigRating: faker.datatype.float(2),

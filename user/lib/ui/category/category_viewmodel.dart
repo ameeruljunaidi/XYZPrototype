@@ -1,3 +1,4 @@
+import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
 import 'package:xyz_prototype/app/app.locator.dart';
 import 'package:xyz_prototype/app/app.logger.dart';
@@ -5,46 +6,21 @@ import 'package:xyz_prototype/app/app.router.dart';
 import 'package:xyz_prototype/models/application_models.dart';
 import 'package:xyz_prototype/services/gig_service.dart';
 import 'package:xyz_prototype/services/realtime_database_service.dart';
-import 'package:xyz_prototype/services/user_service.dart';
-import 'package:xyz_prototype/ui/address_selection/address_selection_view.dart';
-import 'package:xyz_prototype/ui/home/home_viewmodel.dart';
 
-class MarketPlaceViewModel extends HomeViewModel {
-  final log = getLogger('MarketPlaceViewModel');
+class CategoryViewModel extends BaseViewModel {
+  final log = getLogger('CategoryViewModel');
   final _navigationService = locator<NavigationService>();
-  final _userService = locator<UserService>();
   final _realtimeService = locator<RealtimeService>();
   final _gigService = locator<GigService>();
 
+  // Create getter for list of subcateogries
   List<ServiceSubCategory>? _categoriesList;
   List<ServiceSubCategory>? get categoriesList => _categoriesList;
 
-  int _selectedIndex = 0;
-  int get selectedIndex => _selectedIndex;
-
-  bool _addLocationCheck = false;
-  bool get addLocationCheck => _addLocationCheck;
-
-  void updateIndex(index) {
-    _selectedIndex = index;
-    notifyListeners();
-    log.v('selectedIndex: $_selectedIndex');
-  }
-
-  Client clientData() {
-    return _userService.currentUser ??
-        Client(
-          clientId: 'anonymous',
-          clientType: 'anonymous',
-          clientRegistrationDate: 'anonymous',
-        );
-  }
-
-  void listenToUser() async {
-    setBusy(true);
-    _userService.listenToUser();
+  // Get list of available subcategories
+  void getSubCategories() async {
     _categoriesList = await _realtimeService.getSubCategories();
-    setBusy(false);
+    notifyListeners();
   }
 
   // Load the tapped subcategory to temp gig
@@ -57,21 +33,14 @@ class MarketPlaceViewModel extends HomeViewModel {
       _gigService.addGigCategory(
         _categoriesList![index].serviceSubCategoryName,
       );
-
       _navigationService.navigateTo(Routes.servicesView);
-      notifyListeners();
     } else {
       log.e('Categories list is empty');
     }
   }
 
   // Navigation functions
-  void goToAddressSelection() async {
-    await _navigationService.navigateWithTransition(
-      AddressSelectionView(),
-      transition: 'fade',
-    );
-    _userService.syncUserAccount();
-    notifyListeners();
+  void goBack() {
+    _navigationService.back();
   }
 }

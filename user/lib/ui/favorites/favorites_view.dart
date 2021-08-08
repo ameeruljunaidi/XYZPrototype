@@ -18,6 +18,8 @@ class FavoritesView extends StatelessWidget {
     null
   ];
 
+  final double _avatarSize = 64.0;
+
   @override
   Widget build(BuildContext context) {
     return ViewModelBuilder<FavoritesViewModel>.reactive(
@@ -55,7 +57,7 @@ class FavoritesView extends StatelessWidget {
     return GestureDetector(
       onTap: () {},
       child: Container(
-        height: 88,
+        height: _avatarSize * 1.375,
         width: screenWidth(context),
         color: _colorDebug[3],
         child: Padding(
@@ -75,20 +77,21 @@ class FavoritesView extends StatelessWidget {
     return Align(
       alignment: Alignment.centerRight,
       child: Container(
+        margin: EdgeInsets.only(left: _avatarSize / 2),
         height: double.maxFinite,
-        width: 320,
+        width: double.maxFinite,
         decoration: BoxDecoration(
           color: _colorDebug[0] != null ? _colorDebug[0] : Colors.white,
           borderRadius: BorderRadius.only(
-            topRight: Radius.circular(16.0),
-            bottomRight: Radius.circular(16.0),
+            topRight: Radius.circular(defaultBorderRadiusValue),
+            bottomRight: Radius.circular(defaultBorderRadiusValue),
           ),
         ),
         child: Padding(
           padding: EdgeInsets.only(
             top: 16.0,
             bottom: 16.0,
-            left: 32.0,
+            left: _avatarSize / 1.5,
             right: 24.0,
           ),
           child: Align(
@@ -108,8 +111,8 @@ class FavoritesView extends StatelessWidget {
           color: Colors.white,
           shadow: true,
         ),
-        height: 64,
-        width: 64,
+        height: _avatarSize,
+        width: _avatarSize,
         child: Placeholder(),
       ),
     );

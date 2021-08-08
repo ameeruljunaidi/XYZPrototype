@@ -4,17 +4,17 @@ import 'package:xyz_prototype/services/gig_service.dart';
 import 'package:xyz_prototype/services/realtime_database_service.dart';
 import 'package:xyz_prototype/ui/base/add_gig_viewmodel.dart';
 
-class AddGigSubCategoryViewModel extends AddGigViewModel {
+class AddGigCategory extends AddGigViewModel {
   final _realtimeService = locator<RealtimeService>();
   final _gigService = locator<GigService>();
 
   // Create getter for list of subcateogries
-  List<ServiceSubCategory>? _subCategoriesList;
-  List<ServiceSubCategory>? get subCategoriesList => _subCategoriesList;
+  List<ServiceSubCategory>? _categoriesList;
+  List<ServiceSubCategory>? get categoriesList => _categoriesList;
 
   // Get list of available subcategories
   void getSubCategories() async {
-    _subCategoriesList = await _realtimeService.getSubCategories();
+    _categoriesList = await _realtimeService.getSubCategories();
     notifyListeners();
   }
 
@@ -26,7 +26,7 @@ class AddGigSubCategoryViewModel extends AddGigViewModel {
     _selectedSubcategory = index;
 
     final _selectedSubcategoryName =
-        _subCategoriesList![index].serviceSubCategoryName;
+        _categoriesList![index].serviceSubCategoryName;
 
     _gigService.clearGig();
     _gigService.initGig(_selectedSubcategoryName);

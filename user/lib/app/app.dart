@@ -17,10 +17,12 @@ import 'package:xyz_prototype/ui/add_gig/add_gig_category_view.dart';
 import 'package:xyz_prototype/ui/add_gig/add_gig_title_view.dart';
 import 'package:xyz_prototype/ui/add_gig/add_gig_photos_view.dart';
 import 'package:xyz_prototype/ui/address_selection/address_selection_view.dart';
+import 'package:xyz_prototype/ui/category/category_view.dart';
 import 'package:xyz_prototype/ui/chat/chat_view.dart';
 import 'package:xyz_prototype/ui/create_account/create_account_view.dart';
 import 'package:xyz_prototype/ui/favorites/favorites_view.dart';
 import 'package:xyz_prototype/ui/favorites/favorites_viewmodel.dart';
+import 'package:xyz_prototype/ui/gig/gig_view.dart';
 import 'package:xyz_prototype/ui/gig_edit/gig_edit_view.dart';
 import 'package:xyz_prototype/ui/gig_manager/gig_manager_view.dart';
 import 'package:xyz_prototype/ui/home/home_view.dart';
@@ -34,6 +36,7 @@ import 'package:xyz_prototype/ui/profile/profile_view.dart';
 import 'package:xyz_prototype/ui/profile/profile_viewmodel.dart';
 import 'package:xyz_prototype/ui/search/search_view.dart';
 import 'package:xyz_prototype/ui/search/search_viewmodel.dart';
+import 'package:xyz_prototype/ui/services/services_view.dart';
 import 'package:xyz_prototype/ui/startup/startup_view.dart';
 import 'package:xyz_prototype/ui/vendor_profile/vendor_profile_view.dart';
 import 'package:xyz_prototype/utils/image_selector.dart';
@@ -63,6 +66,9 @@ import 'package:xyz_prototype/utils/image_selector.dart';
     MaterialRoute(page: AddGigPriceChooserView),
     MaterialRoute(page: VendorProfileView),
     MaterialRoute(page: ChatView),
+    MaterialRoute(page: CategoryView),
+    MaterialRoute(page: ServicesView),
+    MaterialRoute(page: GigListView),
   ],
   dependencies: [
     LazySingleton(classType: NavigationService),

@@ -40,7 +40,8 @@ class BoxInputField extends StatelessWidget {
   Widget build(BuildContext context) {
     final _decoration = InputDecoration(
       hintText: placeholder,
-      contentPadding: const EdgeInsets.symmetric(vertical: 15, horizontal: 20),
+      isDense: true,
+      contentPadding: EdgeInsets.symmetric(vertical: 12.0, horizontal: 16.0),
       filled: true,
       fillColor: fillColor,
       prefixIcon: leading,

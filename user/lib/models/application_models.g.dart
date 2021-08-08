@@ -180,7 +180,7 @@ _$_Gigs _$_$_GigsFromJson(Map<String, dynamic> json) {
       (k, e) => MapEntry(k, e as String),
     ),
     gigReviews: (json['gigReviews'] as Map<String, dynamic>?)?.map(
-      (k, e) => MapEntry(k, (e as num).toDouble()),
+      (k, e) => MapEntry(k, e as String),
     ),
     gigCategory: json['gigCategory'] as String?,
     gigServiceType: json['gigServiceType'] as String?,
@@ -277,4 +277,21 @@ Map<String, dynamic> _$_$_ServiceFeaturesToJson(_$_ServiceFeatures instance) =>
       'serviceFeatureName': instance.serviceFeatureName,
       'serviceFeatureType': instance.serviceFeatureType,
       'serviceFeatureValue': instance.serviceFeatureValue,
+    };
+
+_$_GigPagination _$_$_GigPaginationFromJson(Map<String, dynamic> json) {
+  return _$_GigPagination(
+    gigs: (json['gigs'] as List<dynamic>?)
+        ?.map((e) => Gig.fromJson(e as Map<String, dynamic>))
+        .toList(),
+    page: json['page'] as int?,
+    errorMessage: json['errorMessage'] as String?,
+  );
+}
+
+Map<String, dynamic> _$_$_GigPaginationToJson(_$_GigPagination instance) =>
+    <String, dynamic>{
+      'gigs': instance.gigs,
+      'page': instance.page,
+      'errorMessage': instance.errorMessage,
     };

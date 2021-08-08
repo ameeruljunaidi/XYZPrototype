@@ -261,15 +261,15 @@ class VendorProfileView extends StatelessWidget {
     final List<Gig> _fakeGigs = <Gig>[
       Gig(
         gigTitle: 'Fake Gig One',
-        gigReviews: {'Good': 2, 'Excellent': 5, 'Alright': 1},
+        gigReviews: {'Good': '2', 'Excellent': '5', 'Alright': '1'},
       ),
       Gig(
         gigTitle: 'Fake Gig Two',
-        gigReviews: {'Good': 2, 'Excellent': 5},
+        gigReviews: {'Good': '2', 'Excellent': '5'},
       ),
       Gig(
         gigTitle: 'Fake Gig Three',
-        gigReviews: {'Good': 2, 'Excellent': 5, 'Alright': 1},
+        gigReviews: {'Good': '2', 'Excellent': '5', 'Alright': '1'},
       ),
     ];
 

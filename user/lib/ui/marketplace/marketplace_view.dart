@@ -100,9 +100,9 @@ class MarketPlaceView extends StatelessWidget with $MarketPlaceView {
           verticalSpaceRegular,
           _carouselServicesTitleAndSeeAll(),
           // If no categories, show a progress bar
-          if (model.subCategoriesList != null)
+          if (model.categoriesList != null)
             _carouselServicesBuilder(context, model),
-          if (model.subCategoriesList == null)
+          if (model.categoriesList == null)
             _progressIndicatorForCarousel(context)
         ],
       ),
@@ -206,7 +206,7 @@ class MarketPlaceView extends StatelessWidget with $MarketPlaceView {
   }
 
   // Listview builder for the caoursel
-  Widget _carouselServicesBuilder(context, model) {
+  Widget _carouselServicesBuilder(context, MarketPlaceViewModel model) {
     final _cardWidth = screenWidthPercentage(
       context,
       percentage: _cardWidthPct,
@@ -223,15 +223,18 @@ class MarketPlaceView extends StatelessWidget with $MarketPlaceView {
         },
         scrollDirection: Axis.horizontal,
         itemBuilder: (context, index) {
-          ServiceSubCategory subCategories = model.subCategoriesList[index];
+          ServiceSubCategory subCategories = model.categoriesList![index];
 
-          return _carouselServicesBody(
-            _cardWidth,
-            _carouselHeight,
-            subCategories,
+          return GestureDetector(
+            onTap: () => model.selectCategory(index),
+            child: _carouselServicesBody(
+              _cardWidth,
+              _carouselHeight,
+              subCategories,
+            ),
           );
         },
-        itemCount: model.subCategoriesList.length,
+        itemCount: model.categoriesList!.length,
       ),
     );
   }

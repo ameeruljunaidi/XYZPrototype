@@ -8,7 +8,7 @@ class AddGigCategoryView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ViewModelBuilder<AddGigSubCategoryViewModel>.reactive(
+    return ViewModelBuilder<AddGigCategory>.reactive(
       onModelReady: (model) => model.getSubCategories(),
       builder: (context, model, child) => Scaffold(
         body: defaultSliverScreen(
@@ -21,12 +21,12 @@ class AddGigCategoryView extends StatelessWidget {
           goContinue: model.goToAddService,
         ),
       ),
-      viewModelBuilder: () => AddGigSubCategoryViewModel(),
+      viewModelBuilder: () => AddGigCategory(),
     );
   }
 
-  Widget _serviceSubCategoriesGrid(context, model) {
-    if (model.subCategoriesList != null) {
+  Widget _serviceSubCategoriesGrid(context, AddGigCategory model) {
+    if (model.categoriesList != null) {
       return SliverPadding(
         padding: EdgeInsets.only(
           bottom: 16.0,
@@ -57,7 +57,7 @@ class AddGigCategoryView extends StatelessWidget {
                     child: Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: Text(
-                        model.subCategoriesList![index].serviceSubCategoryName!,
+                        model.categoriesList![index].serviceSubCategoryName!,
                         textAlign: TextAlign.center,
                         style: TextStyle(
                           fontSize: 16,
@@ -71,7 +71,7 @@ class AddGigCategoryView extends StatelessWidget {
                 ),
               );
             },
-            childCount: model.subCategoriesList!.length,
+            childCount: model.categoriesList!.length,
           ),
           gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
             crossAxisCount: 2,

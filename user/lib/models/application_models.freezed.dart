@@ -1844,7 +1844,7 @@ class _$GigTearOff {
       String? gigDescription,
       List<String>? gigPhotos,
       Map<String, String>? gigFaqs,
-      Map<String, double>? gigReviews,
+      Map<String, String>? gigReviews,
       String? gigCategory,
       String? gigServiceType,
       Map<String, Map<String, dynamic>>? gigPrice,
@@ -1886,7 +1886,7 @@ mixin _$Gig {
   String? get gigDescription => throw _privateConstructorUsedError;
   List<String>? get gigPhotos => throw _privateConstructorUsedError;
   Map<String, String>? get gigFaqs => throw _privateConstructorUsedError;
-  Map<String, double>? get gigReviews => throw _privateConstructorUsedError;
+  Map<String, String>? get gigReviews => throw _privateConstructorUsedError;
   String? get gigCategory => throw _privateConstructorUsedError;
   String? get gigServiceType => throw _privateConstructorUsedError;
   Map<String, Map<String, dynamic>>? get gigPrice =>
@@ -1912,7 +1912,7 @@ abstract class $GigCopyWith<$Res> {
       String? gigDescription,
       List<String>? gigPhotos,
       Map<String, String>? gigFaqs,
-      Map<String, double>? gigReviews,
+      Map<String, String>? gigReviews,
       String? gigCategory,
       String? gigServiceType,
       Map<String, Map<String, dynamic>>? gigPrice,
@@ -1975,7 +1975,7 @@ class _$GigCopyWithImpl<$Res> implements $GigCopyWith<$Res> {
       gigReviews: gigReviews == freezed
           ? _value.gigReviews
           : gigReviews // ignore: cast_nullable_to_non_nullable
-              as Map<String, double>?,
+              as Map<String, String>?,
       gigCategory: gigCategory == freezed
           ? _value.gigCategory
           : gigCategory // ignore: cast_nullable_to_non_nullable
@@ -2020,7 +2020,7 @@ abstract class _$GigsCopyWith<$Res> implements $GigCopyWith<$Res> {
       String? gigDescription,
       List<String>? gigPhotos,
       Map<String, String>? gigFaqs,
-      Map<String, double>? gigReviews,
+      Map<String, String>? gigReviews,
       String? gigCategory,
       String? gigServiceType,
       Map<String, Map<String, dynamic>>? gigPrice,
@@ -2084,7 +2084,7 @@ class __$GigsCopyWithImpl<$Res> extends _$GigCopyWithImpl<$Res>
       gigReviews: gigReviews == freezed
           ? _value.gigReviews
           : gigReviews // ignore: cast_nullable_to_non_nullable
-              as Map<String, double>?,
+              as Map<String, String>?,
       gigCategory: gigCategory == freezed
           ? _value.gigCategory
           : gigCategory // ignore: cast_nullable_to_non_nullable
@@ -2152,7 +2152,7 @@ class _$_Gigs with DiagnosticableTreeMixin implements _Gigs {
   @override
   final Map<String, String>? gigFaqs;
   @override
-  final Map<String, double>? gigReviews;
+  final Map<String, String>? gigReviews;
   @override
   final String? gigCategory;
   @override
@@ -2278,7 +2278,7 @@ abstract class _Gigs implements Gig {
       String? gigDescription,
       List<String>? gigPhotos,
       Map<String, String>? gigFaqs,
-      Map<String, double>? gigReviews,
+      Map<String, String>? gigReviews,
       String? gigCategory,
       String? gigServiceType,
       Map<String, Map<String, dynamic>>? gigPrice,
@@ -2302,7 +2302,7 @@ abstract class _Gigs implements Gig {
   @override
   Map<String, String>? get gigFaqs => throw _privateConstructorUsedError;
   @override
-  Map<String, double>? get gigReviews => throw _privateConstructorUsedError;
+  Map<String, String>? get gigReviews => throw _privateConstructorUsedError;
   @override
   String? get gigCategory => throw _privateConstructorUsedError;
   @override
@@ -3112,5 +3112,206 @@ abstract class _ServiceFeatures implements ServiceFeatures {
   @override
   @JsonKey(ignore: true)
   _$ServiceFeaturesCopyWith<_ServiceFeatures> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+GigPagination _$GigPaginationFromJson(Map<String, dynamic> json) {
+  return _GigPagination.fromJson(json);
+}
+
+/// @nodoc
+class _$GigPaginationTearOff {
+  const _$GigPaginationTearOff();
+
+  _GigPagination call({List<Gig>? gigs, int? page, String? errorMessage}) {
+    return _GigPagination(
+      gigs: gigs,
+      page: page,
+      errorMessage: errorMessage,
+    );
+  }
+
+  GigPagination fromJson(Map<String, Object> json) {
+    return GigPagination.fromJson(json);
+  }
+}
+
+/// @nodoc
+const $GigPagination = _$GigPaginationTearOff();
+
+/// @nodoc
+mixin _$GigPagination {
+  List<Gig>? get gigs => throw _privateConstructorUsedError;
+  int? get page => throw _privateConstructorUsedError;
+  String? get errorMessage => throw _privateConstructorUsedError;
+
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+  @JsonKey(ignore: true)
+  $GigPaginationCopyWith<GigPagination> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $GigPaginationCopyWith<$Res> {
+  factory $GigPaginationCopyWith(
+          GigPagination value, $Res Function(GigPagination) then) =
+      _$GigPaginationCopyWithImpl<$Res>;
+  $Res call({List<Gig>? gigs, int? page, String? errorMessage});
+}
+
+/// @nodoc
+class _$GigPaginationCopyWithImpl<$Res>
+    implements $GigPaginationCopyWith<$Res> {
+  _$GigPaginationCopyWithImpl(this._value, this._then);
+
+  final GigPagination _value;
+  // ignore: unused_field
+  final $Res Function(GigPagination) _then;
+
+  @override
+  $Res call({
+    Object? gigs = freezed,
+    Object? page = freezed,
+    Object? errorMessage = freezed,
+  }) {
+    return _then(_value.copyWith(
+      gigs: gigs == freezed
+          ? _value.gigs
+          : gigs // ignore: cast_nullable_to_non_nullable
+              as List<Gig>?,
+      page: page == freezed
+          ? _value.page
+          : page // ignore: cast_nullable_to_non_nullable
+              as int?,
+      errorMessage: errorMessage == freezed
+          ? _value.errorMessage
+          : errorMessage // ignore: cast_nullable_to_non_nullable
+              as String?,
+    ));
+  }
+}
+
+/// @nodoc
+abstract class _$GigPaginationCopyWith<$Res>
+    implements $GigPaginationCopyWith<$Res> {
+  factory _$GigPaginationCopyWith(
+          _GigPagination value, $Res Function(_GigPagination) then) =
+      __$GigPaginationCopyWithImpl<$Res>;
+  @override
+  $Res call({List<Gig>? gigs, int? page, String? errorMessage});
+}
+
+/// @nodoc
+class __$GigPaginationCopyWithImpl<$Res>
+    extends _$GigPaginationCopyWithImpl<$Res>
+    implements _$GigPaginationCopyWith<$Res> {
+  __$GigPaginationCopyWithImpl(
+      _GigPagination _value, $Res Function(_GigPagination) _then)
+      : super(_value, (v) => _then(v as _GigPagination));
+
+  @override
+  _GigPagination get _value => super._value as _GigPagination;
+
+  @override
+  $Res call({
+    Object? gigs = freezed,
+    Object? page = freezed,
+    Object? errorMessage = freezed,
+  }) {
+    return _then(_GigPagination(
+      gigs: gigs == freezed
+          ? _value.gigs
+          : gigs // ignore: cast_nullable_to_non_nullable
+              as List<Gig>?,
+      page: page == freezed
+          ? _value.page
+          : page // ignore: cast_nullable_to_non_nullable
+              as int?,
+      errorMessage: errorMessage == freezed
+          ? _value.errorMessage
+          : errorMessage // ignore: cast_nullable_to_non_nullable
+              as String?,
+    ));
+  }
+}
+
+/// @nodoc
+@JsonSerializable()
+class _$_GigPagination extends _GigPagination with DiagnosticableTreeMixin {
+  _$_GigPagination({this.gigs, this.page, this.errorMessage}) : super._();
+
+  factory _$_GigPagination.fromJson(Map<String, dynamic> json) =>
+      _$_$_GigPaginationFromJson(json);
+
+  @override
+  final List<Gig>? gigs;
+  @override
+  final int? page;
+  @override
+  final String? errorMessage;
+
+  @override
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
+    return 'GigPagination(gigs: $gigs, page: $page, errorMessage: $errorMessage)';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty('type', 'GigPagination'))
+      ..add(DiagnosticsProperty('gigs', gigs))
+      ..add(DiagnosticsProperty('page', page))
+      ..add(DiagnosticsProperty('errorMessage', errorMessage));
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other is _GigPagination &&
+            (identical(other.gigs, gigs) ||
+                const DeepCollectionEquality().equals(other.gigs, gigs)) &&
+            (identical(other.page, page) ||
+                const DeepCollectionEquality().equals(other.page, page)) &&
+            (identical(other.errorMessage, errorMessage) ||
+                const DeepCollectionEquality()
+                    .equals(other.errorMessage, errorMessage)));
+  }
+
+  @override
+  int get hashCode =>
+      runtimeType.hashCode ^
+      const DeepCollectionEquality().hash(gigs) ^
+      const DeepCollectionEquality().hash(page) ^
+      const DeepCollectionEquality().hash(errorMessage);
+
+  @JsonKey(ignore: true)
+  @override
+  _$GigPaginationCopyWith<_GigPagination> get copyWith =>
+      __$GigPaginationCopyWithImpl<_GigPagination>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$_$_GigPaginationToJson(this);
+  }
+}
+
+abstract class _GigPagination extends GigPagination {
+  factory _GigPagination({List<Gig>? gigs, int? page, String? errorMessage}) =
+      _$_GigPagination;
+  _GigPagination._() : super._();
+
+  factory _GigPagination.fromJson(Map<String, dynamic> json) =
+      _$_GigPagination.fromJson;
+
+  @override
+  List<Gig>? get gigs => throw _privateConstructorUsedError;
+  @override
+  int? get page => throw _privateConstructorUsedError;
+  @override
+  String? get errorMessage => throw _privateConstructorUsedError;
+  @override
+  @JsonKey(ignore: true)
+  _$GigPaginationCopyWith<_GigPagination> get copyWith =>
       throw _privateConstructorUsedError;
 }

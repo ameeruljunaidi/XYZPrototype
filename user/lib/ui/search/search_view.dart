@@ -19,6 +19,8 @@ class SearchView extends StatelessWidget {
     null
   ];
 
+  final double _avatarSize = 64.0;
+
   @override
   Widget build(BuildContext context) {
     return ViewModelBuilder<SearchViewModel>.reactive(
@@ -178,7 +180,7 @@ class SearchView extends StatelessWidget {
     return GestureDetector(
       onTap: () {},
       child: Container(
-        height: 96,
+        height: _avatarSize * 1.5,
         width: screenWidth(context),
         color: _colorDebug[3],
         child: Padding(
@@ -198,8 +200,9 @@ class SearchView extends StatelessWidget {
     return Align(
       alignment: Alignment.centerRight,
       child: Container(
+        margin: EdgeInsets.only(left: _avatarSize / 2),
         height: double.maxFinite,
-        width: 320,
+        width: double.maxFinite,
         decoration: BoxDecoration(
           color: _colorDebug[0] != null ? _colorDebug[0] : Colors.white,
           borderRadius: BorderRadius.only(
@@ -211,7 +214,7 @@ class SearchView extends StatelessWidget {
           padding: EdgeInsets.only(
             top: 16.0,
             bottom: 16.0,
-            left: 32.0,
+            left: _avatarSize / 1.5,
             right: 16.0,
           ),
           child: Row(
@@ -225,12 +228,21 @@ class SearchView extends StatelessWidget {
                     children: <Widget>[
                       Align(
                         alignment: Alignment.centerLeft,
-                        child: BoxText.subheading('Listing Title'),
+                        child: Text(
+                          'Listing Title',
+                          style: subheadingStyle,
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
+                        ),
                       ),
                       verticalSpaceTiny,
                       Align(
                         alignment: Alignment.centerLeft,
-                        child: Text('Listing description...'),
+                        child: Text(
+                          'Listing description...',
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
+                        ),
                       ),
                       verticalSpaceTiny,
                       Align(
@@ -240,6 +252,8 @@ class SearchView extends StatelessWidget {
                           style: TextStyle(
                             color: Colors.grey,
                           ),
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
                         ),
                       ),
                     ],
@@ -271,8 +285,8 @@ class SearchView extends StatelessWidget {
           color: Colors.white,
           shadow: true,
         ),
-        height: 64,
-        width: 64,
+        height: _avatarSize,
+        width: _avatarSize,
         child: Placeholder(),
       ),
     );

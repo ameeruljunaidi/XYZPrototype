@@ -18,9 +18,11 @@ import '../ui/add_gig/add_gig_price_view.dart';
 import '../ui/add_gig/add_gig_service_view.dart';
 import '../ui/add_gig/add_gig_title_view.dart';
 import '../ui/address_selection/address_selection_view.dart';
+import '../ui/category/category_view.dart';
 import '../ui/chat/chat_view.dart';
 import '../ui/create_account/create_account_view.dart';
 import '../ui/favorites/favorites_view.dart';
+import '../ui/gig/gig_view.dart';
 import '../ui/gig_edit/gig_edit_view.dart';
 import '../ui/gig_manager/gig_manager_view.dart';
 import '../ui/home/home_view.dart';
@@ -30,6 +32,7 @@ import '../ui/marketplace/marketplace_view.dart';
 import '../ui/profile/profile_add_avatar_view.dart';
 import '../ui/profile/profile_view.dart';
 import '../ui/search/search_view.dart';
+import '../ui/services/services_view.dart';
 import '../ui/startup/startup_view.dart';
 import '../ui/vendor_profile/vendor_profile_view.dart';
 
@@ -57,6 +60,9 @@ class Routes {
   static const String addGigPriceChooserView = '/add-gig-price-chooser-view';
   static const String vendorProfileView = '/vendor-profile-view';
   static const String chatView = '/chat-view';
+  static const String categoryView = '/category-view';
+  static const String servicesView = '/services-view';
+  static const String gigListView = '/gig-list-view';
   static const all = <String>{
     startupView,
     homeView,
@@ -81,6 +87,9 @@ class Routes {
     addGigPriceChooserView,
     vendorProfileView,
     chatView,
+    categoryView,
+    servicesView,
+    gigListView,
   };
 }
 
@@ -111,6 +120,9 @@ class StackedRouter extends RouterBase {
     RouteDef(Routes.addGigPriceChooserView, page: AddGigPriceChooserView),
     RouteDef(Routes.vendorProfileView, page: VendorProfileView),
     RouteDef(Routes.chatView, page: ChatView),
+    RouteDef(Routes.categoryView, page: CategoryView),
+    RouteDef(Routes.servicesView, page: ServicesView),
+    RouteDef(Routes.gigListView, page: GigListView),
   ];
   @override
   Map<Type, StackedRouteFactory> get pagesMap => _pagesMap;
@@ -280,6 +292,27 @@ class StackedRouter extends RouterBase {
         settings: data,
       );
     },
+    CategoryView: (data) {
+      return MaterialPageRoute<dynamic>(
+        builder: (context) => const CategoryView(),
+        settings: data,
+      );
+    },
+    ServicesView: (data) {
+      return MaterialPageRoute<dynamic>(
+        builder: (context) => const ServicesView(),
+        settings: data,
+      );
+    },
+    GigListView: (data) {
+      var args = data.getArgs<GigListViewArguments>(
+        orElse: () => GigListViewArguments(),
+      );
+      return MaterialPageRoute<dynamic>(
+        builder: (context) => GigListView(key: args.key),
+        settings: data,
+      );
+    },
   };
 }
 
@@ -339,4 +372,10 @@ class AddGigPriceViewArguments {
 class ChatViewArguments {
   final Key? key;
   ChatViewArguments({this.key});
+}
+
+/// GigListView arguments holder class
+class GigListViewArguments {
+  final Key? key;
+  GigListViewArguments({this.key});
 }

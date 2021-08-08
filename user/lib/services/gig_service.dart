@@ -52,6 +52,7 @@ class GigService {
 
   void clearGig() {
     _currentGig = Gig();
+    log.v('Temp gig cleared');
   }
 
   void cancelAddGig() {}

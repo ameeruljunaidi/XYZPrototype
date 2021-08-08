@@ -102,7 +102,7 @@ class Gig with _$Gig {
     String? gigDescription,
     List<String>? gigPhotos,
     Map<String, String>? gigFaqs,
-    Map<String, double>? gigReviews,
+    Map<String, String>? gigReviews,
     String? gigCategory,
     String? gigServiceType,
     Map<String, Map<String, dynamic>>? gigPrice,
@@ -154,4 +154,20 @@ class ServiceFeatures with _$ServiceFeatures {
 
   factory ServiceFeatures.fromJson(Map<String, dynamic> json) =>
       _$ServiceFeaturesFromJson(json);
+}
+
+@freezed
+class GigPagination with _$GigPagination {
+  GigPagination._();
+
+  factory GigPagination({
+    List<Gig>? gigs,
+    int? page,
+    String? errorMessage,
+  }) = _GigPagination;
+
+  bool get refreshError => errorMessage != '' && gigs!.length <= 20;
+
+  factory GigPagination.fromJson(Map<String, dynamic> json) =>
+      _$GigPaginationFromJson(json);
 }
