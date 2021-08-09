@@ -339,7 +339,15 @@ class MarketPlaceView extends StatelessWidget with $MarketPlaceView {
           bottom: 0.0,
           child: Container(
             width: _cardWidth,
-            color: Colors.black12,
+            decoration: BoxDecoration(
+              gradient: LinearGradient(
+                colors: [Colors.transparent, Colors.black54],
+                stops: [0.5, 1.0],
+                begin: Alignment.topCenter,
+                end: Alignment.bottomCenter,
+                tileMode: TileMode.repeated,
+              ),
+            ),
             child: Padding(
               padding: const EdgeInsets.only(
                 left: 8.0,
@@ -357,6 +365,28 @@ class MarketPlaceView extends StatelessWidget with $MarketPlaceView {
             ),
           ),
         ),
+        // Positioned(
+        //   bottom: 0.0,
+        //   child: Container(
+        //     width: _cardWidth,
+        //     color: Colors.black12,
+        //     child: Padding(
+        //       padding: const EdgeInsets.only(
+        //         left: 8.0,
+        //         bottom: 8.0,
+        //         top: 8.0,
+        //       ),
+        //       child: Text(
+        //         subCategories.serviceSubCategoryName!,
+        //         style: TextStyle(
+        //           color: Colors.white,
+        //           fontSize: 24.0,
+        //           fontWeight: FontWeight.w600,
+        //         ),
+        //       ),
+        //     ),
+        //   ),
+        // ),
       ],
     );
   }

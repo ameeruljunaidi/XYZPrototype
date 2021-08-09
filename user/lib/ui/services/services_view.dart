@@ -28,8 +28,7 @@ class ServicesView extends StatelessWidget {
       builder: (context, model, child) => Scaffold(
         body: CustomScrollView(
           slivers: [
-            _appBarSliver(model),
-            _serviceIcon(context, model),
+            _appBarSliver(context, model),
             _categoriesList(context, model),
           ],
         ),
@@ -38,12 +37,11 @@ class ServicesView extends StatelessWidget {
     );
   }
 
-  SliverAppBar _appBarSliver(ServicesViewModel model) {
+  SliverAppBar _appBarSliver(BuildContext context, ServicesViewModel model) {
     return SliverAppBar(
       // pinned: true,
-      floating: true,
+      // floating: true,
       backgroundColor:
-          // ignore: dead_code
           _colorDebug[0] != null ? _colorDebug[0] : Colors.transparent,
       leading: IconButton(
         onPressed: model.goBack,
@@ -61,42 +59,39 @@ class ServicesView extends StatelessWidget {
           ),
         )
       ],
-    );
-  }
-
-  SliverToBoxAdapter _serviceIcon(
-    BuildContext context,
-    ServicesViewModel model,
-  ) {
-    return SliverToBoxAdapter(
-      child: Container(
-        padding: EdgeInsets.symmetric(vertical: 24.0),
-        width: double.infinity,
-        color: _colorDebug[1],
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Icon(
-              Icons.person,
-              size: 48.0,
-            ),
-            verticalSpaceSmall,
-            Text(
-              model.categoryName ?? 'No Category',
-              style: heading2Style,
-              maxLines: 1,
-              overflow: TextOverflow.ellipsis,
-            ),
-            verticalSpaceSmall,
-            Container(
-              width: screenWidth(context) * 0.8,
-              child: Text(
-                LoremIpsum,
-                maxLines: 2,
+      expandedHeight: 248,
+      flexibleSpace: FlexibleSpaceBar(
+        background: Container(color: _colorDebug[1]),
+        centerTitle: true,
+        title: SingleChildScrollView(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.end,
+            children: [
+              Icon(
+                Icons.person,
+                size: 48.0,
+              ),
+              verticalSpaceSmall,
+              Text(
+                model.categoryName ?? 'No Category',
+                style: heading2Style.copyWith(color: Colors.black),
+                maxLines: 1,
                 overflow: TextOverflow.ellipsis,
               ),
-            ),
-          ],
+              verticalSpaceSmall,
+              Container(
+                color: _colorDebug[2],
+                margin: defaultPaddingHorizontal,
+                width: screenWidth(context) * 0.8,
+                child: Text(
+                  LoremIpsum,
+                  style: bodyStyle.copyWith(color: Colors.black),
+                  maxLines: 2,
+                  overflow: TextOverflow.ellipsis,
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );
@@ -134,9 +129,7 @@ class ServicesView extends StatelessWidget {
       );
     } else {
       return SliverToBoxAdapter(
-        child: Container(
-          height: 120,
-          width: screenWidth(context),
+        child: Center(
           child: CircularProgressIndicator(
             color: kcPrimaryColor,
           ),

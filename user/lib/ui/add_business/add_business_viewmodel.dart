@@ -21,7 +21,7 @@ class AddBusinessViewModel extends FormViewModel {
 
   Future<void> submitBusinessRegistration() async {
     final _business = Business(
-      businessRegistrationDate: defaultRegistrationDate,
+      businessRegistrationDate: defaultDateTime,
       businessName: businessNameValue,
       businessDescription: businessDescriptionValue,
       businessWebsite: businessWebsiteValue,

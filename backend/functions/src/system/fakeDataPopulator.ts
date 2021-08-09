@@ -29,8 +29,10 @@ export class FakeDataPopulator {
     log("generateGigs");
 
     for (let index = 0; index < 30; index++) {
+      let gigId = faker.datatype.uuid();
+
       let gig = {
-        gigId: "",
+        gigId: gigId,
         gigVendorId: "",
         gigTitle: faker.name.jobTitle(),
         gigDescription: faker.name.jobDescriptor(),
@@ -45,7 +47,7 @@ export class FakeDataPopulator {
           package1: {
             priceTitle: faker.commerce.product(),
             priceDescription: faker.commerce.productDescription(),
-            price: faker.datatype.float(2),
+            price: faker.datatype.float({max: 800, min: 100, precision: 2}),
             features: {
               feature1: faker.datatype.boolean(),
               feature2: faker.datatype.boolean(),
@@ -57,7 +59,7 @@ export class FakeDataPopulator {
           package2: {
             priceTitle: faker.commerce.product(),
             priceDescription: faker.commerce.productDescription(),
-            price: faker.datatype.float(2),
+            price: faker.datatype.float({max: 800, min: 100, precision: 2}),
             features: {
               feature1: faker.datatype.boolean(),
               feature2: faker.datatype.boolean(),
@@ -69,7 +71,7 @@ export class FakeDataPopulator {
           package3: {
             priceTitle: faker.commerce.product(),
             priceDescription: faker.commerce.productDescription(),
-            price: faker.datatype.float(2),
+            price: faker.datatype.float({max: 800, min: 100, precision: 2}),
             features: {
               feature1: faker.datatype.boolean(),
               feature2: faker.datatype.boolean(),
@@ -90,12 +92,13 @@ export class FakeDataPopulator {
           review3: faker.lorem.paragraph(2),
         },
         gigQuote: faker.datatype.boolean(),
-        gigRating: faker.datatype.float(2),
+        gigRating: faker.datatype.float({min: 0, max: 5, precision: 1}),
         gigRatingNumber: faker.datatype.number(200),
         gigLocation: "addressId",
+        gigDateTimeAdded: faker.date.recent().toISOString(),
       };
 
-      let gigId = await this.createGigDocument(gig);
+      await this.createGigDocument(gigId, gig);
       await this.generateGigsAddress(gigId);
     }
   }
@@ -126,11 +129,11 @@ export class FakeDataPopulator {
       .add(gigAddress);
   }
 
-  private async createGigDocument(gig: any): Promise<string> {
-    let documentReference = await this.firestoreDatabase
+  private async createGigDocument(gigId: string, gig: any) {
+    await this.firestoreDatabase
       .collection("gigs")
-      .add(gig);
-    return documentReference.id;
+      .doc(gigId)
+      .set(gig);
   }
 
   private async createGenerateDocument(): Promise<void> {

@@ -34,8 +34,6 @@ class SearchView extends StatelessWidget {
               child: Column(
                 children: [
                   verticalSpaceRegular,
-                  _searchBox(),
-                  verticalSpaceRegular,
                   _screenHeading(context),
                   _pageSelector(context, model),
                   _pagesBuilder(context, model),

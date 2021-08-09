@@ -101,7 +101,7 @@ Widget defaultTextBoxTitle(title) {
 // Default dividers
 Widget defaultDividers = Divider(
   color: Colors.black,
-  indent: 8.0,
-  endIndent: 8.0,
-  thickness: 2,
+  indent: defaultPaddingValue,
+  endIndent: defaultPaddingValue,
+  thickness: 1,
 );

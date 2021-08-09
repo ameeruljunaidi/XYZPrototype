@@ -23,24 +23,6 @@ class GigManagerViewModel extends BaseViewModel {
     _navigationService.back();
   }
 
-  Future<void> fetchGigs() async {
-    setBusy(true);
-
-    final _currentUser = _userService.currentUser!;
-
-    var gigResults = await _firestoreApi.getGigs(_currentUser);
-    setBusy(false);
-
-    if (gigResults is List<Gig?>) {
-      _gigs = gigResults;
-      notifyListeners();
-    } else {
-      await _dialogService.showDialog(title: 'Fetching gigs failed');
-    }
-
-    log.v('gig in viewmodel: $gigResults');
-  }
-
   void listenToGigs() {
     setBusy(true);
 

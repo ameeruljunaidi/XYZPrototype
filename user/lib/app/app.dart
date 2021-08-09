@@ -20,11 +20,13 @@ import 'package:xyz_prototype/ui/address_selection/address_selection_view.dart';
 import 'package:xyz_prototype/ui/category/category_view.dart';
 import 'package:xyz_prototype/ui/chat/chat_view.dart';
 import 'package:xyz_prototype/ui/create_account/create_account_view.dart';
+import 'package:xyz_prototype/ui/date_selection/date_selection_view.dart';
 import 'package:xyz_prototype/ui/favorites/favorites_view.dart';
 import 'package:xyz_prototype/ui/favorites/favorites_viewmodel.dart';
 import 'package:xyz_prototype/ui/gig/gig_view.dart';
 import 'package:xyz_prototype/ui/gig_edit/gig_edit_view.dart';
 import 'package:xyz_prototype/ui/gig_manager/gig_manager_view.dart';
+import 'package:xyz_prototype/ui/gig_profile/gig_profile_view.dart';
 import 'package:xyz_prototype/ui/home/home_view.dart';
 import 'package:xyz_prototype/ui/inbox/inbox_view.dart';
 import 'package:xyz_prototype/ui/inbox/inbox_viewmodel.dart';
@@ -69,6 +71,8 @@ import 'package:xyz_prototype/utils/image_selector.dart';
     MaterialRoute(page: CategoryView),
     MaterialRoute(page: ServicesView),
     MaterialRoute(page: GigListView),
+    MaterialRoute(page: GigProfileView),
+    MaterialRoute(page: DateSelectionView),
   ],
   dependencies: [
     LazySingleton(classType: NavigationService),

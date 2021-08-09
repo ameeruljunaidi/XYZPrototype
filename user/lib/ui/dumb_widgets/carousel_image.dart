@@ -19,14 +19,14 @@ class CarouselImages extends StatefulWidget {
   ///Height of nearby images. From 0.0 to 1.0. Optional
   final double scaleFactor;
 
-  ///Border radius of image. Optional
-  final double? borderRadius;
-
   ///Vertical alignment of nearby images. Optional
   final Alignment? verticalAlignment;
 
   ///ViewportFraction. From 0.5 to 1.0. Optional
   final double viewportFraction;
+
+  ///Border radius. Optional
+  final BorderRadius? borderRadius;
 
   const CarouselImages({
     Key? key,
@@ -35,9 +35,9 @@ class CarouselImages extends StatefulWidget {
     this.onTap,
     this.cachedNetworkImage: false,
     this.scaleFactor = 1.0,
-    this.borderRadius,
     this.verticalAlignment,
     this.viewportFraction = 0.9,
+    this.borderRadius,
   })  : assert(scaleFactor > 0.0),
         assert(scaleFactor <= 1.0),
         super(key: key);
@@ -78,7 +78,9 @@ class _CarouselImagesState extends State<CarouselImages> {
           itemCount: widget.listImages.length,
           itemBuilder: (context, position) {
             return ClipRRect(
-              borderRadius: defaultBorderRadius,
+              borderRadius: widget.borderRadius != null
+                  ? widget.borderRadius
+                  : defaultBorderRadius,
               child: widget.listImages[position].startsWith('http')
                   ? widget.cachedNetworkImage
                       ? CachedNetworkImage(

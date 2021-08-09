@@ -39,6 +39,9 @@ class _FakePlacesDetails extends _i1.Fake implements _i2.PlacesDetails {}
 class _FakeCollectionReference<T extends Object?> extends _i1.Fake
     implements _i3.CollectionReference<T> {}
 
+class _FakeQuerySnapshot<T extends Object?> extends _i1.Fake
+    implements _i3.QuerySnapshot<T> {}
+
 class _FakeFirebaseAuth extends _i1.Fake implements _i4.FirebaseAuth {
   @override
   String toString() => super.toString();
@@ -473,6 +476,15 @@ class MockFirestoreApi extends _i1.Mock implements _i20.FirestoreApi {
       (super.noSuchMethod(Invocation.method(#getGigs, [client]),
               returnValue: Future<List<_i8.Gig?>>.value(<_i8.Gig?>[]))
           as _i7.Future<List<_i8.Gig?>>);
+  @override
+  _i7.Future<_i3.QuerySnapshot<Object?>> getGigSnaphot(
+          {int? limit = 3, _i3.DocumentSnapshot<Object?>? startAfter}) =>
+      (super.noSuchMethod(
+              Invocation.method(
+                  #getGigSnaphot, [], {#limit: limit, #startAfter: startAfter}),
+              returnValue: Future<_i3.QuerySnapshot<Object?>>.value(
+                  _FakeQuerySnapshot<Object?>()))
+          as _i7.Future<_i3.QuerySnapshot<Object?>>);
   @override
   _i7.Stream<dynamic> getGigsRealtime(_i8.Client? client) =>
       (super.noSuchMethod(Invocation.method(#getGigsRealtime, [client]),

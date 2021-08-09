@@ -13,8 +13,9 @@ class BoxInputField extends StatelessWidget {
   final bool tapOnly;
   final void Function()? onTap;
   final fillColor;
-  final keyboardType;
-  final maxLines;
+  final TextInputType? keyboardType;
+  final int? maxLines;
+  final int? maxLength;
 
   final circularBorder = OutlineInputBorder(
     borderRadius: BorderRadius.circular(defaultBorderRadiusValue),
@@ -34,6 +35,7 @@ class BoxInputField extends StatelessWidget {
     this.fillColor = kcVeryLightGreyColor,
     this.keyboardType,
     this.maxLines,
+    this.maxLength,
   }) : super(key: key);
 
   @override
@@ -63,6 +65,7 @@ class BoxInputField extends StatelessWidget {
       enabledBorder: circularBorder.copyWith(
         borderSide: BorderSide(color: kcLightGreyColor),
       ),
+      // counter: Container(),
     );
 
     return Theme(
@@ -73,6 +76,7 @@ class BoxInputField extends StatelessWidget {
       child: GestureDetector(
         onTap: onTap,
         child: TextField(
+          maxLength: maxLength,
           keyboardType: keyboardType,
           maxLines: maxLines,
           enabled: !tapOnly,

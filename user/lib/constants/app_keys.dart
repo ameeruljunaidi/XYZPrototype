@@ -15,4 +15,4 @@ enum ClientType {
 }
 
 String defaultClientType = describeEnum(ClientType.user);
-String defaultRegistrationDate = DateTime.now().toIso8601String();
+String defaultDateTime = DateTime.now().toIso8601String();

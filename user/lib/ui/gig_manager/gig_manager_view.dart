@@ -90,10 +90,9 @@ class GigManagerView extends StatelessWidget {
 
   Widget _carouselSlider(_gigAtIndex) {
     return CarouselImages(
-      scaleFactor: 1,
+      // scaleFactor: 1,
       listImages: _gigAtIndex.gigPhotos,
       height: double.infinity,
-      borderRadius: defaultBorderRadiusValue,
       cachedNetworkImage: true,
       verticalAlignment: Alignment.topCenter,
     );

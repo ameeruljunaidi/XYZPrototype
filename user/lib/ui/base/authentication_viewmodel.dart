@@ -67,7 +67,7 @@ abstract class AuthenticationViewModel extends FormViewModel {
           clientName: fullNameValue,
           clientEmail: client.email,
           clientType: describeEnum(ClientType.user),
-          clientRegistrationDate: defaultRegistrationDate,
+          clientRegistrationDate: defaultDateTime,
         ),
       );
 

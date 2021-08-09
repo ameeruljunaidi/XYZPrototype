@@ -33,7 +33,7 @@ MockUserService getAndRegisterUserService({
         Client(
           clientId: UserIdTestKey,
           clientType: defaultClientType,
-          clientRegistrationDate: defaultRegistrationDate,
+          clientRegistrationDate: defaultDateTime,
         ),
   );
   locator.registerSingleton<UserService>(service);

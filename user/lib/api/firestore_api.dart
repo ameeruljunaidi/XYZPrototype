@@ -112,6 +112,24 @@ class FirestoreApi {
     }).toList();
   }
 
+  Future<QuerySnapshot> getGigSnaphot({
+    int limit = 3,
+    DocumentSnapshot? startAfter,
+  }) async {
+    final refGigs =
+        await gigsCollection.orderBy('gigDateTimeAdded').limit(limit);
+
+    if (startAfter == null) {
+      log.v('First fetch for gigs');
+
+      return refGigs.get();
+    } else {
+      log.v('Folow-on fetch for gigs');
+
+      return refGigs.startAfterDocument(startAfter).get();
+    }
+  }
+
   // Stream for all gigs based on clientId
   Stream getGigsRealtime(Client client) {
     log.v('client for gig stream: $client');
@@ -120,6 +138,7 @@ class FirestoreApi {
       (gigsSnapshot) {
         if (gigsSnapshot.docs.isNotEmpty) {
           log.v('gigSnaphot not empty');
+
           var gigs = gigsSnapshot.docs
               .map((snapshot) =>
                   Gig.fromJson(snapshot.data() as Map<String, dynamic>))

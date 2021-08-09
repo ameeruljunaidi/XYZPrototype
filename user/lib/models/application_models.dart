@@ -1,5 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:syncfusion_flutter_calendar/calendar.dart';
 import 'package:xyz_prototype/constants/app_keys.dart';
 
 part 'application_models.freezed.dart';
@@ -110,6 +111,7 @@ class Gig with _$Gig {
     String? gigLocation,
     double? gigRating,
     int? gigRatingNumber,
+    DateTime? gigDateTimeAdded,
   }) = _Gigs;
 
   factory Gig.fromJson(Map<String, dynamic> json) => _$GigFromJson(json);

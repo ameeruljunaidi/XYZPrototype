@@ -21,10 +21,12 @@ import '../ui/address_selection/address_selection_view.dart';
 import '../ui/category/category_view.dart';
 import '../ui/chat/chat_view.dart';
 import '../ui/create_account/create_account_view.dart';
+import '../ui/date_selection/date_selection_view.dart';
 import '../ui/favorites/favorites_view.dart';
 import '../ui/gig/gig_view.dart';
 import '../ui/gig_edit/gig_edit_view.dart';
 import '../ui/gig_manager/gig_manager_view.dart';
+import '../ui/gig_profile/gig_profile_view.dart';
 import '../ui/home/home_view.dart';
 import '../ui/inbox/inbox_view.dart';
 import '../ui/login/login_view.dart';
@@ -63,6 +65,8 @@ class Routes {
   static const String categoryView = '/category-view';
   static const String servicesView = '/services-view';
   static const String gigListView = '/gig-list-view';
+  static const String gigProfileView = '/gig-profile-view';
+  static const String dateSelectionView = '/date-selection-view';
   static const all = <String>{
     startupView,
     homeView,
@@ -90,6 +94,8 @@ class Routes {
     categoryView,
     servicesView,
     gigListView,
+    gigProfileView,
+    dateSelectionView,
   };
 }
 
@@ -123,6 +129,8 @@ class StackedRouter extends RouterBase {
     RouteDef(Routes.categoryView, page: CategoryView),
     RouteDef(Routes.servicesView, page: ServicesView),
     RouteDef(Routes.gigListView, page: GigListView),
+    RouteDef(Routes.gigProfileView, page: GigProfileView),
+    RouteDef(Routes.dateSelectionView, page: DateSelectionView),
   ];
   @override
   Map<Type, StackedRouteFactory> get pagesMap => _pagesMap;
@@ -310,6 +318,18 @@ class StackedRouter extends RouterBase {
       );
       return MaterialPageRoute<dynamic>(
         builder: (context) => GigListView(key: args.key),
+        settings: data,
+      );
+    },
+    GigProfileView: (data) {
+      return MaterialPageRoute<dynamic>(
+        builder: (context) => const GigProfileView(),
+        settings: data,
+      );
+    },
+    DateSelectionView: (data) {
+      return MaterialPageRoute<dynamic>(
+        builder: (context) => const DateSelectionView(),
         settings: data,
       );
     },
