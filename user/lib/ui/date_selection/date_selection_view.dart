@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
-import 'package:syncfusion_flutter_calendar/calendar.dart';
-import 'package:xyz_prototype/ui/calendar/data_selection_viewmodel.dart';
+import 'package:xyz_prototype/ui/date_selection/date_selection_viewmodel.dart';
+import 'package:xyz_ui/xyz_ui.dart';
 
 class DateSelectionView extends StatelessWidget {
   const DateSelectionView({Key? key}) : super(key: key);
@@ -11,8 +11,9 @@ class DateSelectionView extends StatelessWidget {
     return ViewModelBuilder<DateSelectionViewModel>.reactive(
       builder: (context, model, child) => Scaffold(
         body: SafeArea(
-          child: SfCalendar(
-            view: CalendarView.month,
+          child: BoxButton(
+            title: 'Test Order',
+            onTap: () => model.testOrder(),
           ),
         ),
       ),

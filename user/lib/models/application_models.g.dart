@@ -299,3 +299,70 @@ Map<String, dynamic> _$_$_GigPaginationToJson(_$_GigPagination instance) =>
       'page': instance.page,
       'errorMessage': instance.errorMessage,
     };
+
+_$_GigOrder _$_$_GigOrderFromJson(Map<String, dynamic> json) {
+  return _$_GigOrder(
+    gigOrderId: json['gigOrderId'] as String?,
+    gigOrderGigId: json['gigOrderGigId'] as String?,
+    gigOrderVendorId: json['gigOrderVendorId'] as String?,
+    gigOrderClientId: json['gigOrderClientId'] as String?,
+    gigOrderAppointment: json['gigOrderAppointment'] as String?,
+  );
+}
+
+Map<String, dynamic> _$_$_GigOrderToJson(_$_GigOrder instance) =>
+    <String, dynamic>{
+      'gigOrderId': instance.gigOrderId,
+      'gigOrderGigId': instance.gigOrderGigId,
+      'gigOrderVendorId': instance.gigOrderVendorId,
+      'gigOrderClientId': instance.gigOrderClientId,
+      'gigOrderAppointment': instance.gigOrderAppointment,
+    };
+
+_$_GigAppointment _$_$_GigAppointmentFromJson(Map<String, dynamic> json) {
+  return _$_GigAppointment(
+    gigAppointmentId: json['gigAppointmentId'] as String?,
+    startTime: json['startTime'] == null
+        ? null
+        : DateTime.parse(json['startTime'] as String),
+    endTime: json['endTime'] == null
+        ? null
+        : DateTime.parse(json['endTime'] as String),
+    isAllDay: json['isAllDay'] as bool?,
+    subject: json['subject'] as String?,
+    startTimeZone: json['startTimeZone'] as String?,
+    endTimeZone: json['endTimeZone'] as String?,
+    recurrenceRule: json['recurrenceRule'] as String?,
+    recurrenceExceptionDates:
+        (json['recurrenceExceptionDates'] as List<dynamic>?)
+            ?.map((e) => DateTime.parse(e as String))
+            .toList(),
+    notes: json['notes'] as String?,
+    location: json['location'] as String?,
+    resourceIds: (json['resourceIds'] as List<dynamic>?)
+        ?.map((e) => e as Object)
+        .toList(),
+    recurrenceId: json['recurrenceId'],
+    id: json['id'],
+  );
+}
+
+Map<String, dynamic> _$_$_GigAppointmentToJson(_$_GigAppointment instance) =>
+    <String, dynamic>{
+      'gigAppointmentId': instance.gigAppointmentId,
+      'startTime': instance.startTime?.toIso8601String(),
+      'endTime': instance.endTime?.toIso8601String(),
+      'isAllDay': instance.isAllDay,
+      'subject': instance.subject,
+      'startTimeZone': instance.startTimeZone,
+      'endTimeZone': instance.endTimeZone,
+      'recurrenceRule': instance.recurrenceRule,
+      'recurrenceExceptionDates': instance.recurrenceExceptionDates
+          ?.map((e) => e.toIso8601String())
+          .toList(),
+      'notes': instance.notes,
+      'location': instance.location,
+      'resourceIds': instance.resourceIds,
+      'recurrenceId': instance.recurrenceId,
+      'id': instance.id,
+    };

@@ -7,11 +7,13 @@ import 'package:xyz_prototype/app/app.locator.dart';
 import 'package:xyz_prototype/app/app.logger.dart';
 import 'package:xyz_prototype/app/app.router.dart';
 import 'package:xyz_prototype/models/application_models.dart';
+import 'package:xyz_prototype/services/gig_service.dart';
 
 class GigListViewModel extends BaseViewModel {
   final log = getLogger('GigListViewModel');
   final _navigationService = locator<NavigationService>();
   final _firestoreApi = locator<FirestoreApi>();
+  final _gigService = locator<GigService>();
 
   // Navigation functions
   void goBack() {
@@ -67,8 +69,6 @@ class GigListViewModel extends BaseViewModel {
 
       if (_gigSnaphots.length < _documentLimit!) _hasNext = false;
 
-      log.v('See gigList: $_gigList');
-
       notifyListeners();
     } catch (e) {
       log.v('${e.toString()}');
@@ -79,7 +79,14 @@ class GigListViewModel extends BaseViewModel {
   }
 
   // Navigation functions
-  void goToGigProfile() {
-    _navigationService.navigateTo(Routes.gigProfileView);
+  void goToGigProfile(index) {
+    if (_gigList != null) {
+      final Gig _loadGig = _gigList![index];
+      _gigService.loadGig(_loadGig);
+
+      _navigationService.navigateTo(Routes.gigProfileView);
+    } else {
+      log.e('gigList is empty');
+    }
   }
 }

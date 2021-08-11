@@ -106,7 +106,7 @@ class GigListView extends StatelessWidget {
                 : 'No';
 
             return GestureDetector(
-              onTap: model.goToGigProfile,
+              onTap: () => model.goToGigProfile(gigIndex),
               child: Container(
                 margin: EdgeInsets.symmetric(
                   horizontal: defaultPaddingValue,

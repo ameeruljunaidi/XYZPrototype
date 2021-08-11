@@ -3341,3 +3341,761 @@ abstract class _GigPagination extends GigPagination {
   _$GigPaginationCopyWith<_GigPagination> get copyWith =>
       throw _privateConstructorUsedError;
 }
+
+GigOrder _$GigOrderFromJson(Map<String, dynamic> json) {
+  return _GigOrder.fromJson(json);
+}
+
+/// @nodoc
+class _$GigOrderTearOff {
+  const _$GigOrderTearOff();
+
+  _GigOrder call(
+      {String? gigOrderId,
+      String? gigOrderGigId,
+      String? gigOrderVendorId,
+      String? gigOrderClientId,
+      String? gigOrderAppointment}) {
+    return _GigOrder(
+      gigOrderId: gigOrderId,
+      gigOrderGigId: gigOrderGigId,
+      gigOrderVendorId: gigOrderVendorId,
+      gigOrderClientId: gigOrderClientId,
+      gigOrderAppointment: gigOrderAppointment,
+    );
+  }
+
+  GigOrder fromJson(Map<String, Object> json) {
+    return GigOrder.fromJson(json);
+  }
+}
+
+/// @nodoc
+const $GigOrder = _$GigOrderTearOff();
+
+/// @nodoc
+mixin _$GigOrder {
+  String? get gigOrderId => throw _privateConstructorUsedError;
+  String? get gigOrderGigId => throw _privateConstructorUsedError;
+  String? get gigOrderVendorId => throw _privateConstructorUsedError;
+  String? get gigOrderClientId => throw _privateConstructorUsedError;
+  String? get gigOrderAppointment => throw _privateConstructorUsedError;
+
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+  @JsonKey(ignore: true)
+  $GigOrderCopyWith<GigOrder> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $GigOrderCopyWith<$Res> {
+  factory $GigOrderCopyWith(GigOrder value, $Res Function(GigOrder) then) =
+      _$GigOrderCopyWithImpl<$Res>;
+  $Res call(
+      {String? gigOrderId,
+      String? gigOrderGigId,
+      String? gigOrderVendorId,
+      String? gigOrderClientId,
+      String? gigOrderAppointment});
+}
+
+/// @nodoc
+class _$GigOrderCopyWithImpl<$Res> implements $GigOrderCopyWith<$Res> {
+  _$GigOrderCopyWithImpl(this._value, this._then);
+
+  final GigOrder _value;
+  // ignore: unused_field
+  final $Res Function(GigOrder) _then;
+
+  @override
+  $Res call({
+    Object? gigOrderId = freezed,
+    Object? gigOrderGigId = freezed,
+    Object? gigOrderVendorId = freezed,
+    Object? gigOrderClientId = freezed,
+    Object? gigOrderAppointment = freezed,
+  }) {
+    return _then(_value.copyWith(
+      gigOrderId: gigOrderId == freezed
+          ? _value.gigOrderId
+          : gigOrderId // ignore: cast_nullable_to_non_nullable
+              as String?,
+      gigOrderGigId: gigOrderGigId == freezed
+          ? _value.gigOrderGigId
+          : gigOrderGigId // ignore: cast_nullable_to_non_nullable
+              as String?,
+      gigOrderVendorId: gigOrderVendorId == freezed
+          ? _value.gigOrderVendorId
+          : gigOrderVendorId // ignore: cast_nullable_to_non_nullable
+              as String?,
+      gigOrderClientId: gigOrderClientId == freezed
+          ? _value.gigOrderClientId
+          : gigOrderClientId // ignore: cast_nullable_to_non_nullable
+              as String?,
+      gigOrderAppointment: gigOrderAppointment == freezed
+          ? _value.gigOrderAppointment
+          : gigOrderAppointment // ignore: cast_nullable_to_non_nullable
+              as String?,
+    ));
+  }
+}
+
+/// @nodoc
+abstract class _$GigOrderCopyWith<$Res> implements $GigOrderCopyWith<$Res> {
+  factory _$GigOrderCopyWith(_GigOrder value, $Res Function(_GigOrder) then) =
+      __$GigOrderCopyWithImpl<$Res>;
+  @override
+  $Res call(
+      {String? gigOrderId,
+      String? gigOrderGigId,
+      String? gigOrderVendorId,
+      String? gigOrderClientId,
+      String? gigOrderAppointment});
+}
+
+/// @nodoc
+class __$GigOrderCopyWithImpl<$Res> extends _$GigOrderCopyWithImpl<$Res>
+    implements _$GigOrderCopyWith<$Res> {
+  __$GigOrderCopyWithImpl(_GigOrder _value, $Res Function(_GigOrder) _then)
+      : super(_value, (v) => _then(v as _GigOrder));
+
+  @override
+  _GigOrder get _value => super._value as _GigOrder;
+
+  @override
+  $Res call({
+    Object? gigOrderId = freezed,
+    Object? gigOrderGigId = freezed,
+    Object? gigOrderVendorId = freezed,
+    Object? gigOrderClientId = freezed,
+    Object? gigOrderAppointment = freezed,
+  }) {
+    return _then(_GigOrder(
+      gigOrderId: gigOrderId == freezed
+          ? _value.gigOrderId
+          : gigOrderId // ignore: cast_nullable_to_non_nullable
+              as String?,
+      gigOrderGigId: gigOrderGigId == freezed
+          ? _value.gigOrderGigId
+          : gigOrderGigId // ignore: cast_nullable_to_non_nullable
+              as String?,
+      gigOrderVendorId: gigOrderVendorId == freezed
+          ? _value.gigOrderVendorId
+          : gigOrderVendorId // ignore: cast_nullable_to_non_nullable
+              as String?,
+      gigOrderClientId: gigOrderClientId == freezed
+          ? _value.gigOrderClientId
+          : gigOrderClientId // ignore: cast_nullable_to_non_nullable
+              as String?,
+      gigOrderAppointment: gigOrderAppointment == freezed
+          ? _value.gigOrderAppointment
+          : gigOrderAppointment // ignore: cast_nullable_to_non_nullable
+              as String?,
+    ));
+  }
+}
+
+/// @nodoc
+@JsonSerializable()
+class _$_GigOrder with DiagnosticableTreeMixin implements _GigOrder {
+  _$_GigOrder(
+      {this.gigOrderId,
+      this.gigOrderGigId,
+      this.gigOrderVendorId,
+      this.gigOrderClientId,
+      this.gigOrderAppointment});
+
+  factory _$_GigOrder.fromJson(Map<String, dynamic> json) =>
+      _$_$_GigOrderFromJson(json);
+
+  @override
+  final String? gigOrderId;
+  @override
+  final String? gigOrderGigId;
+  @override
+  final String? gigOrderVendorId;
+  @override
+  final String? gigOrderClientId;
+  @override
+  final String? gigOrderAppointment;
+
+  @override
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
+    return 'GigOrder(gigOrderId: $gigOrderId, gigOrderGigId: $gigOrderGigId, gigOrderVendorId: $gigOrderVendorId, gigOrderClientId: $gigOrderClientId, gigOrderAppointment: $gigOrderAppointment)';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty('type', 'GigOrder'))
+      ..add(DiagnosticsProperty('gigOrderId', gigOrderId))
+      ..add(DiagnosticsProperty('gigOrderGigId', gigOrderGigId))
+      ..add(DiagnosticsProperty('gigOrderVendorId', gigOrderVendorId))
+      ..add(DiagnosticsProperty('gigOrderClientId', gigOrderClientId))
+      ..add(DiagnosticsProperty('gigOrderAppointment', gigOrderAppointment));
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other is _GigOrder &&
+            (identical(other.gigOrderId, gigOrderId) ||
+                const DeepCollectionEquality()
+                    .equals(other.gigOrderId, gigOrderId)) &&
+            (identical(other.gigOrderGigId, gigOrderGigId) ||
+                const DeepCollectionEquality()
+                    .equals(other.gigOrderGigId, gigOrderGigId)) &&
+            (identical(other.gigOrderVendorId, gigOrderVendorId) ||
+                const DeepCollectionEquality()
+                    .equals(other.gigOrderVendorId, gigOrderVendorId)) &&
+            (identical(other.gigOrderClientId, gigOrderClientId) ||
+                const DeepCollectionEquality()
+                    .equals(other.gigOrderClientId, gigOrderClientId)) &&
+            (identical(other.gigOrderAppointment, gigOrderAppointment) ||
+                const DeepCollectionEquality()
+                    .equals(other.gigOrderAppointment, gigOrderAppointment)));
+  }
+
+  @override
+  int get hashCode =>
+      runtimeType.hashCode ^
+      const DeepCollectionEquality().hash(gigOrderId) ^
+      const DeepCollectionEquality().hash(gigOrderGigId) ^
+      const DeepCollectionEquality().hash(gigOrderVendorId) ^
+      const DeepCollectionEquality().hash(gigOrderClientId) ^
+      const DeepCollectionEquality().hash(gigOrderAppointment);
+
+  @JsonKey(ignore: true)
+  @override
+  _$GigOrderCopyWith<_GigOrder> get copyWith =>
+      __$GigOrderCopyWithImpl<_GigOrder>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$_$_GigOrderToJson(this);
+  }
+}
+
+abstract class _GigOrder implements GigOrder {
+  factory _GigOrder(
+      {String? gigOrderId,
+      String? gigOrderGigId,
+      String? gigOrderVendorId,
+      String? gigOrderClientId,
+      String? gigOrderAppointment}) = _$_GigOrder;
+
+  factory _GigOrder.fromJson(Map<String, dynamic> json) = _$_GigOrder.fromJson;
+
+  @override
+  String? get gigOrderId => throw _privateConstructorUsedError;
+  @override
+  String? get gigOrderGigId => throw _privateConstructorUsedError;
+  @override
+  String? get gigOrderVendorId => throw _privateConstructorUsedError;
+  @override
+  String? get gigOrderClientId => throw _privateConstructorUsedError;
+  @override
+  String? get gigOrderAppointment => throw _privateConstructorUsedError;
+  @override
+  @JsonKey(ignore: true)
+  _$GigOrderCopyWith<_GigOrder> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+GigAppointment _$GigAppointmentFromJson(Map<String, dynamic> json) {
+  return _GigAppointment.fromJson(json);
+}
+
+/// @nodoc
+class _$GigAppointmentTearOff {
+  const _$GigAppointmentTearOff();
+
+  _GigAppointment call(
+      {String? gigAppointmentId,
+      DateTime? startTime,
+      DateTime? endTime,
+      bool? isAllDay,
+      String? subject,
+      String? startTimeZone,
+      String? endTimeZone,
+      String? recurrenceRule,
+      List<DateTime>? recurrenceExceptionDates,
+      String? notes,
+      String? location,
+      List<Object>? resourceIds,
+      Object? recurrenceId,
+      Object? id}) {
+    return _GigAppointment(
+      gigAppointmentId: gigAppointmentId,
+      startTime: startTime,
+      endTime: endTime,
+      isAllDay: isAllDay,
+      subject: subject,
+      startTimeZone: startTimeZone,
+      endTimeZone: endTimeZone,
+      recurrenceRule: recurrenceRule,
+      recurrenceExceptionDates: recurrenceExceptionDates,
+      notes: notes,
+      location: location,
+      resourceIds: resourceIds,
+      recurrenceId: recurrenceId,
+      id: id,
+    );
+  }
+
+  GigAppointment fromJson(Map<String, Object> json) {
+    return GigAppointment.fromJson(json);
+  }
+}
+
+/// @nodoc
+const $GigAppointment = _$GigAppointmentTearOff();
+
+/// @nodoc
+mixin _$GigAppointment {
+  String? get gigAppointmentId => throw _privateConstructorUsedError;
+  DateTime? get startTime => throw _privateConstructorUsedError;
+  DateTime? get endTime => throw _privateConstructorUsedError;
+  bool? get isAllDay => throw _privateConstructorUsedError;
+  String? get subject => throw _privateConstructorUsedError;
+  String? get startTimeZone => throw _privateConstructorUsedError;
+  String? get endTimeZone => throw _privateConstructorUsedError;
+  String? get recurrenceRule => throw _privateConstructorUsedError;
+  List<DateTime>? get recurrenceExceptionDates =>
+      throw _privateConstructorUsedError;
+  String? get notes => throw _privateConstructorUsedError;
+  String? get location => throw _privateConstructorUsedError;
+  List<Object>? get resourceIds => throw _privateConstructorUsedError;
+  Object? get recurrenceId => throw _privateConstructorUsedError;
+  Object? get id => throw _privateConstructorUsedError;
+
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+  @JsonKey(ignore: true)
+  $GigAppointmentCopyWith<GigAppointment> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $GigAppointmentCopyWith<$Res> {
+  factory $GigAppointmentCopyWith(
+          GigAppointment value, $Res Function(GigAppointment) then) =
+      _$GigAppointmentCopyWithImpl<$Res>;
+  $Res call(
+      {String? gigAppointmentId,
+      DateTime? startTime,
+      DateTime? endTime,
+      bool? isAllDay,
+      String? subject,
+      String? startTimeZone,
+      String? endTimeZone,
+      String? recurrenceRule,
+      List<DateTime>? recurrenceExceptionDates,
+      String? notes,
+      String? location,
+      List<Object>? resourceIds,
+      Object? recurrenceId,
+      Object? id});
+}
+
+/// @nodoc
+class _$GigAppointmentCopyWithImpl<$Res>
+    implements $GigAppointmentCopyWith<$Res> {
+  _$GigAppointmentCopyWithImpl(this._value, this._then);
+
+  final GigAppointment _value;
+  // ignore: unused_field
+  final $Res Function(GigAppointment) _then;
+
+  @override
+  $Res call({
+    Object? gigAppointmentId = freezed,
+    Object? startTime = freezed,
+    Object? endTime = freezed,
+    Object? isAllDay = freezed,
+    Object? subject = freezed,
+    Object? startTimeZone = freezed,
+    Object? endTimeZone = freezed,
+    Object? recurrenceRule = freezed,
+    Object? recurrenceExceptionDates = freezed,
+    Object? notes = freezed,
+    Object? location = freezed,
+    Object? resourceIds = freezed,
+    Object? recurrenceId = freezed,
+    Object? id = freezed,
+  }) {
+    return _then(_value.copyWith(
+      gigAppointmentId: gigAppointmentId == freezed
+          ? _value.gigAppointmentId
+          : gigAppointmentId // ignore: cast_nullable_to_non_nullable
+              as String?,
+      startTime: startTime == freezed
+          ? _value.startTime
+          : startTime // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
+      endTime: endTime == freezed
+          ? _value.endTime
+          : endTime // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
+      isAllDay: isAllDay == freezed
+          ? _value.isAllDay
+          : isAllDay // ignore: cast_nullable_to_non_nullable
+              as bool?,
+      subject: subject == freezed
+          ? _value.subject
+          : subject // ignore: cast_nullable_to_non_nullable
+              as String?,
+      startTimeZone: startTimeZone == freezed
+          ? _value.startTimeZone
+          : startTimeZone // ignore: cast_nullable_to_non_nullable
+              as String?,
+      endTimeZone: endTimeZone == freezed
+          ? _value.endTimeZone
+          : endTimeZone // ignore: cast_nullable_to_non_nullable
+              as String?,
+      recurrenceRule: recurrenceRule == freezed
+          ? _value.recurrenceRule
+          : recurrenceRule // ignore: cast_nullable_to_non_nullable
+              as String?,
+      recurrenceExceptionDates: recurrenceExceptionDates == freezed
+          ? _value.recurrenceExceptionDates
+          : recurrenceExceptionDates // ignore: cast_nullable_to_non_nullable
+              as List<DateTime>?,
+      notes: notes == freezed
+          ? _value.notes
+          : notes // ignore: cast_nullable_to_non_nullable
+              as String?,
+      location: location == freezed
+          ? _value.location
+          : location // ignore: cast_nullable_to_non_nullable
+              as String?,
+      resourceIds: resourceIds == freezed
+          ? _value.resourceIds
+          : resourceIds // ignore: cast_nullable_to_non_nullable
+              as List<Object>?,
+      recurrenceId:
+          recurrenceId == freezed ? _value.recurrenceId : recurrenceId,
+      id: id == freezed ? _value.id : id,
+    ));
+  }
+}
+
+/// @nodoc
+abstract class _$GigAppointmentCopyWith<$Res>
+    implements $GigAppointmentCopyWith<$Res> {
+  factory _$GigAppointmentCopyWith(
+          _GigAppointment value, $Res Function(_GigAppointment) then) =
+      __$GigAppointmentCopyWithImpl<$Res>;
+  @override
+  $Res call(
+      {String? gigAppointmentId,
+      DateTime? startTime,
+      DateTime? endTime,
+      bool? isAllDay,
+      String? subject,
+      String? startTimeZone,
+      String? endTimeZone,
+      String? recurrenceRule,
+      List<DateTime>? recurrenceExceptionDates,
+      String? notes,
+      String? location,
+      List<Object>? resourceIds,
+      Object? recurrenceId,
+      Object? id});
+}
+
+/// @nodoc
+class __$GigAppointmentCopyWithImpl<$Res>
+    extends _$GigAppointmentCopyWithImpl<$Res>
+    implements _$GigAppointmentCopyWith<$Res> {
+  __$GigAppointmentCopyWithImpl(
+      _GigAppointment _value, $Res Function(_GigAppointment) _then)
+      : super(_value, (v) => _then(v as _GigAppointment));
+
+  @override
+  _GigAppointment get _value => super._value as _GigAppointment;
+
+  @override
+  $Res call({
+    Object? gigAppointmentId = freezed,
+    Object? startTime = freezed,
+    Object? endTime = freezed,
+    Object? isAllDay = freezed,
+    Object? subject = freezed,
+    Object? startTimeZone = freezed,
+    Object? endTimeZone = freezed,
+    Object? recurrenceRule = freezed,
+    Object? recurrenceExceptionDates = freezed,
+    Object? notes = freezed,
+    Object? location = freezed,
+    Object? resourceIds = freezed,
+    Object? recurrenceId = freezed,
+    Object? id = freezed,
+  }) {
+    return _then(_GigAppointment(
+      gigAppointmentId: gigAppointmentId == freezed
+          ? _value.gigAppointmentId
+          : gigAppointmentId // ignore: cast_nullable_to_non_nullable
+              as String?,
+      startTime: startTime == freezed
+          ? _value.startTime
+          : startTime // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
+      endTime: endTime == freezed
+          ? _value.endTime
+          : endTime // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
+      isAllDay: isAllDay == freezed
+          ? _value.isAllDay
+          : isAllDay // ignore: cast_nullable_to_non_nullable
+              as bool?,
+      subject: subject == freezed
+          ? _value.subject
+          : subject // ignore: cast_nullable_to_non_nullable
+              as String?,
+      startTimeZone: startTimeZone == freezed
+          ? _value.startTimeZone
+          : startTimeZone // ignore: cast_nullable_to_non_nullable
+              as String?,
+      endTimeZone: endTimeZone == freezed
+          ? _value.endTimeZone
+          : endTimeZone // ignore: cast_nullable_to_non_nullable
+              as String?,
+      recurrenceRule: recurrenceRule == freezed
+          ? _value.recurrenceRule
+          : recurrenceRule // ignore: cast_nullable_to_non_nullable
+              as String?,
+      recurrenceExceptionDates: recurrenceExceptionDates == freezed
+          ? _value.recurrenceExceptionDates
+          : recurrenceExceptionDates // ignore: cast_nullable_to_non_nullable
+              as List<DateTime>?,
+      notes: notes == freezed
+          ? _value.notes
+          : notes // ignore: cast_nullable_to_non_nullable
+              as String?,
+      location: location == freezed
+          ? _value.location
+          : location // ignore: cast_nullable_to_non_nullable
+              as String?,
+      resourceIds: resourceIds == freezed
+          ? _value.resourceIds
+          : resourceIds // ignore: cast_nullable_to_non_nullable
+              as List<Object>?,
+      recurrenceId:
+          recurrenceId == freezed ? _value.recurrenceId : recurrenceId,
+      id: id == freezed ? _value.id : id,
+    ));
+  }
+}
+
+/// @nodoc
+@JsonSerializable()
+class _$_GigAppointment
+    with DiagnosticableTreeMixin
+    implements _GigAppointment {
+  _$_GigAppointment(
+      {this.gigAppointmentId,
+      this.startTime,
+      this.endTime,
+      this.isAllDay,
+      this.subject,
+      this.startTimeZone,
+      this.endTimeZone,
+      this.recurrenceRule,
+      this.recurrenceExceptionDates,
+      this.notes,
+      this.location,
+      this.resourceIds,
+      this.recurrenceId,
+      this.id});
+
+  factory _$_GigAppointment.fromJson(Map<String, dynamic> json) =>
+      _$_$_GigAppointmentFromJson(json);
+
+  @override
+  final String? gigAppointmentId;
+  @override
+  final DateTime? startTime;
+  @override
+  final DateTime? endTime;
+  @override
+  final bool? isAllDay;
+  @override
+  final String? subject;
+  @override
+  final String? startTimeZone;
+  @override
+  final String? endTimeZone;
+  @override
+  final String? recurrenceRule;
+  @override
+  final List<DateTime>? recurrenceExceptionDates;
+  @override
+  final String? notes;
+  @override
+  final String? location;
+  @override
+  final List<Object>? resourceIds;
+  @override
+  final Object? recurrenceId;
+  @override
+  final Object? id;
+
+  @override
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
+    return 'GigAppointment(gigAppointmentId: $gigAppointmentId, startTime: $startTime, endTime: $endTime, isAllDay: $isAllDay, subject: $subject, startTimeZone: $startTimeZone, endTimeZone: $endTimeZone, recurrenceRule: $recurrenceRule, recurrenceExceptionDates: $recurrenceExceptionDates, notes: $notes, location: $location, resourceIds: $resourceIds, recurrenceId: $recurrenceId, id: $id)';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty('type', 'GigAppointment'))
+      ..add(DiagnosticsProperty('gigAppointmentId', gigAppointmentId))
+      ..add(DiagnosticsProperty('startTime', startTime))
+      ..add(DiagnosticsProperty('endTime', endTime))
+      ..add(DiagnosticsProperty('isAllDay', isAllDay))
+      ..add(DiagnosticsProperty('subject', subject))
+      ..add(DiagnosticsProperty('startTimeZone', startTimeZone))
+      ..add(DiagnosticsProperty('endTimeZone', endTimeZone))
+      ..add(DiagnosticsProperty('recurrenceRule', recurrenceRule))
+      ..add(DiagnosticsProperty(
+          'recurrenceExceptionDates', recurrenceExceptionDates))
+      ..add(DiagnosticsProperty('notes', notes))
+      ..add(DiagnosticsProperty('location', location))
+      ..add(DiagnosticsProperty('resourceIds', resourceIds))
+      ..add(DiagnosticsProperty('recurrenceId', recurrenceId))
+      ..add(DiagnosticsProperty('id', id));
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other is _GigAppointment &&
+            (identical(other.gigAppointmentId, gigAppointmentId) ||
+                const DeepCollectionEquality()
+                    .equals(other.gigAppointmentId, gigAppointmentId)) &&
+            (identical(other.startTime, startTime) ||
+                const DeepCollectionEquality()
+                    .equals(other.startTime, startTime)) &&
+            (identical(other.endTime, endTime) ||
+                const DeepCollectionEquality()
+                    .equals(other.endTime, endTime)) &&
+            (identical(other.isAllDay, isAllDay) ||
+                const DeepCollectionEquality()
+                    .equals(other.isAllDay, isAllDay)) &&
+            (identical(other.subject, subject) ||
+                const DeepCollectionEquality()
+                    .equals(other.subject, subject)) &&
+            (identical(other.startTimeZone, startTimeZone) ||
+                const DeepCollectionEquality()
+                    .equals(other.startTimeZone, startTimeZone)) &&
+            (identical(other.endTimeZone, endTimeZone) ||
+                const DeepCollectionEquality()
+                    .equals(other.endTimeZone, endTimeZone)) &&
+            (identical(other.recurrenceRule, recurrenceRule) ||
+                const DeepCollectionEquality()
+                    .equals(other.recurrenceRule, recurrenceRule)) &&
+            (identical(
+                    other.recurrenceExceptionDates, recurrenceExceptionDates) ||
+                const DeepCollectionEquality().equals(
+                    other.recurrenceExceptionDates,
+                    recurrenceExceptionDates)) &&
+            (identical(other.notes, notes) ||
+                const DeepCollectionEquality().equals(other.notes, notes)) &&
+            (identical(other.location, location) ||
+                const DeepCollectionEquality()
+                    .equals(other.location, location)) &&
+            (identical(other.resourceIds, resourceIds) ||
+                const DeepCollectionEquality()
+                    .equals(other.resourceIds, resourceIds)) &&
+            (identical(other.recurrenceId, recurrenceId) ||
+                const DeepCollectionEquality()
+                    .equals(other.recurrenceId, recurrenceId)) &&
+            (identical(other.id, id) ||
+                const DeepCollectionEquality().equals(other.id, id)));
+  }
+
+  @override
+  int get hashCode =>
+      runtimeType.hashCode ^
+      const DeepCollectionEquality().hash(gigAppointmentId) ^
+      const DeepCollectionEquality().hash(startTime) ^
+      const DeepCollectionEquality().hash(endTime) ^
+      const DeepCollectionEquality().hash(isAllDay) ^
+      const DeepCollectionEquality().hash(subject) ^
+      const DeepCollectionEquality().hash(startTimeZone) ^
+      const DeepCollectionEquality().hash(endTimeZone) ^
+      const DeepCollectionEquality().hash(recurrenceRule) ^
+      const DeepCollectionEquality().hash(recurrenceExceptionDates) ^
+      const DeepCollectionEquality().hash(notes) ^
+      const DeepCollectionEquality().hash(location) ^
+      const DeepCollectionEquality().hash(resourceIds) ^
+      const DeepCollectionEquality().hash(recurrenceId) ^
+      const DeepCollectionEquality().hash(id);
+
+  @JsonKey(ignore: true)
+  @override
+  _$GigAppointmentCopyWith<_GigAppointment> get copyWith =>
+      __$GigAppointmentCopyWithImpl<_GigAppointment>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$_$_GigAppointmentToJson(this);
+  }
+}
+
+abstract class _GigAppointment implements GigAppointment {
+  factory _GigAppointment(
+      {String? gigAppointmentId,
+      DateTime? startTime,
+      DateTime? endTime,
+      bool? isAllDay,
+      String? subject,
+      String? startTimeZone,
+      String? endTimeZone,
+      String? recurrenceRule,
+      List<DateTime>? recurrenceExceptionDates,
+      String? notes,
+      String? location,
+      List<Object>? resourceIds,
+      Object? recurrenceId,
+      Object? id}) = _$_GigAppointment;
+
+  factory _GigAppointment.fromJson(Map<String, dynamic> json) =
+      _$_GigAppointment.fromJson;
+
+  @override
+  String? get gigAppointmentId => throw _privateConstructorUsedError;
+  @override
+  DateTime? get startTime => throw _privateConstructorUsedError;
+  @override
+  DateTime? get endTime => throw _privateConstructorUsedError;
+  @override
+  bool? get isAllDay => throw _privateConstructorUsedError;
+  @override
+  String? get subject => throw _privateConstructorUsedError;
+  @override
+  String? get startTimeZone => throw _privateConstructorUsedError;
+  @override
+  String? get endTimeZone => throw _privateConstructorUsedError;
+  @override
+  String? get recurrenceRule => throw _privateConstructorUsedError;
+  @override
+  List<DateTime>? get recurrenceExceptionDates =>
+      throw _privateConstructorUsedError;
+  @override
+  String? get notes => throw _privateConstructorUsedError;
+  @override
+  String? get location => throw _privateConstructorUsedError;
+  @override
+  List<Object>? get resourceIds => throw _privateConstructorUsedError;
+  @override
+  Object? get recurrenceId => throw _privateConstructorUsedError;
+  @override
+  Object? get id => throw _privateConstructorUsedError;
+  @override
+  @JsonKey(ignore: true)
+  _$GigAppointmentCopyWith<_GigAppointment> get copyWith =>
+      throw _privateConstructorUsedError;
+}

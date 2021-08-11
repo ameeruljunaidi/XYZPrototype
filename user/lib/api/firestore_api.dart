@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/foundation.dart';
+import 'package:syncfusion_flutter_calendar/calendar.dart';
 import 'package:xyz_prototype/app/app.locator.dart';
 import 'package:xyz_prototype/app/app.logger.dart';
 import 'package:xyz_prototype/constants/app_keys.dart';
@@ -15,11 +16,13 @@ class FirestoreApi {
   final log = getLogger('firestoreApi');
   final _gigService = locator<GigService>();
 
-  // Collection reference for firebas
+  // Collection reference for firebase
   final CollectionReference userCollection =
       FirebaseFirestore.instance.collection(UsersFirestoreKey);
   final CollectionReference gigsCollection =
       FirebaseFirestore.instance.collection(GigsFirestoreKey);
+  final CollectionReference ordersCollection =
+      FirebaseFirestore.instance.collection(OrdersFirestoreKey);
 
   // Get collection reference base on client Id
   CollectionReference getVendorCollectionForUser(String clientId) {
@@ -39,6 +42,11 @@ class FirestoreApi {
     return gigsCollection.doc(gigId).collection(AddressFirestoreKey);
   }
 
+  // Get appointment reference based on gigOrderId
+  CollectionReference getAppointmentCollections(String gigOrderId) {
+    return ordersCollection.doc(gigOrderId).collection(AppointmentFirestoreKey);
+  }
+
   // Getting a stream controller for gigs
   final StreamController<List<Gig>> _gigsController =
       StreamController<List<Gig>>.broadcast();
@@ -47,11 +55,11 @@ class FirestoreApi {
   final StreamController<Client> _clientController =
       StreamController<Client>.broadcast();
 
-  // Firebase functions that get stuff /////////////////////////////////////////
+  // Firebase functions that get stuff
 
   // Getting the user
   Future<Client?> getUser({required String clientId}) async {
-    log.i('clientId:$clientId');
+    log.i('Getting clientId:$clientId');
 
     if (clientId.isNotEmpty) {
       final userDoc = await userCollection.doc(clientId).get();
@@ -70,6 +78,30 @@ class FirestoreApi {
           message:
               'Your clientId passed in is empty. Plase pass in a valid user if from your Firebase user');
     }
+  }
+
+  // Getting a vendor for a given  gigOrders
+  Future<Client> getVendorForOrder(GigOrder gigOrder) async {
+    log.i('loaded gigOrder: $gigOrder');
+
+    final _vendorId = gigOrder.gigOrderVendorId;
+    final _vendorDoc = await userCollection
+        .where('clientVendorId', isEqualTo: _vendorId)
+        .get();
+
+    final _vendorData = _vendorDoc.docs.first.data();
+    return Client.fromJson(_vendorData as Map<String, dynamic>);
+  }
+
+  Future<List<Client>> getVendorsForOrder(List<GigOrder> gigOrders) async {
+    List<Client> _vendorsList = [];
+
+    for (var _gigOrder in gigOrders) {
+      final _vendor = await getVendorForOrder(_gigOrder);
+      _vendorsList.add(_vendor);
+    }
+
+    return _vendorsList;
   }
 
   // Getting the client's business info
@@ -99,19 +131,32 @@ class FirestoreApi {
   }
 
   // Getting all gigs
-  Future<List<Gig?>> getGigs(Client client) async {
-    final gigDocs = await gigsCollection
-        .where('gigVendorId', isEqualTo: client.clientVendorId)
-        .get();
-
-    return gigDocs.docs.map((element) {
-      final gigData = element.data();
-
-      log.v('gigs retrieved from firestore');
-      return Gig.fromJson(gigData as Map<String, dynamic>);
+  Future<List<Gig?>> getOrderedGigs(
+    Client client,
+  ) async {
+    final List<GigOrder> _gigOrderList = await getGigOrders(client);
+    final List<String> _gigIdList = _gigOrderList.map((element) {
+      return element.gigOrderGigId!;
     }).toList();
+    log.v('gigIdList loaded: $_gigIdList');
+
+    List<Gig> _gigList = <Gig>[];
+
+    for (String gigId in _gigIdList) {
+      final gigDocs =
+          await gigsCollection.where('gigId', isEqualTo: gigId).get();
+
+      gigDocs.docs.map((element) {
+        final gigData = element.data();
+
+        _gigList.add(Gig.fromJson(gigData as Map<String, dynamic>));
+      }).toList();
+    }
+
+    return _gigList;
   }
 
+  // Getting gig snapshots, mostly for paginations
   Future<QuerySnapshot> getGigSnaphot({
     int limit = 3,
     DocumentSnapshot? startAfter,
@@ -127,6 +172,44 @@ class FirestoreApi {
       log.v('Folow-on fetch for gigs');
 
       return refGigs.startAfterDocument(startAfter).get();
+    }
+  }
+
+  Future<List<GigOrder>> getGigOrders(Client client) async {
+    log.i('client loaded: $client');
+
+    final gigOrderDocs = await ordersCollection
+        .where(
+          'gigOrderClientId',
+          isEqualTo: client.clientVendorId,
+        )
+        .get();
+
+    return gigOrderDocs.docs.map((element) {
+      final _orderData = element.data();
+
+      return GigOrder.fromJson(_orderData as Map<String, dynamic>);
+    }).toList();
+  }
+
+  // Getting all calendar appointments
+  Future<GigAppointment> getCalendarAppointment(
+    GigOrder gigOrder,
+  ) async {
+    final _gigOrderId = gigOrder.gigOrderId;
+    final _gigOrderAppointment = gigOrder.gigOrderAppointment;
+
+    if (_gigOrderId != null) {
+      final appointmentRef = getAppointmentCollections(_gigOrderId);
+      final appointmentDoc =
+          await appointmentRef.doc(_gigOrderAppointment).get();
+      final appointmentData = appointmentDoc.data();
+
+      return GigAppointment.fromJson(
+        appointmentData as Map<String, dynamic>,
+      );
+    } else {
+      throw UnimplementedError();
     }
   }
 
@@ -187,7 +270,7 @@ class FirestoreApi {
     return _clientController.stream;
   }
 
-  // Firebase functions for CRUD ///////////////////////////////////////////////
+  // Firebase functions for CRUD
 
   // Creating a user
   Future<void> createUser({required Client client}) async {
@@ -199,7 +282,9 @@ class FirestoreApi {
       log.v('User created at ${userDocument.path}');
     } catch (error) {
       throw FirestoreApiException(
-          message: 'Failed to create new user', devDetails: '$error');
+        message: 'Failed to create new user',
+        devDetails: '$error',
+      );
     }
   }
 
@@ -409,6 +494,64 @@ class FirestoreApi {
       throw FirestoreApiException(
           message: 'Failed to upload user avatar', devDetails: '$e');
     }
+  }
+
+  // Adding an order
+  Future<bool> createOder(
+    GigOrder gigOrder,
+    GigAppointment gigAppointment,
+  ) async {
+    log.i('Loaded gigOrder');
+
+    try {
+      DocumentReference gigOrderDoc = ordersCollection.doc();
+      final String newGigOrderId = gigOrderDoc.id;
+      log.v('newGigOrder will be added at $newGigOrderId');
+
+      GigOrder _gigOrder = gigOrder.copyWith(gigOrderId: newGigOrderId);
+
+      await gigOrderDoc.set(_gigOrder.toJson());
+
+      final String _appointmentId = await addAppointmentToOrder(
+        newGigOrderId,
+        gigAppointment,
+      );
+
+      gigOrderDoc = ordersCollection.doc(newGigOrderId);
+      _gigOrder = _gigOrder.copyWith(
+        gigOrderAppointment: _appointmentId,
+      );
+
+      await gigOrderDoc.set(_gigOrder.toJson());
+      log.v('gigOrder later set at $_gigOrder at $_appointmentId');
+
+      return true;
+    } catch (error) {
+      throw FirestoreApiException(
+        message: 'Failed to add order',
+        devDetails: '$error',
+      );
+    }
+  }
+
+  // Add an appointement item
+  Future<String> addAppointmentToOrder(
+    String gigOrderId,
+    GigAppointment gigAppointment,
+  ) async {
+    log.i('Loaded $gigAppointment');
+
+    final appointmentCollection = getAppointmentCollections(gigOrderId);
+    final appointmentDoc = appointmentCollection.doc();
+    final newAppointmentId = appointmentDoc.id;
+    log.v('New appointment at $newAppointmentId');
+
+    final _gigAppointment = gigAppointment.copyWith(
+      gigAppointmentId: newAppointmentId,
+    );
+
+    await appointmentDoc.set(_gigAppointment.toJson());
+    return newAppointmentId;
   }
 
   // Deleting a vendor's gig

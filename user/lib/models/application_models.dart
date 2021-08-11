@@ -1,6 +1,6 @@
 import 'package:flutter/foundation.dart';
+import 'package:flutter/material.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:syncfusion_flutter_calendar/calendar.dart';
 import 'package:xyz_prototype/constants/app_keys.dart';
 
 part 'application_models.freezed.dart';
@@ -172,4 +172,41 @@ class GigPagination with _$GigPagination {
 
   factory GigPagination.fromJson(Map<String, dynamic> json) =>
       _$GigPaginationFromJson(json);
+}
+
+@freezed
+class GigOrder with _$GigOrder {
+  factory GigOrder({
+    String? gigOrderId,
+    String? gigOrderGigId,
+    String? gigOrderVendorId,
+    String? gigOrderClientId,
+    String? gigOrderAppointment,
+  }) = _GigOrder;
+
+  factory GigOrder.fromJson(Map<String, dynamic> json) =>
+      _$GigOrderFromJson(json);
+}
+
+@freezed
+class GigAppointment with _$GigAppointment {
+  factory GigAppointment({
+    String? gigAppointmentId,
+    DateTime? startTime,
+    DateTime? endTime,
+    bool? isAllDay,
+    String? subject,
+    String? startTimeZone,
+    String? endTimeZone,
+    String? recurrenceRule,
+    List<DateTime>? recurrenceExceptionDates,
+    String? notes,
+    String? location,
+    List<Object>? resourceIds,
+    Object? recurrenceId,
+    Object? id,
+  }) = _GigAppointment;
+
+  factory GigAppointment.fromJson(Map<String, dynamic> json) =>
+      _$GigAppointmentFromJson(json);
 }

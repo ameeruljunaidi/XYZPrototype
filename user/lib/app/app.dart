@@ -5,6 +5,7 @@ import 'package:stacked_services/stacked_services.dart';
 import 'package:xyz_prototype/api/firestore_api.dart';
 import 'package:xyz_prototype/services/cloud_storage_service.dart';
 import 'package:xyz_prototype/services/gig_service.dart';
+import 'package:xyz_prototype/services/orders_services.dart';
 import 'package:xyz_prototype/services/realtime_database_service.dart';
 import 'package:xyz_prototype/services/service_services.dart';
 import 'package:xyz_prototype/services/user_service.dart';
@@ -92,6 +93,7 @@ import 'package:xyz_prototype/utils/image_selector.dart';
     LazySingleton(classType: GigService),
     LazySingleton(classType: RealtimeService),
     LazySingleton(classType: ServiceService),
+    LazySingleton(classType: OrderService),
     Singleton(classType: ImageSelector),
     Singleton(classType: FirebaseAuthenticationService),
   ],

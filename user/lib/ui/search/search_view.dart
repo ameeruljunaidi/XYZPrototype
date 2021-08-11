@@ -1,9 +1,12 @@
 import 'package:expandable_page_view/expandable_page_view.dart';
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
+import 'package:syncfusion_flutter_calendar/calendar.dart';
 import 'package:xyz_prototype/app/app.locator.dart';
+import 'package:xyz_prototype/models/application_models.dart';
 import 'package:xyz_prototype/ui/search/search_viewmodel.dart';
 import 'package:xyz_ui/xyz_ui.dart';
+import 'package:intl/intl.dart';
 
 class SearchView extends StatelessWidget {
   const SearchView({Key? key}) : super(key: key);
@@ -25,7 +28,13 @@ class SearchView extends StatelessWidget {
   Widget build(BuildContext context) {
     return ViewModelBuilder<SearchViewModel>.reactive(
       disposeViewModel: false,
-      initialiseSpecialViewModelsOnce: true,
+      initialiseSpecialViewModelsOnce: false,
+      onModelReady: (model) {
+        model.getGigOrders();
+        model.getGigs();
+        model.getVendors();
+        model.getAppointments();
+      },
       builder: (context, model, child) => Scaffold(
         body: GestureDetector(
           onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
@@ -36,6 +45,7 @@ class SearchView extends StatelessWidget {
                   verticalSpaceRegular,
                   _screenHeading(context),
                   _pageSelector(context, model),
+                  verticalSpaceRegular,
                   _pagesBuilder(context, model),
                 ],
               ),
@@ -53,22 +63,7 @@ class SearchView extends StatelessWidget {
       itemCount: model.pages!.length,
       onPageChanged: (page) => model.updateSelectedPricePage(page),
       itemBuilder: (context, pageIndex) {
-        return Column(
-          children: <Widget>[
-            verticalSpaceRegular,
-            _activitiesCard(context, model),
-            verticalSpaceRegular,
-            _activitiesCard(context, model),
-            verticalSpaceRegular,
-            _activitiesCard(context, model),
-            verticalSpaceRegular,
-            _activitiesCard(context, model),
-            verticalSpaceRegular,
-            _activitiesCard(context, model),
-            verticalSpaceRegular,
-            _activitiesCard(context, model),
-          ],
-        );
+        return _gigListBuilder(context, model);
       },
     );
   }
@@ -151,10 +146,12 @@ class SearchView extends StatelessWidget {
         children: [
           BoxText.headline('Activities'),
           TextButton(
-            child: Text('See All',
-                style: TextStyle(
-                  color: kcPrimaryColor,
-                )),
+            child: Text(
+              'See All',
+              style: TextStyle(
+                color: kcPrimaryColor,
+              ),
+            ),
             onPressed: () {},
           ),
         ],
@@ -174,7 +171,84 @@ class SearchView extends StatelessWidget {
     );
   }
 
-  Widget _activitiesCard(BuildContext context, SearchViewModel model) {
+  Widget _gigListBuilder(BuildContext context, SearchViewModel model) {
+    final List<GigOrder>? _gigOrderList = model.gigOrders;
+    final List<Gig?>? _gigList = model.gigList;
+    final List<Client>? _vendorList = model.vendorList;
+    final List<Appointment>? _appointmentList = model.appointmentList;
+
+    final bool _gigOderListExist = _gigOrderList != null;
+    final bool _gigListExist = _gigList != null;
+    final bool _gigVendorListExist = _vendorList != null;
+    final bool _gigAppointmentListExist = _appointmentList != null;
+
+    if (_gigOderListExist &&
+        _gigListExist &&
+        _gigVendorListExist &&
+        _gigAppointmentListExist) {
+      return _gigListView(
+        _gigOrderList,
+        _gigList,
+        _vendorList,
+        _appointmentList,
+        model,
+      );
+    } else {
+      return CircularProgressIndicator(color: kcPrimaryColor);
+    }
+  }
+
+  ListView _gigListView(
+    List<GigOrder> _gigOrderList,
+    List<Gig?> _gigList,
+    List<Client> _vendorList,
+    List<Appointment> _appointmentList,
+    SearchViewModel model,
+  ) {
+    return ListView.separated(
+      physics: const NeverScrollableScrollPhysics(),
+      shrinkWrap: true,
+      itemBuilder: (context, gigOrderIndex) {
+        final _gigOrder = _gigOrderList[gigOrderIndex];
+
+        final _gigOrderGigId = _gigOrder.gigOrderGigId;
+        final _gigOrderGigVendorId = _gigOrder.gigOrderVendorId;
+        final _gigOrderGigAppointment = _gigOrder.gigOrderAppointment;
+
+        final _gigAtIndex =
+            _gigList.firstWhere((e) => e!.gigId == _gigOrderGigId);
+        final _vendorAtIndex = _vendorList
+            .firstWhere((e) => e.clientVendorId == _gigOrderGigVendorId);
+        final _appointmentAtIndex =
+            _appointmentList.firstWhere((e) => e.id == _gigOrderGigAppointment);
+
+        final DateFormat formatter = DateFormat('MMM-dd');
+        final _dateAtIndex = formatter.format(_appointmentAtIndex.startTime);
+
+        return _activitiesCard(
+          context,
+          model,
+          listingTitle: _gigAtIndex!.gigTitle ?? 'No Title',
+          listingDescription: _gigAtIndex.gigDescription ?? 'No Description',
+          vendorName: _vendorAtIndex.clientName ?? 'No Vendor',
+          bookedDate: _dateAtIndex,
+        );
+      },
+      separatorBuilder: (context, gigOrderIndex) {
+        return verticalSpaceRegular;
+      },
+      itemCount: _gigOrderList.length,
+    );
+  }
+
+  Widget _activitiesCard(
+    BuildContext context,
+    SearchViewModel model, {
+    required String listingTitle,
+    required String listingDescription,
+    required String vendorName,
+    required String bookedDate,
+  }) {
     return GestureDetector(
       onTap: () {},
       child: Container(
@@ -185,7 +259,13 @@ class SearchView extends StatelessWidget {
           padding: defaultPaddingHorizontal,
           child: Stack(
             children: <Widget>[
-              _activitiesDetails(context),
+              _activitiesDetails(
+                context,
+                bookedDate: bookedDate,
+                listingDescription: listingDescription,
+                listingTitle: listingTitle,
+                vendorName: vendorName,
+              ),
               _activitiesAvatar(),
             ],
           ),
@@ -194,7 +274,13 @@ class SearchView extends StatelessWidget {
     );
   }
 
-  Align _activitiesDetails(BuildContext context) {
+  Align _activitiesDetails(
+    BuildContext context, {
+    required String listingTitle,
+    required String listingDescription,
+    required String vendorName,
+    required String bookedDate,
+  }) {
     return Align(
       alignment: Alignment.centerRight,
       child: Container(
@@ -227,7 +313,7 @@ class SearchView extends StatelessWidget {
                       Align(
                         alignment: Alignment.centerLeft,
                         child: Text(
-                          'Listing Title',
+                          listingTitle,
                           style: subheadingStyle,
                           maxLines: 1,
                           overflow: TextOverflow.ellipsis,
@@ -237,7 +323,7 @@ class SearchView extends StatelessWidget {
                       Align(
                         alignment: Alignment.centerLeft,
                         child: Text(
-                          'Listing description...',
+                          listingDescription,
                           maxLines: 1,
                           overflow: TextOverflow.ellipsis,
                         ),
@@ -246,7 +332,7 @@ class SearchView extends StatelessWidget {
                       Align(
                         alignment: Alignment.centerLeft,
                         child: Text(
-                          'with David Dobrik',
+                          'with $vendorName',
                           style: TextStyle(
                             color: Colors.grey,
                           ),
@@ -263,7 +349,7 @@ class SearchView extends StatelessWidget {
                 child: Align(
                   alignment: Alignment.centerRight,
                   child: BoxText.body(
-                    'Date',
+                    bookedDate,
                     color: Colors.black,
                   ),
                 ),

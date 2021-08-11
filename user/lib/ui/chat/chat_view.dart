@@ -80,7 +80,7 @@ class ChatView extends StatelessWidget with $ChatView {
       title: Column(
         children: [
           Text(
-            'Johnny Sins',
+            'Bill Gates',
             style: TextStyle(
               color: Colors.black,
             ),
@@ -160,7 +160,7 @@ class ChatView extends StatelessWidget with $ChatView {
         [
           _messageItem(
             context,
-            senderName: 'Johnny Sins',
+            senderName: 'Bill Gates',
             messageTime: 'Time',
             messageContent:
                 'I\'m going to be in a new video tongight, make sure you come and watch me, okat?',
@@ -173,7 +173,7 @@ class ChatView extends StatelessWidget with $ChatView {
           ),
           _messageItem(
             context,
-            senderName: 'Johnny Sins',
+            senderName: 'Bill Gates',
             messageTime: 'Time',
             messageContent: 'Where were you?',
           ),

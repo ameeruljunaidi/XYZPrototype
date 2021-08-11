@@ -11,6 +11,10 @@ class GigService {
     addGigCategory(gigSubcategory);
   }
 
+  void loadGig(Gig gig) {
+    _currentGig = gig;
+  }
+
   void addGigId(gigId) {
     _currentGig = _currentGig!.copyWith(gigId: gigId);
   }
