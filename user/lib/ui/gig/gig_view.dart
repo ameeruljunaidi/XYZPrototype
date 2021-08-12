@@ -33,7 +33,7 @@ class GigListView extends StatelessWidget {
         body: CustomScrollView(
           controller: model.scrollController,
           slivers: [
-            _whiteSpace(context, model),
+            // _whiteSpace(context, model),
             _appBarSliver(context, model),
             _whiteSpace(context, model),
             _listOfGigs(context, model),
@@ -97,13 +97,13 @@ class GigListView extends StatelessWidget {
       return SliverList(
         delegate: SliverChildBuilderDelegate(
           (context, gigIndex) {
-            final _gigAtIndex = _loadedGigs[gigIndex];
-            final _gigTitle = _gigAtIndex.gigTitle;
-            final _gigDescription = _gigAtIndex.gigDescription;
-            final _gigRating = _gigAtIndex.gigRating;
-            final _gigReviewCount = _gigAtIndex.gigReviews!.isNotEmpty
-                ? _gigAtIndex.gigReviews!.length
-                : 'No';
+            final Gig _gigAtIndex = _loadedGigs[gigIndex];
+            final String _gigTitle = _gigAtIndex.gigTitle ?? 'No Title';
+            final String _gigDescription =
+                _gigAtIndex.gigDescription ?? 'No Description';
+            final double _gigRating = _gigAtIndex.gigRating ?? 0;
+            final String _gigReviewCount =
+                _gigAtIndex.gigReviews != null ? '3' : 'No';
 
             return GestureDetector(
               onTap: () => model.goToGigProfile(gigIndex),
@@ -119,9 +119,9 @@ class GigListView extends StatelessWidget {
                   shadow: true,
                 ),
                 child: _cardContent(
-                  _gigTitle!,
-                  _gigDescription!,
-                  _gigRating!,
+                  _gigTitle,
+                  _gigDescription,
+                  _gigRating,
                   _gigReviewCount,
                   _gigAtIndex,
                 ),
@@ -180,6 +180,7 @@ class GigListView extends StatelessWidget {
               ),
               child: CachedNetworkImage(
                 imageUrl: _gigAtIndex.gigPhotos![0],
+                height: double.infinity,
                 fit: BoxFit.cover,
               ),
             ),

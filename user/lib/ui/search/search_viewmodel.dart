@@ -14,6 +14,16 @@ class SearchViewModel extends BaseViewModel {
   final _firestoreApi = locator<FirestoreApi>();
   final _orderService = locator<OrderService>();
 
+  void startupLogic() async {
+    setBusy(true);
+    await getUser();
+    await getGigOrders();
+    await getGigs();
+    await getVendors();
+    await getAppointments();
+    setBusy(true);
+  }
+
   Client? _currentUser;
   bool _currentUserExist = false;
 
@@ -73,23 +83,41 @@ class SearchViewModel extends BaseViewModel {
   List<GigOrder>? get gigOrders => _gigOrders;
 
   Future<void> getGigOrders() async {
-    await getUser();
-
     if (_currentUserExist) {
       _gigOrders = await _firestoreApi.getGigOrders(_currentUser!);
+
+      if (_gigOrders != null) {
+        List<String> _previewGigOrder = <String>[];
+
+        _gigOrders!.forEach((gigOrder) {
+          _previewGigOrder.add(gigOrder.gigOrderId!);
+        });
+
+        log.v('Loaded gigOrder: ${_previewGigOrder}');
+      }
     } else {
       log.e('Failed to get gig orders');
     }
+
+    notifyListeners();
   }
 
   List<Gig?>? _gigList;
   List<Gig?>? get gigList => _gigList;
 
-  void getGigs() async {
-    await getUser();
-
+  Future<void> getGigs() async {
     if (_currentUserExist) {
       _gigList = await _firestoreApi.getOrderedGigs(_currentUser!);
+
+      if (_gigList != null) {
+        List<String> _previewGig = <String>[];
+
+        _gigList!.forEach((gig) {
+          _previewGig.add(gig!.gigId!);
+        });
+
+        log.v('Loaded gigs: $_previewGig');
+      }
     } else {
       log.e('currentUser not found');
     }
@@ -99,24 +127,30 @@ class SearchViewModel extends BaseViewModel {
   List<Client>? _vendorList;
   List<Client>? get vendorList => _vendorList;
 
-  void getVendors() async {
-    await getGigOrders();
-
-    List<Client> _gigVendors = <Client>[];
-
+  Future<void> getVendors() async {
     if (_gigOrders != null) {
       _vendorList = await _firestoreApi.getVendorsForOrder(_gigOrders!);
+
+      if (_vendorList != null) {
+        List<String> _previewVendors = <String>[];
+
+        _vendorList!.forEach((vendor) {
+          _previewVendors.add(vendor.clientVendorId!);
+        });
+
+        log.v('Loaded vendors: $_previewVendors');
+      }
     } else {
       log.e('gigOrder is empty: $_gigOrders');
     }
+
+    notifyListeners();
   }
 
   List<Appointment>? _appointmentList;
   List<Appointment>? get appointmentList => _appointmentList;
 
-  void getAppointments() async {
-    await getGigOrders();
-
+  Future<void> getAppointments() async {
     List<Appointment> _gigAppointments = <Appointment>[];
 
     if (_gigOrders != null) {
@@ -124,6 +158,14 @@ class SearchViewModel extends BaseViewModel {
         final _appointment = await _orderService.getAppointment(_gigOrder);
         _gigAppointments.add(_appointment);
       }
+
+      List<String> _previewAppointment = <String>[];
+
+      _gigAppointments.forEach((appointment) {
+        _previewAppointment.add(appointment.id.toString());
+      });
+
+      log.v('Loaded appointment: $_previewAppointment');
     } else {
       log.e('gigOrder is empty: $_gigOrders');
     }

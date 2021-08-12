@@ -29,12 +29,7 @@ class SearchView extends StatelessWidget {
     return ViewModelBuilder<SearchViewModel>.reactive(
       disposeViewModel: false,
       initialiseSpecialViewModelsOnce: false,
-      onModelReady: (model) {
-        model.getGigOrders();
-        model.getGigs();
-        model.getVendors();
-        model.getAppointments();
-      },
+      onModelReady: (model) => model.startupLogic(),
       builder: (context, model, child) => Scaffold(
         body: GestureDetector(
           onTap: () => FocusManager.instance.primaryFocus?.unfocus(),

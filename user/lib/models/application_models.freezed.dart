@@ -1280,7 +1280,9 @@ class _$VendorTearOff {
       String? vendorGender,
       List<String>? vendorSkills,
       Map<String, Map<String, String>>? vendorEducationHistory,
-      Map<String, Map<String, String>>? vendorOccupationHistory}) {
+      Map<String, Map<String, String>>? vendorOccupationHistory,
+      bool? vendorVerifiedStatus,
+      String? vendorRank}) {
     return _Vendor(
       vendorRegistrationDate: vendorRegistrationDate,
       vendorId: vendorId,
@@ -1298,6 +1300,8 @@ class _$VendorTearOff {
       vendorSkills: vendorSkills,
       vendorEducationHistory: vendorEducationHistory,
       vendorOccupationHistory: vendorOccupationHistory,
+      vendorVerifiedStatus: vendorVerifiedStatus,
+      vendorRank: vendorRank,
     );
   }
 
@@ -1331,6 +1335,8 @@ mixin _$Vendor {
       throw _privateConstructorUsedError;
   Map<String, Map<String, String>>? get vendorOccupationHistory =>
       throw _privateConstructorUsedError;
+  bool? get vendorVerifiedStatus => throw _privateConstructorUsedError;
+  String? get vendorRank => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -1357,7 +1363,9 @@ abstract class $VendorCopyWith<$Res> {
       String? vendorGender,
       List<String>? vendorSkills,
       Map<String, Map<String, String>>? vendorEducationHistory,
-      Map<String, Map<String, String>>? vendorOccupationHistory});
+      Map<String, Map<String, String>>? vendorOccupationHistory,
+      bool? vendorVerifiedStatus,
+      String? vendorRank});
 
   $AddressCopyWith<$Res>? get vendorAddress;
 }
@@ -1388,6 +1396,8 @@ class _$VendorCopyWithImpl<$Res> implements $VendorCopyWith<$Res> {
     Object? vendorSkills = freezed,
     Object? vendorEducationHistory = freezed,
     Object? vendorOccupationHistory = freezed,
+    Object? vendorVerifiedStatus = freezed,
+    Object? vendorRank = freezed,
   }) {
     return _then(_value.copyWith(
       vendorRegistrationDate: vendorRegistrationDate == freezed
@@ -1454,6 +1464,14 @@ class _$VendorCopyWithImpl<$Res> implements $VendorCopyWith<$Res> {
           ? _value.vendorOccupationHistory
           : vendorOccupationHistory // ignore: cast_nullable_to_non_nullable
               as Map<String, Map<String, String>>?,
+      vendorVerifiedStatus: vendorVerifiedStatus == freezed
+          ? _value.vendorVerifiedStatus
+          : vendorVerifiedStatus // ignore: cast_nullable_to_non_nullable
+              as bool?,
+      vendorRank: vendorRank == freezed
+          ? _value.vendorRank
+          : vendorRank // ignore: cast_nullable_to_non_nullable
+              as String?,
     ));
   }
 
@@ -1490,7 +1508,9 @@ abstract class _$VendorCopyWith<$Res> implements $VendorCopyWith<$Res> {
       String? vendorGender,
       List<String>? vendorSkills,
       Map<String, Map<String, String>>? vendorEducationHistory,
-      Map<String, Map<String, String>>? vendorOccupationHistory});
+      Map<String, Map<String, String>>? vendorOccupationHistory,
+      bool? vendorVerifiedStatus,
+      String? vendorRank});
 
   @override
   $AddressCopyWith<$Res>? get vendorAddress;
@@ -1523,6 +1543,8 @@ class __$VendorCopyWithImpl<$Res> extends _$VendorCopyWithImpl<$Res>
     Object? vendorSkills = freezed,
     Object? vendorEducationHistory = freezed,
     Object? vendorOccupationHistory = freezed,
+    Object? vendorVerifiedStatus = freezed,
+    Object? vendorRank = freezed,
   }) {
     return _then(_Vendor(
       vendorRegistrationDate: vendorRegistrationDate == freezed
@@ -1589,13 +1611,21 @@ class __$VendorCopyWithImpl<$Res> extends _$VendorCopyWithImpl<$Res>
           ? _value.vendorOccupationHistory
           : vendorOccupationHistory // ignore: cast_nullable_to_non_nullable
               as Map<String, Map<String, String>>?,
+      vendorVerifiedStatus: vendorVerifiedStatus == freezed
+          ? _value.vendorVerifiedStatus
+          : vendorVerifiedStatus // ignore: cast_nullable_to_non_nullable
+              as bool?,
+      vendorRank: vendorRank == freezed
+          ? _value.vendorRank
+          : vendorRank // ignore: cast_nullable_to_non_nullable
+              as String?,
     ));
   }
 }
 
 /// @nodoc
 @JsonSerializable()
-class _$_Vendor with DiagnosticableTreeMixin implements _Vendor {
+class _$_Vendor extends _Vendor with DiagnosticableTreeMixin {
   _$_Vendor(
       {required this.vendorRegistrationDate,
       this.vendorId,
@@ -1612,7 +1642,10 @@ class _$_Vendor with DiagnosticableTreeMixin implements _Vendor {
       this.vendorGender,
       this.vendorSkills,
       this.vendorEducationHistory,
-      this.vendorOccupationHistory});
+      this.vendorOccupationHistory,
+      this.vendorVerifiedStatus,
+      this.vendorRank})
+      : super._();
 
   factory _$_Vendor.fromJson(Map<String, dynamic> json) =>
       _$_$_VendorFromJson(json);
@@ -1649,10 +1682,14 @@ class _$_Vendor with DiagnosticableTreeMixin implements _Vendor {
   final Map<String, Map<String, String>>? vendorEducationHistory;
   @override
   final Map<String, Map<String, String>>? vendorOccupationHistory;
+  @override
+  final bool? vendorVerifiedStatus;
+  @override
+  final String? vendorRank;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'Vendor(vendorRegistrationDate: $vendorRegistrationDate, vendorId: $vendorId, vendorName: $vendorName, vendorEmail: $vendorEmail, vendorPhone: $vendorPhone, vendorAddress: $vendorAddress, vendorPhotos: $vendorPhotos, vendorAvatar: $vendorAvatar, vendorSocialMedias: $vendorSocialMedias, vendorLanguages: $vendorLanguages, vendorAccreditations: $vendorAccreditations, vendorAge: $vendorAge, vendorGender: $vendorGender, vendorSkills: $vendorSkills, vendorEducationHistory: $vendorEducationHistory, vendorOccupationHistory: $vendorOccupationHistory)';
+    return 'Vendor(vendorRegistrationDate: $vendorRegistrationDate, vendorId: $vendorId, vendorName: $vendorName, vendorEmail: $vendorEmail, vendorPhone: $vendorPhone, vendorAddress: $vendorAddress, vendorPhotos: $vendorPhotos, vendorAvatar: $vendorAvatar, vendorSocialMedias: $vendorSocialMedias, vendorLanguages: $vendorLanguages, vendorAccreditations: $vendorAccreditations, vendorAge: $vendorAge, vendorGender: $vendorGender, vendorSkills: $vendorSkills, vendorEducationHistory: $vendorEducationHistory, vendorOccupationHistory: $vendorOccupationHistory, vendorVerifiedStatus: $vendorVerifiedStatus, vendorRank: $vendorRank)';
   }
 
   @override
@@ -1678,7 +1715,9 @@ class _$_Vendor with DiagnosticableTreeMixin implements _Vendor {
       ..add(
           DiagnosticsProperty('vendorEducationHistory', vendorEducationHistory))
       ..add(DiagnosticsProperty(
-          'vendorOccupationHistory', vendorOccupationHistory));
+          'vendorOccupationHistory', vendorOccupationHistory))
+      ..add(DiagnosticsProperty('vendorVerifiedStatus', vendorVerifiedStatus))
+      ..add(DiagnosticsProperty('vendorRank', vendorRank));
   }
 
   @override
@@ -1733,7 +1772,13 @@ class _$_Vendor with DiagnosticableTreeMixin implements _Vendor {
             (identical(
                     other.vendorOccupationHistory, vendorOccupationHistory) ||
                 const DeepCollectionEquality().equals(
-                    other.vendorOccupationHistory, vendorOccupationHistory)));
+                    other.vendorOccupationHistory, vendorOccupationHistory)) &&
+            (identical(other.vendorVerifiedStatus, vendorVerifiedStatus) ||
+                const DeepCollectionEquality().equals(
+                    other.vendorVerifiedStatus, vendorVerifiedStatus)) &&
+            (identical(other.vendorRank, vendorRank) ||
+                const DeepCollectionEquality()
+                    .equals(other.vendorRank, vendorRank)));
   }
 
   @override
@@ -1754,7 +1799,9 @@ class _$_Vendor with DiagnosticableTreeMixin implements _Vendor {
       const DeepCollectionEquality().hash(vendorGender) ^
       const DeepCollectionEquality().hash(vendorSkills) ^
       const DeepCollectionEquality().hash(vendorEducationHistory) ^
-      const DeepCollectionEquality().hash(vendorOccupationHistory);
+      const DeepCollectionEquality().hash(vendorOccupationHistory) ^
+      const DeepCollectionEquality().hash(vendorVerifiedStatus) ^
+      const DeepCollectionEquality().hash(vendorRank);
 
   @JsonKey(ignore: true)
   @override
@@ -1767,7 +1814,7 @@ class _$_Vendor with DiagnosticableTreeMixin implements _Vendor {
   }
 }
 
-abstract class _Vendor implements Vendor {
+abstract class _Vendor extends Vendor {
   factory _Vendor(
       {required String vendorRegistrationDate,
       String? vendorId,
@@ -1784,7 +1831,10 @@ abstract class _Vendor implements Vendor {
       String? vendorGender,
       List<String>? vendorSkills,
       Map<String, Map<String, String>>? vendorEducationHistory,
-      Map<String, Map<String, String>>? vendorOccupationHistory}) = _$_Vendor;
+      Map<String, Map<String, String>>? vendorOccupationHistory,
+      bool? vendorVerifiedStatus,
+      String? vendorRank}) = _$_Vendor;
+  _Vendor._() : super._();
 
   factory _Vendor.fromJson(Map<String, dynamic> json) = _$_Vendor.fromJson;
 
@@ -1824,6 +1874,10 @@ abstract class _Vendor implements Vendor {
   @override
   Map<String, Map<String, String>>? get vendorOccupationHistory =>
       throw _privateConstructorUsedError;
+  @override
+  bool? get vendorVerifiedStatus => throw _privateConstructorUsedError;
+  @override
+  String? get vendorRank => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
   _$VendorCopyWith<_Vendor> get copyWith => throw _privateConstructorUsedError;

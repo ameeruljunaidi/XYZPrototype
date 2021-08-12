@@ -6,8 +6,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter/src/rendering/sliver_persistent_header.dart';
 import 'package:stacked/stacked.dart';
 import 'package:xyz_prototype/constants/app_strings.dart';
+import 'package:xyz_prototype/models/application_models.dart';
 import 'package:xyz_prototype/ui/gig_profile/gig_profile_viewmodel.dart';
 import 'package:xyz_ui/xyz_ui.dart';
+import 'package:intl/intl.dart';
 
 class GigProfileView extends StatelessWidget {
   const GigProfileView({Key? key}) : super(key: key);
@@ -28,6 +30,7 @@ class GigProfileView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ViewModelBuilder<GigProfileViewModel>.reactive(
+      onModelReady: (model) => model.startupLogic(),
       builder: (context, model, child) => Scaffold(
         body: GestureDetector(
           onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
@@ -37,13 +40,7 @@ class GigProfileView extends StatelessWidget {
                 CustomScrollView(
                   controller: model.scrollController,
                   slivers: [
-                    SliverPersistentHeader(
-                      pinned: true,
-                      delegate: GigProfileHeader(
-                        minExtent: 48,
-                        maxExtent: 320.0,
-                      ),
-                    ),
+                    _sliverHeader(context, model),
                     _gigProfileBody(context, model),
                     _whiteSpace(_bottomBarHeight),
                   ],
@@ -59,136 +56,267 @@ class GigProfileView extends StatelessWidget {
     );
   }
 
-  Align _bottomBar(BuildContext context, GigProfileViewModel model) {
+  Widget _sliverHeader(BuildContext context, GigProfileViewModel model) {
+    final Gig? _loadedGig = model.currentGig;
+    final bool _loadedGigExist = _loadedGig != null;
+
+    if (_loadedGigExist) {
+      return SliverPersistentHeader(
+        pinned: true,
+        delegate: GigProfileHeader(
+          minExtent: 48,
+          maxExtent: 320.0,
+          gigTitle: _loadedGig.gigTitle ?? 'No Title',
+          model: model,
+        ),
+      );
+    } else {
+      return _whiteSpace(24.0);
+    }
+  }
+
+  Widget _bottomBar(BuildContext context, GigProfileViewModel model) {
     final bool _isPricePack = model.selectedPricePackPage! < 3;
 
-    return Align(
-      alignment: Alignment.bottomCenter,
-      child: Container(
-        height: 64.0,
-        width: double.infinity,
-        padding: defaultPaddingHorizontal,
-        decoration: BoxDecoration(
-          border: Border(
-            top: BorderSide(width: 1.0, color: Colors.grey),
+    final List<String>? _pricePackages = model.pricePackages;
+    final List<String>? _pricePackTitle = model.pricePackName;
+
+    final bool _pricePackagesExist = _pricePackages != null;
+    final bool _pricePackTitleExist = _pricePackTitle != null;
+
+    if (_pricePackagesExist && _pricePackTitleExist) {
+      return Align(
+        alignment: Alignment.bottomCenter,
+        child: Container(
+          height: 64.0,
+          width: double.infinity,
+          padding: defaultPaddingHorizontal,
+          decoration: BoxDecoration(
+            border: Border(
+              top: BorderSide(width: 1.0, color: Colors.grey),
+            ),
+            boxShadow: [
+              BoxShadow(
+                color: Colors.black26,
+                offset: Offset(0.0, 2.0),
+                blurRadius: 6.0,
+              )
+            ],
+            color: _colorDebug[0] != null
+                ? _colorDebug[0]
+                : kcBackgroundColor(context),
           ),
-          boxShadow: [
-            BoxShadow(
-              color: Colors.black26,
-              offset: Offset(0.0, 2.0),
-              blurRadius: 6.0,
-            )
-          ],
-          color: _colorDebug[0] != null
-              ? _colorDebug[0]
-              : kcBackgroundColor(context),
-        ),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: <Widget>[
-            if (_isPricePack)
-              Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: <Widget>[
-                  Text(
-                    model.pricePackages[model.selectedPricePackPage!],
-                    style: TextStyle(
-                      fontWeight: FontWeight.bold,
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: <Widget>[
+              if (_isPricePack)
+                Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: <Widget>[
+                    Text(
+                      _pricePackages[model.selectedPricePackPage!],
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
-                  ),
-                  verticalSpaceTiny,
-                  Text(
-                    model.pricePackTypes[model.selectedPricePackPage!],
-                    style: TextStyle(
-                      fontSize: 12.0,
-                    ),
-                  )
-                ],
-              ),
-            if (_isPricePack)
-              Container(
-                padding: EdgeInsets.symmetric(
-                  horizontal: 32.0,
-                  vertical: 8.0,
+                    verticalSpaceTiny,
+                    Text(
+                      _pricePackTitle[model.selectedPricePackPage!],
+                      style: TextStyle(
+                        fontSize: 12.0,
+                      ),
+                    )
+                  ],
                 ),
-                decoration: BoxDecoration(
-                  color: kcPrimaryColor,
-                  borderRadius: defaultBorderRadius,
-                ),
-                child: GestureDetector(
-                  onTap: model.goToCalendarView,
-                  child: Text(
-                    'Check Availability',
-                    style: TextStyle(
-                      color: Colors.white,
-                    ),
-                  ),
-                ),
-              ),
-            if (!_isPricePack)
-              Expanded(
-                child: Container(
-                  height: double.infinity,
-                  margin: EdgeInsets.symmetric(
-                    vertical: defaultPaddingValueSmall,
+              if (_isPricePack)
+                Container(
+                  padding: EdgeInsets.symmetric(
+                    horizontal: 32.0,
+                    vertical: 8.0,
                   ),
                   decoration: BoxDecoration(
                     color: kcPrimaryColor,
                     borderRadius: defaultBorderRadius,
                   ),
-                  alignment: Alignment.center,
                   child: GestureDetector(
                     onTap: model.goToCalendarView,
                     child: Text(
-                      'Request Availability',
+                      'Check Availability',
                       style: TextStyle(
                         color: Colors.white,
                       ),
                     ),
                   ),
                 ),
-              ),
-          ],
+              if (!_isPricePack)
+                Expanded(
+                  child: Container(
+                    height: double.infinity,
+                    margin: EdgeInsets.symmetric(
+                      vertical: defaultPaddingValueSmall,
+                    ),
+                    decoration: BoxDecoration(
+                      color: kcPrimaryColor,
+                      borderRadius: defaultBorderRadius,
+                    ),
+                    alignment: Alignment.center,
+                    child: GestureDetector(
+                      onTap: model.goToCalendarView,
+                      child: Text(
+                        'Request Availability',
+                        style: TextStyle(
+                          color: Colors.white,
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+            ],
+          ),
         ),
-      ),
-    );
+      );
+    } else {
+      return Container();
+    }
   }
 
   SliverFillRemaining _gigProfileBody(
     BuildContext context,
     GigProfileViewModel model,
   ) {
-    final _pricePackages = model.pricePackages;
+    final Gig? _loadedGig = model.currentGig;
+    final Client? _gigClient = model.gigClient;
+    final Vendor? _gigVendor = model.gigVendor;
+    final Address? _gigAddress = model.gigLocation;
 
-    return SliverFillRemaining(
-      hasScrollBody: false,
-      child: SingleChildScrollView(
-        controller: model.scrollController,
-        child: Column(
-          children: <Widget>[
-            _gigHeading(context, model),
-            verticalSpaceRegular,
-            defaultDividers,
-            _vendorDetails(context, model),
-            defaultDividers,
-            verticalSpaceRegular,
-            _pricePackSelector(context, model, _pricePackages),
-            verticalSpaceRegular,
-            _pricePackBuilder(context, model, _pricePackages),
-            defaultDividers,
-            verticalSpaceRegular,
-            _gigLocationHeader(context, model),
-            verticalSpaceRegular,
-            _gigLocationMap(context, model),
-            verticalSpaceRegular,
-          ],
-        ),
-      ),
-    );
+    final bool _loadedGigExist = _loadedGig != null;
+    final bool _gigClientExist = _gigClient != null;
+    final bool _gigVendorExist = _gigVendor != null;
+    final bool _gigAddressExist = _gigAddress != null;
+
+    if (_loadedGigExist &&
+        _gigClientExist &&
+        _gigVendorExist &&
+        _gigAddressExist) {
+      final String _gigRating = _loadedGig.gigRating != null
+          ? _loadedGig.gigRating.toString()
+          : 'No Rating';
+      final String _gigReviewNumber = _loadedGig.gigReviews != null
+          ? _loadedGig.gigReviews!.length.toString()
+          : 'No';
+
+      final String _gigLocationStreet = _gigAddress.street ?? '';
+      final String _gigLocationCity = _gigAddress.city ?? '';
+      final String _gigLocationState = _gigAddress.state ?? '';
+      final String _gigLocation =
+          '$_gigLocationStreet, $_gigLocationCity, $_gigLocationState';
+
+      final bool _isVerified = _gigVendor.isVerified;
+
+      final String _vendorDescription = LoremIpsum;
+      final String _vendorName = _gigVendor.vendorName ?? 'No Name';
+      final String? _vendorRank = _gigVendor.vendorRank;
+
+      final DateFormat registrationYearFormatter = DateFormat('y');
+      final DateTime _vendorRestrationDate =
+          DateTime.parse(_gigVendor.vendorRegistrationDate);
+      final String? _vendorRegistrationYear =
+          registrationYearFormatter.format(_vendorRestrationDate);
+
+      final List<String>? _pricePackages = model.pricePackages;
+      final List<String>? _pricePackName = model.pricePackName;
+      final List<String>? _pricePackDescription = model.pricePackDescription;
+      final List<Map<String, dynamic>>? _priceFeature = model.priceFeatures;
+
+      final bool _pricePackagesExist = _pricePackages != null;
+      final bool _pricePackNameExist = _pricePackName != null;
+      final bool _pricePackDescriptionExist = _pricePackDescription != null;
+      final bool _pricePackFeaturesExist = _priceFeature != null;
+
+      if (_pricePackagesExist &&
+          _pricePackNameExist &&
+          _pricePackDescriptionExist &&
+          _pricePackFeaturesExist) {
+        return SliverFillRemaining(
+          hasScrollBody: false,
+          child: SingleChildScrollView(
+            controller: model.scrollController,
+            child: Column(
+              children: <Widget>[
+                _gigHeading(
+                  context,
+                  model,
+                  gigRating: _gigRating,
+                  gigReviewNumbers: _gigReviewNumber,
+                  isVerified: _isVerified,
+                  gigLocation: _gigLocation,
+                ),
+                verticalSpaceRegular,
+                defaultDividers,
+                _vendorDetails(
+                  context,
+                  model,
+                  vendorDescription: _vendorDescription,
+                  vendorName: _vendorName,
+                  vendorRank: _vendorRank,
+                  vendorRegistrationYear: _vendorRegistrationYear ?? 'Unknown',
+                ),
+                defaultDividers,
+                verticalSpaceRegular,
+                if (_pricePackagesExist)
+                  _pricePackSelector(
+                    context,
+                    model,
+                    pricePackages: _pricePackages,
+                  ),
+                verticalSpaceRegular,
+                if (_pricePackagesExist)
+                  _pricePackBuilder(
+                    context,
+                    model,
+                    featuresList: _priceFeature,
+                    pricePackages: _pricePackages,
+                    pricePackDescription: _pricePackDescription,
+                    vendorName:
+                        _gigClient.clientName ?? 'your service provider',
+                  ),
+                defaultDividers,
+                verticalSpaceRegular,
+                _gigLocationHeader(context, model),
+                verticalSpaceRegular,
+                _gigLocationMap(context, model),
+                verticalSpaceRegular,
+              ],
+            ),
+          ),
+        );
+      } else {
+        return SliverFillRemaining(
+          child: Column(children: [
+            verticalSpaceLarge,
+            CircularProgressIndicator(color: kcPrimaryColor),
+          ]),
+        );
+      }
+    } else {
+      return SliverFillRemaining(
+        child: Column(children: [
+          verticalSpaceLarge,
+          CircularProgressIndicator(color: kcPrimaryColor),
+        ]),
+      );
+    }
   }
 
-  Widget _vendorDetails(BuildContext context, GigProfileViewModel model) {
+  Widget _vendorDetails(
+    BuildContext context,
+    GigProfileViewModel model, {
+    required String vendorName,
+    required String vendorDescription,
+    required String vendorRegistrationYear,
+    required String? vendorRank,
+  }) {
     return InkWell(
       onTap: model.goToVendorProfile,
       child: Container(
@@ -213,7 +341,7 @@ class GigProfileView extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
                     Text(
-                      'Alexandra K.',
+                      vendorName,
                       style: TextStyle(
                         fontWeight: FontWeight.bold,
                       ),
@@ -221,47 +349,48 @@ class GigProfileView extends StatelessWidget {
                       overflow: TextOverflow.ellipsis,
                     ),
                     Text(
-                      LoremIpsum,
+                      vendorDescription,
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
                     ),
                     verticalSpaceTiny,
-                    Text('Joined in 2019'),
+                    Text('Joined in $vendorRegistrationYear'),
                   ],
                 ),
               ),
             ),
             Container(
+              margin: EdgeInsets.only(left: 4.0),
               color: _colorDebug[2],
               child: Column(
                 children: <Widget>[
-                  Container(
-                    padding: EdgeInsets.symmetric(
-                      horizontal: 16.0,
-                      vertical: 4.0,
-                    ),
-                    decoration: BoxDecoration(
-                      borderRadius: defaultBorderRadius,
-                      color: kcPrimaryColor,
-                    ),
-                    child: Text(
-                      'Gold',
-                      style: TextStyle(color: Colors.white),
-                    ),
-                  ),
-                  verticalSpaceSmall,
-                  GestureDetector(
-                    child: Text(
-                      'View Profile',
-                      style: TextStyle(
+                  if (vendorRank != null)
+                    Container(
+                      padding: EdgeInsets.symmetric(
+                        horizontal: 16.0,
+                        vertical: 4.0,
+                      ),
+                      decoration: BoxDecoration(
+                        borderRadius: defaultBorderRadius,
                         color: kcPrimaryColor,
-                        fontSize: 12.0,
+                      ),
+                      child: Text(
+                        vendorRank,
+                        style: TextStyle(color: Colors.white),
                       ),
                     ),
-                    onTap: () {
-                      // TODO: Implement view profile
-                    },
-                  ),
+                  verticalSpaceSmall,
+                  if (vendorRank != null)
+                    GestureDetector(
+                      child: Text(
+                        'View Profile',
+                        style: TextStyle(
+                          color: kcPrimaryColor,
+                          fontSize: 12.0,
+                        ),
+                      ),
+                      onTap: model.goToVendorProfile,
+                    ),
                 ],
               ),
             )
@@ -271,7 +400,14 @@ class GigProfileView extends StatelessWidget {
     );
   }
 
-  Container _gigHeading(BuildContext context, GigProfileViewModel model) {
+  Container _gigHeading(
+    BuildContext context,
+    GigProfileViewModel model, {
+    required String gigRating,
+    required String gigReviewNumbers,
+    required bool isVerified,
+    required String gigLocation,
+  }) {
     return Container(
       margin: EdgeInsets.only(top: defaultPaddingValue),
       padding: EdgeInsets.only(
@@ -288,16 +424,11 @@ class GigProfileView extends StatelessWidget {
             children: <Widget>[
               Icon(Icons.star, size: 16.0),
               horizontalSpaceTiny,
-              Text('5.0'),
+              Text(gigRating),
               horizontalSpaceTiny,
-              Text('(3 Review)'),
+              Text('($gigReviewNumbers Review)'),
               horizontalSpaceSmall,
-              Icon(
-                Icons.verified,
-                size: 16.0,
-              ),
-              horizontalSpaceTiny,
-              Text('Verified'),
+              if (isVerified) _verifiedLogo(),
               Spacer(),
               Icon(Icons.message, size: 16.0),
               horizontalSpaceTiny,
@@ -305,14 +436,30 @@ class GigProfileView extends StatelessWidget {
             ],
           ),
           verticalSpaceTiny,
-          Text('San Francisco, California, United States'),
+          Text(gigLocation),
         ],
       ),
     );
   }
 
-  Container _pricePackSelector(BuildContext context, GigProfileViewModel model,
-      List<String> _pricePackages) {
+  Row _verifiedLogo() {
+    return Row(
+      children: [
+        Icon(
+          Icons.verified,
+          size: 16.0,
+        ),
+        horizontalSpaceTiny,
+        Text('Verified'),
+      ],
+    );
+  }
+
+  Widget _pricePackSelector(
+    BuildContext context,
+    GigProfileViewModel model, {
+    required List<String> pricePackages,
+  }) {
     return Container(
       height: 24.0,
       width: screenWidth(context),
@@ -327,62 +474,97 @@ class GigProfileView extends StatelessWidget {
           scrollDirection: Axis.horizontal,
           itemBuilder: (context, packageIndex) {
             final int? _getSelectedPack = model.selectedPricePackPage;
+            final String _pricePack = pricePackages[packageIndex];
+            final bool _priceExist = _pricePack != '\$';
+
             final bool _selectedPack = packageIndex == _getSelectedPack;
 
-            return InkWell(
-              onTap: () => model.selectPricePack(packageIndex),
-              child: Container(
-                decoration: BoxDecoration(
-                  color: _colorDebug[3],
-                  border: model.isBusy
-                      ? null
-                      : _selectedPack
-                          ? Border(
-                              bottom:
-                                  BorderSide(width: 1.0, color: Colors.black),
-                            )
-                          : null,
+            if (_priceExist) {
+              return InkWell(
+                onTap: () => model.selectPricePack(packageIndex),
+                child: Container(
+                  decoration: BoxDecoration(
+                    color: _colorDebug[3],
+                    border: model.isBusy
+                        ? null
+                        : _selectedPack
+                            ? Border(
+                                bottom:
+                                    BorderSide(width: 1.0, color: Colors.black),
+                              )
+                            : null,
+                  ),
+                  child: Align(
+                    alignment: Alignment.center,
+                    child: Text(_pricePack),
+                  ),
                 ),
-                child: Align(
-                  alignment: Alignment.center,
-                  child: Text(_pricePackages[packageIndex]),
-                ),
-              ),
-            );
+              );
+            } else {
+              return Container();
+            }
           },
           separatorBuilder: (context, pageIndex) {
-            return horizontalSpaceMedium;
+            final String _pricePack = pricePackages[pageIndex];
+            final bool _priceExist = _pricePack != '\$';
+
+            if (_priceExist) {
+              return horizontalSpaceMedium;
+            } else {
+              return SizedBox.shrink();
+            }
           },
-          itemCount: _pricePackages.length),
+          itemCount: pricePackages.length),
     );
   }
 
   Widget _pricePackBuilder(
     BuildContext context,
-    GigProfileViewModel model,
-    List<String> _pricePackages,
-  ) {
+    GigProfileViewModel model, {
+    required List<String> pricePackages,
+    required List<String> pricePackDescription,
+    required List<Map<String, dynamic>> featuresList,
+    required String vendorName,
+  }) {
     return Container(
       color: _colorDebug[1],
       padding: defaultPaddingHorizontal,
       child: ExpandablePageView.builder(
+        physics: NeverScrollableScrollPhysics(),
         itemBuilder: (context, packageView) {
+          final bool _priceExist = pricePackages[packageView] != '\$';
+
           return Column(
             children: <Widget>[
-              if (packageView <= 2) _pricePackDetails(context, model),
+              if (packageView <= 2 && _priceExist)
+                _pricePackDetails(
+                  context,
+                  model,
+                  featuresList: featuresList[packageView],
+                  pricePackDescription: pricePackDescription[packageView],
+                ),
               if (packageView <= 2) verticalSpaceRegular,
-              if (packageView > 2) _requestQuote(context, model),
+              if (packageView > 2)
+                _requestQuote(
+                  context,
+                  model,
+                  vendorName: vendorName,
+                ),
             ],
           );
         },
-        itemCount: _pricePackages.length,
+        itemCount: pricePackages.length,
         onPageChanged: (page) => model.updateSelectedPricePage(page),
         controller: model.pricePackPageController,
       ),
     );
   }
 
-  Widget _requestQuote(BuildContext context, GigProfileViewModel model) {
+  Widget _requestQuote(
+    BuildContext context,
+    GigProfileViewModel model, {
+    required String vendorName,
+  }) {
     return BoxInputField(
       fillColor: Colors.transparent,
       keyboardType: TextInputType.multiline,
@@ -391,37 +573,74 @@ class GigProfileView extends StatelessWidget {
       // TODO: Replace the textEditingController
       controller: TextEditingController(),
       placeholder:
-          'Give some details of your request to help Alexandra determine the appropriate quote',
+          'Give some details of your request to help $vendorName determine the appropriate quote.',
     );
   }
 
-  Widget _pricePackDetails(BuildContext context, GigProfileViewModel model) {
+  Widget _pricePackDetails(
+    BuildContext context,
+    GigProfileViewModel model, {
+    required Map<String, dynamic> featuresList,
+    required String pricePackDescription,
+  }) {
+    final _featuresList = Map.fromEntries(
+      featuresList.entries.toList()
+        ..sort((e1, e2) => e2.value.compareTo(e1.value)),
+    );
+
+    List<String> _featureTitle = <String>[];
+    List<bool> _featureApplicability = <bool>[];
+
+    _featuresList.forEach((key, value) {
+      _featureTitle.add(key.toString());
+
+      if (value == 'true' || value == 'false') {
+        _featureApplicability.add(model.stringToBool(value));
+      } else {
+        _featureApplicability.add(false);
+      }
+    });
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
-        Text('Price Package Description...'),
+        Text(pricePackDescription),
         verticalSpaceSmall,
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: <Widget>[
-            Text('Feature 1'),
-            Icon(Icons.check),
-          ],
+        ListView.separated(
+            shrinkWrap: true,
+            physics: NeverScrollableScrollPhysics(),
+            itemBuilder: (context, featureIndex) {
+              return _featureDetail(
+                context,
+                model,
+                featureTitle: _featureTitle[featureIndex],
+                featureApplicable: _featureApplicability[featureIndex],
+              );
+            },
+            separatorBuilder: (context, featureIndex) {
+              return verticalSpaceTiny;
+            },
+            itemCount: featuresList.length)
+      ],
+    );
+  }
+
+  Widget _featureDetail(
+    BuildContext context,
+    GigProfileViewModel model, {
+    required String featureTitle,
+    required bool featureApplicable,
+  }) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: <Widget>[
+        Text(
+          featureTitle,
+          maxLines: 1,
+          overflow: TextOverflow.ellipsis,
         ),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: <Widget>[
-            Text('Feature 2'),
-            Icon(Icons.check),
-          ],
-        ),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: <Widget>[
-            Text('Feature 3'),
-            Icon(Icons.check),
-          ],
-        ),
+        if (featureApplicable) Icon(Icons.check),
+        if (!featureApplicable) Icon(Icons.clear),
       ],
     );
   }
@@ -458,9 +677,13 @@ class GigProfileHeader implements SliverPersistentHeaderDelegate {
   GigProfileHeader({
     this.minExtent = 0.0,
     required this.maxExtent,
+    required this.gigTitle,
+    required this.model,
   });
   final double minExtent;
   final double maxExtent;
+  final String gigTitle;
+  final GigProfileViewModel model;
 
   static const _colorDebug = [
     // Colors.red,
@@ -475,7 +698,10 @@ class GigProfileHeader implements SliverPersistentHeaderDelegate {
 
   @override
   Widget build(
-      BuildContext context, double shrinkOffset, bool overlapsContent) {
+    BuildContext context,
+    double shrinkOffset,
+    bool overlapsContent,
+  ) {
     return Stack(
       children: [
         Container(
@@ -526,7 +752,7 @@ class GigProfileHeader implements SliverPersistentHeaderDelegate {
           right: 16.0,
           bottom: 16.0,
           child: Text(
-            'Gig Title',
+            gigTitle,
             style: heading2Style.copyWith(
               color: Colors.white.withOpacity(
                 titleOpacity(shrinkOffset),
@@ -552,9 +778,7 @@ class GigProfileHeader implements SliverPersistentHeaderDelegate {
                   Icons.cancel,
                   color: iconColor(shrinkOffset),
                 ),
-                onPressed: () {
-                  // TODO: Implement cancel/goBack
-                },
+                onPressed: model.goBack,
               ),
               _appBarTitle(shrinkOffset),
               IconButton(
@@ -590,7 +814,7 @@ class GigProfileHeader implements SliverPersistentHeaderDelegate {
         child: Container(
           color: _colorDebug[3],
           child: Text(
-            'Gig Title',
+            gigTitle,
             style: heading3Style,
             maxLines: 1,
             overflow: TextOverflow.ellipsis,

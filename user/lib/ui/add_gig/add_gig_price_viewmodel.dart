@@ -220,7 +220,7 @@ class AddGigPriceViewModel extends FormViewModel {
       "package3": {
         "priceTitle": gigPriceTier3TitleValue,
         "priceDescription": gigPriceTier3DescriptionValue,
-        "price": gigPriceTier2PriceValue,
+        "price": gigPriceTier3PriceValue,
         "features": _packageThreeFeaturesMap,
       },
     };

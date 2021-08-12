@@ -34,7 +34,7 @@ class RealtimeService {
         if (snapshot != null) {
           final _snapshotValue = snapshot.value;
           final _snapshotValueMap = Map<String, dynamic>.from(_snapshotValue);
-          log.v('sample from realtime: ${_snapshotValueMap['sambo']}');
+          log.v('Services retrieved from realtime database');
 
           _snapshotValueMap.forEach(
             (serviceId, serviceData) {
@@ -53,8 +53,8 @@ class RealtimeService {
 
           _allServiceList = _services;
 
-          log.v('sample serviceData: ${_services[0]}');
-          log.v('sample price type: ${_services[0].servicePriceTypes![0]}');
+          log.v('serviceData retrieved');
+          log.v('priceTypes retrieved');
           return _services;
         }
       },
@@ -110,7 +110,7 @@ class RealtimeService {
         if (snapshot != null) {
           final _snapshotValue = snapshot.value;
           final _snapshotValueMap = Map<String, dynamic>.from(_snapshotValue);
-          log.v('snapshotValueRetrieved: $_snapshotValue');
+          log.v('snapshotValueRetrieved');
 
           for (var entry in _snapshotValueMap.entries) {
             await forEachServiceSubCategory(

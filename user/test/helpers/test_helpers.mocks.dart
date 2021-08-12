@@ -39,10 +39,14 @@ class _FakePlacesDetails extends _i1.Fake implements _i2.PlacesDetails {}
 class _FakeCollectionReference<T extends Object?> extends _i1.Fake
     implements _i3.CollectionReference<T> {}
 
+class _FakeClient extends _i1.Fake implements _i4.Client {}
+
 class _FakeQuerySnapshot<T extends Object?> extends _i1.Fake
     implements _i3.QuerySnapshot<T> {}
 
 class _FakeGigAppointment extends _i1.Fake implements _i4.GigAppointment {}
+
+class _FakeAddress extends _i1.Fake implements _i4.Address {}
 
 class _FakeFirebaseAuth extends _i1.Fake implements _i5.FirebaseAuth {
   @override
@@ -477,6 +481,17 @@ class MockFirestoreApi extends _i1.Mock implements _i20.FirestoreApi {
       Invocation.method(#getUser, [], {#clientId: clientId}),
       returnValue: Future<_i4.Client?>.value()) as _i8.Future<_i4.Client?>);
   @override
+  _i8.Future<_i4.Client> getVendorForOrder(_i4.GigOrder? gigOrder) =>
+      (super.noSuchMethod(Invocation.method(#getVendorForOrder, [gigOrder]),
+              returnValue: Future<_i4.Client>.value(_FakeClient()))
+          as _i8.Future<_i4.Client>);
+  @override
+  _i8.Future<List<_i4.Client>> getVendorsForOrder(
+          List<_i4.GigOrder>? gigOrders) =>
+      (super.noSuchMethod(Invocation.method(#getVendorsForOrder, [gigOrders]),
+              returnValue: Future<List<_i4.Client>>.value(<_i4.Client>[]))
+          as _i8.Future<List<_i4.Client>>);
+  @override
   _i8.Future<_i4.Business?> getBusiness({_i4.Client? client}) => (super
           .noSuchMethod(Invocation.method(#getBusiness, [], {#client: client}),
               returnValue: Future<_i4.Business?>.value())
@@ -486,8 +501,13 @@ class MockFirestoreApi extends _i1.Mock implements _i20.FirestoreApi {
       (super.noSuchMethod(Invocation.method(#getVendor, [], {#client: client}),
           returnValue: Future<_i4.Vendor?>.value()) as _i8.Future<_i4.Vendor?>);
   @override
-  _i8.Future<List<_i4.Gig?>> getGigs(_i4.Client? client) =>
-      (super.noSuchMethod(Invocation.method(#getGigs, [client]),
+  _i8.Future<_i4.Client> getClientFromGigId(_i4.Gig? gig) =>
+      (super.noSuchMethod(Invocation.method(#getClientFromGigId, [gig]),
+              returnValue: Future<_i4.Client>.value(_FakeClient()))
+          as _i8.Future<_i4.Client>);
+  @override
+  _i8.Future<List<_i4.Gig?>> getOrderedGigs(_i4.Client? client) =>
+      (super.noSuchMethod(Invocation.method(#getOrderedGigs, [client]),
               returnValue: Future<List<_i4.Gig?>>.value(<_i4.Gig?>[]))
           as _i8.Future<List<_i4.Gig?>>);
   @override
@@ -512,6 +532,11 @@ class MockFirestoreApi extends _i1.Mock implements _i20.FirestoreApi {
               returnValue:
                   Future<_i4.GigAppointment>.value(_FakeGigAppointment()))
           as _i8.Future<_i4.GigAppointment>);
+  @override
+  _i8.Future<_i4.Address> getGigAddress(_i4.Gig? gig) =>
+      (super.noSuchMethod(Invocation.method(#getGigAddress, [gig]),
+              returnValue: Future<_i4.Address>.value(_FakeAddress()))
+          as _i8.Future<_i4.Address>);
   @override
   _i8.Stream<dynamic> getGigsRealtime(_i4.Client? client) =>
       (super.noSuchMethod(Invocation.method(#getGigsRealtime, [client]),

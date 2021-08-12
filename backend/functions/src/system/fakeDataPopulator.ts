@@ -30,6 +30,7 @@ export class FakeDataPopulator {
     for (let index = 0; index < 30; index++) {
       let gigId = faker.datatype.uuid();
       let gigVendorId = faker.datatype.uuid();
+      let gigAddressId = faker.datatype.uuid();
 
       let gig = {
         gigId: gigId,
@@ -49,11 +50,11 @@ export class FakeDataPopulator {
             priceDescription: faker.commerce.productDescription(),
             price: faker.datatype.float({ max: 800, min: 100, precision: 2 }),
             features: {
-              feature1: faker.datatype.boolean(),
-              feature2: faker.datatype.boolean(),
-              feature3: faker.datatype.boolean(),
-              feature4: faker.datatype.boolean(),
-              feature5: faker.datatype.boolean(),
+              feature1: String(faker.datatype.boolean()),
+              feature2: String(faker.datatype.boolean()),
+              feature3: String(faker.datatype.boolean()),
+              feature4: String(faker.datatype.boolean()),
+              feature5: String(faker.datatype.boolean()),
             },
           },
           package2: {
@@ -61,11 +62,11 @@ export class FakeDataPopulator {
             priceDescription: faker.commerce.productDescription(),
             price: faker.datatype.float({ max: 800, min: 100, precision: 2 }),
             features: {
-              feature1: faker.datatype.boolean(),
-              feature2: faker.datatype.boolean(),
-              feature3: faker.datatype.boolean(),
-              feature4: faker.datatype.boolean(),
-              feature5: faker.datatype.boolean(),
+              feature1: String(faker.datatype.boolean()),
+              feature2: String(faker.datatype.boolean()),
+              feature3: String(faker.datatype.boolean()),
+              feature4: String(faker.datatype.boolean()),
+              feature5: String(faker.datatype.boolean()),
             },
           },
           package3: {
@@ -73,11 +74,11 @@ export class FakeDataPopulator {
             priceDescription: faker.commerce.productDescription(),
             price: faker.datatype.float({ max: 800, min: 100, precision: 2 }),
             features: {
-              feature1: faker.datatype.boolean(),
-              feature2: faker.datatype.boolean(),
-              feature3: faker.datatype.boolean(),
-              feature4: faker.datatype.boolean(),
-              feature5: faker.datatype.boolean(),
+              feature1: String(faker.datatype.boolean()),
+              feature2: String(faker.datatype.boolean()),
+              feature3: String(faker.datatype.boolean()),
+              feature4: String(faker.datatype.boolean()),
+              feature5: String(faker.datatype.boolean()),
             },
           },
         },
@@ -94,24 +95,24 @@ export class FakeDataPopulator {
         gigQuote: faker.datatype.boolean(),
         gigRating: faker.datatype.float({ min: 0, max: 5, precision: 1 }),
         gigRatingNumber: faker.datatype.number(200),
-        gigLocation: "addressId",
+        gigLocation: gigAddressId,
         gigDateTimeAdded: faker.date.recent().toISOString(),
       };
 
       await this.createGigDocument(gigId, gig);
-      await this.generateGigsAddress(gigId);
+      await this.generateGigsAddress(gigId, gigAddressId);
       await this.generateClients(gigVendorId);
     }
   }
 
-  private async generateGigsAddress(gigId: string) {
+  private async generateGigsAddress(gigId: string, gigAddressId: string) {
     log(`generateGigsAddress at ${gigId}`);
 
     let gigAddress = {
-      id: "addressId",
+      id: gigAddressId,
       placeId: "",
-      latitude: faker.address.latitude(),
-      longitude: faker.address.longitude(),
+      latitude: parseFloat(faker.address.latitude()) ,
+      longitude: parseFloat(faker.address.longitude()),
       street: faker.address.streetName(),
       streetNumber: "20",
       city: faker.address.city(),
@@ -119,43 +120,90 @@ export class FakeDataPopulator {
       postalCode: faker.address.zipCode(),
     };
 
-    await this.createGigAddress(gigId, gigAddress);
+    await this.createGigAddress(gigId, gigAddress, gigAddressId);
   }
 
   private async generateClients(vendorId: string) {
     log(`generateVendors at ${vendorId}`);
 
+    let clientId = faker.datatype.uuid();
+    let clientName = `${faker.name.firstName()} ${faker.name.lastName()}`;
+    let clientPhone = faker.phone.phoneNumber();
+
     let client = {
-      clientId: faker.datatype.uuid(),
+      clientId: clientId,
       clientType: `vendor`,
       clientRegistrationDate: faker.date.recent().toISOString(),
       clientEmail: faker.internet.email(),
-      clientName: `${faker.name.firstName()} ${faker.name.lastName()}`,
+      clientName: clientName,
       clientAddress: null,
-      clientPhone: faker.phone.phoneNumber(),
+      clientPhone: clientPhone,
       clientAvatar: faker.image.imageUrl(640, 640, "food"),
       clientPaymentInfo: null,
       clientBusinessId: null,
       clientVendorId: vendorId,
     };
 
-    await this.createClient(client);
+    let vendor = {
+      vendorEducationHistory: null,
+      vendorEmail: null,
+      vendorGender: null,
+      vendorId: vendorId,
+      vendorLanguages: null,
+      vendorName: clientName,
+      vendorOccupationHistory: null,
+      vendorPhone: clientPhone,
+      vendorPhotos: [
+        faker.image.imageUrl(640, 640, "food"),
+        faker.image.imageUrl(640, 640, "food"),
+        faker.image.imageUrl(640, 640, "food"),
+      ],
+      vendorRegistrationDate: faker.date.recent().toISOString(),
+      vendorSkills: null,
+      vendorSocialMedias: null,
+      vendorVerifiedStatus: true,
+      vendorRank: 'Gold',
+    };
+
+    await this.createClient(clientId, client);
+    await this.createClientVendor(clientId, vendorId, vendor);
   }
 
-  private async createGigAddress(gigId: string, gigAddress: any) {
+  private async createGigAddress(
+    gigId: string,
+    gigAddress: any,
+    gigAddressId: string
+  ) {
     await this.firestoreDatabase
       .collection("gigs")
       .doc(gigId)
       .collection("addresses")
-      .add(gigAddress);
+      .doc(gigAddressId)
+      .set(gigAddress);
+  }
+
+  private async createClientVendor(
+    clientId: string,
+    clientVendorId: string,
+    vendorData: any
+  ) {
+    await this.firestoreDatabase
+      .collection("clients")
+      .doc(clientId)
+      .collection("vendor")
+      .doc(clientVendorId)
+      .set(vendorData);
   }
 
   private async createGigDocument(gigId: string, gig: any) {
     await this.firestoreDatabase.collection("gigs").doc(gigId).set(gig);
   }
 
-  private async createClient(client: any) {
-    await this.firestoreDatabase.collection("clients").add(client);
+  private async createClient(clientId: string, client: any) {
+    await this.firestoreDatabase
+      .collection("clients")
+      .doc(clientId)
+      .set(client);
   }
 
   private async createGenerateDocument(): Promise<void> {

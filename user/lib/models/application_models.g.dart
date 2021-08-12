@@ -146,6 +146,8 @@ _$_Vendor _$_$_VendorFromJson(Map<String, dynamic> json) {
         (json['vendorOccupationHistory'] as Map<String, dynamic>?)?.map(
       (k, e) => MapEntry(k, Map<String, String>.from(e as Map)),
     ),
+    vendorVerifiedStatus: json['vendorVerifiedStatus'] as bool?,
+    vendorRank: json['vendorRank'] as String?,
   );
 }
 
@@ -166,6 +168,8 @@ Map<String, dynamic> _$_$_VendorToJson(_$_Vendor instance) => <String, dynamic>{
       'vendorSkills': instance.vendorSkills,
       'vendorEducationHistory': instance.vendorEducationHistory,
       'vendorOccupationHistory': instance.vendorOccupationHistory,
+      'vendorVerifiedStatus': instance.vendorVerifiedStatus,
+      'vendorRank': instance.vendorRank,
     };
 
 _$_Gigs _$_$_GigsFromJson(Map<String, dynamic> json) {

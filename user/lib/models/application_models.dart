@@ -72,6 +72,8 @@ class Business with _$Business {
 
 @freezed
 class Vendor with _$Vendor {
+  Vendor._();
+
   factory Vendor({
     required String vendorRegistrationDate,
     String? vendorId,
@@ -89,7 +91,11 @@ class Vendor with _$Vendor {
     List<String>? vendorSkills,
     Map<String, Map<String, String>>? vendorEducationHistory,
     Map<String, Map<String, String>>? vendorOccupationHistory,
+    bool? vendorVerifiedStatus,
+    String? vendorRank,
   }) = _Vendor;
+
+  bool get isVerified => vendorVerifiedStatus == true;
 
   factory Vendor.fromJson(Map<String, dynamic> json) => _$VendorFromJson(json);
 }

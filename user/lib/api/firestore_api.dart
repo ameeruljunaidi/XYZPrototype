@@ -2,7 +2,6 @@ import 'dart:async';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/foundation.dart';
-import 'package:syncfusion_flutter_calendar/calendar.dart';
 import 'package:xyz_prototype/app/app.locator.dart';
 import 'package:xyz_prototype/app/app.logger.dart';
 import 'package:xyz_prototype/constants/app_keys.dart';
@@ -82,7 +81,7 @@ class FirestoreApi {
 
   // Getting a vendor for a given  gigOrders
   Future<Client> getVendorForOrder(GigOrder gigOrder) async {
-    log.i('loaded gigOrder: $gigOrder');
+    log.i('loaded gigOrder: ${gigOrder.gigOrderId}');
 
     final _vendorId = gigOrder.gigOrderVendorId;
     final _vendorDoc = await userCollection
@@ -125,9 +124,22 @@ class FirestoreApi {
         .doc(client.clientVendorId)
         .get();
 
-    final vendorData = vendorDoc.data();
+    final vendorData = await vendorDoc.data();
 
     return Vendor.fromJson(vendorData as Map<String, dynamic>);
+  }
+
+  /// Get client from a gigVendorId
+  Future<Client> getClientFromGigId(Gig gig) async {
+    log.i('Loaded gig: ${gig.gigId}');
+
+    final clientDoc = await userCollection
+        .where('clientVendorId', isEqualTo: gig.gigVendorId)
+        .get();
+
+    final clientData = clientDoc.docs.first.data();
+
+    return Client.fromJson(clientData as Map<String, dynamic>);
   }
 
   // Getting all gigs
@@ -138,7 +150,7 @@ class FirestoreApi {
     final List<String> _gigIdList = _gigOrderList.map((element) {
       return element.gigOrderGigId!;
     }).toList();
-    log.v('gigIdList loaded: $_gigIdList');
+    log.v('gigIdList loaded: ${_gigIdList.isNotEmpty}');
 
     List<Gig> _gigList = <Gig>[];
 
@@ -165,7 +177,7 @@ class FirestoreApi {
         await gigsCollection.orderBy('gigDateTimeAdded').limit(limit);
 
     if (startAfter == null) {
-      log.v('First fetch for gigs');
+      log.i('First fetch for gigs');
 
       return refGigs.get();
     } else {
@@ -176,7 +188,7 @@ class FirestoreApi {
   }
 
   Future<List<GigOrder>> getGigOrders(Client client) async {
-    log.i('client loaded: $client');
+    log.i('client loaded: ${client.clientId}');
 
     final gigOrderDocs = await ordersCollection
         .where(
@@ -208,6 +220,24 @@ class FirestoreApi {
       return GigAppointment.fromJson(
         appointmentData as Map<String, dynamic>,
       );
+    } else {
+      throw UnimplementedError();
+    }
+  }
+
+  // Get gig address from a given gig
+  Future<Address> getGigAddress(Gig gig) async {
+    log.i('Gig loaded: ${gig.gigId}');
+
+    final _gigId = gig.gigId;
+    final _gigAddress = gig.gigLocation;
+
+    if (_gigId != null) {
+      final addressRef = getAddressCollectionForGig(_gigId);
+      final addressDoc = await addressRef.doc(_gigAddress).get();
+      final addressData = addressDoc.data();
+
+      return Address.fromJson(addressData as Map<String, dynamic>);
     } else {
       throw UnimplementedError();
     }
@@ -319,7 +349,7 @@ class FirestoreApi {
 
         return true;
       } else if (gig != null) {
-        log.v('See gig loaded from form: $gig');
+        log.v('See gig loaded from form: ${gig.gigId}');
         final addressDoc = getAddressCollectionForGig(gig.gigId!).doc();
         final newAddressId = addressDoc.id;
         log.v('Address will be stored with id:$newAddressId');
@@ -440,7 +470,7 @@ class FirestoreApi {
 
   // Add a vendor's gig
   Future<bool> addGig({required Gig gig}) async {
-    log.i('Gig loaded: $gig');
+    log.i('Gig loaded: ${gig.gigId}');
 
     if (gig.gigId == null || gig.gigId == '') {
       final gigDoc = gigsCollection.doc();
@@ -481,7 +511,7 @@ class FirestoreApi {
     required Client client,
     required String avatarUrl,
   }) async {
-    log.i('client loaded: $client');
+    log.i('client loaded: ${client.clientId}');
 
     try {
       final userDocument = userCollection.doc(client.clientId);
@@ -501,7 +531,7 @@ class FirestoreApi {
     GigOrder gigOrder,
     GigAppointment gigAppointment,
   ) async {
-    log.i('Loaded gigOrder');
+    log.i('Loaded gigOrder: ${gigOrder.gigOrderId}');
 
     try {
       DocumentReference gigOrderDoc = ordersCollection.doc();
@@ -539,7 +569,7 @@ class FirestoreApi {
     String gigOrderId,
     GigAppointment gigAppointment,
   ) async {
-    log.i('Loaded $gigAppointment');
+    log.i('Loaded ${gigAppointment.gigAppointmentId}');
 
     final appointmentCollection = getAppointmentCollections(gigOrderId);
     final appointmentDoc = appointmentCollection.doc();
