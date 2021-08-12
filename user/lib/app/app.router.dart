@@ -18,6 +18,7 @@ import '../ui/add_gig/add_gig_price_view.dart';
 import '../ui/add_gig/add_gig_service_view.dart';
 import '../ui/add_gig/add_gig_title_view.dart';
 import '../ui/address_selection/address_selection_view.dart';
+import '../ui/booking_summary/booking_summary_view.dart';
 import '../ui/category/category_view.dart';
 import '../ui/chat/chat_view.dart';
 import '../ui/create_account/create_account_view.dart';
@@ -31,6 +32,7 @@ import '../ui/home/home_view.dart';
 import '../ui/inbox/inbox_view.dart';
 import '../ui/login/login_view.dart';
 import '../ui/marketplace/marketplace_view.dart';
+import '../ui/order_confirm/order_confirm_view.dart';
 import '../ui/profile/profile_add_avatar_view.dart';
 import '../ui/profile/profile_view.dart';
 import '../ui/search/search_view.dart';
@@ -67,6 +69,8 @@ class Routes {
   static const String gigListView = '/gig-list-view';
   static const String gigProfileView = '/gig-profile-view';
   static const String dateSelectionView = '/date-selection-view';
+  static const String orderConfirmView = '/order-confirm-view';
+  static const String bookingSummaryView = '/booking-summary-view';
   static const all = <String>{
     startupView,
     homeView,
@@ -96,6 +100,8 @@ class Routes {
     gigListView,
     gigProfileView,
     dateSelectionView,
+    orderConfirmView,
+    bookingSummaryView,
   };
 }
 
@@ -131,6 +137,8 @@ class StackedRouter extends RouterBase {
     RouteDef(Routes.gigListView, page: GigListView),
     RouteDef(Routes.gigProfileView, page: GigProfileView),
     RouteDef(Routes.dateSelectionView, page: DateSelectionView),
+    RouteDef(Routes.orderConfirmView, page: OrderConfirmView),
+    RouteDef(Routes.bookingSummaryView, page: BookingSummaryView),
   ];
   @override
   Map<Type, StackedRouteFactory> get pagesMap => _pagesMap;
@@ -322,14 +330,29 @@ class StackedRouter extends RouterBase {
       );
     },
     GigProfileView: (data) {
+      var args = data.getArgs<GigProfileViewArguments>(
+        orElse: () => GigProfileViewArguments(),
+      );
       return MaterialPageRoute<dynamic>(
-        builder: (context) => const GigProfileView(),
+        builder: (context) => GigProfileView(key: args.key),
         settings: data,
       );
     },
     DateSelectionView: (data) {
       return MaterialPageRoute<dynamic>(
         builder: (context) => const DateSelectionView(),
+        settings: data,
+      );
+    },
+    OrderConfirmView: (data) {
+      return MaterialPageRoute<dynamic>(
+        builder: (context) => const OrderConfirmView(),
+        settings: data,
+      );
+    },
+    BookingSummaryView: (data) {
+      return MaterialPageRoute<dynamic>(
+        builder: (context) => const BookingSummaryView(),
         settings: data,
       );
     },
@@ -398,4 +421,10 @@ class ChatViewArguments {
 class GigListViewArguments {
   final Key? key;
   GigListViewArguments({this.key});
+}
+
+/// GigProfileView arguments holder class
+class GigProfileViewArguments {
+  final Key? key;
+  GigProfileViewArguments({this.key});
 }

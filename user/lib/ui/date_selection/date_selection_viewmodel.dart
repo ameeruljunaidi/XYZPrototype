@@ -10,9 +10,25 @@ class DateSelectionViewModel extends BaseViewModel {
   final _orderService = locator<OrderService>();
   final _navigationService = locator<NavigationService>();
 
+  int? _currentTimeSelected;
+  int? get currentTimeSelected => _currentTimeSelected;
+
+  void selectTime(timeIndex) {
+    _currentTimeSelected = timeIndex;
+    notifyListeners();
+  }
+
   void testOrder() {
     _orderService.createGigOrder();
 
     _navigationService.navigateTo(Routes.homeView);
+  }
+
+  void goBack() {
+    _navigationService.back();
+  }
+
+  void goToBookingSummary() {
+    _navigationService.navigateTo(Routes.bookingSummaryView);
   }
 }

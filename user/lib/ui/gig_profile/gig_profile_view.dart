@@ -8,11 +8,13 @@ import 'package:stacked/stacked.dart';
 import 'package:xyz_prototype/constants/app_strings.dart';
 import 'package:xyz_prototype/models/application_models.dart';
 import 'package:xyz_prototype/ui/gig_profile/gig_profile_viewmodel.dart';
+import 'package:xyz_prototype/ui/gig_profile/header_view.dart';
 import 'package:xyz_ui/xyz_ui.dart';
 import 'package:intl/intl.dart';
 
+// ignore: must_be_immutable
 class GigProfileView extends StatelessWidget {
-  const GigProfileView({Key? key}) : super(key: key);
+  GigProfileView({Key? key}) : super(key: key);
 
   static const _colorDebug = [
     // Colors.red,
@@ -26,6 +28,13 @@ class GigProfileView extends StatelessWidget {
   ];
 
   final _bottomBarHeight = 64.0;
+  final _controller = ScrollController();
+
+  double get maxHeight => 200;
+
+  double get minHeight => kToolbarHeight;
+
+  bool isEmpty = false;
 
   @override
   Widget build(BuildContext context) {
@@ -34,19 +43,26 @@ class GigProfileView extends StatelessWidget {
       builder: (context, model, child) => Scaffold(
         body: GestureDetector(
           onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
-          child: SafeArea(
-            child: Stack(
-              children: [
-                CustomScrollView(
-                  controller: model.scrollController,
-                  slivers: [
-                    _sliverHeader(context, model),
-                    _gigProfileBody(context, model),
-                    _whiteSpace(_bottomBarHeight),
-                  ],
+          child: NotificationListener<ScrollEndNotification>(
+            onNotification: (_) {
+              _snapAppbar();
+              return false;
+            },
+            child: CustomScrollView(
+              physics: AlwaysScrollableScrollPhysics(),
+              controller: _controller,
+              slivers: [
+                SliverAppBar(
+                  pinned: true,
+                  stretch: true,
+                  flexibleSpace: Header(
+                    maxHeight: maxHeight,
+                    minHeight: minHeight,
+                  ),
+                  expandedHeight:
+                      maxHeight - MediaQuery.of(context).padding.top,
                 ),
-                if (model.selectedPricePackPage != null)
-                  _bottomBar(context, model),
+                _gigProfileContent(context, model),
               ],
             ),
           ),
@@ -55,6 +71,46 @@ class GigProfileView extends StatelessWidget {
       viewModelBuilder: () => GigProfileViewModel(),
     );
   }
+
+  void _snapAppbar() {
+    final scrollDistance = maxHeight - minHeight;
+
+    if (_controller.offset > 0 && _controller.offset < scrollDistance) {
+      final double snapOffset =
+          _controller.offset / scrollDistance > 0.5 ? scrollDistance : 0;
+
+      Future.microtask(() => _controller.animateTo(snapOffset,
+          duration: Duration(milliseconds: 200), curve: Curves.easeIn));
+    }
+  }
+
+  // Widget _pageBody(BuildContext context, GigProfileViewModel model) {
+  //   return Stack(
+  //     children: [
+  //       CustomScrollView(
+  //         controller: model.scrollController,
+  //         slivers: [
+  //           // _sliverHeader(context, model),
+  //           SliverAppBar(
+  //             pinned: true,
+  //             snap: true,
+  //             floating: true,
+  //             flexibleSpace: Header(
+  //               maxHeight: 400,
+  //               minHeight: 200,
+  //             ),
+  //             expandedHeight: 400 - MediaQuery.of(context).padding.top,
+  //             title: Text('Title'),
+  //           ),
+  //           _gigProfileBody(context, model),
+  //           if (model.selectedPricePackPage != null)
+  //             _whiteSpace(_bottomBarHeight),
+  //         ],
+  //       ),
+  //       if (model.selectedPricePackPage != null) _bottomBar(context, model),
+  //     ],
+  //   );
+  // }
 
   Widget _sliverHeader(BuildContext context, GigProfileViewModel model) {
     final Gig? _loadedGig = model.currentGig;
@@ -181,7 +237,7 @@ class GigProfileView extends StatelessWidget {
     }
   }
 
-  SliverFillRemaining _gigProfileBody(
+  SliverFillRemaining _gigProfileContent(
     BuildContext context,
     GigProfileViewModel model,
   ) {
@@ -292,21 +348,20 @@ class GigProfileView extends StatelessWidget {
           ),
         );
       } else {
-        return SliverFillRemaining(
-          child: Column(children: [
-            verticalSpaceLarge,
-            CircularProgressIndicator(color: kcPrimaryColor),
-          ]),
-        );
+        return _progressIndicator();
       }
     } else {
-      return SliverFillRemaining(
-        child: Column(children: [
-          verticalSpaceLarge,
-          CircularProgressIndicator(color: kcPrimaryColor),
-        ]),
-      );
+      return _progressIndicator();
     }
+  }
+
+  SliverFillRemaining _progressIndicator() {
+    return SliverFillRemaining(
+      child: Column(children: [
+        verticalSpaceLarge,
+        CircularProgressIndicator(color: kcPrimaryColor),
+      ]),
+    );
   }
 
   Widget _vendorDetails(

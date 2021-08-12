@@ -18,6 +18,7 @@ import 'package:xyz_prototype/ui/add_gig/add_gig_category_view.dart';
 import 'package:xyz_prototype/ui/add_gig/add_gig_title_view.dart';
 import 'package:xyz_prototype/ui/add_gig/add_gig_photos_view.dart';
 import 'package:xyz_prototype/ui/address_selection/address_selection_view.dart';
+import 'package:xyz_prototype/ui/booking_summary/booking_summary_view.dart';
 import 'package:xyz_prototype/ui/category/category_view.dart';
 import 'package:xyz_prototype/ui/chat/chat_view.dart';
 import 'package:xyz_prototype/ui/create_account/create_account_view.dart';
@@ -34,6 +35,7 @@ import 'package:xyz_prototype/ui/inbox/inbox_viewmodel.dart';
 import 'package:xyz_prototype/ui/login/login_view.dart';
 import 'package:xyz_prototype/ui/marketplace/marketplace_view.dart';
 import 'package:xyz_prototype/ui/marketplace/marketplace_viewmodel.dart';
+import 'package:xyz_prototype/ui/order_confirm/order_confirm_view.dart';
 import 'package:xyz_prototype/ui/profile/profile_add_avatar_view.dart';
 import 'package:xyz_prototype/ui/profile/profile_view.dart';
 import 'package:xyz_prototype/ui/profile/profile_viewmodel.dart';
@@ -74,6 +76,8 @@ import 'package:xyz_prototype/utils/image_selector.dart';
     MaterialRoute(page: GigListView),
     MaterialRoute(page: GigProfileView),
     MaterialRoute(page: DateSelectionView),
+    MaterialRoute(page: OrderConfirmView),
+    MaterialRoute(page: BookingSummaryView),
   ],
   dependencies: [
     LazySingleton(classType: NavigationService),
