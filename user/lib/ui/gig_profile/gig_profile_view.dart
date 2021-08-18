@@ -1,14 +1,9 @@
-import 'dart:math';
-
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:expandable_page_view/expandable_page_view.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/rendering/sliver_persistent_header.dart';
 import 'package:stacked/stacked.dart';
 import 'package:xyz_prototype/constants/app_strings.dart';
 import 'package:xyz_prototype/models/application_models.dart';
 import 'package:xyz_prototype/ui/gig_profile/gig_profile_viewmodel.dart';
-import 'package:xyz_prototype/ui/gig_profile/header_view.dart';
 import 'package:xyz_ui/xyz_ui.dart';
 import 'package:intl/intl.dart';
 
@@ -31,45 +26,129 @@ class GigProfileView extends StatelessWidget {
   final _controller = ScrollController();
 
   double get maxHeight => 200;
-
   double get minHeight => kToolbarHeight;
-
-  bool isEmpty = false;
 
   @override
   Widget build(BuildContext context) {
     return ViewModelBuilder<GigProfileViewModel>.reactive(
       onModelReady: (model) => model.startupLogic(),
       builder: (context, model, child) => Scaffold(
-        body: GestureDetector(
-          onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
-          child: NotificationListener<ScrollEndNotification>(
-            onNotification: (_) {
-              _snapAppbar();
-              return false;
-            },
-            child: CustomScrollView(
-              physics: AlwaysScrollableScrollPhysics(),
-              controller: _controller,
-              slivers: [
-                SliverAppBar(
-                  pinned: true,
-                  stretch: true,
-                  flexibleSpace: Header(
-                    maxHeight: maxHeight,
-                    minHeight: minHeight,
-                  ),
-                  expandedHeight:
-                      maxHeight - MediaQuery.of(context).padding.top,
-                ),
-                _gigProfileContent(context, model),
-              ],
-            ),
-          ),
-        ),
+        body: _pageBody(context, model),
       ),
       viewModelBuilder: () => GigProfileViewModel(),
     );
+  }
+
+  Widget _pageBody(BuildContext context, GigProfileViewModel model) {
+    final Gig? _loadedGig = model.currentGig;
+    final Client? _gigClient = model.gigClient;
+    final Vendor? _gigVendor = model.gigVendor;
+    final Address? _gigAddress = model.gigLocation;
+
+    final bool _loadedGigExist = _loadedGig != null;
+    final bool _gigClientExist = _gigClient != null;
+    final bool _gigVendorExist = _gigVendor != null;
+    final bool _gigAddressExist = _gigAddress != null;
+
+    if (_loadedGigExist &&
+        _gigClientExist &&
+        _gigVendorExist &&
+        _gigAddressExist) {
+      final String _gigRating = _loadedGig.gigRating != null
+          ? _loadedGig.gigRating.toString()
+          : 'No Rating';
+      final String _gigReviewNumber = _loadedGig.gigReviews != null
+          ? _loadedGig.gigReviews!.length.toString()
+          : 'No';
+
+      final String _gigTitle = _loadedGig.gigTitle ?? 'No Title';
+      final String _gigLocationStreet = _gigAddress.street ?? '';
+      final String _gigLocationCity = _gigAddress.city ?? '';
+      final String _gigLocationState = _gigAddress.state ?? '';
+      final String _gigLocation =
+          '$_gigLocationStreet, $_gigLocationCity, $_gigLocationState';
+
+      final bool _isVerified = _gigVendor.isVerified;
+
+      final String _vendorDescription = LoremIpsum;
+      final String _vendorName = _gigVendor.vendorName ?? 'No Name';
+      final String _vendorRank = _gigVendor.vendorRank ?? 'Unranked';
+
+      final DateFormat registrationYearFormatter = DateFormat('y');
+      final DateTime _vendorRestrationDate =
+          DateTime.parse(_gigVendor.vendorRegistrationDate);
+      final String _vendorRegistrationYear =
+          registrationYearFormatter.format(_vendorRestrationDate);
+
+      final List<String>? _pricePackages = model.pricePackages;
+      final List<String>? _pricePackName = model.pricePackName;
+      final List<String>? _pricePackDescription = model.pricePackDescription;
+      final List<Map<String, dynamic>>? _priceFeature = model.priceFeatures;
+
+      final bool _pricePackagesExist = _pricePackages != null;
+      final bool _pricePackNameExist = _pricePackName != null;
+      final bool _pricePackDescriptionExist = _pricePackDescription != null;
+      final bool _pricePackFeaturesExist = _priceFeature != null;
+
+      return GestureDetector(
+        onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
+        child: NotificationListener<ScrollEndNotification>(
+          onNotification: (_) {
+            _snapAppbar();
+            return false;
+          },
+          child: Stack(
+            children: [
+              CustomScrollView(
+                physics: AlwaysScrollableScrollPhysics(),
+                controller: _controller,
+                slivers: [
+                  SliverAppBar(
+                    pinned: true,
+                    stretch: true,
+                    flexibleSpace: _header(
+                      context,
+                      model,
+                      gigTitle: _gigTitle,
+                    ),
+                    expandedHeight: maxHeight,
+                  ),
+                  _gigProfileContent(
+                    context,
+                    model,
+                    gigAddress: _gigAddress,
+                    gigClient: _gigClient,
+                    gigVendor: _gigVendor,
+                    loadedGig: _loadedGig,
+                    gigLocation: _gigLocation,
+                    gigRating: _gigRating,
+                    gigReviewNumber: _gigReviewNumber,
+                    isVerified: _isVerified,
+                    priceFeature: _priceFeature ?? [],
+                    pricePackages: _pricePackages ?? [],
+                    pricePackDescription: _pricePackDescription ?? [],
+                    pricePackagesExist: _pricePackagesExist,
+                    pricePackDescriptionExist: _pricePackDescriptionExist,
+                    pricePackFeaturesExist: _pricePackFeaturesExist,
+                    pricePackNameExist: _pricePackNameExist,
+                    vendorDescription: _vendorDescription,
+                    vendorName: _vendorName,
+                    vendorRank: _vendorRank,
+                    vendorRegistrationYear: _vendorRegistrationYear,
+                  ),
+                  if (model.selectedPricePackPage != null)
+                    _whiteSpace(_bottomBarHeight),
+                ],
+              ),
+              if (model.selectedPricePackPage != null)
+                _bottomBar(context, model),
+            ],
+          ),
+        ),
+      );
+    } else {
+      return Center(child: CircularProgressIndicator(color: kcPrimaryColor));
+    }
   }
 
   void _snapAppbar() {
@@ -84,51 +163,85 @@ class GigProfileView extends StatelessWidget {
     }
   }
 
-  // Widget _pageBody(BuildContext context, GigProfileViewModel model) {
-  //   return Stack(
-  //     children: [
-  //       CustomScrollView(
-  //         controller: model.scrollController,
-  //         slivers: [
-  //           // _sliverHeader(context, model),
-  //           SliverAppBar(
-  //             pinned: true,
-  //             snap: true,
-  //             floating: true,
-  //             flexibleSpace: Header(
-  //               maxHeight: 400,
-  //               minHeight: 200,
-  //             ),
-  //             expandedHeight: 400 - MediaQuery.of(context).padding.top,
-  //             title: Text('Title'),
-  //           ),
-  //           _gigProfileBody(context, model),
-  //           if (model.selectedPricePackPage != null)
-  //             _whiteSpace(_bottomBarHeight),
-  //         ],
-  //       ),
-  //       if (model.selectedPricePackPage != null) _bottomBar(context, model),
-  //     ],
-  //   );
-  // }
+  LayoutBuilder _header(
+    BuildContext context,
+    GigProfileViewModel model, {
+    required String gigTitle,
+  }) {
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        final expandRatio = _calculateExpandRatio(constraints);
+        final animation = AlwaysStoppedAnimation(expandRatio);
 
-  Widget _sliverHeader(BuildContext context, GigProfileViewModel model) {
-    final Gig? _loadedGig = model.currentGig;
-    final bool _loadedGigExist = _loadedGig != null;
+        return Stack(
+          fit: StackFit.expand,
+          children: [
+            _buildImage(animation),
+            _buildGradient(animation),
+            _buildTitle(
+              animation,
+              gigTitle: gigTitle,
+            ),
+          ],
+        );
+      },
+    );
+  }
 
-    if (_loadedGigExist) {
-      return SliverPersistentHeader(
-        pinned: true,
-        delegate: GigProfileHeader(
-          minExtent: 48,
-          maxExtent: 320.0,
-          gigTitle: _loadedGig.gigTitle ?? 'No Title',
-          model: model,
+  double _calculateExpandRatio(BoxConstraints constraints) {
+    var expandRatio =
+        (constraints.maxHeight - minHeight) / (maxHeight - minHeight);
+    if (expandRatio > 1.0) expandRatio = 1.0;
+    if (expandRatio < 0.0) expandRatio = 0.0;
+    return expandRatio;
+  }
+
+  Align _buildTitle(Animation<double> animation, {required String gigTitle}) {
+    return Align(
+      alignment: AlignmentTween(
+              begin: Alignment.bottomCenter, end: Alignment.bottomLeft)
+          .evaluate(animation),
+      child: Container(
+        margin: EdgeInsets.only(bottom: 12, left: 12),
+        child: Text(
+          gigTitle,
+          style: TextStyle(
+            fontSize: Tween<double>(begin: 18, end: 36).evaluate(animation),
+            color: Colors.white,
+            fontWeight: FontWeight.w800,
+          ),
         ),
-      );
-    } else {
-      return _whiteSpace(24.0);
-    }
+      ),
+    );
+  }
+
+  Container _buildGradient(Animation<double> animation) {
+    return Container(
+      decoration: BoxDecoration(
+        gradient: LinearGradient(
+          colors: [
+            Colors.transparent,
+            ColorTween(begin: Colors.black87, end: Colors.black38)
+                .evaluate(animation)!
+          ],
+          begin: Alignment.topCenter,
+          end: Alignment.bottomCenter,
+        ),
+      ),
+    );
+  }
+
+  ClipRRect _buildImage(Animation<double> animation) {
+    return ClipRRect(
+      borderRadius: BorderRadius.only(
+        bottomLeft: Radius.circular(defaultBorderRadiusValue),
+        bottomRight: Radius.circular(defaultBorderRadiusValue),
+      ),
+      child: Image.network(
+        "http://placeimg.com/640/640/food",
+        fit: BoxFit.cover,
+      ),
+    );
   }
 
   Widget _bottomBar(BuildContext context, GigProfileViewModel model) {
@@ -238,118 +351,82 @@ class GigProfileView extends StatelessWidget {
   }
 
   SliverFillRemaining _gigProfileContent(
-    BuildContext context,
-    GigProfileViewModel model,
-  ) {
-    final Gig? _loadedGig = model.currentGig;
-    final Client? _gigClient = model.gigClient;
-    final Vendor? _gigVendor = model.gigVendor;
-    final Address? _gigAddress = model.gigLocation;
-
-    final bool _loadedGigExist = _loadedGig != null;
-    final bool _gigClientExist = _gigClient != null;
-    final bool _gigVendorExist = _gigVendor != null;
-    final bool _gigAddressExist = _gigAddress != null;
-
-    if (_loadedGigExist &&
-        _gigClientExist &&
-        _gigVendorExist &&
-        _gigAddressExist) {
-      final String _gigRating = _loadedGig.gigRating != null
-          ? _loadedGig.gigRating.toString()
-          : 'No Rating';
-      final String _gigReviewNumber = _loadedGig.gigReviews != null
-          ? _loadedGig.gigReviews!.length.toString()
-          : 'No';
-
-      final String _gigLocationStreet = _gigAddress.street ?? '';
-      final String _gigLocationCity = _gigAddress.city ?? '';
-      final String _gigLocationState = _gigAddress.state ?? '';
-      final String _gigLocation =
-          '$_gigLocationStreet, $_gigLocationCity, $_gigLocationState';
-
-      final bool _isVerified = _gigVendor.isVerified;
-
-      final String _vendorDescription = LoremIpsum;
-      final String _vendorName = _gigVendor.vendorName ?? 'No Name';
-      final String? _vendorRank = _gigVendor.vendorRank;
-
-      final DateFormat registrationYearFormatter = DateFormat('y');
-      final DateTime _vendorRestrationDate =
-          DateTime.parse(_gigVendor.vendorRegistrationDate);
-      final String? _vendorRegistrationYear =
-          registrationYearFormatter.format(_vendorRestrationDate);
-
-      final List<String>? _pricePackages = model.pricePackages;
-      final List<String>? _pricePackName = model.pricePackName;
-      final List<String>? _pricePackDescription = model.pricePackDescription;
-      final List<Map<String, dynamic>>? _priceFeature = model.priceFeatures;
-
-      final bool _pricePackagesExist = _pricePackages != null;
-      final bool _pricePackNameExist = _pricePackName != null;
-      final bool _pricePackDescriptionExist = _pricePackDescription != null;
-      final bool _pricePackFeaturesExist = _priceFeature != null;
-
-      if (_pricePackagesExist &&
-          _pricePackNameExist &&
-          _pricePackDescriptionExist &&
-          _pricePackFeaturesExist) {
-        return SliverFillRemaining(
-          hasScrollBody: false,
-          child: SingleChildScrollView(
-            controller: model.scrollController,
-            child: Column(
-              children: <Widget>[
-                _gigHeading(
+      BuildContext context, GigProfileViewModel model,
+      {required Gig loadedGig,
+      required Address gigAddress,
+      required Vendor gigVendor,
+      required Client gigClient,
+      required String gigRating,
+      required String gigReviewNumber,
+      required String gigLocation,
+      required String vendorDescription,
+      required String vendorName,
+      required String vendorRank,
+      required String vendorRegistrationYear,
+      required List<String> pricePackDescription,
+      required List<String> pricePackages,
+      required List<Map<String, dynamic>> priceFeature,
+      required bool isVerified,
+      required bool pricePackagesExist,
+      required bool pricePackNameExist,
+      required bool pricePackDescriptionExist,
+      required bool pricePackFeaturesExist}) {
+    if (pricePackagesExist &&
+        pricePackNameExist &&
+        pricePackDescriptionExist &&
+        pricePackFeaturesExist) {
+      return SliverFillRemaining(
+        hasScrollBody: false,
+        child: SingleChildScrollView(
+          controller: model.scrollController,
+          child: Column(
+            children: <Widget>[
+              _gigHeading(
+                context,
+                model,
+                gigRating: gigRating,
+                gigReviewNumbers: gigReviewNumber,
+                isVerified: isVerified,
+                gigLocation: gigLocation,
+              ),
+              verticalSpaceRegular,
+              defaultDividers,
+              _vendorDetails(
+                context,
+                model,
+                vendorDescription: vendorDescription,
+                vendorName: vendorName,
+                vendorRank: vendorRank,
+                vendorRegistrationYear: vendorRegistrationYear,
+              ),
+              defaultDividers,
+              verticalSpaceRegular,
+              if (pricePackagesExist)
+                _pricePackSelector(
                   context,
                   model,
-                  gigRating: _gigRating,
-                  gigReviewNumbers: _gigReviewNumber,
-                  isVerified: _isVerified,
-                  gigLocation: _gigLocation,
+                  pricePackages: pricePackages,
                 ),
-                verticalSpaceRegular,
-                defaultDividers,
-                _vendorDetails(
+              verticalSpaceRegular,
+              if (pricePackagesExist)
+                _pricePackBuilder(
                   context,
                   model,
-                  vendorDescription: _vendorDescription,
-                  vendorName: _vendorName,
-                  vendorRank: _vendorRank,
-                  vendorRegistrationYear: _vendorRegistrationYear ?? 'Unknown',
+                  featuresList: priceFeature,
+                  pricePackages: pricePackages,
+                  pricePackDescription: pricePackDescription,
+                  vendorName: vendorName,
                 ),
-                defaultDividers,
-                verticalSpaceRegular,
-                if (_pricePackagesExist)
-                  _pricePackSelector(
-                    context,
-                    model,
-                    pricePackages: _pricePackages,
-                  ),
-                verticalSpaceRegular,
-                if (_pricePackagesExist)
-                  _pricePackBuilder(
-                    context,
-                    model,
-                    featuresList: _priceFeature,
-                    pricePackages: _pricePackages,
-                    pricePackDescription: _pricePackDescription,
-                    vendorName:
-                        _gigClient.clientName ?? 'your service provider',
-                  ),
-                defaultDividers,
-                verticalSpaceRegular,
-                _gigLocationHeader(context, model),
-                verticalSpaceRegular,
-                _gigLocationMap(context, model),
-                verticalSpaceRegular,
-              ],
-            ),
+              defaultDividers,
+              verticalSpaceRegular,
+              _gigLocationHeader(context, model),
+              verticalSpaceRegular,
+              _gigLocationMap(context, model),
+              verticalSpaceRegular,
+            ],
           ),
-        );
-      } else {
-        return _progressIndicator();
-      }
+        ),
+      );
     } else {
       return _progressIndicator();
     }
@@ -726,210 +803,4 @@ class GigProfileView extends StatelessWidget {
       ),
     );
   }
-}
-
-class GigProfileHeader implements SliverPersistentHeaderDelegate {
-  GigProfileHeader({
-    this.minExtent = 0.0,
-    required this.maxExtent,
-    required this.gigTitle,
-    required this.model,
-  });
-  final double minExtent;
-  final double maxExtent;
-  final String gigTitle;
-  final GigProfileViewModel model;
-
-  static const _colorDebug = [
-    // Colors.red,
-    // Colors.blue,
-    // Colors.green,
-    // Colors.grey,
-    null,
-    null,
-    null,
-    null
-  ];
-
-  @override
-  Widget build(
-    BuildContext context,
-    double shrinkOffset,
-    bool overlapsContent,
-  ) {
-    return Stack(
-      children: [
-        Container(
-          height: double.infinity,
-          width: double.infinity,
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.only(
-              bottomLeft: Radius.circular(defaultBorderRadiusValue),
-              bottomRight: Radius.circular(defaultBorderRadiusValue),
-            ),
-            boxShadow: [
-              BoxShadow(
-                color: Colors.black26,
-                offset: Offset(0.0, 2.0),
-                blurRadius: 6.0,
-              )
-            ],
-          ),
-          child: ClipRRect(
-            borderRadius: BorderRadius.only(
-              bottomLeft: Radius.circular(defaultBorderRadiusValue),
-              bottomRight: Radius.circular(defaultBorderRadiusValue),
-            ),
-            child: CachedNetworkImage(
-              imageUrl: 'http://placeimg.com/640/640/food',
-              fit: BoxFit.cover,
-            ),
-          ),
-        ),
-        // The gradient black bar underneath the title
-        Container(
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.only(
-              bottomLeft: Radius.circular(defaultBorderRadiusValue),
-              bottomRight: Radius.circular(defaultBorderRadiusValue),
-            ),
-            gradient: LinearGradient(
-              colors: [Colors.transparent, Colors.black54],
-              stops: [0.5, 1.0],
-              begin: Alignment.topCenter,
-              end: Alignment.bottomCenter,
-              tileMode: TileMode.repeated,
-            ),
-          ),
-        ),
-        Positioned(
-          left: 24.0,
-          right: 16.0,
-          bottom: 16.0,
-          child: Text(
-            gigTitle,
-            style: heading2Style.copyWith(
-              color: Colors.white.withOpacity(
-                titleOpacity(shrinkOffset),
-              ),
-            ),
-          ),
-        ),
-        Container(
-          height: 48.0,
-          width: double.infinity,
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.all(
-              Radius.circular(appBarRadius(shrinkOffset)),
-            ),
-            color: kcBackgroundColor(context).withOpacity(
-              appBarOpacity(shrinkOffset),
-            ),
-          ),
-          child: Row(
-            children: [
-              IconButton(
-                icon: Icon(
-                  Icons.cancel,
-                  color: iconColor(shrinkOffset),
-                ),
-                onPressed: model.goBack,
-              ),
-              _appBarTitle(shrinkOffset),
-              IconButton(
-                icon: Icon(
-                  Icons.share,
-                  color: iconColor(shrinkOffset),
-                ),
-                onPressed: () {
-                  // TODO: Implement share
-                },
-              ),
-              IconButton(
-                icon: Icon(
-                  Icons.favorite_outline,
-                  color: iconColor(shrinkOffset),
-                ),
-                onPressed: () {
-                  // TODO: Implement favorite
-                },
-              ),
-            ],
-          ),
-        ),
-      ],
-    );
-  }
-
-  _appBarTitle(double shrinkOffset) {
-    final _availableSpace = (shrinkOffset + minExtent) / maxExtent;
-
-    if (min(_availableSpace, 1) == 1) {
-      return Expanded(
-        child: Container(
-          color: _colorDebug[3],
-          child: Text(
-            gigTitle,
-            style: heading3Style,
-            maxLines: 1,
-            overflow: TextOverflow.ellipsis,
-          ),
-        ),
-      );
-    }
-    return Spacer();
-  }
-
-  double titleOpacity(double shrinkOffset) {
-    // simple formula: fade out text as soon as shrinkOffset > 0
-    // return 1.0 - max(0.0, shrinkOffset) / maxExtent;
-    // more complex formula: starts fading out text when shrinkOffset > minExtent
-    return 1.0 - max(0.0, (shrinkOffset - minExtent)) / (maxExtent - minExtent);
-  }
-
-  double appBarOpacity(double shrinkOffset) {
-    final _availableSpace = (shrinkOffset + minExtent) / maxExtent;
-
-    if (_availableSpace <= 0.15) {
-      return 0;
-    } else {
-      return min(_availableSpace, 1);
-    }
-  }
-
-  double appBarRadius(double shrinkOffset) {
-    return 48 * (1 - (min((shrinkOffset + minExtent) / (maxExtent), 1)));
-  }
-
-  double printMeasurement(shrinkOffset) {
-    final _availableSpace = (shrinkOffset + minExtent) / maxExtent;
-
-    return _availableSpace;
-  }
-
-  Color iconColor(double shrinkOffset) {
-    if (min((shrinkOffset + minExtent) / (maxExtent), 1) == 1) {
-      return Colors.black;
-    } else {
-      return Colors.white;
-    }
-  }
-
-  @override
-  bool shouldRebuild(covariant SliverPersistentHeaderDelegate oldDelegate) {
-    return true;
-  }
-
-  @override
-  PersistentHeaderShowOnScreenConfiguration? get showOnScreenConfiguration =>
-      null;
-
-  @override
-  FloatingHeaderSnapConfiguration? get snapConfiguration => null;
-
-  @override
-  OverScrollHeaderStretchConfiguration? get stretchConfiguration => null;
-
-  @override
-  TickerProvider? get vsync => null;
 }
