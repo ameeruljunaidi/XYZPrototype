@@ -6,6 +6,7 @@ import 'package:xyz_prototype/app/app.locator.dart';
 import 'package:xyz_prototype/app/app.logger.dart';
 import 'package:xyz_prototype/app/app.router.dart';
 import 'package:xyz_prototype/services/user_service.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 class StartUpViewModel extends BaseViewModel {
   final log = getLogger('StartUpViewModel');
@@ -17,7 +18,7 @@ class StartUpViewModel extends BaseViewModel {
 
   Future<void> runStartupLogic() async {
     _placesService.initialize(
-      apiKey: 'AIzaSyBzUeZcsTXODsZai6nbke65SyV_hbKdf7E',
+      apiKey: dotenv.env['GOOGLE_MAPS_API_KEY']!,
     );
 
     if (_userService.hasLoggedInUser) {
